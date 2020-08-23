@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "illandril-token-tooltips",
+  "version": "1.0.0",
+  "title": "Illandril's Token Tooltips (5e)",
+  "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include AC, Passive Perception, Passive Investigation, Passive Insight, Spell Slots, Feat Usages, and Consumable Usages. Tooltips are shown for all tokens for GMs, and for Friendly tokens for players.",
+  "author": "Joe Spandrusyszyn",
+  "minimumCoreVersion": "0.6.5",
+  "compatibleCoreVersion": "0.6.5",
+  "styles": ["./styles.css"],
+  "esmodules": ["./init.js"],
+  "license": "./LICENSE",
+  "url": "https://github.com/illandril/FoundryVTT-token-tooltips",
+  "bugs": "https://github.com/illandril/FoundryVTT-token-tooltips/issues",
+  "manifest": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/latest/download/module.json",
+  "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v1.0.0/illandril-token-tooltips.zip"
+}

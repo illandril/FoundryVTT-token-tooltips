@@ -1,0 +1,75 @@
+.illandril-token-tooltips--tooltip {
+  position: absolute;
+  display: none;
+  background: rgba(255,255,255,0.75);
+  border-radius: 2px;
+  border: 2px solid rgba(255,255,255,0.9);
+}
+
+.illandril-token-tooltips--tooltip.illandril-token-tooltips--show {
+  display: block;
+}
+
+.illandril-token-tooltips--name {
+    font-weight: bold;
+    text-align: center;
+    padding: 2px 6px;
+    font-size: 1.15em;
+    color: rgba(0,0,100,0.8);
+}
+
+.illandril-token-tooltips--data {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: max-content;
+  justify-content: center;
+}
+
+.illandril-token-tooltips--data img {
+  height: 1.15em;
+  vertical-align: text-bottom;
+  border: none;
+}
+
+.illandril-token-tooltips--row {
+  display: inline-block;
+  padding: 3px 8px;
+}
+
+.illandril-token-tooltips--label,
+.illandril-token-tooltips--value {
+  display: inline-block;
+}
+
+.illandril-token-tooltips--label {
+  padding-right: 6px;
+  min-width: 2em;
+}
+
+.illandril-token-tooltips--temp::after {
+  content: '+';
+  font-size: 0.75em;
+  vertical-align: top;
+}
+
+.illandril-token-tooltips--max::before {
+  content: ' / ';
+}
+
+.illandril-token-tooltips--spellslot {
+    position: relative;
+}
+
+.illandril-token-tooltips--spellslot-level {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 3px;
+    bottom: 0;
+    font-size: 0.7em;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    color: white;
+}
