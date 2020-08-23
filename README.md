@@ -2,14 +2,17 @@
 
 This is a module for Foundry Virtual Tabletop that adds tooltips to tokens.
 
+![Screenshot showing tooltips for Clarity](/screenshots/example-a.png?raw=true)
+
 The tooltips include...
+1. HP
 1. AC
 1. Passive Perception
 1. Passive Investigation
 1. Passive Insight
 1. Spell Slots
-1. Feat Usages
-1. Consumable Usages
+1. Feat Uses
+1. Consumable Uses
 
 Tooltips are shown for all tokens for GMs. They are shown only for Friendly tokens for players.
 
