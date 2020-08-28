@@ -71,7 +71,10 @@ Hooks.on('hoverToken', (token, hovered) => {
         showAttribute(fArr, item.name, img(item.img), uses.value, uses.max);
       }
       if (item.type === 'consumable') {
-        showAttribute(cArr, item.name, img(item.img), item.data.quantity);
+        const uses = calculateConsumableUses(item);
+        if (uses !== null) {
+          showAttribute(cArr, item.name, img(item.img), uses);
+        }
       }
     });
 
@@ -100,6 +103,22 @@ Hooks.on('hoverToken', (token, hovered) => {
     tooltipElem.classList.remove(CSS_SHOW);
   }
 });
+
+function calculateConsumableUses(item) {
+  const itemData = item.data;
+  let uses = 1;
+  let maxUses = 1;
+  if (itemData.uses && itemData.uses.max) {
+    uses = itemData.uses.value;
+    maxUses = itemData.uses.max;
+  }
+  const quantity = itemData.quantity;
+  if (quantity) {
+    return uses + (quantity - 1) * maxUses;
+  } else {
+    return uses;
+  }
+}
 
 function shouldShowTooltip(token) {
   if (!(token && token.actor)) {
