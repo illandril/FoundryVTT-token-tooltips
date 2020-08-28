@@ -70,7 +70,7 @@ Hooks.on('hoverToken', (token, hovered) => {
         const uses = item.data.uses;
         showAttribute(fArr, item.name, img(item.img), uses.value, uses.max);
       }
-      if (item.type === 'consumable') {
+      if (shouldCalculateAsConsumable(item)) {
         const uses = calculateConsumableUses(item);
         if (uses !== null) {
           showAttribute(cArr, item.name, img(item.img), uses);
@@ -103,6 +103,16 @@ Hooks.on('hoverToken', (token, hovered) => {
     tooltipElem.classList.remove(CSS_SHOW);
   }
 });
+
+function shouldCalculateAsConsumable(item) {
+  if (item.type === 'consumable') {
+    return true;
+  }
+  if (item.data.uses && item.data.uses.max) {
+    return true;
+  }
+  return false;
+}
 
 function calculateConsumableUses(item) {
   const itemData = item.data;
