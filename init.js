@@ -12,6 +12,9 @@ const CSS_CURRENT = CSS_PREFIX + 'current';
 const CSS_MAX = CSS_PREFIX + 'max';
 const CSS_TEMP = CSS_PREFIX + 'temp';
 
+const CSS5E_ITEM_DETAIL = 'item-detail';
+const CSS_TOOLTIP_CELL = CSS_PREFIX + 'tooltip-cell';
+
 const tooltipElem = document.createElement('div');
 tooltipElem.classList.add(CSS_TOOLTIP);
 
@@ -26,6 +29,44 @@ tooltipElem.appendChild(tooltipDataContainer);
 Hooks.once('ready', () => {
   // Workaround for the hover spam issue: https://gitlab.com/foundrynet/foundryvtt/-/issues/3506
   canvas.app.renderer.plugins.interaction.moveWhenInside = true;
+});
+
+Hooks.on('renderActorSheet5eCharacter', (actorSheet, html, data) => {
+  const actor = game.actors.get(data.actor._id);
+
+  const inventoryTab = html[0].querySelector('.tab.inventory');
+  const inventoryHeaders = inventoryTab.querySelectorAll('.inventory-header');
+  Array.prototype.forEach.call(inventoryHeaders, (inventoryHeader) => {
+    const tooltipHeader = document.createElement('div');
+    tooltipHeader.classList.add(CSS5E_ITEM_DETAIL);
+    tooltipHeader.classList.add(CSS_TOOLTIP_CELL);
+    tooltipHeader.appendChild(faIcon('hand-pointer'));
+    inventoryHeader.insertBefore(tooltipHeader, inventoryHeader.firstChild);
+  });
+
+  const inventoryRows = inventoryTab.querySelectorAll('.item[data-item-id]');
+  Array.prototype.forEach.call(inventoryRows, (inventoryRow) => {
+    const itemID = inventoryRow.getAttribute('data-item-id');
+    const item = actor.items.get(itemID);
+    const tooltipCell = document.createElement('div');
+    tooltipCell.classList.add(CSS5E_ITEM_DETAIL);
+    tooltipCell.classList.add(CSS_TOOLTIP_CELL);
+
+    if (canCalculateAsConsumable(item.data)) {
+      const tooltipToggle = document.createElement('input');
+      tooltipToggle.type = 'checkbox';
+      tooltipToggle.checked = !!getProperty(item.data, 'data.illandril.tooltips.show');
+      tooltipToggle.addEventListener(
+        'input',
+        () => {
+          item.update({ 'data.illandril.tooltips.show': tooltipToggle.checked });
+        },
+        false
+      );
+      tooltipCell.appendChild(tooltipToggle);
+    }
+    inventoryRow.insertBefore(tooltipCell, inventoryRow.firstChild);
+  });
 });
 
 Hooks.once('ready', () => {
@@ -110,6 +151,13 @@ Hooks.on('hoverToken', (token, hovered) => {
 });
 
 function shouldCalculateAsConsumable(item) {
+  if (!getProperty(item, 'data.illandril.tooltips.show')) {
+    return false;
+  }
+  return canCalculateAsConsumable(item);
+}
+
+function canCalculateAsConsumable(item) {
   if (item.type === 'consumable') {
     return true;
   }

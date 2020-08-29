@@ -73,3 +73,7 @@
   font-weight: bold;
   color: white;
 }
+
+.dnd5e.sheet.actor .inventory-list .item-detail.illandril-token-tooltips--tooltip-cell {
+  flex: 0 0 30px;
+}
