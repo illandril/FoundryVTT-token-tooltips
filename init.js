@@ -24,6 +24,11 @@ tooltipDataContainer.classList.add(CSS_DATA);
 tooltipElem.appendChild(tooltipDataContainer);
 
 Hooks.once('ready', () => {
+  // Workaround for the hover spam issue: https://gitlab.com/foundrynet/foundryvtt/-/issues/3506
+  canvas.app.renderer.plugins.interaction.moveWhenInside = true;
+});
+
+Hooks.once('ready', () => {
   document.body.appendChild(tooltipElem);
   window.addEventListener('mousedown', () => {
     tooltipElem.classList.remove(CSS_SHOW);
