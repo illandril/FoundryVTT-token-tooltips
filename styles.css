@@ -77,3 +77,12 @@
 .dnd5e.sheet.actor .inventory-list .item-detail.illandril-token-tooltips--tooltip-cell {
   flex: 0 0 30px;
 }
+
+.illandril-token-tooltips--toggle {
+  color: #000;
+  opacity: 0.3;
+}
+
+.illandril-token-tooltips--toggle[aria-checked="true"] {
+  opacity: 0.8;
+}

@@ -12,7 +12,7 @@ The tooltips include...
 1. Passive Insight
 1. Spell Slots
 1. Feat Uses
-1. Consumable Uses
+1. Item Quantity and Uses (toggle-able for each item)
 
 Tooltips are shown for all tokens for GMs. They are shown only for Friendly tokens for players.
 

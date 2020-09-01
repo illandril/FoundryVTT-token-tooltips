@@ -14,6 +14,8 @@ const CSS_TEMP = CSS_PREFIX + 'temp';
 
 const CSS5E_ITEM_DETAIL = 'item-detail';
 const CSS_TOOLTIP_CELL = CSS_PREFIX + 'tooltip-cell';
+const CSS_TOOLTIP_TOGGLE = CSS_PREFIX + 'toggle';
+const CSS_TOOLTIP_ACTIVE = CSS_PREFIX + 'active';
 
 const tooltipElem = document.createElement('div');
 tooltipElem.classList.add(CSS_TOOLTIP);
@@ -33,6 +35,9 @@ Hooks.once('ready', () => {
 
 Hooks.on('renderActorSheet5eCharacter', (actorSheet, html, data) => {
   const actor = game.actors.get(data.actor._id);
+  if (actor.permission !== ENTITY_PERMISSIONS.OWNER) {
+    return;
+  }
 
   const inventoryTab = html[0].querySelector('.tab.inventory');
   const inventoryHeaders = inventoryTab.querySelectorAll('.inventory-header');
@@ -40,8 +45,7 @@ Hooks.on('renderActorSheet5eCharacter', (actorSheet, html, data) => {
     const tooltipHeader = document.createElement('div');
     tooltipHeader.classList.add(CSS5E_ITEM_DETAIL);
     tooltipHeader.classList.add(CSS_TOOLTIP_CELL);
-    tooltipHeader.appendChild(faIcon('hand-pointer'));
-    inventoryHeader.insertBefore(tooltipHeader, inventoryHeader.firstChild);
+    inventoryHeader.insertBefore(tooltipHeader, inventoryHeader.querySelector('.item-controls'));
   });
 
   const inventoryRows = inventoryTab.querySelectorAll('.item[data-item-id]');
@@ -53,19 +57,30 @@ Hooks.on('renderActorSheet5eCharacter', (actorSheet, html, data) => {
     tooltipCell.classList.add(CSS_TOOLTIP_CELL);
 
     if (canCalculateAsConsumable(item.data)) {
-      const tooltipToggle = document.createElement('input');
-      tooltipToggle.type = 'checkbox';
-      tooltipToggle.checked = !!getProperty(item.data, 'data.illandril.tooltips.show');
+      const shown = !!getProperty(item.data, 'data.illandril.tooltips.show');
+      const tooltipToggle = document.createElement('a');
+      tooltipToggle.classList.add(CSS_TOOLTIP_TOGGLE);
+      tooltipToggle.setAttribute('role', 'switch');
+      tooltipToggle.setAttribute('aria-checked', shown);
+      const ariaLabel = game.i18n.localize('illandril-token-tooltips.tooltipSwitch');
+      tooltipToggle.setAttribute('aria-label', ariaLabel);
+      if (shown) {
+        tooltipToggle.classList.add(CSS_TOOLTIP_ACTIVE);
+      }
+
+      const titleKey = 'illandril-token-tooltips.tooltip' + (shown ? 'Shown' : 'NotShown');
+      tooltipToggle.title = game.i18n.localize(titleKey);
       tooltipToggle.addEventListener(
-        'input',
+        'click',
         () => {
-          item.update({ 'data.illandril.tooltips.show': tooltipToggle.checked });
+          item.update({ 'data.illandril.tooltips.show': !shown });
         },
         false
       );
+      tooltipToggle.appendChild(faIcon('hand-pointer'));
       tooltipCell.appendChild(tooltipToggle);
     }
-    inventoryRow.insertBefore(tooltipCell, inventoryRow.firstChild);
+    inventoryRow.insertBefore(tooltipCell, inventoryRow.querySelector('.item-controls'));
   });
 });
 
@@ -89,10 +104,11 @@ Hooks.on('hoverToken', (token, hovered) => {
     const ssArr = [];
     const fArr = [];
     const cArr = [];
-    showAttribute(aArr, 'HP', faIcon('heart'), hp.value, hp.max, hp.temp, hp.tempmax);
+    showAttribute(aArr, aArr.length, 'HP', faIcon('heart'), hp.value, hp.max, hp.temp, hp.tempmax);
 
     showAttribute(
       aArr,
+      aArr.length,
       game.i18n.localize('DND5E.ArmorClass'),
       faIcon('user-shield'),
       attributes.ac.value
@@ -114,12 +130,12 @@ Hooks.on('hoverToken', (token, hovered) => {
     items.forEach((item) => {
       if (item.type === 'feat' && item.data.uses && item.data.uses.max > 0) {
         const uses = item.data.uses;
-        showAttribute(fArr, item.name, img(item.img), uses.value, uses.max);
+        showAttribute(fArr, item.sort, item.name, img(item.img), uses.value, uses.max);
       }
       if (shouldCalculateAsConsumable(item)) {
-        const uses = calculateConsumableUses(item);
+        const { uses, maxUses } = calculateConsumableUses(item);
         if (uses !== null) {
-          showAttribute(cArr, item.name, img(item.img), uses);
+          showAttribute(cArr, item.sort, item.name, img(item.img), uses, maxUses);
         }
       }
     });
@@ -127,18 +143,10 @@ Hooks.on('hoverToken', (token, hovered) => {
     emptyNode(tooltipName);
     emptyNode(tooltipDataContainer);
     tooltipName.appendChild(document.createTextNode(token.name));
-    aArr.forEach((data) => {
-      tooltipDataContainer.appendChild(data);
-    });
-    ssArr.forEach((data) => {
-      tooltipDataContainer.appendChild(data);
-    });
-    fArr.forEach((data) => {
-      tooltipDataContainer.appendChild(data);
-    });
-    cArr.forEach((data) => {
-      tooltipDataContainer.appendChild(data);
-    });
+    sortAndAdd(tooltipDataContainer, aArr);
+    sortAndAdd(tooltipDataContainer, ssArr);
+    sortAndAdd(tooltipDataContainer, fArr);
+    sortAndAdd(tooltipDataContainer, cArr);
 
     const tokenWidth = token.w * canvas.stage.scale.x;
 
@@ -149,6 +157,17 @@ Hooks.on('hoverToken', (token, hovered) => {
     tooltipElem.classList.remove(CSS_SHOW);
   }
 });
+
+function sortAndAdd(tooltipDataContainer, attributeArray) {
+  attributeArray.sort(attributeSort);
+  attributeArray.forEach((attr) => {
+    tooltipDataContainer.appendChild(attr.element);
+  });
+}
+
+function attributeSort(a, b) {
+  return a.sort - b.sort;
+}
 
 function shouldCalculateAsConsumable(item) {
   if (!getProperty(item, 'data.illandril.tooltips.show')) {
@@ -164,23 +183,26 @@ function canCalculateAsConsumable(item) {
   if (item.data.uses && item.data.uses.max) {
     return true;
   }
+  if (item.data.quantity) {
+    return true;
+  }
   return false;
 }
 
 function calculateConsumableUses(item) {
   const itemData = item.data;
   let uses = 1;
-  let maxUses = 1;
+  let maxUses = 0;
   if (itemData.uses && itemData.uses.max) {
     uses = itemData.uses.value;
     maxUses = itemData.uses.max;
   }
   const quantity = itemData.quantity;
   if (quantity) {
-    return uses + (quantity - 1) * maxUses;
-  } else {
-    return uses;
+    uses += (quantity - 1) * Math.max(1, maxUses);
+    maxUses = maxUses * quantity;
   }
+  return { uses, maxUses: maxUses > quantity ? maxUses : null };
 }
 
 function shouldShowTooltip(token) {
@@ -203,22 +225,29 @@ function showSpellSlot(ssArr, level, slots) {
     let name;
     if (level === 'P') {
       name = game.i18n.localize('DND5E.PactMagic');
-      slotLevelDisp.appendChild(document.createTextNode('P'));
+      const pactAbbr = game.i18n.localize('illandril-token-tooltips.pactAbbreviation');
+      slotLevelDisp.appendChild(document.createTextNode(pactAbbr));
     } else {
       name = game.i18n.localize('DND5E.SpellLevel' + level);
       slotLevelDisp.appendChild(document.createTextNode(level));
     }
     slotIcon.appendChild(slotLevelDisp);
 
-    showAttribute(ssArr, name, slotIcon, slots.value, slots.max);
+    showAttribute(ssArr, ssArr.length, name, slotIcon, slots.value, slots.max);
   }
 }
 
 function showPassive(aArr, name, icon, skill) {
-  showAttribute(aArr, name + ' (' + game.i18n.localize('DND5E.Passive') + ')', icon, skill.passive);
+  showAttribute(
+    aArr,
+    aArr.length,
+    name + ' (' + game.i18n.localize('DND5E.Passive') + ')',
+    icon,
+    skill.passive
+  );
 }
 
-function showAttribute(aArr, name, icon, value, max = null, temp = null, tempMax = null) {
+function showAttribute(aArr, sort, name, icon, value, max = null, temp = null, tempMax = null) {
   const row = document.createElement('div');
   row.classList.add(CSS_ROW);
 
@@ -259,7 +288,10 @@ function showAttribute(aArr, name, icon, value, max = null, temp = null, tempMax
     valueDisplay.appendChild(maxDisplay);
   }
   row.appendChild(valueDisplay);
-  aArr.push(row);
+  aArr.push({
+    sort,
+    element: row,
+  });
 }
 
 function img(url) {
