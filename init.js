@@ -17,6 +17,12 @@ const CSS_TOOLTIP_CELL = CSS_PREFIX + 'tooltip-cell';
 const CSS_TOOLTIP_TOGGLE = CSS_PREFIX + 'toggle';
 const CSS_TOOLTIP_ACTIVE = CSS_PREFIX + 'active';
 
+const VISIBILITY_STATUSES = {
+  OWNER: 'OWNER',
+  FRIENDLY: 'FRIENDLY',
+  ALL: 'ALL',
+};
+
 const tooltipElem = document.createElement('div');
 tooltipElem.classList.add(CSS_TOOLTIP);
 
@@ -27,6 +33,19 @@ tooltipElem.appendChild(tooltipName);
 const tooltipDataContainer = document.createElement('div');
 tooltipDataContainer.classList.add(CSS_DATA);
 tooltipElem.appendChild(tooltipDataContainer);
+
+Hooks.once('init', () => {
+  game.settings.register('illandril-token-tooltips', 'visibility-status', {
+    name: game.i18n.localize('illandril-token-tooltips.settings.visibility-status.name'),
+    hint: game.i18n.localize('illandril-token-tooltips.settings.visibility-status.hint'),
+    scope: 'world',
+    config: true,
+    restricted: true,
+    choices: VISIBILITY_STATUSES,
+    default: VISIBILITY_STATUSES.FRIENDLY,
+    type: String,
+  });
+})
 
 Hooks.once('ready', () => {
   // Workaround for the hover spam issue: https://gitlab.com/foundrynet/foundryvtt/-/issues/3506
@@ -212,7 +231,17 @@ function shouldShowTooltip(token) {
   if (game.user.isGM) {
     return true;
   }
-  return token.data.disposition === TOKEN_DISPOSITIONS.FRIENDLY;
+  const visibility = game.settings.get('illandril-token-tooltips', 'visibility-status');
+  switch (visibility) {
+    case VISIBILITY_STATUSES.FRIENDLY:
+      return token.data.disposition === TOKEN_DISPOSITIONS.FRIENDLY;
+    case VISIBILITY_STATUSES.OWNER:
+      return token.actor.permission === ENTITY_PERMISSIONS.OWNER;
+    case VISIBILITY_STATUSES.ALL:
+      return true;
+    default:
+      return false;
+  }
 }
 
 function showSpellSlot(ssArr, level, slots) {
