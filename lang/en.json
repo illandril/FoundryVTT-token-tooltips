@@ -4,5 +4,7 @@
   "illandril-token-tooltips.tooltipShown": "Shown in Tooltip",
   "illandril-token-tooltips.tooltipNotShown": "Not Shown in Tooltip",
   "illandril-token-tooltips.settings.visibility-status.name": "Visibility Status",
-  "illandril-token-tooltips.settings.visibility-status.hint": "Tooltips will only be show for users with token permissions that match this value."
+  "illandril-token-tooltips.settings.visibility-status.hint": "Tooltips will only be show for users with token permissions that match this value.",
+  "illandril-token-tooltips.settings.show-all.name": "Show all tooltips on <Alt>",
+  "illandril-token-tooltips.settings.show-all.hint": "Show all available tooltips when holding the <Alt> key down."
 }
