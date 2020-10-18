@@ -1,3 +1,8 @@
+## [v1.2.0](https://github.com/illandril/FoundryVTT-token-tooltips/releases/tag/v1.1.0) (2020-10-17)
+**New Features:**
+* [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11) Add option to hide/show items/spells based on user permissions
+* [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8) Add option to show tooltips to players for more or fewer tokens
+
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/releases/tag/v1.1.0) (2020-09-01)
 **New Features:**
 * [\#3](https://github.com/illandril/FoundryVTT-token-tooltips/issues/3) Show counts for non-consumable items
