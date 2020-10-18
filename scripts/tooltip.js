@@ -2,6 +2,7 @@ import Settings from './settings.js';
 import { CSS_PREFIX } from './module.js';
 import { icon, emptyNode, img, div, span, appendText } from './html.js';
 import { shouldCalculateUses, calculateUses } from './item-system.js';
+import { hasPlayerOwner } from './visibility-rules.js';
 
 const CSS_TOOLTIP = `${CSS_PREFIX}tooltip`;
 const CSS_NAME = `${CSS_PREFIX}name`;
@@ -144,7 +145,7 @@ class Tooltip {
   updateSpellSlots(actor) {
     let showSpells;
     if (game.user.isGM) {
-      showSpells = !(actor.isPC && Settings.HidePlayerSpellsFromGM.get());
+      showSpells = !(hasPlayerOwner(actor) && Settings.HidePlayerSpellsFromGM.get());
     } else {
       showSpells = actor.hasPerm(game.user, Settings.SpellsMinimumPermission.get());
     }
@@ -162,7 +163,7 @@ class Tooltip {
   updateItems(actor) {
     let showItems;
     if (game.user.isGM) {
-      showItems = !(actor.isPC && Settings.HidePlayerItemsFromGM.get());
+      showItems = !(hasPlayerOwner(actor) && Settings.HidePlayerItemsFromGM.get());
     } else {
       showItems = actor.hasPerm(game.user, Settings.ItemsMinimumPermission.get());
     }
