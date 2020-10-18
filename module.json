@@ -3,7 +3,7 @@
   "name": "illandril-token-tooltips",
   "version": "1.2.0",
   "title": "Illandril's Token Tooltips (5e)",
-  "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include AC, Passive Perception, Passive Investigation, Passive Insight, Spell Slots, Feat Usages (configurable per feat), and Item Uses and Quantity (configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
+  "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include HP, AC, Passive Perception, Passive Investigation, Passive Insight, Spell Slots, Feat Usages (visibility configurable per feat), and Item Uses and Quantity (visibility configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
   "author": "Joe Spandrusyszyn",
   "minimumCoreVersion": "0.6.5",
   "compatibleCoreVersion": "0.6.6",
