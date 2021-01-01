@@ -45,6 +45,7 @@
 .illandril-token-tooltips--label {
   padding-right: 6px;
   min-width: 2em;
+  text-align: center;
 }
 
 .illandril-token-tooltips--temp::after {
@@ -57,21 +58,30 @@
   content: ' / ';
 }
 
+.illandril-token-tooltips--resource,
 .illandril-token-tooltips--spellslot {
   position: relative;
 }
 
+.illandril-token-tooltips--resource-number,
 .illandril-token-tooltips--spellslot-level {
   position: absolute;
   left: 0;
   right: 0;
-  top: 3px;
   bottom: 0;
   font-size: 0.7em;
   text-align: center;
   display: block;
   font-weight: bold;
   color: white;
+}
+
+.illandril-token-tooltips--resource-number {
+  top: 2px;
+}
+
+.illandril-token-tooltips--spellslot-level {
+  top: 3px;
 }
 
 .dnd5e.sheet.actor .inventory-list .item-detail.illandril-token-tooltips--tooltip-cell {

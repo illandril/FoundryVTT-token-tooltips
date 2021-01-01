@@ -98,6 +98,8 @@ const Settings = {
   SpellsMinimumPermission: new ChoiceSetting('spellsMinimumPermission', 'NONE', entityPermission, { hasHint: true }),
   HidePlayerItemsFromGM: new BooleanSetting('hidePlayerItemsFromGM', false, { hasHint: true }),
   HidePlayerSpellsFromGM: new BooleanSetting('hidePlayerSpellsFromGM', false, { hasHint: true }),
+  ShowMovement: new BooleanSetting('showMovement', false, { hasHint: true }),
+  ShowResources: new BooleanSetting('showResources', false, { hasHint: true }),
 };
 
 Object.freeze(Settings);

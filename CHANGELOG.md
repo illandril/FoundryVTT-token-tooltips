@@ -1,3 +1,8 @@
+## [v1.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/releases/tag/v1.3.0) (2020-01-01)
+**New Features:**
+* [\#14](https://github.com/illandril/FoundryVTT-token-tooltips/issues/14) Add option to show resources
+* [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13) Add option to show movement speeds
+
 ## [v1.2.3](https://github.com/illandril/FoundryVTT-token-tooltips/releases/tag/v1.2.3) (2020-12-20)
 **Fixed Bugs:**
 * Increases compatible version to 0.7.9

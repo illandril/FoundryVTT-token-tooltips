@@ -8,6 +8,8 @@ const CSS_TOOLTIP = `${CSS_PREFIX}tooltip`;
 const CSS_NAME = `${CSS_PREFIX}name`;
 const CSS_DATA = `${CSS_PREFIX}data`;
 const CSS_SHOW = `${CSS_PREFIX}show`;
+const CSS_RESOURCE = `${CSS_PREFIX}resource`;
+const CSS_RESOURCE_NUMBER = `${CSS_PREFIX}resource-number`;
 const CSS_SPELLSLOT = `${CSS_PREFIX}spellslot`;
 const CSS_SPELLSLOT_LEVEL = `${CSS_PREFIX}spellslot-level`;
 const CSS_ROW = `${CSS_PREFIX}row`;
@@ -23,6 +25,41 @@ const passiveSkillLabel = (skill) => {
   );
 };
 
+const capitalize = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+const MOVEMENTS = [
+  { name: 'walk', icon: 'walking' },
+  { name: 'burrow', icon: 'angle-double-down' },
+  { name: 'climb', icon: 'spider' },
+  { name: 'fly', icon: 'feather-alt' },
+  { name: 'swim', icon: 'swimmer' },
+];
+
+const resourceType = (resourceNumber) => {
+  switch (resourceNumber) {
+    case 1:
+      return 'primary';
+    case 2:
+      return 'secondary';
+    case 3:
+      return 'tertiary';
+    default:
+      return 'UNKNOWN';
+  }
+};
+
+const resourceRow = (resourceNumber) => {
+  const slotIcon = span(CSS_RESOURCE);
+  slotIcon.appendChild(icon('circle'));
+  const slotNumberDisp = span(CSS_RESOURCE_NUMBER);
+  const name = game.i18n.localize(`DND5E.Resource${capitalize(resourceType(resourceNumber))}`);
+  appendText(slotNumberDisp, resourceNumber);
+  slotIcon.appendChild(slotNumberDisp);
+  return new AttributeRow(name, slotIcon);
+};
+
 const spellSlotRow = (level) => {
   const slotIcon = span(CSS_SPELLSLOT);
   slotIcon.appendChild(icon('star'));
@@ -33,7 +70,7 @@ const spellSlotRow = (level) => {
     const pactAbbr = game.i18n.localize('illandril-token-tooltips.pactAbbreviation');
     appendText(slotLevelDisp, pactAbbr);
   } else {
-    name = game.i18n.localize('DND5E.SpellLevel' + level);
+    name = game.i18n.localize(`DND5E.SpellLevel${level}`);
     appendText(slotLevelDisp, level);
   }
   slotIcon.appendChild(slotLevelDisp);
@@ -55,6 +92,19 @@ class Tooltip {
     this.psvPrcRow = new AttributeRow(passiveSkillLabel('Prc'), icon('eye'));
     this.psvInvRow = new AttributeRow(passiveSkillLabel('Inv'), icon('search'));
     this.psvInsRow = new AttributeRow(passiveSkillLabel('Ins'), icon('brain'));
+
+    this.movementRows = [];
+    MOVEMENTS.forEach((movementType) => {
+      this.movementRows.push(
+        new AttributeRow(
+          game.i18n.localize(`DND5E.Movement${capitalize(movementType.name)}`),
+          icon(movementType.icon)
+        )
+      );
+    });
+    this.r1Row = resourceRow(1);
+    this.r2Row = resourceRow(2);
+    this.r3Row = resourceRow(3);
 
     this.spellRows = [spellSlotRow('P')];
     for (let i = 1; i <= 9; i++) {
@@ -104,7 +154,9 @@ class Tooltip {
 
     const actor = token.actor;
     this.updateHPAndAC(actor);
+    this.updateMovement(actor);
     this.updatePassives(actor);
+    this.updateResources(actor);
     this.updateSpellSlots(actor);
     this.updateItems(actor);
   }
@@ -129,6 +181,20 @@ class Tooltip {
     this.dataElement.appendChild(this.acRow.element);
   }
 
+  updateMovement(actor) {
+    if (Settings.ShowMovement.get()) {
+      const movements = actor.data.data.attributes.movement;
+      MOVEMENTS.forEach((movementType, i) => {
+        const movementRow = this.movementRows[i];
+        const movement = movements[movementType.name];
+        if (movement > 0) {
+          movementRow.setValue(movement);
+          this.dataElement.appendChild(movementRow.element);
+        }
+      });
+    }
+  }
+
   updatePassives(actor) {
     const skills = actor.data.data.skills;
 
@@ -140,6 +206,23 @@ class Tooltip {
 
     this.psvInsRow.setValue(skills.ins.passive);
     this.dataElement.appendChild(this.psvInsRow.element);
+  }
+
+  updateResources(actor) {
+    if (Settings.ShowResources.get()) {
+      const resources = actor.data.data.resources;
+      this.updateResource(resources, this.r1Row, 1);
+      this.updateResource(resources, this.r2Row, 2);
+      this.updateResource(resources, this.r3Row, 3);
+    }
+  }
+
+  updateResource(resources, resourceRow, resourceNumber) {
+    const resource = resources[resourceType(resourceNumber)];
+    if (resource && (resource.value > 0 || resource.max > 0)) {
+      resourceRow.setValue(resource.value, resource.max);
+      this.dataElement.appendChild(resourceRow.element);
+    }
   }
 
   updateSpellSlots(actor) {
@@ -272,7 +355,8 @@ class AttributeRow {
   }
 }
 
-const addIntegerLikeValueWithTemp = (element, value, tempValue) => {
+const addIntegerLikeValueWithTemp = (element, valueMaybeNull, tempValue) => {
+  const value = valueMaybeNull || 0;
   if (!!tempValue) {
     element.classList.add(CSS_TEMP);
     const withTemp = '' + (parseInt(value, 10) + parseInt(tempValue, 10));

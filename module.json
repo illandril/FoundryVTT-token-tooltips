@@ -1,9 +1,9 @@
 {
   "type": "module",
   "name": "illandril-token-tooltips",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "title": "Illandril's Token Tooltips (5e)",
-  "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include HP, AC, Passive Perception, Passive Investigation, Passive Insight, Spell Slots, Feat Usages (visibility configurable per feat), and Item Uses and Quantity (visibility configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
+  "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include HP, AC, Movement Speeds (optional), Passive Perception, Passive Investigation, Passive Insight, Resources (optional), Spell Slots, Feat Usages (visibility configurable per feat), and Item Uses and Quantity (visibility configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
   "author": "Joe Spandrusyszyn",
   "minimumCoreVersion": "0.6.5",
   "compatibleCoreVersion": "0.7.9",
@@ -15,5 +15,5 @@
   "bugs": "https://github.com/illandril/FoundryVTT-token-tooltips/issues",
   "changelog": "https://github.com/illandril/FoundryVTT-token-tooltips/blob/master/CHANGELOG.md",
   "manifest": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/latest/download/module.json",
-  "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v1.2.3/illandril-token-tooltips.zip"
+  "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v1.3.0/illandril-token-tooltips.zip"
 }
