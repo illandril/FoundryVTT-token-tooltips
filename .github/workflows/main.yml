@@ -46,3 +46,8 @@ jobs:
           author_email: github@illandril.net
           branch: master
           message: Updates version info for ${{github.event.release.name}}
+
+      - name: Update changelog
+        uses: heinrichreimer/github-changelog-generator-action@v2.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
