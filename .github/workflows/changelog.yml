@@ -26,6 +26,7 @@ jobs:
           prWoLables: true
           author: true
           compareLink: true
+          issue-line-labels: compatibility issue,technical debt
           breakingLabel: Breaking Changes
           enhancementLabel: Enhancements
           bugsLabel: Fixed Bugs
