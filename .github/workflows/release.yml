@@ -43,18 +43,17 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issuesWoLabels: true
-          prWoLables: true
+          prWoLabels: true
           author: true
           compareLink: true
-          issue-line-labels: compatibility issue,technical debt
-          breakingLabel: Breaking Changes
-          enhancementLabel: Enhancements
-          bugsLabel: Fixed Bugs
-          deprecatedLabel: Deprecated
-          removedLabel: Removed
-          securityLabel: Security Fixes
-          issuesLabel: Other Changes
-          prLabel: Merged Pull Requests
+          breakingLabel: '**Breaking&nbsp;Changes**'
+          enhancementLabel: '**Enhancements**'
+          bugsLabel: '**Fixed&nbsp;Bugs**'
+          deprecatedLabel: '**Deprecated**'
+          removedLabel: '**Removed**'
+          securityLabel: '**Security&nbsp;Fixes**'
+          issuesLabel: '**Other&nbsp;Changes**'
+          prLabel: '**Merged&nbsp;Pull&nbsp;Requests**'
 
       - name: Update repo with new version info
         uses: EndBug/add-and-commit@v7
