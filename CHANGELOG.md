@@ -2,6 +2,8 @@
 
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
+
 **Fixed bugs:**
 
 - Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
@@ -9,34 +11,47 @@
 **Closed issues:**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
-- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
-
-## [v1.3.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.3.1) (2021-01-16)
 
 ## [v1.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.3.0) (2021-01-01)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.2.3...v1.3.0)
 
 **Implemented enhancements:**
 
 - Request: Show resources in tooltip [\#14](https://github.com/illandril/FoundryVTT-token-tooltips/issues/14)
+- request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
 
 ## [v1.2.3](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.3) (2020-12-20)
 
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.2.2...v1.2.3)
+
 ## [v1.2.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.2) (2020-11-08)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.2.1...v1.2.2)
 
 ## [v1.2.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.1) (2020-10-18)
 
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.2.0...v1.2.1)
+
 ## [v1.2.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.0) (2020-10-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.1.0...v1.2.0)
 
 **Implemented enhancements:**
 
 - Add option to hide/show items/spells based on user permissions [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11)
 - Add option to show tooltips to players for more or fewer tokens  [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8)
 
+**Closed issues:**
+
+- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
+
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.1.0) (2020-09-01)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.0.0...v1.1.0)
 
 **Implemented enhancements:**
 
-- request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
 - Show max uses for charges [\#7](https://github.com/illandril/FoundryVTT-token-tooltips/issues/7)
 - Add a way to hide certain items from the tooltip [\#4](https://github.com/illandril/FoundryVTT-token-tooltips/issues/4)
 - Show counts for non-consumables with charges [\#3](https://github.com/illandril/FoundryVTT-token-tooltips/issues/3)
@@ -52,6 +67,8 @@
 - Update compatibility for 0.6.6 [\#5](https://github.com/illandril/FoundryVTT-token-tooltips/issues/5)
 
 ## [v1.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.0.0) (2020-08-23)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/44ea05c02593a67f39400fb0dc4f1cb4191a8025...v1.0.0)
 
 
 
