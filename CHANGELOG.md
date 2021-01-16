@@ -4,15 +4,11 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
 
-**Enhancements**
-
-- Add option to hide/show items/spells based on user permissions [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11)
-
-**Fixed Bugs**
+**Fixed-Bugs**
 
 - Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
 
-**Other
+**Other-Changes**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
 - \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
@@ -25,6 +21,10 @@
 
 - Request: Show resources in tooltip [\#14](https://github.com/illandril/FoundryVTT-token-tooltips/issues/14)
 - request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
+
+**Other-Changes**
+
+- Update compatibility for 0.6.6 [\#5](https://github.com/illandril/FoundryVTT-token-tooltips/issues/5)
 
 ## [v1.2.3](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.3) (2020-12-20)
 
@@ -44,6 +44,7 @@
 
 **Enhancements**
 
+- Add option to hide/show items/spells based on user permissions [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11)
 - Add option to show tooltips to players for more or fewer tokens  [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8)
 
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.1.0) (2020-09-01)
@@ -56,14 +57,13 @@
 - Add a way to hide certain items from the tooltip [\#4](https://github.com/illandril/FoundryVTT-token-tooltips/issues/4)
 - Show counts for non-consumables with charges [\#3](https://github.com/illandril/FoundryVTT-token-tooltips/issues/3)
 
-**Fixed Bugs**
+**Fixed-Bugs**
 
 - Tooltip appears when Foundry first loads [\#6](https://github.com/illandril/FoundryVTT-token-tooltips/issues/6)
 - Counts are incorrect for consumables with charges [\#2](https://github.com/illandril/FoundryVTT-token-tooltips/issues/2)
 
-**Other
+**Other-Changes**
 
-- Update compatibility for 0.6.6 [\#5](https://github.com/illandril/FoundryVTT-token-tooltips/issues/5)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-token-tooltips/issues/1)
 
 ## [v1.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.0.0) (2020-08-23)
