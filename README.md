@@ -2,7 +2,7 @@
 
 This is a module for Foundry Virtual Tabletop that adds tooltips to tokens.
 
-![Screenshot showing tooltips for Clarity](/screenshots/example-b.png?raw=true)
+![Screenshot showing tooltips for Olive](/screenshots/example-b.png?raw=true)
 
 The tooltips include...
 1. HP
