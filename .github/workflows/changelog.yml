@@ -23,7 +23,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update repo with new version info
+      - name: Push updated changelog
         uses: EndBug/add-and-commit@v7
         with:
           add: CHANGELOG.md
