@@ -26,14 +26,14 @@ jobs:
           prWoLabels: true
           author: true
           compareLink: true
-          breakingLabel: '**Breaking-Changes**'
+          breakingLabel: '**Breaking&nbsp;Changes**'
           enhancementLabel: '**Enhancements**'
-          bugsLabel: '**Fixed-Bugs**'
+          bugsLabel: '**Fixed&nbsp;Bugs**'
           deprecatedLabel: '**Deprecated**'
           removedLabel: '**Removed**'
-          securityLabel: '**Security-Fixes**'
-          issuesLabel: '**Other-Changes**'
-          prLabel: '**Merged-Pull-Requests**'
+          securityLabel: '**Security&nbsp;Fixes**'
+          issuesLabel: '**Other&nbsp;Changes**'
+          prLabel: '**Merged&nbsp;Pull&nbsp;Requests**'
 
       - name: Push updated changelog
         uses: EndBug/add-and-commit@v7
