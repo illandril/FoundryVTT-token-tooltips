@@ -172,21 +172,23 @@ class Tooltip {
 
   updateHPAndAC(actor) {
     const attributes = actor.data.data.attributes;
-
     const hp = attributes.hp;
-    this.hpRow.setValue(hp.value, hp.max, hp.temp, hp.tempmax);
-    this.dataElement.appendChild(this.hpRow.element);
-
-    this.acRow.setValue(attributes.ac.value);
-    this.dataElement.appendChild(this.acRow.element);
+    if (hp) {
+      this.hpRow.setValue(hp.value, hp.max, hp.temp, hp.tempmax);
+      this.dataElement.appendChild(this.hpRow.element);
+    }
+    if (attributes.ac) {
+      this.acRow.setValue(attributes.ac.value);
+      this.dataElement.appendChild(this.acRow.element);
+    }
   }
 
   updateMovement(actor) {
     if (Settings.ShowMovement.get()) {
-      const movements = actor.data.data.attributes.movement;
+      const movements = actor.data.data.attributes.movement || {};
       MOVEMENTS.forEach((movementType, i) => {
         const movementRow = this.movementRows[i];
-        const movement = movements[movementType.name];
+        const movement = movements[movementType.name] || 0;
         if (movement > 0) {
           movementRow.setValue(movement);
           this.dataElement.appendChild(movementRow.element);
@@ -198,22 +200,31 @@ class Tooltip {
   updatePassives(actor) {
     const skills = actor.data.data.skills;
 
-    this.psvPrcRow.setValue(skills.prc.passive);
-    this.dataElement.appendChild(this.psvPrcRow.element);
+    if (skills) {
+      if (skills.prc && skills.prc.passive) {
+        this.psvPrcRow.setValue(skills.prc.passive);
+        this.dataElement.appendChild(this.psvPrcRow.element);
+      }
+      if (skills.inv && skills.inv.passive) {
+        this.psvInvRow.setValue(skills.inv.passive);
+        this.dataElement.appendChild(this.psvInvRow.element);
+      }
 
-    this.psvInvRow.setValue(skills.inv.passive);
-    this.dataElement.appendChild(this.psvInvRow.element);
-
-    this.psvInsRow.setValue(skills.ins.passive);
-    this.dataElement.appendChild(this.psvInsRow.element);
+      if (skills.ins && skills.ins.passive) {
+        this.psvInsRow.setValue(skills.ins.passive);
+        this.dataElement.appendChild(this.psvInsRow.element);
+      }
+    }
   }
 
   updateResources(actor) {
     if (Settings.ShowResources.get()) {
       const resources = actor.data.data.resources;
-      this.updateResource(resources, this.r1Row, 1);
-      this.updateResource(resources, this.r2Row, 2);
-      this.updateResource(resources, this.r3Row, 3);
+      if (resources) {
+        this.updateResource(resources, this.r1Row, 1);
+        this.updateResource(resources, this.r2Row, 2);
+        this.updateResource(resources, this.r3Row, 3);
+      }
     }
   }
 
@@ -254,7 +265,7 @@ class Tooltip {
       const items = actor.data.items;
       const fArr = [];
       const cArr = [];
-      items.forEach((item) => {
+      items && items.forEach((item) => {
         if (shouldCalculateUses(item)) {
           const { uses, maxUses } = calculateUses(item);
           if (uses !== null) {
@@ -282,6 +293,9 @@ class Tooltip {
 
 const getSpellSlots = (actor) => {
   const spells = actor.data.data.spells;
+  if(!spells) {
+    return [];
+  }
   return [
     spells.pact,
     spells.spell1,
