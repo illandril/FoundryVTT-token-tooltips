@@ -44,4 +44,5 @@ jobs:
           add: module/module.json
           author_name: Release Auto-Commit
           author_email: github@illandril.net
+          branch: master
           message: Updates version info for ${{github.event.release.name}}
