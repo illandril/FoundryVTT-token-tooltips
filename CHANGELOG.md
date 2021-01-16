@@ -2,6 +2,10 @@
 
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
+**Fixed bugs:**
+
+- Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
+
 **Closed issues:**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
@@ -14,7 +18,6 @@
 **Implemented enhancements:**
 
 - Request: Show resources in tooltip [\#14](https://github.com/illandril/FoundryVTT-token-tooltips/issues/14)
-- request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
 
 ## [v1.2.3](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.3) (2020-12-20)
 
@@ -33,6 +36,7 @@
 
 **Implemented enhancements:**
 
+- request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
 - Show max uses for charges [\#7](https://github.com/illandril/FoundryVTT-token-tooltips/issues/7)
 - Add a way to hide certain items from the tooltip [\#4](https://github.com/illandril/FoundryVTT-token-tooltips/issues/4)
 - Show counts for non-consumables with charges [\#3](https://github.com/illandril/FoundryVTT-token-tooltips/issues/3)
