@@ -1,51 +1,55 @@
 {
-  "name": "illandril-token-tooltips",
-  "title": "Illandril's Token Tooltips (5e)",
-  "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include HP, AC, Movement Speeds (optional), Passive Perception, Passive Investigation, Passive Insight, Resources (optional), Spell Slots, Feat Usages (visibility configurable per feat), and Item Uses and Quantity (visibility configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
-  "version": "1.3.1",
-  "library": "false",
-  "manifestPlusVersion": "1.0.0",
-  "minimumCoreVersion": "0.7.9",
-  "compatibleCoreVersion": "0.7.9",
-  "type": "module",
-  "authors": [
-    {
-      "name": "Joe Spandrusyszyn (illandril)",
-      "url": "https://github.com/illandril",
-      "email": "foundry-modules@illandril.net",
-      "discord": "joespan#3152",
-      "reddit": "u/illandril"
-    }
-  ],
-  "dependencies": [],
-  "conflicts": [],
-  "esmodules": ["./scripts/index.js"],
-  "styles": ["./styles.css"],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    }
-  ],
-  "license": "./LICENSE",
-  "url": "https://github.com/illandril/FoundryVTT-token-tooltips",
-  "bugs": "https://github.com/illandril/FoundryVTT-token-tooltips/issues",
-  "changelog": "https://github.com/illandril/FoundryVTT-token-tooltips/blob/master/CHANGELOG.md",
-  "manifest": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/latest/download/module.json",
-  "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v1.3.1/module.zip",
-  "media": [
-    {
-      "type": "cover",
-      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/master/screenshots/cover.png"
-    },
-    {
-      "type": "screenshot",
-      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/master/screenshots/example-a.png"
-    },
-    {
-      "type": "screenshot",
-      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/master/screenshots/example-b.png"
-    }
-  ]
+    "name": "illandril-token-tooltips",
+    "title": "Illandril's Token Tooltips (5e)",
+    "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include HP, AC, Movement Speeds (optional), Passive Perception, Passive Investigation, Passive Insight, Resources (optional), Spell Slots, Feat Usages (visibility configurable per feat), and Item Uses and Quantity (visibility configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
+    "version": "1.4.0",
+    "library": "false",
+    "manifestPlusVersion": "1.0.0",
+    "minimumCoreVersion": "0.7.9",
+    "compatibleCoreVersion": "0.7.9",
+    "type": "module",
+    "authors": [
+        {
+            "name": "Joe Spandrusyszyn (illandril)",
+            "url": "https://github.com/illandril",
+            "email": "foundry-modules@illandril.net",
+            "discord": "joespan#3152",
+            "reddit": "u/illandril"
+        }
+    ],
+    "dependencies": [],
+    "conflicts": [],
+    "esmodules": [
+        "./scripts/index.js"
+    ],
+    "styles": [
+        "./styles.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "license": "./LICENSE",
+    "url": "https://github.com/illandril/FoundryVTT-token-tooltips",
+    "bugs": "https://github.com/illandril/FoundryVTT-token-tooltips/issues",
+    "changelog": "https://github.com/illandril/FoundryVTT-token-tooltips/blob/master/CHANGELOG.md",
+    "manifest": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/latest/download/module.json",
+    "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v1.4.0/module.zip",
+    "media": [
+        {
+            "type": "cover",
+            "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/master/screenshots/cover.png"
+        },
+        {
+            "type": "screenshot",
+            "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/master/screenshots/example-a.png"
+        },
+        {
+            "type": "screenshot",
+            "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/master/screenshots/example-b.png"
+        }
+    ]
 }
