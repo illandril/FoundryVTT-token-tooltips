@@ -23,10 +23,10 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issuesWoLabels: true
-          prWoLables: true
+          prWoLabels: true
           author: true
           compareLink: true
-          issueLineLabels: compatibility issue,technical debt
+          issueLineLabels: 'compatibility issue,technical debt'
           breakingLabel: '**Breaking Changes**'
           enhancementLabel: '**Enhancements**'
           bugsLabel: '**Fixed Bugs**'
