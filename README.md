@@ -16,7 +16,7 @@ The tooltips include...
 
 Tooltips are shown for all tokens for GMs. They are shown only for Friendly tokens for players.
 
-This currently only supports the DnD5e System.
+This currently only supports the DnD5e System (it will function on other modules, but the tooltips will likely not have enough useful information shown to be worthwhile).
 
 # Installation
 1. Open the Configuration and Setup for your FoundryVTT server
