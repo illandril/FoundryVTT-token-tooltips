@@ -11,6 +11,7 @@
 **Closed issues:**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
+- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 
 ## [v1.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.3.0) (2021-01-01)
 
@@ -41,10 +42,6 @@
 
 - Add option to hide/show items/spells based on user permissions [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11)
 - Add option to show tooltips to players for more or fewer tokens  [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8)
-
-**Closed issues:**
-
-- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.1.0) (2020-09-01)
 
