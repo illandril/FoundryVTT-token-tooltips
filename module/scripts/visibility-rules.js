@@ -1,8 +1,3 @@
-// hasPlayerOwner: 0.7.4, isPC: 0.6.x
-export const hasPlayerOwner = Entity.prototype.hasOwnProperty('hasPlayerOwner')
-  ? (actor) => actor.hasPlayerOwner
-  : (actor) => actor.isPC;
-
 export default [
   {
     name: 'FRIENDLY',
@@ -19,7 +14,7 @@ export default [
   {
     name: 'ALL_PLAYERS',
     shouldShowTooltip: (token) => {
-      return hasPlayerOwner(token.actor);
+      return token.actor.hasPlayerOwner;
     },
   },
   {
