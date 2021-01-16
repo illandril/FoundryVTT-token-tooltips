@@ -26,6 +26,14 @@ jobs:
           prWoLables: true
           author: true
           compareLink: true
+          breakingLabel: Breaking Changes
+          enhancementLabel: Enhancements
+          bugsLabel: Fixed Bugs
+          deprecatedLabel: Deprecated
+          removedLabel: Removed
+          securityLabel: Security Fixes
+          issuesLabel: Other Changes
+          prLabel: Merged Pull Requests
 
       - name: Push updated changelog
         uses: EndBug/add-and-commit@v7
