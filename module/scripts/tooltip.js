@@ -1,4 +1,4 @@
-import Settings from './settings.js';
+import Settings, { HIDE_FROM_EVERYONE_OPTION } from './settings.js';
 import { CSS_PREFIX } from './module.js';
 import { icon, emptyNode, img, div, span, appendText } from './html.js';
 import { shouldCalculateUses, calculateUses } from './item-system.js';
@@ -183,7 +183,7 @@ class Tooltip {
   }
 
   updateMovement(actor) {
-    if (Settings.ShowMovement.get()) {
+    if (showDataType(actor, Settings.MovementMinimumPermission)) {
       const movements = actor.data.data.attributes.movement || {};
       MOVEMENTS.forEach((movementType, i) => {
         const movementRow = this.movementRows[i];
@@ -217,7 +217,9 @@ class Tooltip {
   }
 
   updateResources(actor) {
-    if (Settings.ShowResources.get()) {
+    if (
+      showDataType(actor, Settings.ResourcesMinimumPermission, Settings.HidePlayerResourcesFromGM)
+    ) {
       const resources = actor.data.data.resources;
       if (resources) {
         this.updateResource(resources, this.r1Row, 1);
@@ -236,13 +238,7 @@ class Tooltip {
   }
 
   updateSpellSlots(actor) {
-    let showSpells;
-    if (game.user.isGM) {
-      showSpells = !(actor.hasPlayerOwner && Settings.HidePlayerSpellsFromGM.get());
-    } else {
-      showSpells = actor.hasPerm(game.user, Settings.SpellsMinimumPermission.get());
-    }
-    if (showSpells) {
+    if (showDataType(actor, Settings.SpellsMinimumPermission, Settings.HidePlayerSpellsFromGM)) {
       getSpellSlots(actor).forEach((slots, i) => {
         if (slots.max > 0 && slots.max < 99) {
           const row = this.spellRows[i];
@@ -254,29 +250,24 @@ class Tooltip {
   }
 
   updateItems(actor) {
-    let showItems;
-    if (game.user.isGM) {
-      showItems = !(actor.hasPlayerOwner && Settings.HidePlayerItemsFromGM.get());
-    } else {
-      showItems = actor.hasPerm(game.user, Settings.ItemsMinimumPermission.get());
-    }
-    if (showItems) {
+    if (showDataType(actor, Settings.ItemsMinimumPermission, Settings.HidePlayerItemsFromGM)) {
       const items = actor.data.items;
       const fArr = [];
       const cArr = [];
-      items && items.forEach((item) => {
-        if (shouldCalculateUses(item)) {
-          const { uses, maxUses } = calculateUses(item);
-          if (uses !== null) {
-            const attributeRow = new AttributeRow(item.name, img(item.img));
-            attributeRow.setValue(uses, maxUses);
-            (item.type === 'feat' ? fArr : cArr).push({
-              sort: item.sort,
-              element: attributeRow.element,
-            });
+      items &&
+        items.forEach((item) => {
+          if (shouldCalculateUses(item)) {
+            const { uses, maxUses } = calculateUses(item);
+            if (uses !== null) {
+              const attributeRow = new AttributeRow(item.name, img(item.img));
+              attributeRow.setValue(uses, maxUses);
+              (item.type === 'feat' ? fArr : cArr).push({
+                sort: item.sort,
+                element: attributeRow.element,
+              });
+            }
           }
-        }
-      });
+        });
       this.sortAndAdd(fArr);
       this.sortAndAdd(cArr);
     }
@@ -290,9 +281,20 @@ class Tooltip {
   }
 }
 
+const showDataType = (actor, minimumPermissionSetting, hideFromGMSetting) => {
+  const minimumPermission = minimumPermissionSetting.get();
+  if (minimumPermission === HIDE_FROM_EVERYONE_OPTION) {
+    return false;
+  } else if (hideFromGMSetting && game.user.isGM) {
+    return !(actor.hasPlayerOwner && hideFromGMSetting.get());
+  } else {
+    return actor.hasPerm(game.user, minimumPermission);
+  }
+};
+
 const getSpellSlots = (actor) => {
   const spells = actor.data.data.spells;
-  if(!spells) {
+  if (!spells) {
     return [];
   }
   return [

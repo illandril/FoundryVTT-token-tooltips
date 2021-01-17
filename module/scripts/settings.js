@@ -1,5 +1,8 @@
-import { KEY as MODULE_KEY } from './module.js';
+import { log, KEY as MODULE_KEY } from './module.js';
 import VISIBILITY_RULES from './visibility-rules.js';
+
+const SETTINGS_VERSION = 1;
+const SETTINGS_VERSION_KEY = 'settingsVersion';
 
 export const SETTINGS_UPDATED = MODULE_KEY + '.SettingsUpdated';
 
@@ -77,7 +80,12 @@ class BooleanSetting extends Setting {
   }
 }
 
-const entityPermission = fixChoices('entityPermission', Object.keys(CONST.ENTITY_PERMISSIONS));
+export const HIDE_FROM_EVERYONE_OPTION = 'HIDE_FROM_EVERYONE';
+
+const entityPermission = fixChoices(
+  'entityPermission',
+  Object.keys(CONST.ENTITY_PERMISSIONS).concat(HIDE_FROM_EVERYONE_OPTION)
+);
 
 const visibilityChoice = new ChoiceSetting(
   'visibility',
@@ -94,12 +102,30 @@ const Settings = {
       return rule.shouldShowTooltip(token);
     },
   },
-  ItemsMinimumPermission: new ChoiceSetting('itemsMinimumPermission', 'NONE', entityPermission, { hasHint: true }),
-  SpellsMinimumPermission: new ChoiceSetting('spellsMinimumPermission', 'NONE', entityPermission, { hasHint: true }),
+
+  ItemsMinimumPermission: new ChoiceSetting('itemsMinimumPermission', 'NONE', entityPermission, {
+    hasHint: true,
+  }),
   HidePlayerItemsFromGM: new BooleanSetting('hidePlayerItemsFromGM', false, { hasHint: true }),
+
+  SpellsMinimumPermission: new ChoiceSetting('spellsMinimumPermission', 'NONE', entityPermission, {
+    hasHint: true,
+  }),
   HidePlayerSpellsFromGM: new BooleanSetting('hidePlayerSpellsFromGM', false, { hasHint: true }),
-  ShowMovement: new BooleanSetting('showMovement', false, { hasHint: true }),
-  ShowResources: new BooleanSetting('showResources', false, { hasHint: true }),
+
+  ResourcesMinimumPermission: new ChoiceSetting(
+    'resourcesMinimumPermission',
+    'NONE',
+    entityPermission,
+    { hasHint: true }
+  ),
+  HidePlayerResourcesFromGM: new BooleanSetting('hidePlayerResourcesFromGM', false, {
+    hasHint: true,
+  }),
+
+  MovementMinimumPermission: new ChoiceSetting('movementMinimumPermission', 'NONE', entityPermission, {
+    hasHint: true,
+  }),
 };
 
 Object.freeze(Settings);
@@ -109,4 +135,48 @@ Hooks.once('init', () => {
   settingsList.forEach((setting) => {
     setting.register();
   });
+  game.settings.register(MODULE_KEY, SETTINGS_VERSION_KEY, {
+    scope: 'world',
+    config: false,
+    type: Number,
+    default: 0,
+  });
+
+  const previousVersion = game.settings.get(MODULE_KEY, SETTINGS_VERSION_KEY);
+  if (previousVersion < SETTINGS_VERSION) {
+    if (previousVersion < 1) {
+      game.settings.register(MODULE_KEY, 'showResources', {
+        scope: 'world',
+        config: false,
+        type: Boolean,
+        default: false,
+      });
+      if (!game.settings.get(MODULE_KEY, 'showResources')) {
+        log.info(`Migrating old showResources setting - hiding resources`);
+        game.settings.set(
+          MODULE_KEY,
+          Settings.ResourcesMinimumPermission.key,
+          HIDE_FROM_EVERYONE_OPTION
+        );
+      }
+      game.settings.register(MODULE_KEY, 'showMovement', {
+        scope: 'world',
+        config: false,
+        type: Boolean,
+        default: false,
+      });
+      if (!game.settings.get(MODULE_KEY, 'showMovement')) {
+        log.info(`Migrating old showMovement setting - hiding movement`);
+        game.settings.set(
+          MODULE_KEY,
+          Settings.MovementMinimumPermission.key,
+          HIDE_FROM_EVERYONE_OPTION
+        );
+      }
+    }
+    game.settings.set(MODULE_KEY, SETTINGS_VERSION_KEY, SETTINGS_VERSION);
+    log.info(`Settings Initialized - upgraded from v${previousVersion} to v${SETTINGS_VERSION}`);
+  } else {
+    log.info(`Settings Initialized - already on ${SETTINGS_VERSION}`);
+  }
 });
