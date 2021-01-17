@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.4.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.1) (2021-01-17)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.0...v1.4.1)
+
+**Enhancements**
+
+- Improve visibility settings for Items, Resources, Spells, and Movement [\#17](https://github.com/illandril/FoundryVTT-token-tooltips/issues/17)
+
+**Fixed&nbsp;Bugs**
+
+- Spell slots and resources not showing for GMs, regardless of settings [\#16](https://github.com/illandril/FoundryVTT-token-tooltips/issues/16)
+
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
