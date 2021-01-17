@@ -238,7 +238,7 @@ class Tooltip {
   updateSpellSlots(actor) {
     let showSpells;
     if (game.user.isGM) {
-      showSpells = !actor.hasPlayerOwner && Settings.HidePlayerSpellsFromGM.get();
+      showSpells = !(actor.hasPlayerOwner && Settings.HidePlayerSpellsFromGM.get());
     } else {
       showSpells = actor.hasPerm(game.user, Settings.SpellsMinimumPermission.get());
     }
@@ -256,7 +256,7 @@ class Tooltip {
   updateItems(actor) {
     let showItems;
     if (game.user.isGM) {
-      showItems = !actor.hasPlayerOwner && Settings.HidePlayerItemsFromGM.get();
+      showItems = !(actor.hasPlayerOwner && Settings.HidePlayerItemsFromGM.get());
     } else {
       showItems = actor.hasPerm(game.user, Settings.ItemsMinimumPermission.get());
     }
