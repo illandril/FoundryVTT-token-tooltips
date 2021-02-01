@@ -1,4 +1,7 @@
 export const icon = (iconName) => {
+  if(!iconName) {
+    return null;
+  }
   const iconElem = document.createElement('i');
   iconElem.classList.add('fas');
   iconElem.classList.add('fa-' + iconName);

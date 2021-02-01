@@ -1,7 +1,7 @@
-import Settings from './settings.js';
-import { CSS_PREFIX } from './module.js';
+import Settings from '../settings/index.js';
+import { CSS_PREFIX } from '../module.js';
 import { icon } from './html.js';
-import { canCalculateUses, showInTooltip, setShowInTooltip } from './item-system.js';
+import { canCalculateUses, showInTooltip, setShowInTooltip } from '../item-system.js';
 
 const CSS5E_ITEM_DETAIL = 'item-detail';
 const CSS_TOOLTIP_CELL = CSS_PREFIX + 'tooltip-cell';

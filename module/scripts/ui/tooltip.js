@@ -1,7 +1,9 @@
-import Settings, { HIDE_FROM_EVERYONE_OPTION } from './settings.js';
-import { CSS_PREFIX } from './module.js';
+import Settings, { HIDE_FROM_EVERYONE_OPTION } from '../settings/index.js';
+import { CSS_PREFIX } from '../module.js';
 import { icon, emptyNode, img, div, span, appendText } from './html.js';
-import { shouldCalculateUses, calculateUses } from './item-system.js';
+import { shouldCalculateUses, calculateUses } from '../item-system.js';
+
+import AttributeRow from './attribute-row.js';
 
 const CSS_TOOLTIP = `${CSS_PREFIX}tooltip`;
 const CSS_NAME = `${CSS_PREFIX}name`;
@@ -86,18 +88,18 @@ class Tooltip {
     this.dataElement = div(CSS_DATA);
     this.element.appendChild(this.dataElement);
 
-    this.hpRow = new AttributeRow(game.i18n.localize('DND5E.HitPoints'), icon('heart'));
-    this.acRow = new AttributeRow(game.i18n.localize('DND5E.ArmorClass'), icon('user-shield'));
-    this.psvPrcRow = new AttributeRow(passiveSkillLabel('Prc'), icon('eye'));
-    this.psvInvRow = new AttributeRow(passiveSkillLabel('Inv'), icon('search'));
-    this.psvInsRow = new AttributeRow(passiveSkillLabel('Ins'), icon('brain'));
+    this.hpRow = new AttributeRow(game.i18n.localize('DND5E.HitPoints'), 'heart');
+    this.acRow = new AttributeRow(game.i18n.localize('DND5E.ArmorClass'), 'user-shield');
+    this.psvPrcRow = new AttributeRow(passiveSkillLabel('Prc'), 'eye');
+    this.psvInvRow = new AttributeRow(passiveSkillLabel('Inv'), 'search');
+    this.psvInsRow = new AttributeRow(passiveSkillLabel('Ins'), 'brain');
 
     this.movementRows = [];
     MOVEMENTS.forEach((movementType) => {
       this.movementRows.push(
         new AttributeRow(
           game.i18n.localize(`DND5E.Movement${capitalize(movementType.name)}`),
-          icon(movementType.icon)
+          movementType.icon
         )
       );
     });
@@ -109,6 +111,8 @@ class Tooltip {
     for (let i = 1; i <= 9; i++) {
       this.spellRows.push(spellSlotRow(i));
     }
+
+    this.customRows = [];
 
     document.body.appendChild(this.element);
     window.addEventListener('mousedown', () => {
@@ -158,6 +162,8 @@ class Tooltip {
     this.updateResources(actor);
     this.updateSpellSlots(actor);
     this.updateItems(actor);
+
+    this.updateCustomRows(actor);
   }
 
   clearElements() {
@@ -273,6 +279,53 @@ class Tooltip {
     }
   }
 
+  updateCustomRows(actor) {
+    const customRows = Settings.CustomOptions.get();
+    if (!customRows || customRows.length === 0) {
+      return;
+    }
+    customRows.forEach((customRow, i) => {
+      if (!showDataType(actor, customRow.permission, customRow.hideFromGM)) {
+        return;
+      }
+      const attributeKey = customRow.attributeKey;
+      const attribute = getProperty(actor.data, attributeKey);
+      console.log(`${attributeKey}: ${attribute}`);
+      let value;
+      let max;
+      let temp;
+      let tempMax;
+      if (attribute === '') {
+        return;
+      } else if (typeof attribute === 'number' || typeof attribute === 'string') {
+        value = attribute;
+        max = null;
+        temp = null;
+        tempMax = null;
+      } else if (typeof attribute === 'object') {
+        value = attribute.value;
+        max = attribute.max;
+        temp = attribute.temp;
+        tempMax = attribute.tempMax;
+      } else {
+        return;
+      }
+
+      const name = customRow.name;
+      const iconElem = customRow.icon;
+      let row;
+      if (!this.customRows[i]) {
+        row = new AttributeRow(name, iconElem);
+        this.customRows[i] = row;
+      } else {
+        row = this.customRows[i];
+        row.setNameAndIcon(name, iconElem);
+      }
+      row.setValue(value, max, temp, tempMax);
+      this.dataElement.appendChild(row.element);
+    });
+  }
+
   sortAndAdd(attributeArray) {
     attributeArray.sort(attributeSort);
     attributeArray.forEach((attr) => {
@@ -281,12 +334,29 @@ class Tooltip {
   }
 }
 
+const perm = (minimumPermissionSetting) => {
+  if (!minimumPermissionSetting) {
+    return 'NONE';
+  }
+  if (typeof minimumPermissionSetting === 'string') {
+    return minimumPermissionSetting;
+  }
+  return minimumPermissionSetting.get() || 'NONE';
+};
+
+const boolOrBoolSetting = (boolSetting) => {
+  if (typeof boolSetting === 'boolean') {
+    return boolSetting;
+  }
+  return boolSetting && boolSetting.get();
+};
+
 const showDataType = (actor, minimumPermissionSetting, hideFromGMSetting) => {
-  const minimumPermission = minimumPermissionSetting.get();
+  const minimumPermission = perm(minimumPermissionSetting);
   if (minimumPermission === HIDE_FROM_EVERYONE_OPTION) {
     return false;
-  } else if (hideFromGMSetting && game.user.isGM) {
-    return !(actor.hasPlayerOwner && hideFromGMSetting.get());
+  } else if (game.user.isGM) {
+    return !(actor.hasPlayerOwner && boolOrBoolSetting(hideFromGMSetting));
   } else {
     return actor.hasPerm(game.user, minimumPermission);
   }
@@ -323,63 +393,6 @@ const shouldShowTooltip = (token) => {
     return true;
   }
   return Settings.Visibility.shouldShowTooltip(token);
-};
-
-class AttributeRow {
-  constructor(name, icon) {
-    const row = div(CSS_ROW);
-
-    const label = span(CSS_LABEL);
-    if (icon) {
-      label.appendChild(icon);
-      label.title = name;
-    } else {
-      appendText(label, name);
-    }
-    row.appendChild(label);
-
-    const valueDisplay = span(CSS_VALUE);
-    row.appendChild(valueDisplay);
-
-    const currDisplay = span(CSS_CURRENT);
-    valueDisplay.appendChild(currDisplay);
-
-    this.valueDisplay = valueDisplay;
-    this.currDisplay = currDisplay;
-
-    this.element = row;
-  }
-
-  setValue(value, max = null, temp = null, tempMax = null) {
-    emptyNode(this.currDisplay);
-    addIntegerLikeValueWithTemp(this.currDisplay, value, temp);
-    if (max) {
-      if (this.maxDisplay) {
-        emptyNode(this.maxDisplay);
-      } else {
-        this.maxDisplay = span(CSS_MAX);
-        this.valueDisplay.appendChild(this.maxDisplay);
-      }
-      addIntegerLikeValueWithTemp(this.maxDisplay, max, tempMax);
-    } else {
-      if (this.maxDisplay) {
-        this.valueDisplay.removeChild(this.maxDisplay);
-        this.maxDisplay = null;
-      }
-    }
-  }
-}
-
-const addIntegerLikeValueWithTemp = (element, valueMaybeNull, tempValue) => {
-  const value = valueMaybeNull || 0;
-  if (!!tempValue) {
-    element.classList.add(CSS_TEMP);
-    const withTemp = '' + (parseInt(value, 10) + parseInt(tempValue, 10));
-    appendText(element, withTemp);
-  } else {
-    element.classList.remove(CSS_TEMP);
-    appendText(element, value);
-  }
 };
 
 Hooks.once('ready', () => {

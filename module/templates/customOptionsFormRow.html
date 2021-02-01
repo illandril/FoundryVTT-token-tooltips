@@ -1,0 +1,65 @@
+<input
+  type="text"
+  name="name"
+  value="{{option.name}}"
+  aria-labelledby="{{FORM_CSS_PREFIX}}header-name"
+/>
+<div class="{{FORM_CSS_PREFIX}}iconCell">
+  <input
+    type="text"
+    name="icon"
+    value="{{option.icon}}"
+    aria-labelledby="{{FORM_CSS_PREFIX}}header-icon"
+  />
+  <div class="{{FORM_CSS_PREFIX}}iconPreview">
+    <i class="fas fa-{{option.icon}}"></i>
+  </div>
+</div>
+<input
+  type="text"
+  name="attributeKey"
+  value="{{option.attributeKey}}"
+  aria-labelledby="{{FORM_CSS_PREFIX}}header-attributeKey"
+/>
+<div class="{{FORM_CSS_PREFIX}}permissionsCell">
+  <select
+    type="text"
+    name="permission"
+    value="{{option.permission}}"
+    aria-labelledby="{{FORM_CSS_PREFIX}}header-permission"
+  >
+    {{#each entityPermission as |name k|}}
+    <option value="k">{{localize name}}</option>
+    {{/each}}
+  </select>
+  <a><label class="{{FORM_CSS_PREFIX}}hideFromGM" title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM'}}">
+    <input
+      type="checkbox"
+      name="hideFromGM"
+      {{checked
+      option.hideFromGM}}
+      aria-labelledby="{{FORM_CSS_PREFIX}}header-hideFromGM"
+    />
+    <span>{{localize 'illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle'}}</span>
+  </label></a>
+</div>
+<div class="{{FORM_CSS_PREFIX}}actions">
+  <a
+    class="{{FORM_CSS_PREFIX}}moveDown"
+    title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.moveDown'}}"
+  >
+    <i class="fas fa-arrow-down"></i>
+  </a>
+  <a
+    class="{{FORM_CSS_PREFIX}}moveUp"
+    title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.moveUp'}}"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  <a
+    class="{{FORM_CSS_PREFIX}}delete"
+    title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.delete'}}"
+  >
+    <i class="fas fa-trash"></i>
+  </a>
+</div>

@@ -96,3 +96,79 @@
 .illandril-token-tooltips--toggle[aria-checked="true"] {
   opacity: 0.8;
 }
+
+.illandril-token-tooltips--customOptionForm-help dl {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 6px 12px;
+  align-items: center;
+  margin: 8px 16px;
+}
+
+.illandril-token-tooltips--customOptionForm-help dl dt {
+  text-align: center;
+}
+
+.illandril-token-tooltips--customOptionForm-help dl > * {
+  margin: 0;
+  padding: 0;
+}
+
+.illandril-token-tooltips--customOptionForm-data {
+  display: grid;
+  grid-template-columns: 100px 175px auto max-content max-content;
+  align-items: center;
+  grid-gap: 4px 8px;
+}
+
+.illandril-token-tooltips--customOptionForm-permissionsCell select {
+  margin-right: 3px;
+}
+
+.illandril-token-tooltips--customOptionForm-hideFromGM input {
+  display: none;
+}
+
+.illandril-token-tooltips--customOptionForm-hideFromGM input + span {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.illandril-token-tooltips--customOptionForm-hideFromGM input:checked + span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+
+.illandril-token-tooltips--customOptionForm-actions.first .illandril-token-tooltips--customOptionForm-moveUp,
+.illandril-token-tooltips--customOptionForm-actions.last .illandril-token-tooltips--customOptionForm-moveDown {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.illandril-token-tooltips--customOptionForm-actions {
+  text-align: center;
+}
+
+
+.illandril-token-tooltips--customOptionForm-actions a + a {
+  margin-left: 4px;
+}
+
+.illandril-token-tooltips--customOptionForm-iconCell {
+  display: grid;
+  grid-template-columns: auto min-content;
+  align-items: center;
+}
+
+.illandril-token-tooltips--customOptionForm-iconPreview {
+  min-width: 20px;
+  text-align: center;
+}
+
+#illandril-token-tooltips--customOptionForm-addRow {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  text-align: center;
+  padding: 4px 6px;
+}

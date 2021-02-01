@@ -1,3 +1,3 @@
-import './settings.js';
-import './actor-settings.js';
-import './tooltip.js';
+import './settings/index.js';
+import './ui/actor-settings.js';
+import './ui/tooltip.js';
