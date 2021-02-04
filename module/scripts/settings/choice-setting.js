@@ -1,11 +1,12 @@
 import { KEY as MODULE_KEY } from '../module.js';
 import Setting from './setting.js';
 
-export const fixChoices = (key, choices) => {
+export const fixChoices = (key, choices, opt_localize) => {
   if (Array.isArray(choices)) {
     const choiceObject = {};
     choices.forEach((choice) => {
-      choiceObject[choice] = `${MODULE_KEY}.setting.${key}.option.${choice}`;
+      const choiceKey = `${MODULE_KEY}.setting.${key}.option.${choice}`;
+      choiceObject[choice] = opt_localize ? game.i18n.localize(choiceKey) : choiceKey;
     });
     return choiceObject;
   } else {

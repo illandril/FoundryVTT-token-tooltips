@@ -1,0 +1,71 @@
+<div aria-labelledby="{{FORM_CSS_PREFIX}}header-name" class="{{FORM_CSS_PREFIX}}disabledInput">
+  <input type="hidden" name="name" value="{{option.name}}" />
+  {{option.name}}
+</div>
+<div class="{{FORM_CSS_PREFIX}}iconCell">
+  <div aria-labelledby="{{FORM_CSS_PREFIX}}header-icon" class="{{FORM_CSS_PREFIX}}disabledInput">
+    <input type="hidden" name="icon" value="{{option.icon}}" />
+    {{option.icon}}
+  </div>
+  <div class="{{FORM_CSS_PREFIX}}iconPreview">
+    <i class="fas fa-{{option.icon}}"></i>
+  </div>
+</div>
+<div
+  aria-labelledby="{{FORM_CSS_PREFIX}}header-attributeKey"
+  class="{{FORM_CSS_PREFIX}}disabledInput"
+>
+  <input type="hidden" name="attributeKey" value="{{option.attributeKey}}" />
+  {{option.attributeKey}}
+</div>
+<div class="{{FORM_CSS_PREFIX}}permissionsCell">
+  <select
+    type="text"
+    name="permission"
+    value="{{option.permission}}"
+    aria-labelledby="{{FORM_CSS_PREFIX}}header-permission"
+  >
+    {{selectOptions entityPermission selected=option.permission}}
+  </select>
+  {{#if option.gmSetting}}
+  <a
+    ><label
+      class="{{FORM_CSS_PREFIX}}hideFromGM"
+      title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM'}}"
+    >
+      <input
+        type="checkbox"
+        name="hideFromGM"
+        {{checked
+        option.hideFromGM}}
+        aria-labelledby="{{FORM_CSS_PREFIX}}header-hideFromGM"
+      />
+      <span
+        >{{localize 'illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle'}}</span
+      >
+    </label></a
+  >
+  {{else}}
+  <input type="checkbox" name="hideFromGM" {{checked option.hideFromGM}} style="display:none;" />
+  {{/if}}
+</div>
+<div class="{{FORM_CSS_PREFIX}}actions" style="visibility:hidden;">
+  <a
+    class="{{FORM_CSS_PREFIX}}moveDown"
+    title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.moveDown'}}"
+  >
+    <i class="fas fa-arrow-down"></i>
+  </a>
+  <a
+    class="{{FORM_CSS_PREFIX}}moveUp"
+    title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.moveUp'}}"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  <a
+    class="{{FORM_CSS_PREFIX}}delete"
+    title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.delete'}}"
+  >
+    <i class="fas fa-trash"></i>
+  </a>
+</div>

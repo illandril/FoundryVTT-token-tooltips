@@ -10,7 +10,7 @@ export default class Setting {
     this.defaultValue = defaultValue;
     this.choices = options.choices || null;
     this.scope = options.scope || 'world';
-    this.config = typeof (options.config) === 'boolean' ? options.config : true;
+    this.config = typeof options.config === 'boolean' ? options.config : true;
     settingsList.push(this);
   }
 

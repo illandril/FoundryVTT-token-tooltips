@@ -1,5 +1,5 @@
 export const icon = (iconName) => {
-  if(!iconName) {
+  if (!iconName) {
     return null;
   }
   const iconElem = document.createElement('i');

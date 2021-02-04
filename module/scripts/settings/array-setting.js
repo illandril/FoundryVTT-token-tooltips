@@ -19,7 +19,7 @@ export default class ObjectSetting extends Setting {
   }
 
   set(value) {
-    if(!Array.isArray(value)) {
+    if (!Array.isArray(value)) {
       throw new Error('Array setting was set to a non-array');
     }
     super.set(value);

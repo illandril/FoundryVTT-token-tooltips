@@ -1,57 +1,78 @@
 {
-  "illandril-token-tooltips.setting.customOptionsMenu.name": "Custom Tooltip Values",
-  "illandril-token-tooltips.setting.customOptionsMenu.label": "Configure Custom Tooltip Values",
-  "illandril-token-tooltips.setting.customOptionsMenu.hint": "Custom Tooltip Values allow you to show tooltips for any numerical data associated with a token's actor.",
+  "illandril-token-tooltips.setting.customOptionsMenu.name": "Tooltip Values",
+  "illandril-token-tooltips.setting.customOptionsMenu.label": "Configure Tooltip Values",
+  "illandril-token-tooltips.setting.customOptionsMenu.hint": "Customize which values are shown in the Tooltip. Custom Tooltip Values allow you to show tooltips for any numerical data associated with a token's actor.",
 
-  "illandril-token-tooltips.setting.customOptionsMenu.title": "Custom Tooltip Values Configuration",
-  "illandril-token-tooltips.setting.customOptionsMenu.instructions.top": "For each Custom Tooltip Value, specify a Name, Icon, and Attribute Key.",
+  "illandril-token-tooltips.setting.customOptionsMenu.title": "Tooltip Values Configuration",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.top": "For each Standard Tooltip Value, select the permission required to see those values (note: not all standard values show for all systems). For each Custom Tooltip Value, specify a Name, Icon, and Data Key.",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.name": "A name for the data shown. If no icon is specified, the name will be displayed instead of an icon in the tooltip.",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.icon": "The name of the FontAwesome icon to show in the tooltip. A preview of the icon is shown to the right of the input to help ensure you select the right icon. If left blank, the name will be shown instead of an icon.",
-  "illandril-token-tooltips.setting.customOptionsMenu.instructions.attributeKey": "The property key used to lookup the value you want to show in the tooltip. For example, to show the CR of a creature using the DnD5e system, specify \"data.details.cr\".",
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.attributeKey": "The property key used to lookup the value you want to show in the tooltip. For example, to show the CR of a creature using the DnD5e system, specify \"data.details.cr\". The Data Key Debugger can be enabled to assist in finding the correct Data Key for the information you want to display.",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.permission": "The minimum permission a player must have to see this value in an actor's tooltip. Note: GMs are considered Owners for all actors. Click the GM toggle to hide the value from GMs in tooltips for actors with a player owner.",
+
   "illandril-token-tooltips.setting.customOptionsMenu.header.name": "Name",
   "illandril-token-tooltips.setting.customOptionsMenu.header.icon": "Icon",
   "illandril-token-tooltips.setting.customOptionsMenu.header.attributeKey": "Data Key",
   "illandril-token-tooltips.setting.customOptionsMenu.header.permission": "Permission",
   "illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM": "Hide from GM",
-  "illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle": "GM",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standardOptionsTitle": "Standard Tooltip Values (may not show in all systems)",
+  "illandril-token-tooltips.setting.customOptionsMenu.customOptionsTitle": "Custom Tooltip Values",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.name": "Health",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.key": "Varies per system (ex. data.attributes.hp)",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.name": "Armor Class",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.key": "Varies per system (ex. data.attributes.ac)",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.name": "Movement",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.key": "Varies per system (ex. data.stats.speed)",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.name": "Passive Skills",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.key": "DnD5e only (ex. data.skills.prc.passive)",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.name": "Resources",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.key": "data.resources.#",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.name": "Spell Slots",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies per system (ex. data.spells.spell#)",
+
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.name": "Item Uses",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.key": "DnD5e only (toggle per item in actor sheets)",
+
+    "illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle": "GM",
+    "illandril-token-tooltips.setting.customOptionsMenu.moveDown": "Move Down",
+    "illandril-token-tooltips.setting.customOptionsMenu.moveUp": "Move Up",
   "illandril-token-tooltips.setting.customOptionsMenu.delete": "Delete",
   "illandril-token-tooltips.setting.customOptionsMenu.deleteConfirm": "Are you sure you want to delete this value?",
   "illandril-token-tooltips.setting.customOptionsMenu.add": "Add",
   "illandril-token-tooltips.setting.customOptionsMenu.save": "Save Custom Tooltip Values",
 
+  "illandril-token-tooltips.setting.customOptionsMenu.toggleDebug.offLabel": "Enable Data Key Debugger",
+  "illandril-token-tooltips.setting.customOptionsMenu.toggleDebug.onLabel": "Disable Data Key Debugger",
+  "illandril-token-tooltips.debugDisplay.empty": "Hover over a token to see Data Keys for that actor",
+
   "illandril-token-tooltips.setting.visibility.label": "Tooltip Visibility",
   "illandril-token-tooltips.setting.visibility.hint": "Tooltip Visibility adjusts which tokens show tooltips for players. Tooltips are shown for all tokens for GMs.",
+
   "illandril-token-tooltips.setting.visibility.option.FRIENDLY": "Friendly Tokens (PC and NPC)",
   "illandril-token-tooltips.setting.visibility.option.NEUTRAL": "Neutral and Friendly Tokens (PC and NPC)",
   "illandril-token-tooltips.setting.visibility.option.ALL_PLAYERS": "Player Tokens (any disposition)",
   "illandril-token-tooltips.setting.visibility.option.OWNER": "Owned Actor Tokens",
   "illandril-token-tooltips.setting.visibility.option.OBSERVER": "Observed Actor Tokens",
+
   "illandril-token-tooltips.setting.entityPermission.option.NONE": "None",
   "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited",
   "illandril-token-tooltips.setting.entityPermission.option.OBSERVER": "Observer",
   "illandril-token-tooltips.setting.entityPermission.option.OWNER": "Owner",
   "illandril-token-tooltips.setting.entityPermission.option.HIDE_FROM_EVERYONE": "Hide from Everyone",
 
-  "illandril-token-tooltips.setting.itemsMinimumPermission.label": "Minimum Items Permission",
-  "illandril-token-tooltips.setting.itemsMinimumPermission.hint": "Sets the minimum permission a player must have to see items in an actor's tooltip. Note: GMs are considered Owners for all actors. Item visibility is also controlled for each individual item in the actor's sheet (currently only available for the default 5e character sheet).",
-  "illandril-token-tooltips.setting.hidePlayerItemsFromGM.label": "Hide Player Items from GM",
-  "illandril-token-tooltips.setting.hidePlayerItemsFromGM.hint": "Hides Item details from GMs in tooltips for actors with a player owner.",
-
-  "illandril-token-tooltips.setting.spellsMinimumPermission.label": "Minimum Spells Permission",
-  "illandril-token-tooltips.setting.spellsMinimumPermission.hint": "Sets the minimum permission a player must have to see Spell Slots in an actor's tooltip. Note: GMs are considered Owners for all actors.",
-  "illandril-token-tooltips.setting.hidePlayerSpellsFromGM.label": "Hide Player Spell Slots from GM",
-  "illandril-token-tooltips.setting.hidePlayerSpellsFromGM.hint": "Hides Spell Slot details from GMs in tooltips for actors with a player owner.",
-
-  "illandril-token-tooltips.setting.resourcesMinimumPermission.label": "Minimum Resources Permission",
-  "illandril-token-tooltips.setting.resourcesMinimumPermission.hint": "Sets the minimum permission a player must have to see Resources in an actor's tooltip. Note: GMs are considered Owners for all actors.",
-  "illandril-token-tooltips.setting.hidePlayerResourcesFromGM.label": "Hide Player Resources from GM",
-  "illandril-token-tooltips.setting.hidePlayerResourcesFromGM.hint": "Hides Resource details from GMs in tooltips for actors with a player owner.",
-
-  "illandril-token-tooltips.setting.movementMinimumPermission.label": "Minimum Movement Permission",
-  "illandril-token-tooltips.setting.movementMinimumPermission.hint": "Sets the minimum permission a player must have to see Movement in an actor's tooltip. Note: GMs are considered Owners for all actors.",
-
   "illandril-token-tooltips.pactAbbreviation": "P",
+  "illandril-token-tooltips.powerAbbreviation": "P",
+  "illandril-token-tooltips.cantripAbbreviation": "C",
+
   "illandril-token-tooltips.tooltipSwitch": "Show in Tooltip",
   "illandril-token-tooltips.tooltipShown": "Shown in Tooltip",
   "illandril-token-tooltips.tooltipNotShown": "Not Shown in Tooltip"

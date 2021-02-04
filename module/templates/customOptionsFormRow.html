@@ -25,12 +25,9 @@
   <select
     type="text"
     name="permission"
-    value="{{option.permission}}"
     aria-labelledby="{{FORM_CSS_PREFIX}}header-permission"
   >
-    {{#each entityPermission as |name k|}}
-    <option value="k">{{localize name}}</option>
-    {{/each}}
+    {{selectOptions entityPermission selected=option.permission}}
   </select>
   <a><label class="{{FORM_CSS_PREFIX}}hideFromGM" title="{{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM'}}">
     <input

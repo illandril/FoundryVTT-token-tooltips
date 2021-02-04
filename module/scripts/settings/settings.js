@@ -2,14 +2,10 @@ import VISIBILITY_RULES from '../visibility-rules.js';
 
 import ArraySetting from './array-setting.js';
 import BooleanSetting from './boolean-setting.js';
-import ChoiceSetting, { fixChoices } from './choice-setting.js';
+import ChoiceSetting from './choice-setting.js';
+import StringSetting from './string-setting.js';
 
 export const HIDE_FROM_EVERYONE_OPTION = 'HIDE_FROM_EVERYONE';
-
-const entityPermission = fixChoices(
-  'entityPermission',
-  Object.keys(CONST.ENTITY_PERMISSIONS).concat(HIDE_FROM_EVERYONE_OPTION)
-);
 
 const visibilityChoice = new ChoiceSetting(
   'visibility',
@@ -27,31 +23,48 @@ const Settings = {
     },
   },
 
-  ItemsMinimumPermission: new ChoiceSetting('itemsMinimumPermission', 'NONE', entityPermission, {
-    hasHint: true,
+  HPMinimumPermission: new StringSetting('hpMinimumPermission', 'NONE', {
+    config: false,
   }),
-  HidePlayerItemsFromGM: new BooleanSetting('hidePlayerItemsFromGM', false, { hasHint: true }),
+  HidePlayerHPFromGM: new BooleanSetting('hidePlayerHPFromGM', false, { config: false }),
 
-  SpellsMinimumPermission: new ChoiceSetting('spellsMinimumPermission', 'NONE', entityPermission, {
-    hasHint: true,
+  ACMinimumPermission: new StringSetting('acMinimumPermission', 'NONE', {
+    config: false,
   }),
-  HidePlayerSpellsFromGM: new BooleanSetting('hidePlayerSpellsFromGM', false, { hasHint: true }),
+  HidePlayerACFromGM: new BooleanSetting('hidePlayerACFromGM', false, { config: false }),
 
-  ResourcesMinimumPermission: new ChoiceSetting(
-    'resourcesMinimumPermission',
-    'NONE',
-    entityPermission,
-    { hasHint: true }
-  ),
+  PassivesMinimumPermission: new StringSetting('passivesMinimumPermission', 'NONE', {
+    config: false,
+  }),
+  HidePlayerPassivesFromGM: new BooleanSetting('hidePlayerPassivesFromGM', false, {
+    config: false,
+  }),
+
+  ItemsMinimumPermission: new StringSetting('itemsMinimumPermission', 'NONE', {
+    config: false,
+  }),
+  HidePlayerItemsFromGM: new BooleanSetting('hidePlayerItemsFromGM', false, { config: false }),
+
+  SpellsMinimumPermission: new StringSetting('spellsMinimumPermission', 'NONE', {
+    config: false,
+  }),
+  HidePlayerSpellsFromGM: new BooleanSetting('hidePlayerSpellsFromGM', false, { config: false }),
+
+  ResourcesMinimumPermission: new StringSetting('resourcesMinimumPermission', 'NONE', {
+    config: false,
+  }),
   HidePlayerResourcesFromGM: new BooleanSetting('hidePlayerResourcesFromGM', false, {
-    hasHint: true,
+    config: false,
   }),
 
-  MovementMinimumPermission: new ChoiceSetting('movementMinimumPermission', 'NONE', entityPermission, {
-    hasHint: true,
+  MovementMinimumPermission: new StringSetting('movementMinimumPermission', 'NONE', {
+    config: false,
+  }),
+  HidePlayerMovementFromGM: new BooleanSetting('hidePlayerMovementFromGM', false, {
+    config: false,
   }),
 
-  CustomOptions: new ArraySetting('customOptions', [] ),
+  CustomOptions: new ArraySetting('customOptions', []),
 };
 
 Object.freeze(Settings);

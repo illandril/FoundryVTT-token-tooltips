@@ -1,15 +1,97 @@
 import { log, CSS_PREFIX, KEY as MODULE_KEY } from '../module.js';
+import { isDebug, toggleDebug } from '../ui/custom-options-debug.js';
 
-import Settings from './settings.js';
+import Settings, { HIDE_FROM_EVERYONE_OPTION } from './settings.js';
 import { fixChoices } from './choice-setting.js';
 
 const FORM_CSS_PREFIX = `${CSS_PREFIX}customOptionForm-`;
+const DEBUG_TOGGLE_CSS = `${FORM_CSS_PREFIX}toggleDebug`;
+const DEBUG_TOGGLE_ON_CSS = `${FORM_CSS_PREFIX}toggleDebug-on`;
+const ACTIONS_CSS = `${FORM_CSS_PREFIX}actions`;
+const CUSTOM_TITLE_CSS = `${FORM_CSS_PREFIX}customOptionsTitle`;
+
 const ROW_TEMPLATE = 'modules/illandril-token-tooltips/templates/customOptionsFormRow.html';
-const entityPermission = fixChoices('entityPermission', Object.keys(CONST.ENTITY_PERMISSIONS));
+const STD_ROW_TEMPLATE = 'modules/illandril-token-tooltips/templates/standardOptionsFormRow.html';
+
+let entityPermission;
+let standardEntityPermission;
 
 Hooks.on('ready', () => {
+  entityPermission = fixChoices('entityPermission', Object.keys(CONST.ENTITY_PERMISSIONS), true);
+  standardEntityPermission = fixChoices(
+    'entityPermission',
+    Object.keys(CONST.ENTITY_PERMISSIONS).concat(HIDE_FROM_EVERYONE_OPTION),
+    true
+  );
   getTemplate(ROW_TEMPLATE);
+  getTemplate(STD_ROW_TEMPLATE);
 });
+
+const getStandardItem = (name, icon, permissionSetting, gmSetting) => {
+  return {
+    name: game.i18n.localize(
+      `illandril-token-tooltips.setting.customOptionsMenu.standard.${name}.name`
+    ),
+    icon,
+    attributeKey: game.i18n.localize(
+      `illandril-token-tooltips.setting.customOptionsMenu.standard.${name}.key`
+    ),
+    permissionSetting,
+    permission: permissionSetting.get(),
+    gmSetting,
+    hideFromGM: gmSetting && gmSetting.get(),
+  };
+};
+
+const getStandardItems = () => {
+  return [
+    // HP
+    getStandardItem('hp', 'heart', Settings.HPMinimumPermission, Settings.HidePlayerHPFromGM),
+
+    // AC
+    getStandardItem('ac', 'user-shield', Settings.ACMinimumPermission, Settings.HidePlayerACFromGM),
+
+    // Movement
+    getStandardItem(
+      'movement',
+      'walking',
+      Settings.MovementMinimumPermission,
+      Settings.HidePlayerMovementFromGM
+    ),
+
+    // Passive Skills
+    getStandardItem(
+      'passives',
+      'eye , search , brain',
+      Settings.PassivesMinimumPermission,
+      Settings.HidePlayerPassivesFromGM
+    ),
+
+    // Resources
+    getStandardItem(
+      'resources',
+      'circle',
+      Settings.ResourcesMinimumPermission,
+      Settings.HidePlayerResourcesFromGM
+    ),
+
+    // Spell Slots
+    getStandardItem(
+      'spells',
+      'star',
+      Settings.SpellsMinimumPermission,
+      Settings.HidePlayerSpellsFromGM
+    ),
+
+    // Items
+    getStandardItem(
+      'items',
+      game.i18n.localize('illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon'),
+      Settings.ItemsMinimumPermission,
+      Settings.HidePlayerItemsFromGM
+    ),
+  ];
+};
 
 export default class CustomOptionsForm extends FormApplication {
   constructor(object, options = {}) {
@@ -25,36 +107,40 @@ export default class CustomOptionsForm extends FormApplication {
       title: 'illandril-token-tooltips.setting.customOptionsMenu.title',
       template: 'modules/illandril-token-tooltips/templates/customOptionsForm.html',
       classes: ['sheet'],
-      width: 750,
+      width: 825,
       closeOnSubmit: true,
     });
   }
 
   getData() {
-    return { customOptions: Settings.CustomOptions.get(), entityPermission, FORM_CSS_PREFIX };
+    return {
+      standardOptions: getStandardItems(),
+      standardEntityPermission,
+      customOptions: Settings.CustomOptions.get(),
+      entityPermission,
+      FORM_CSS_PREFIX,
+    };
   }
 
   async _updateObject(event, formData) {
-    console.dir(formData);
+    const standardItems = getStandardItems();
     const newOptions = [];
     if (Array.isArray(formData.name)) {
       for (let i = 0; i < formData.name.length; i++) {
-        newOptions.push({
-          name: formData.name[i],
-          icon: formData.icon[i],
-          attributeKey: formData.attributeKey[i],
-          permission: formData.permission[i],
-          hideFromGM: formData.hideFromGM[i],
-        });
+        if (i < standardItems.length) {
+          const standardItem = standardItems[i];
+          standardItem.permissionSetting.set(formData.permission[i]);
+          standardItem.gmSetting?.set(formData.hideFromGM[i]);
+        } else {
+          newOptions.push({
+            name: formData.name[i],
+            icon: formData.icon[i],
+            attributeKey: formData.attributeKey[i],
+            permission: formData.permission[i],
+            hideFromGM: formData.hideFromGM[i],
+          });
+        }
       }
-    } else {
-      newOptions.push({
-        name: formData.name,
-        icon: formData.icon,
-        attributeKey: formData.attributeKey,
-        permission: formData.permission,
-        hideFromGM: formData.hideFromGM,
-      });
     }
     Settings.CustomOptions.set(newOptions);
   }
@@ -76,9 +162,6 @@ export default class CustomOptionsForm extends FormApplication {
   onMoveUp(event) {
     const row = getRow(event.target);
     const previousRow = getRow(row.first().prev()[0]);
-    console.error('UP');
-    console.dir(row);
-    console.dir(previousRow);
     if (previousRow) {
       row.insertBefore(previousRow.first());
       this._refreshActionCells();
@@ -88,13 +171,16 @@ export default class CustomOptionsForm extends FormApplication {
   onMoveDown(event) {
     const row = getRow(event.target);
     const nextRow = getRow(row.last().next()[0]);
-    console.error('DOWN');
-    console.dir(row);
-    console.dir(nextRow);
     if (nextRow) {
       row.insertAfter(nextRow.last());
       this._refreshActionCells();
     }
+  }
+
+  onToggleDebug(event) {
+    event.preventDefault();
+    toggleDebug();
+    this._fixDebugToggleCSS();
   }
 
   async onAdd(event) {
@@ -115,7 +201,9 @@ export default class CustomOptionsForm extends FormApplication {
     super.activateListeners(html);
     log.debug('Activating CustomOptionsForm listeners');
     html.find(`#${FORM_CSS_PREFIX}addRow a`).on('click', this.onAdd.bind(this));
+    html.find(`.${FORM_CSS_PREFIX}toggleDebug`).on('click', this.onToggleDebug.bind(this));
     this._activateRowListeners(html);
+    this._fixDebugToggleCSS();
   }
 
   _activateRowListeners(html) {
@@ -127,11 +215,20 @@ export default class CustomOptionsForm extends FormApplication {
   }
 
   _refreshActionCells() {
-    const allActions = this.element.find(`.${FORM_CSS_PREFIX}actions`);
-    allActions.removeClass('first');
-    allActions.removeClass('last');
-    allActions.first().addClass('first');
-    allActions.last().addClass('last');
+    const allCustomActions = this.element.find(`.${CUSTOM_TITLE_CSS} ~ .${ACTIONS_CSS}`);
+    allCustomActions.removeClass('first');
+    allCustomActions.removeClass('last');
+    allCustomActions.first().addClass('first');
+    allCustomActions.last().addClass('last');
+  }
+
+  _fixDebugToggleCSS() {
+    const debugToggle = this.element.find(`.${DEBUG_TOGGLE_CSS}`);
+    if (isDebug()) {
+      debugToggle.addClass(DEBUG_TOGGLE_ON_CSS);
+    } else {
+      debugToggle.removeClass(DEBUG_TOGGLE_ON_CSS);
+    }
   }
 }
 
@@ -140,13 +237,14 @@ const getRow = (element) => {
     element = element.parentNode;
   }
 
-  while (element && !element.classList.contains(`${FORM_CSS_PREFIX}actions`)) {
+  while (element && !element.classList.contains(ACTIONS_CSS)) {
     element = element.nextElementSibling;
   }
-  if (element && element.classList.contains(`${FORM_CSS_PREFIX}actions`)) {
+  if (element && element.classList.contains(ACTIONS_CSS)) {
     return $([
       // Name
-      element.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling,
+      element.previousElementSibling.previousElementSibling.previousElementSibling
+        .previousElementSibling,
       // Icon
       element.previousElementSibling.previousElementSibling.previousElementSibling,
       // Key

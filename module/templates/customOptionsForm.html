@@ -21,19 +21,41 @@
       </dl>
     </div>
     <div class="{{FORM_CSS_PREFIX}}data">
-      <div id="{{FORM_CSS_PREFIX}}header-name">
+      <div class="{{FORM_CSS_PREFIX}}standardOptionsTitle">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.standardOptionsTitle'}}
+      </div>
+      <div id="{{FORM_CSS_PREFIX}}header-name" class="{{FORM_CSS_PREFIX}}header">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.name'}}
       </div>
-      <div id="{{FORM_CSS_PREFIX}}header-icon">
+      <div id="{{FORM_CSS_PREFIX}}header-icon" class="{{FORM_CSS_PREFIX}}header">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.icon'}}
       </div>
-      <div id="{{FORM_CSS_PREFIX}}header-attributeKey">
+      <div id="{{FORM_CSS_PREFIX}}header-attributeKey" class="{{FORM_CSS_PREFIX}}header">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.attributeKey'}}
       </div>
-      <div id="{{FORM_CSS_PREFIX}}header-permission">
+      <div id="{{FORM_CSS_PREFIX}}header-permission" class="{{FORM_CSS_PREFIX}}header">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.permission'}}
       </div>
-      <div id="{{FORM_CSS_PREFIX}}header-delete"></div>
+      <div id="{{FORM_CSS_PREFIX}}header-actions" class="{{FORM_CSS_PREFIX}}header"></div>
+      {{#each standardOptions}}
+        {{> modules/illandril-token-tooltips/templates/standardOptionsFormRow.html option=this entityPermission=../standardEntityPermission FORM_CSS_PREFIX=../FORM_CSS_PREFIX}}
+      {{/each}}
+      <div class="{{FORM_CSS_PREFIX}}customOptionsTitle">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.customOptionsTitle'}}
+      </div>
+      <div class="{{FORM_CSS_PREFIX}}header">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.name'}}
+      </div>
+      <div class="{{FORM_CSS_PREFIX}}header">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.icon'}}
+      </div>
+      <div class="{{FORM_CSS_PREFIX}}header">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.attributeKey'}}
+      </div>
+      <div class="{{FORM_CSS_PREFIX}}header">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.permission'}}
+      </div>
+      <div class="{{FORM_CSS_PREFIX}}header"></div>
       {{#each customOptions}}
        {{> modules/illandril-token-tooltips/templates/customOptionsFormRow.html option=this entityPermission=../entityPermission FORM_CSS_PREFIX=../FORM_CSS_PREFIX}}
       {{/each}}
@@ -46,6 +68,15 @@
     </div>
   </section>
   <footer class="form-footer">
+    <button class="{{FORM_CSS_PREFIX}}toggleDebug">
+      <i class="fas fa-bug"></i>
+      <span class="{{FORM_CSS_PREFIX}}toggleDebug-onLabel">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.toggleDebug.onLabel'}}
+      </span>
+      <span class="{{FORM_CSS_PREFIX}}toggleDebug-offLabel">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.toggleDebug.offLabel'}}
+      </span>
+    </button>
     <button type="submit" name="submit">
       <i class="far fa-save"></i>
       {{localize 'illandril-token-tooltips.setting.customOptionsMenu.save'}}

@@ -7,6 +7,7 @@ const CSS_VALUE = `${CSS_PREFIX}value`;
 const CSS_CURRENT = `${CSS_PREFIX}current`;
 const CSS_MAX = `${CSS_PREFIX}max`;
 const CSS_TEMP = `${CSS_PREFIX}temp`;
+const CSS_UNITS = `${CSS_PREFIX}units`;
 
 export default class AttributeRow {
   constructor(name, iconNameOrElem) {
@@ -35,7 +36,6 @@ export default class AttributeRow {
     if (this.name === name && this.iconName === iconNameOrElem) {
       return;
     }
-    console.log(`sNAI ${name} ${iconNameOrElem}`);
     this.name = name;
     let iconElem;
     if (typeof iconNameOrElem === 'string') {
@@ -54,7 +54,11 @@ export default class AttributeRow {
     }
   }
 
-  setValue(value, max = null, temp = null, tempMax = null) {
+  setValue(value, max = null, temp = null, tempMax = null, units = null) {
+    if (typeof value === 'object') {
+      this.setValue(value.value, value.max, value.temp, value.tempMax, value.units);
+      return;
+    }
     emptyNode(this.currDisplay);
     addValueWithTemp(this.currDisplay, value, temp);
     if (max) {
@@ -69,6 +73,20 @@ export default class AttributeRow {
       if (this.maxDisplay) {
         this.valueDisplay.removeChild(this.maxDisplay);
         this.maxDisplay = null;
+      }
+    }
+    if (units) {
+      if (this.unitsDisplay) {
+        emptyNode(this.unitsDisplay);
+      } else {
+        this.unitsDisplay = span(CSS_UNITS);
+        this.valueDisplay.appendChild(this.unitsDisplay);
+      }
+      appendText(this.unitsDisplay, '' + units);
+    } else {
+      if (this.unitsDisplay) {
+        this.valueDisplay.removeChild(this.unitsDisplay);
+        this.unitsDisplay = null;
       }
     }
   }
@@ -116,4 +134,77 @@ const addWithoutTemp = (element, value) => {
   } else {
     appendText(element, value);
   }
+};
+
+const isValidAttributeValue = (value) => {
+  if (value === null || value === '') {
+    return false;
+  }
+  if (typeof value === 'number' && !isNaN(value)) {
+    return true;
+  }
+  return typeof value === 'string';
+};
+
+const isNumberLikeValue = (value) => {
+  const valueAsFloat = parseFloat(value);
+  return !isNaN(valueAsFloat);
+};
+
+export const calculateValue = (attribute, opt_attributeKey) => {
+  const attributeKey = opt_attributeKey || '';
+  if (attribute === null) {
+    return null;
+  }
+
+  if (isValidAttributeValue(attribute)) {
+    let value;
+    if (typeof attribute === 'number' && attributeKey.endsWith('.pct')) {
+      value = +attribute.toFixed(2) + '%';
+    } else {
+      value = attribute;
+    }
+    return {
+      value,
+    };
+  }
+
+  if (typeof attribute === 'object') {
+    let value;
+    if (isValidAttributeValue(attribute.total)) {
+      value = attribute.total;
+    } else if (isValidAttributeValue(attribute.value)) {
+      value = attribute.value;
+    } else if (isValidAttributeValue(attribute.max)) {
+      value = 0;
+    } else {
+      return null;
+    }
+    let max;
+    if (isValidAttributeValue(attribute.max)) {
+      max = attribute.max;
+    } else {
+      max = null;
+    }
+    let temp;
+    if (isNumberLikeValue(value) && isNumberLikeValue(attribute.temp)) {
+      temp = attribute.temp;
+    } else {
+      temp = null;
+    }
+    let tempMax;
+    if (isNumberLikeValue(max) && isNumberLikeValue(attribute.tempMax)) {
+      tempMax = attribute.tempMax;
+    } else {
+      tempMax = null;
+    }
+    let units;
+    if (typeof attribute.units === 'string') {
+      units = attribute.units;
+    } else {
+      units = null;
+    }
+    return { value, max, temp, tempMax, units };
+  }
+  return null;
 };

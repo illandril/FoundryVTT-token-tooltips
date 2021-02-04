@@ -17,8 +17,8 @@ Hooks.once('init', () => {
     hint: `${MODULE_KEY}.setting.customOptionsMenu.hint`,
     icon: 'fas fa-bars',
     type: CustomOptionsForm,
-    restricted: true
-});
+    restricted: true,
+  });
   getSettingsList().forEach((setting) => {
     setting.register();
   });
