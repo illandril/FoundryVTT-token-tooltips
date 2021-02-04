@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.0) (2021-02-04)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.1...v2.0.0)
+
+**Enhancements**
+
+- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
+
+**Other&nbsp;Changes**
+
+- \[Minor Feature Request\] Add data attributes movement [\#18](https://github.com/illandril/FoundryVTT-token-tooltips/issues/18)
+
 ## [v1.4.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.1) (2021-01-17)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.0...v1.4.1)
@@ -11,14 +23,11 @@
 **Fixed&nbsp;Bugs**
 
 - Spell slots and resources not showing for GMs, regardless of settings [\#16](https://github.com/illandril/FoundryVTT-token-tooltips/issues/16)
+- Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
 
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
-
-**Fixed&nbsp;Bugs**
-
-- Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
 
 **Other&nbsp;Changes**
 
