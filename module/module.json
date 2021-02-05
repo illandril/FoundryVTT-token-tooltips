@@ -1,7 +1,7 @@
 {
     "name": "illandril-token-tooltips",
-    "title": "Illandril's Token Tooltips (5e)",
-    "description": "Adds tooltips for tokens for the DnD5e system. The tooltips include HP, AC, Movement Speeds (optional), Passive Perception, Passive Investigation, Passive Insight, Resources (optional), Spell Slots, Feat Usages (visibility configurable per feat), and Item Uses and Quantity (visibility configurable per-item). Tooltips are shown for all tokens for GMs, and visibility is configurable for players.",
+    "title": "Illandril's Token Tooltips",
+    "description": "Adds tooltips for tokens for any system. Some, but not all, systems have some values pre-configured for the tooltip, but custom tooltip values can be configured for any system. The DnD5e system has the most built-in support, but other modules (including Pathfinder 1 and 2, D&D 3.5, and more) have some values configured to show out-of-the-box.",
     "version": "2.0.0",
     "library": "false",
     "manifestPlusVersion": "1.0.0",
