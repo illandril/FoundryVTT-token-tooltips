@@ -117,10 +117,17 @@ class Tooltip {
   }
 
   fixPosition(token) {
-    const tokenWidth = token.w * canvas.stage.scale.x;
-    const left = Math.ceil(token.worldTransform.tx + tokenWidth + 8);
+    if ( Settings.ShowOnLeft.get() ) {
+      const right = window.innerWidth - Math.ceil(token.worldTransform.tx - 8);
+      this.element.style.right = `${right}px`;
+      this.element.style.left = '';
+    } else {
+      const tokenWidth = token.w * canvas.stage.scale.x;
+      const left = Math.ceil(token.worldTransform.tx + tokenWidth + 8);
+      this.element.style.left = `${left}px`;
+      this.element.style.right = '';
+    }
     const top = Math.floor(token.worldTransform.ty - 8);
-    this.element.style.left = `${left}px`;
     this.element.style.top = `${top}px`;
   }
 

@@ -65,6 +65,10 @@ const Settings = {
   }),
 
   CustomOptions: new ArraySetting('customOptions', []),
+
+  ShowOnLeft: new BooleanSetting('showOnLeft', false, {
+    hasHint: true,
+  }),
 };
 
 Object.freeze(Settings);

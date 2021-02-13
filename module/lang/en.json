@@ -38,13 +38,13 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.name": "Spell Slots",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies per system (ex. data.spells.spell#)",
 
-    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.name": "Item Uses",
-    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
-    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.key": "DnD5e only (toggle per item in actor sheets)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.items.name": "Item Uses",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.items.key": "DnD5e only (toggle per item in actor sheets)",
 
-    "illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle": "GM",
-    "illandril-token-tooltips.setting.customOptionsMenu.moveDown": "Move Down",
-    "illandril-token-tooltips.setting.customOptionsMenu.moveUp": "Move Up",
+  "illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle": "GM",
+  "illandril-token-tooltips.setting.customOptionsMenu.moveDown": "Move Down",
+  "illandril-token-tooltips.setting.customOptionsMenu.moveUp": "Move Up",
   "illandril-token-tooltips.setting.customOptionsMenu.delete": "Delete",
   "illandril-token-tooltips.setting.customOptionsMenu.deleteConfirm": "Are you sure you want to delete this value?",
   "illandril-token-tooltips.setting.customOptionsMenu.add": "Add",
@@ -68,6 +68,9 @@
   "illandril-token-tooltips.setting.entityPermission.option.OBSERVER": "Observer",
   "illandril-token-tooltips.setting.entityPermission.option.OWNER": "Owner",
   "illandril-token-tooltips.setting.entityPermission.option.HIDE_FROM_EVERYONE": "Hide from Everyone",
+
+  "illandril-token-tooltips.setting.showOnLeft.label": "Show on Left",
+  "illandril-token-tooltips.setting.showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
 
   "illandril-token-tooltips.pactAbbreviation": "P",
   "illandril-token-tooltips.powerAbbreviation": "P",
