@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.0.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.2) (2021-02-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.1...v2.0.2)
+
+**Enhancements**
+
+- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
+
+**Fixed&nbsp;Bugs**
+
+- Temporary maximum HP increases are not shown in tooltip [\#24](https://github.com/illandril/FoundryVTT-token-tooltips/issues/24)
+- Temp HP sometimes concatenates current and temp as strings, instead of adding them numerically [\#23](https://github.com/illandril/FoundryVTT-token-tooltips/issues/23)
+
 ## [v2.0.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.1) (2021-02-13)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.0...v2.0.1)
