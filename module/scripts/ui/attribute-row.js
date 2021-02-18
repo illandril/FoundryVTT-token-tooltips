@@ -54,9 +54,9 @@ export default class AttributeRow {
     }
   }
 
-  setValue(value, max = null, temp = null, tempMax = null, units = null) {
+  setValue(value, max = null, temp = null, tempmax = null, units = null) {
     if (typeof value === 'object') {
-      this.setValue(value.value, value.max, value.temp, value.tempMax, value.units);
+      this.setValue(value.value, value.max, value.temp, (value.tempmax || value.tempmax), value.units);
       return;
     }
     emptyNode(this.currDisplay);
@@ -68,7 +68,7 @@ export default class AttributeRow {
         this.maxDisplay = span(CSS_MAX);
         this.valueDisplay.appendChild(this.maxDisplay);
       }
-      addValueWithTemp(this.maxDisplay, max, tempMax);
+      addValueWithTemp(this.maxDisplay, max, tempmax);
     } else {
       if (this.maxDisplay) {
         this.valueDisplay.removeChild(this.maxDisplay);
@@ -98,9 +98,9 @@ const nanToZero = (value) => {
   }
   const valueAsFloat = parseFloat(value);
   if (isNaN(valueAsFloat)) {
-    return valueAsFloat;
+    return 0;
   }
-  return value;
+  return valueAsFloat;
 };
 
 const addValueWithTemp = (element, value, opt_tempValue) => {
@@ -111,6 +111,7 @@ const addValueWithTemp = (element, value, opt_tempValue) => {
     if (tempValue === 0) {
       addWithoutTemp(element, value);
     } else {
+      console.dir({ value, ntzValue: nanToZero(value), opt_tempValue, tempValue, sum: nanToZero(value) + tempValue });
       addWithoutTemp(element, nanToZero(value) + tempValue);
       element.classList.add(CSS_TEMP);
     }
@@ -192,11 +193,11 @@ export const calculateValue = (attribute, opt_attributeKey) => {
     } else {
       temp = null;
     }
-    let tempMax;
-    if (isNumberLikeValue(max) && isNumberLikeValue(attribute.tempMax)) {
-      tempMax = attribute.tempMax;
+    let tempmax;
+    if (isNumberLikeValue(max) && isNumberLikeValue(attribute.tempmax)) {
+      tempmax = attribute.tempmax;
     } else {
-      tempMax = null;
+      tempmax = null;
     }
     let units;
     if (typeof attribute.units === 'string') {
@@ -204,7 +205,7 @@ export const calculateValue = (attribute, opt_attributeKey) => {
     } else {
       units = null;
     }
-    return { value, max, temp, tempMax, units };
+    return { value, max, temp, tempmax, units };
   }
   return null;
 };

@@ -18,6 +18,6 @@ export const updateCustomAttributeRow = (actor, customRow, customRows, i) => {
     row = customRows[i];
     row.setNameAndIcon(name, iconElem);
   }
-  row.setValue(value.value, value.max, value.temp, value.tempMax);
+  row.setValue(value.value, value.max, value.temp, value.tempmax);
   return row;
 };
