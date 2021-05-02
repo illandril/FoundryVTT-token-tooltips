@@ -26,9 +26,13 @@
   justify-content: center;
 }
 
-.illandril-token-tooltips--data img {
+.illandril-token-tooltips--label img {
   height: 1.15em;
   vertical-align: text-bottom;
+  border: none;
+}
+
+.illandril-token-tooltips--value img {
   border: none;
 }
 

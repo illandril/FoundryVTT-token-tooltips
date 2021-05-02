@@ -55,6 +55,11 @@ export default class AttributeRow {
   }
 
   setValue(value, max = null, temp = null, tempmax = null, units = null) {
+    if(value instanceof Image) {
+      emptyNode(this.currDisplay);
+      this.currDisplay.appendChild(value);
+      return;
+    }
     if (typeof value === 'object') {
       this.setValue(value.value, value.max, value.temp, (value.tempmax || value.tempmax), value.units);
       return;
