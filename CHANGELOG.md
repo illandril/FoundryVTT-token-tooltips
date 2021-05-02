@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.1.0) (2021-05-02)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.2...v2.1.0)
+
+**Enhancements**
+
+- data key "img" doesn't work [\#26](https://github.com/illandril/FoundryVTT-token-tooltips/issues/26)
+- Show resistances/etc in a single tooltip value \(potentially with generic array handling instead of specific to resistances\) [\#25](https://github.com/illandril/FoundryVTT-token-tooltips/issues/25)
+
 ## [v2.0.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.2) (2021-02-18)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.1...v2.0.2)
@@ -60,7 +69,6 @@
 **Other&nbsp;Changes**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
-- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 
 ## [v1.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.3.0) (2021-01-01)
 
@@ -109,6 +117,7 @@
 
 **Other&nbsp;Changes**
 
+- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 - Update compatibility for 0.6.6 [\#5](https://github.com/illandril/FoundryVTT-token-tooltips/issues/5)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-token-tooltips/issues/1)
 
