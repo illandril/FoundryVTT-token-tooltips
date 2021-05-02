@@ -35,6 +35,16 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.name": "Resources",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.key": "data.resources.#",
 
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.name": "Dmg Res./Vuln.",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.help": "Damage Resistances, Immunities, and Vulnerabilities/Weaknesses. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.icon": "label",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.key": "Varies per system (ex. data.traits.di/dr/dv)",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.name": "Cond. Imm.",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.help": "Condition Immunities. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.icon": "label",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.key": "Varies per system (ex. data.traits.ci)",
+
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.name": "Spell Slots",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies per system (ex. data.spells.spell#)",
 
@@ -75,6 +85,12 @@
   "illandril-token-tooltips.pactAbbreviation": "P",
   "illandril-token-tooltips.powerAbbreviation": "P",
   "illandril-token-tooltips.cantripAbbreviation": "C",
+
+  "illandril-token-tooltips.tooltip.damageImmunities.label": "Immunities",
+  "illandril-token-tooltips.tooltip.damageResistances.label": "Resistances",
+  "illandril-token-tooltips.tooltip.damageVulnerabilities.label": "Vulnerabilities",
+  "illandril-token-tooltips.tooltip.weaknesses.label": "Weaknesses",
+  "illandril-token-tooltips.tooltip.conditionImmunities.label": "Cond. Imm.",
 
   "illandril-token-tooltips.tooltipSwitch": "Show in Tooltip",
   "illandril-token-tooltips.tooltipShown": "Shown in Tooltip",

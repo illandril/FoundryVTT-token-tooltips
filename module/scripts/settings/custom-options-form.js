@@ -28,6 +28,8 @@ Hooks.on('ready', () => {
 });
 
 const getStandardItem = (name, icon, permissionSetting, gmSetting) => {
+  const helpKey = `illandril-token-tooltips.setting.customOptionsMenu.standard.${name}.help`;
+  const help = game.i18n.has(helpKey) ? game.i18n.localize(helpKey) : undefined;
   return {
     name: game.i18n.localize(
       `illandril-token-tooltips.setting.customOptionsMenu.standard.${name}.name`
@@ -40,6 +42,7 @@ const getStandardItem = (name, icon, permissionSetting, gmSetting) => {
     permission: permissionSetting.get(),
     gmSetting,
     hideFromGM: gmSetting && gmSetting.get(),
+    help
   };
 };
 
@@ -65,6 +68,22 @@ const getStandardItems = () => {
       'eye , search , brain',
       Settings.PassivesMinimumPermission,
       Settings.HidePlayerPassivesFromGM
+    ),
+
+    // Damage Resistances / Immunities / Vulnerabilities
+    getStandardItem(
+      'dmgResVuln',
+      game.i18n.localize('illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.icon'),
+      Settings.DmgResVulnMinimumPermission,
+      Settings.HidePlayerDmgResVulnFromGM
+    ),
+
+    // Condition Immunities
+    getStandardItem(
+      'condImm',
+      game.i18n.localize('illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.icon'),
+      Settings.CondImmMinimumPermission,
+      Settings.HidePlayerCondImmFromGM
     ),
 
     // Resources
@@ -107,7 +126,7 @@ export default class CustomOptionsForm extends FormApplication {
       title: 'illandril-token-tooltips.setting.customOptionsMenu.title',
       template: 'modules/illandril-token-tooltips/templates/customOptionsForm.html',
       classes: ['sheet'],
-      width: 825,
+      width: 840,
       closeOnSubmit: true,
     });
   }

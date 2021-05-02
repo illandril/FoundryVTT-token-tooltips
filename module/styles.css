@@ -40,6 +40,11 @@
 .illandril-token-tooltips--label,
 .illandril-token-tooltips--value {
   display: inline-block;
+  vertical-align: text-top;
+}
+
+.illandril-token-tooltips--value {
+  max-width: 15em;
 }
 
 .illandril-token-tooltips--label {
@@ -121,7 +126,7 @@
 
 .illandril-token-tooltips--customOptionForm-data {
   display: grid;
-  grid-template-columns: 100px 150px auto max-content max-content;
+  grid-template-columns: 115px 150px auto max-content max-content;
   align-items: center;
   grid-gap: 4px 8px;
 }
@@ -176,6 +181,37 @@
 .illandril-token-tooltips--customOptionForm-disabledInput {
     border-bottom: 1px solid rgba(0,0,0,0.2);
     padding: 0 4px;
+}
+
+.illandril-token-tooltips--customOptionForm-disabledInput[data-help] {
+  position: relative;
+}
+
+.illandril-token-tooltips--customOptionForm-disabledInput[data-help]::after {
+  content: '\f059';
+  font-family: 'Font Awesome 5 Free';
+  position: absolute;
+  right: 0;
+  opacity: 0.65;
+  font-size: 85%;
+  line-height: 150%;
+}
+
+.illandril-token-tooltips--customOptionForm-disabledInput[data-help]:hover::after {
+  opacity: 1;
+}
+
+.illandril-token-tooltips--customOptionForm-disabledInput[data-help]:hover::before {
+  content: attr(data-help);
+  position: absolute;
+  top: 0;
+  left: calc(100% + 4px);
+  background: #fff;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 2px 4px;
+  width: max-content;
+  max-width: 430px;
 }
 
 .illandril-token-tooltips--customOptionForm-standardOptionsTitle,

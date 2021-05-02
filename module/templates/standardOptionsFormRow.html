@@ -1,5 +1,5 @@
-<div aria-labelledby="{{FORM_CSS_PREFIX}}header-name" class="{{FORM_CSS_PREFIX}}disabledInput">
-  <input type="hidden" name="name" value="{{option.name}}" />
+<div aria-labelledby="{{FORM_CSS_PREFIX}}header-name" class="{{FORM_CSS_PREFIX}}disabledInput" {{#if option.help}}data-help="{{option.help}}"{{/if}}>
+  <input type="hidden" name="name" value="{{option.name}}"/>
   {{option.name}}
 </div>
 <div class="{{FORM_CSS_PREFIX}}iconCell">

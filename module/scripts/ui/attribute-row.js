@@ -138,6 +138,16 @@ const addWithoutTemp = (element, value) => {
 };
 
 const isValidAttributeValue = (value) => {
+  if(isValidNonArrayAttributeValue(value)) {
+    return true;
+  }
+  if(Array.isArray(value)) {
+    return Array.prototype.every.call(value, isValidNonArrayAttributeValue);
+  }
+  return false;
+};
+
+const isValidNonArrayAttributeValue = (value) => {
   if (value === null || value === '') {
     return false;
   }
@@ -160,7 +170,9 @@ export const calculateValue = (attribute, opt_attributeKey) => {
 
   if (isValidAttributeValue(attribute)) {
     let value;
-    if (typeof attribute === 'number' && attributeKey.endsWith('.pct')) {
+    if(Array.isArray(attribute)) {
+      value = Array.prototype.join.call(attribute, ', ');
+    } else if (typeof attribute === 'number' && attributeKey.endsWith('.pct')) {
       value = +attribute.toFixed(2) + '%';
     } else {
       value = attribute;
@@ -176,6 +188,9 @@ export const calculateValue = (attribute, opt_attributeKey) => {
       value = attribute.total;
     } else if (isValidAttributeValue(attribute.value)) {
       value = attribute.value;
+      if(Array.isArray(value)) {
+        return calculateValue(value);
+      }
     } else if (isValidAttributeValue(attribute.max)) {
       value = 0;
     } else {

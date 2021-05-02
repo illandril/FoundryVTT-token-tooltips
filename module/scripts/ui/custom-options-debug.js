@@ -45,7 +45,9 @@ Hooks.on('hoverToken', (token, hovered) => {
 });
 
 const addDataRows = (actor, keySoFar, data) => {
-  for (let key in data) {
+  const keys = Object.keys(data);
+  keys.sort();
+  for (let key of keys) {
     if (
       key.startsWith('_') ||
       key === 'permission' ||
@@ -75,29 +77,6 @@ const addDataRows = (actor, keySoFar, data) => {
 
     if (typeof value === 'object') {
       addDataRows(actor, fullKey, value);
-    } else {
-      //addDataRow(fullKey, value);
     }
   }
-};
-
-const addDataRow = (key, value) => {
-  if (typeof value === 'string') {
-    if (value.length === 0 || value.length > 25) {
-      return;
-    }
-  } else if (!(typeof value === 'number')) {
-    return;
-  }
-
-  const row = div(CSS_ROW);
-
-  const keyCell = div(CSS_KEY);
-  keyCell.appendChild(document.createTextNode(key));
-  row.appendChild(keyCell);
-
-  const valueCell = div(CSS_VALUE);
-  valueCell.appendChild(document.createTextNode('' + value));
-  row.appendChild(valueCell);
-  debugDisplay.appendChild(row);
 };

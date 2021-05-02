@@ -64,6 +64,20 @@ const Settings = {
     config: false,
   }),
 
+  DmgResVulnMinimumPermission: new StringSetting('dmgResVulnMinimumPermission', HIDE_FROM_EVERYONE_OPTION, {
+    config: false,
+  }),
+  HidePlayerDmgResVulnFromGM: new BooleanSetting('hidePlayerDmgResVulnFromGM', false, {
+    config: false,
+  }),
+
+  CondImmMinimumPermission: new StringSetting('condImmMinimumPermission', HIDE_FROM_EVERYONE_OPTION, {
+    config: false,
+  }),
+  HidePlayerCondImmFromGM: new BooleanSetting('hidePlayerCondImmFromGM', false, {
+    config: false,
+  }),
+
   CustomOptions: new ArraySetting('customOptions', []),
 
   ShowOnLeft: new BooleanSetting('showOnLeft', false, {

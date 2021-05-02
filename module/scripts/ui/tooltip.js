@@ -75,6 +75,24 @@ class Tooltip {
         )
       );
     }
+    for (let damageResImmVuln of attributeLookups.damageResImmVuln) {
+      this.standardRows.push(
+        new StandardRow(
+          damageResImmVuln,
+          Settings.DmgResVulnMinimumPermission,
+          Settings.HidePlayerDmgResVulnFromGM
+        )
+      );
+    }
+    for (let conditionImmunity of attributeLookups.conditionImmunities) {
+      this.standardRows.push(
+        new StandardRow(
+          conditionImmunity,
+          Settings.CondImmMinimumPermission,
+          Settings.HidePlayerCondImmFromGM
+        )
+      );
+    }
     for (let resource of attributeLookups.resources) {
       this.standardRows.push(
         new StandardRow(
