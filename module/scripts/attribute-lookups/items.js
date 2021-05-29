@@ -10,7 +10,8 @@ export const get = (actor) => {
   const fArr = [];
   const cArr = [];
   items &&
-    items.forEach((item) => {
+    items.forEach((itemEntity) => {
+      const item = itemEntity.data;
       if (shouldCalculateUses(item)) {
         const { uses, maxUses } = calculateUses(item);
         if (uses !== null) {

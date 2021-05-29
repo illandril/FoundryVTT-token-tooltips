@@ -246,7 +246,7 @@ const showDataType = (actor, minimumPermissionSetting, hideFromGMSetting) => {
   } else if (game.user.isGM) {
     return !(actor.hasPlayerOwner && boolOrBoolSetting(hideFromGMSetting));
   } else {
-    return actor.hasPerm(game.user, minimumPermission);
+    return actor.testUserPermission(game.user, minimumPermission);
   }
 };
 

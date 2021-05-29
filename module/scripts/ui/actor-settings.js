@@ -10,7 +10,7 @@ const CSS_TOOLTIP_ACTIVE = CSS_PREFIX + 'active';
 
 Hooks.on('renderActorSheet5eCharacter', (actorSheet, html, data) => {
   const actor = game.actors.get(data.actor._id);
-  if (actor.permission !== ENTITY_PERMISSIONS.OWNER) {
+  if (!actor.isOwner) {
     return;
   }
 

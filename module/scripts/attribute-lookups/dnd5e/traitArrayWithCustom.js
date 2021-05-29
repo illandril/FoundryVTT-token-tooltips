@@ -10,7 +10,7 @@ const traitArrayWithCustom = (localeKey, propertyKey, valueLocalePrefix) => {
     icon: () => null,
     label: () => game.i18n.localize(`${MODULE_KEY}.tooltip.${localeKey}.label`),
     value: (actor) => {
-      if (game.system.id !== 'DnD5e') {
+      if (game.system.id !== 'dnd5e') {
         return null;
       }
       const property = getProperty(actor, `data.data.traits.${propertyKey}`);
