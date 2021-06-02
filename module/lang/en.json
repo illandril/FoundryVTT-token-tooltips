@@ -72,6 +72,8 @@
   "illandril-token-tooltips.setting.visibility.option.ALL_PLAYERS": "Player Tokens (any disposition)",
   "illandril-token-tooltips.setting.visibility.option.OWNER": "Owned Actor Tokens",
   "illandril-token-tooltips.setting.visibility.option.OBSERVER": "Observed Actor Tokens",
+  "illandril-token-tooltips.setting.visibility.option.LIMITED": "Limited Permission Actor Tokens",
+  "illandril-token-tooltips.setting.visibility.option.ALL": "All Tokens",
 
   "illandril-token-tooltips.setting.entityPermission.option.NONE": "None",
   "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited",

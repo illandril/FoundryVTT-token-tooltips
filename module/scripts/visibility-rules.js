@@ -29,4 +29,16 @@ export default [
       return token.observer;
     },
   },
+  {
+    name: 'LIMITED',
+    shouldShowTooltip: (token) => {
+      return token.actor?.testUserPermission(game.user, CONST.ENTITY_PERMISSIONS.LIMITED);
+    },
+  },
+  {
+    name: 'ALL',
+    shouldShowTooltip: (token) => {
+      return true;
+    },
+  },
 ];
