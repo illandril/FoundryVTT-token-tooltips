@@ -1,12 +1,16 @@
 # Changelog
 
+## [v2.2.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.2.1) (2021-06-02)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.2.0...v2.2.1)
+
+**Enhancements**
+
+- No option for enemies? [\#28](https://github.com/illandril/FoundryVTT-token-tooltips/issues/28)
+
 ## [v2.2.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.2.0) (2021-05-29)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.1.0...v2.2.0)
-
-**Other&nbsp;Changes**
-
-- Support Foundry 0.8.x [\#27](https://github.com/illandril/FoundryVTT-token-tooltips/issues/27)
 
 ## [v2.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.1.0) (2021-05-02)
 
@@ -52,6 +56,7 @@
 
 **Other&nbsp;Changes**
 
+- Support Foundry 0.8.x [\#27](https://github.com/illandril/FoundryVTT-token-tooltips/issues/27)
 - \[Minor Feature Request\] Add data attributes movement [\#18](https://github.com/illandril/FoundryVTT-token-tooltips/issues/18)
 
 ## [v1.4.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.1) (2021-01-17)
