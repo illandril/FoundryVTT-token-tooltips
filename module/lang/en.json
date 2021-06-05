@@ -84,6 +84,9 @@
   "illandril-token-tooltips.setting.showOnLeft.label": "Show on Left",
   "illandril-token-tooltips.setting.showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
 
+  "illandril-token-tooltips.setting.showTokenName.label": "Show Token Name",
+  "illandril-token-tooltips.setting.showTokenName.hint": "If checked, the tooltip will show on the Token's name at the top of the tooltip.",
+
   "illandril-token-tooltips.pactAbbreviation": "P",
   "illandril-token-tooltips.powerAbbreviation": "P",
   "illandril-token-tooltips.cantripAbbreviation": "C",

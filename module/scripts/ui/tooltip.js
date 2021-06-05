@@ -177,7 +177,12 @@ class Tooltip {
   }
 
   updateName(token) {
-    this.nameElement.appendChild(document.createTextNode(token.name));
+    if ( Settings.ShowTokenName.get() ) {
+      this.nameElement.style.display = '';
+      this.nameElement.appendChild(document.createTextNode(token.name));
+    } else {
+      this.nameElement.style.display = 'none';
+    }
   }
 
   _updateRow(row, attribute) {

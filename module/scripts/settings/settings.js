@@ -83,6 +83,10 @@ const Settings = {
   ShowOnLeft: new BooleanSetting('showOnLeft', false, {
     hasHint: true,
   }),
+
+  ShowTokenName: new BooleanSetting('showTokenName', true, {
+    hasHint: true,
+  }),
 };
 
 Object.freeze(Settings);
