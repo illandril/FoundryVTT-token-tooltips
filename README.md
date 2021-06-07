@@ -10,3 +10,6 @@ The tooltips for DnD5e include HP, AC, Movement Speeds, Passive Perception, Pass
 Tooltips are shown for all tokens for GMs, and visibility is configurable for players.
 
 ![Screenshot showing tooltips for Olive](/screenshots/example-b.png?raw=true)
+
+
+For the custom tooltip values, the icon name is the name of the Font Awesome icon you want to show. You can search for icons [on the Font Awesome website](https://fontawesome.com/icons). Note that not all Font Awesome icons are available (FoundryVTT itself is in control over which icons are available, not this module - this module is just using the icons that are shipped with FoundryVTT).
