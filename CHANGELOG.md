@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.3.0) (2021-06-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.2.2...v2.3.0)
+
+**Enhancements**
+
+- Hide from Everyone with GM enabled still hides it from GM [\#32](https://github.com/illandril/FoundryVTT-token-tooltips/issues/32)
+- Suggestion: Allow static items to be rearranged [\#30](https://github.com/illandril/FoundryVTT-token-tooltips/issues/30)
+
+**Other&nbsp;Changes**
+
+- List of Icons Available [\#31](https://github.com/illandril/FoundryVTT-token-tooltips/issues/31)
+
 ## [v2.2.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.2.2) (2021-06-05)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.2.1...v2.2.2)
@@ -31,6 +44,7 @@
 **Enhancements**
 
 - data key "img" doesn't work [\#26](https://github.com/illandril/FoundryVTT-token-tooltips/issues/26)
+- Show resistances/etc in a single tooltip value \(potentially with generic array handling instead of specific to resistances\) [\#25](https://github.com/illandril/FoundryVTT-token-tooltips/issues/25)
 
 ## [v2.0.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.2) (2021-02-18)
 
@@ -38,7 +52,6 @@
 
 **Enhancements**
 
-- Show resistances/etc in a single tooltip value \(potentially with generic array handling instead of specific to resistances\) [\#25](https://github.com/illandril/FoundryVTT-token-tooltips/issues/25)
 - Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
 
 **Fixed&nbsp;Bugs**
@@ -65,7 +78,6 @@
 **Enhancements**
 
 - Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
-- request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
 
 **Other&nbsp;Changes**
 
@@ -103,6 +115,7 @@
 **Enhancements**
 
 - Request: Show resources in tooltip [\#14](https://github.com/illandril/FoundryVTT-token-tooltips/issues/14)
+- request: show actor speed in tooltip [\#13](https://github.com/illandril/FoundryVTT-token-tooltips/issues/13)
 
 ## [v1.2.3](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.2.3) (2020-12-20)
 
