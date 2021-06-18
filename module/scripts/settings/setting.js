@@ -8,7 +8,8 @@ export default class Setting {
     this.key = key;
     this.hasHint = !!options.hasHint;
     this.defaultValue = defaultValue;
-    this.choices = options.choices || null;
+    this.choices = options.choices || undefined;
+    this.range = options.range || undefined;
     this.scope = options.scope || 'world';
     this.config = typeof options.config === 'boolean' ? options.config : true;
     settingsList.push(this);
@@ -25,6 +26,7 @@ export default class Setting {
       default: this.defaultValue,
       type: this.type,
       choices: this.choices,
+      range: this.range,
     });
   }
 

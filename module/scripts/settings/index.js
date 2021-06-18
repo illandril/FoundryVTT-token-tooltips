@@ -1,5 +1,5 @@
 import { log, KEY as MODULE_KEY } from '../module.js';
-import Settings, { HIDE_FROM_EVERYONE_OPTION } from './settings.js';
+import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from './settings.js';
 import CustomOptionsForm from './custom-options-form.js';
 
 import { getSettingsList } from './setting.js';
@@ -7,7 +7,7 @@ import { getSettingsList } from './setting.js';
 const SETTINGS_VERSION = 1;
 const SETTINGS_VERSION_KEY = 'settingsVersion';
 
-export { Settings as default, HIDE_FROM_EVERYONE_OPTION };
+export { Settings as default, HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY };
 window.ITTCustomOptions = Settings.CustomOptions;
 
 Hooks.once('init', () => {

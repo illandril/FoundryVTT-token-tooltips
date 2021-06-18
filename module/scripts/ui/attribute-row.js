@@ -116,7 +116,6 @@ const addValueWithTemp = (element, value, opt_tempValue) => {
     if (tempValue === 0) {
       addWithoutTemp(element, value);
     } else {
-      console.dir({ value, ntzValue: nanToZero(value), opt_tempValue, tempValue, sum: nanToZero(value) + tempValue });
       addWithoutTemp(element, nanToZero(value) + tempValue);
       element.classList.add(CSS_TEMP);
     }

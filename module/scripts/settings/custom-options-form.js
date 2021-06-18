@@ -1,8 +1,12 @@
 import { log, CSS_PREFIX, KEY as MODULE_KEY } from '../module.js';
 import { isDebug, toggleDebug } from '../ui/custom-options-debug.js';
 
-import Settings, { HIDE_FROM_EVERYONE_OPTION } from './settings.js';
+import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from './settings.js';
 import { fixChoices } from './choice-setting.js';
+
+import { supportedSystems as condImmSupportedSystems } from '../attribute-lookups/conditionImmunities.js';
+import { supportedSystems as damResImmVulnSupportedSystems } from '../attribute-lookups/damageResImmVuln.js';
+import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attribute-lookups/saving-throws.js';
 
 const FORM_CSS_PREFIX = `${CSS_PREFIX}customOptionForm-`;
 const DEBUG_TOGGLE_CSS = `${FORM_CSS_PREFIX}toggleDebug`;
@@ -17,10 +21,14 @@ let entityPermission;
 let standardEntityPermission;
 
 Hooks.on('ready', () => {
-  entityPermission = fixChoices('entityPermission', Object.keys(CONST.ENTITY_PERMISSIONS), true);
+  entityPermission = fixChoices(
+    'entityPermission',
+    Object.keys(CONST.ENTITY_PERMISSIONS).concat(SHOW_TO_GMS_ONLY),
+    true
+  );
   standardEntityPermission = fixChoices(
     'entityPermission',
-    Object.keys(CONST.ENTITY_PERMISSIONS).concat(HIDE_FROM_EVERYONE_OPTION),
+    Object.keys(CONST.ENTITY_PERMISSIONS).concat(SHOW_TO_GMS_ONLY, HIDE_FROM_EVERYONE_OPTION),
     true
   );
   getTemplate(ROW_TEMPLATE);
@@ -42,74 +50,115 @@ const getStandardItem = (name, icon, permissionSetting, gmSetting) => {
     permission: permissionSetting.get(),
     gmSetting,
     hideFromGM: gmSetting && gmSetting.get(),
-    help
+    help,
   };
 };
 
 const getStandardItems = () => {
-  return [
+  const standardItems = [
     // HP
     getStandardItem('hp', 'heart', Settings.HPMinimumPermission, Settings.HidePlayerHPFromGM),
 
     // AC
     getStandardItem('ac', 'user-shield', Settings.ACMinimumPermission, Settings.HidePlayerACFromGM),
+  ];
 
-    // Movement
-    getStandardItem(
-      'movement',
-      'walking',
-      Settings.MovementMinimumPermission,
-      Settings.HidePlayerMovementFromGM
-    ),
+  if (!savingThrowsUnsupportedSystems.includes(game.system.id)) {
+    // Saving Throws
+    standardItems.push(
+      getStandardItem(
+        'savingThrows',
+        game.i18n.localize(
+          'illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.icon'
+        ),
+        Settings.SavingThrowsMinimumPermission,
+        Settings.HidePlayerSavingThrowsFromGM
+      )
+    );
+  }
 
-    // Passive Skills
+  if (damResImmVulnSupportedSystems.includes(game.system.id)) {
+    // Damage Resistances / Immunities / Vulnerabilities
+    standardItems.push(
+      getStandardItem(
+        'dmgResVuln',
+        game.i18n.localize(
+          'illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.icon'
+        ),
+        Settings.DmgResVulnMinimumPermission,
+        Settings.HidePlayerDmgResVulnFromGM
+      )
+    );
+  }
+
+  if (condImmSupportedSystems.includes(game.system.id)) {
+    // Condition Immunities
+    standardItems.push(
+      getStandardItem(
+        'condImm',
+        game.i18n.localize(
+          'illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.icon'
+        ),
+        Settings.CondImmMinimumPermission,
+        Settings.HidePlayerCondImmFromGM
+      )
+    );
+  }
+
+  // Passive Skills
+  standardItems.push(
     getStandardItem(
       'passives',
       'eye , search , brain',
       Settings.PassivesMinimumPermission,
       Settings.HidePlayerPassivesFromGM
-    ),
+    )
+  );
 
-    // Damage Resistances / Immunities / Vulnerabilities
+  // Movement
+  standardItems.push(
     getStandardItem(
-      'dmgResVuln',
-      game.i18n.localize('illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.icon'),
-      Settings.DmgResVulnMinimumPermission,
-      Settings.HidePlayerDmgResVulnFromGM
-    ),
+      'movement',
+      'walking',
+      Settings.MovementMinimumPermission,
+      Settings.HidePlayerMovementFromGM
+    )
+  );
 
-    // Condition Immunities
-    getStandardItem(
-      'condImm',
-      game.i18n.localize('illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.icon'),
-      Settings.CondImmMinimumPermission,
-      Settings.HidePlayerCondImmFromGM
-    ),
-
-    // Resources
+  // Resources
+  standardItems.push(
     getStandardItem(
       'resources',
       'circle',
       Settings.ResourcesMinimumPermission,
       Settings.HidePlayerResourcesFromGM
-    ),
+    )
+  );
 
-    // Spell Slots
+  // Spell Slots
+  standardItems.push(
     getStandardItem(
       'spells',
       'star',
       Settings.SpellsMinimumPermission,
       Settings.HidePlayerSpellsFromGM
-    ),
+    )
+  );
 
+  if (game.system.id === 'dnd5e') {
     // Items
-    getStandardItem(
-      'items',
-      game.i18n.localize('illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon'),
-      Settings.ItemsMinimumPermission,
-      Settings.HidePlayerItemsFromGM
-    ),
-  ];
+    standardItems.push(
+      getStandardItem(
+        'items',
+        game.i18n.localize(
+          'illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon'
+        ),
+        Settings.ItemsMinimumPermission,
+        Settings.HidePlayerItemsFromGM
+      )
+    );
+  }
+  return standardItems;
 };
 
 export default class CustomOptionsForm extends FormApplication {

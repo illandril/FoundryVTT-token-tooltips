@@ -3,9 +3,11 @@ import VISIBILITY_RULES from '../visibility-rules.js';
 import ArraySetting from './array-setting.js';
 import BooleanSetting from './boolean-setting.js';
 import ChoiceSetting from './choice-setting.js';
+import RangeSetting from './range-setting.js';
 import StringSetting from './string-setting.js';
 
 export const HIDE_FROM_EVERYONE_OPTION = 'HIDE_FROM_EVERYONE';
+export const SHOW_TO_GMS_ONLY = "SHOW_TO_GMS_ONLY";
 
 const visibilityChoice = new ChoiceSetting(
   'visibility',
@@ -22,6 +24,8 @@ const Settings = {
       return rule.shouldShowTooltip(token);
     },
   },
+
+  RowsPerTooltip: new RangeSetting('rowsPerTooltip', 5, 1, 20, 1, { hasHint: true }),
 
   HPMinimumPermission: new StringSetting('hpMinimumPermission', 'NONE', {
     config: false,
@@ -61,6 +65,13 @@ const Settings = {
     config: false,
   }),
   HidePlayerMovementFromGM: new BooleanSetting('hidePlayerMovementFromGM', false, {
+    config: false,
+  }),
+
+  SavingThrowsMinimumPermission: new StringSetting('savingThrowsMinimumPermission', HIDE_FROM_EVERYONE_OPTION, {
+    config: false,
+  }),
+  HidePlayerSavingThrowsFromGM: new BooleanSetting('hidePlayerSavingThrowsFromGM', false, {
     config: false,
   }),
 

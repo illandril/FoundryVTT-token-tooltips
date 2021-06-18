@@ -1,4 +1,4 @@
-import Settings, { HIDE_FROM_EVERYONE_OPTION } from '../settings/index.js';
+import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from '../settings/index.js';
 import { CSS_PREFIX } from '../module.js';
 import { icon, emptyNode, img, div, span, appendText } from './html.js';
 import { updateCustomAttributeRow } from './custom-attribute-display.js';
@@ -51,30 +51,28 @@ class Tooltip {
         Settings.HPMinimumPermission,
         Settings.HidePlayerHPFromGM
       ),
-      new StandardRow(
-        attributeLookups.ac,
-        Settings.ACMinimumPermission,
-        Settings.HidePlayerACFromGM
-      ),
     ];
-    for (let movement of attributeLookups.movements) {
+
+    for (let ac of attributeLookups.acs) {
       this.standardRows.push(
         new StandardRow(
-          movement,
-          Settings.MovementMinimumPermission,
-          Settings.HidePlayerMovementFromGM
+          ac,
+          Settings.ACMinimumPermission,
+          Settings.HidePlayerACFromGM
         )
       );
     }
-    for (let passive of attributeLookups.passives) {
+
+    for (let savingThrow of attributeLookups.savingThrows) {
       this.standardRows.push(
         new StandardRow(
-          passive,
-          Settings.PassivesMinimumPermission,
-          Settings.HidePlayerPassivesFromGM
+          savingThrow,
+          Settings.SavingThrowsMinimumPermission,
+          Settings.HidePlayerSavingThrowsFromGM
         )
       );
     }
+
     for (let damageResImmVuln of attributeLookups.damageResImmVuln) {
       this.standardRows.push(
         new StandardRow(
@@ -84,6 +82,7 @@ class Tooltip {
         )
       );
     }
+
     for (let conditionImmunity of attributeLookups.conditionImmunities) {
       this.standardRows.push(
         new StandardRow(
@@ -93,6 +92,27 @@ class Tooltip {
         )
       );
     }
+
+    for (let passive of attributeLookups.passives) {
+      this.standardRows.push(
+        new StandardRow(
+          passive,
+          Settings.PassivesMinimumPermission,
+          Settings.HidePlayerPassivesFromGM
+        )
+      );
+    }
+
+    for (let movement of attributeLookups.movements) {
+      this.standardRows.push(
+        new StandardRow(
+          movement,
+          Settings.MovementMinimumPermission,
+          Settings.HidePlayerMovementFromGM
+        )
+      );
+    }
+
     for (let resource of attributeLookups.resources) {
       this.standardRows.push(
         new StandardRow(
@@ -102,6 +122,7 @@ class Tooltip {
         )
       );
     }
+
     for (let spellSlot of attributeLookups.spellSlots) {
       this.standardRows.push(
         new StandardRow(
@@ -135,6 +156,7 @@ class Tooltip {
   }
 
   fixPosition(token) {
+    document.documentElement.style.setProperty('--illandril-token-tooltips--tooltip-rows', Settings.RowsPerTooltip.get());
     if ( Settings.ShowOnLeft.get() ) {
       const right = window.innerWidth - Math.ceil(token.worldTransform.tx - 8);
       this.element.style.right = `${right}px`;
@@ -250,6 +272,8 @@ const showDataType = (actor, minimumPermissionSetting, hideFromGMSetting) => {
     return false;
   } else if (game.user.isGM) {
     return !(actor.hasPlayerOwner && boolOrBoolSetting(hideFromGMSetting));
+  } else if ( minimumPermission === SHOW_TO_GMS_ONLY ) {
+    return false;
   } else {
     return actor.testUserPermission(game.user, minimumPermission);
   }

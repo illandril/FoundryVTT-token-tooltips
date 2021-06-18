@@ -1,5 +1,6 @@
 import { calculateValue } from '../../ui/attribute-row.js';
 import { KEY as MODULE_KEY } from '../../module.js';
+import systemID from './systemID.js';
 
 const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -19,7 +20,7 @@ const traitArrayWithCustom = (localeKey, propertyKey) => {
     icon: () => null,
     label: () => game.i18n.localize(`${MODULE_KEY}.tooltip.${localeKey}.label`),
     value: (actor) => {
-      if (game.system.id !== 'pf1') {
+      if (game.system.id !== systemID) {
         return null;
       }
       const property = getProperty(actor, `data.data.traits.${propertyKey}`);

@@ -6,7 +6,7 @@
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "minimumCoreVersion": "0.8.5",
-    "compatibleCoreVersion": "0.8.6",
+    "compatibleCoreVersion": "0.8.7",
     "type": "module",
     "author": "Joe Spandrusyszyn (illandril)",
     "authors": [
@@ -38,7 +38,9 @@
     "license": "./LICENSE",
     "url": "https://github.com/illandril/FoundryVTT-token-tooltips",
     "bugs": "https://github.com/illandril/FoundryVTT-token-tooltips/issues",
-    "allowBugReporter": true,
+    "flags": {
+      "allowBugReporter": true
+    },
     "changelog": "https://github.com/illandril/FoundryVTT-token-tooltips/blob/master/CHANGELOG.md",
     "manifest": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/latest/download/module.json",
     "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v2.2.2/module.zip",

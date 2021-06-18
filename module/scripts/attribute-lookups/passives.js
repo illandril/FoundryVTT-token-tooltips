@@ -21,4 +21,23 @@ const passive = (key, icon) => {
   };
 };
 
-export default [passive('prc', 'eye'), passive('inv', 'search'), passive('ins', 'brain')];
+export default [
+  // dnd5e (and similar system) passives
+  passive('prc', 'eye'),
+  passive('inv', 'search'),
+  passive('ins', 'brain'),
+
+  // PF1 Perception
+  {
+    icon: () => 'eye',
+    label: () => {
+      return game.i18n.localize('PF1.SkillPer');
+    },
+    value: (actor) => {
+      if (game.system.id !== 'pf1') {
+        return null;
+      }
+      return getProperty(actor, `data.data.skills.per.mod`);
+    },
+  },
+];

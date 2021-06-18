@@ -7,46 +7,54 @@
 
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.top": "For each Standard Tooltip Value, select the permission required to see those values (note: not all standard values show for all systems). For each Custom Tooltip Value, specify a Name, Icon, and Data Key.",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.name": "A name for the data shown. If no icon is specified, the name will be displayed instead of an icon in the tooltip.",
-  "illandril-token-tooltips.setting.customOptionsMenu.instructions.icon": "The name of the FontAwesome icon to show in the tooltip. A preview of the icon is shown to the right of the input to help ensure you select the right icon. If left blank, the name will be shown instead of an icon.",
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.icon": "The name of the Font Awesome icon to show in the tooltip. A preview of the icon is shown to the right of the input to help ensure you select the right icon. If left blank, the name will be shown instead of an icon. Note that not all Font Awesome icons are available (FoundryVTT itself is in control over which icons are available, not this module - this module is just using the icons that are shipped with FoundryVTT).",
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.iconLink": "Search for icons on the Font Awesome Website",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.attributeKey": "The property key used to lookup the value you want to show in the tooltip. For example, to show the CR of a creature using the DnD5e system, specify \"data.details.cr\". The Data Key Debugger can be enabled to assist in finding the correct Data Key for the information you want to display.",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.permission": "The minimum permission a player must have to see this value in an actor's tooltip. Note: GMs are considered Owners for all actors. Click the GM toggle to hide the value from GMs in tooltips for actors with a player owner.",
+
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.bugs": "Click here to report bugs or request features",
 
   "illandril-token-tooltips.setting.customOptionsMenu.header.name": "Name",
   "illandril-token-tooltips.setting.customOptionsMenu.header.icon": "Icon",
   "illandril-token-tooltips.setting.customOptionsMenu.header.attributeKey": "Data Key",
   "illandril-token-tooltips.setting.customOptionsMenu.header.permission": "Permission",
-  "illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM": "Hide from GM",
+  "illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM": "Hide Player Details from GM",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standardOptionsTitle": "Standard Tooltip Values (may not show in all systems)",
   "illandril-token-tooltips.setting.customOptionsMenu.customOptionsTitle": "Custom Tooltip Values",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.name": "Health",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.key": "Varies per system (ex. data.attributes.hp)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.key": "Varies (ex. data.attributes.hp)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.name": "Armor Class",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.key": "Varies per system (ex. data.attributes.ac)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.key": "Varies (ex. data.attributes.ac)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.name": "Movement",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.key": "Varies per system (ex. data.stats.speed)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.key": "Varies (ex. data.stats.speed)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.name": "Passive Skills",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.key": "DnD5e only (ex. data.skills.prc.passive)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.key": "Varies (ex. data.skills.prc.passive)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.name": "Resources",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.key": "data.resources.#",
 
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.name": "Saving Throws",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.help": "Fortitude, Reflex, and Will Saving Throws (Pathfinder and D&D 3.5). Does not include Attribute-based saving throws (D&D 5).",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.icon": "label",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.key": "Varies (ex. data.attributes.savingThrows.fort)",
+
   "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.name": "Dmg Res./Vuln.",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.help": "Damage Resistances, Immunities, and Vulnerabilities/Weaknesses. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.icon": "label",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.key": "Varies per system (ex. data.traits.di/dr/dv)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.key": "Varies (ex. data.traits.di/dr/dv)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.name": "Cond. Imm.",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.help": "Condition Immunities. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.icon": "label",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.key": "Varies per system (ex. data.traits.ci)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.key": "Varies (ex. data.traits.ci)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.name": "Spell Slots",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies per system (ex. data.spells.spell#)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies (ex. data.spells.spell#)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.name": "Item Uses",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
@@ -79,7 +87,11 @@
   "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited",
   "illandril-token-tooltips.setting.entityPermission.option.OBSERVER": "Observer",
   "illandril-token-tooltips.setting.entityPermission.option.OWNER": "Owner",
+  "illandril-token-tooltips.setting.entityPermission.option.SHOW_TO_GMS_ONLY": "GM Only",
   "illandril-token-tooltips.setting.entityPermission.option.HIDE_FROM_EVERYONE": "Hide from Everyone",
+
+  "illandril-token-tooltips.setting.rowsPerTooltip.label": "Tooltip Rows",
+  "illandril-token-tooltips.setting.visibility.hint": "The maximum number of rows shown in each column in the Tooltip.",
 
   "illandril-token-tooltips.setting.showOnLeft.label": "Show on Left",
   "illandril-token-tooltips.setting.showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
@@ -90,6 +102,14 @@
   "illandril-token-tooltips.pactAbbreviation": "P",
   "illandril-token-tooltips.powerAbbreviation": "P",
   "illandril-token-tooltips.cantripAbbreviation": "C",
+
+  "illandril-token-tooltips.savingThrowFort": "Fort",
+  "illandril-token-tooltips.savingThrowRef": "Ref",
+  "illandril-token-tooltips.savingThrowWill": "Will",
+
+  "illandril-token-tooltips.touchACAbbreviation": "T",
+  "illandril-token-tooltips.flatFootedACAbbreviation": "FF",
+  "illandril-token-tooltips.cmdAbbreviation": "CMD",
 
   "illandril-token-tooltips.tooltip.damageImmunities.label": "Immunities",
   "illandril-token-tooltips.tooltip.damageResistances.label": "Resistances",

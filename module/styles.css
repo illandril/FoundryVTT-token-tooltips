@@ -1,3 +1,7 @@
+:root {
+  --illandril-token-tooltips--tooltip-rows: 5;
+}
+
 .illandril-token-tooltips--tooltip {
   position: absolute;
   display: none;
@@ -21,9 +25,10 @@
 .illandril-token-tooltips--data {
   display: grid;
   grid-auto-flow: column;
-  grid-template-rows: repeat(5, max-content);
+  grid-template-rows: repeat(var(--illandril-token-tooltips--tooltip-rows), max-content);
   grid-template-columns: max-content;
   justify-content: center;
+  column-gap: 0.25em;
 }
 
 .illandril-token-tooltips--label img {
@@ -38,7 +43,7 @@
 
 .illandril-token-tooltips--row {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 0.2em 0.5em;
 }
 
 .illandril-token-tooltips--label,
@@ -52,8 +57,8 @@
 }
 
 .illandril-token-tooltips--label {
-  padding-right: 6px;
-  min-width: 2em;
+  padding-right: 0.5em;
+  min-width: 2.5em;
   text-align: center;
   font-weight: bold;
 }
