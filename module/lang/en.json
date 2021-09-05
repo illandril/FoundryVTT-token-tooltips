@@ -91,7 +91,7 @@
   "illandril-token-tooltips.setting.entityPermission.option.HIDE_FROM_EVERYONE": "Hide from Everyone",
 
   "illandril-token-tooltips.setting.rowsPerTooltip.label": "Tooltip Rows",
-  "illandril-token-tooltips.setting.visibility.hint": "The maximum number of rows shown in each column in the Tooltip.",
+  "illandril-token-tooltips.setting.rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",
 
   "illandril-token-tooltips.setting.showOnLeft.label": "Show on Left",
   "illandril-token-tooltips.setting.showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
