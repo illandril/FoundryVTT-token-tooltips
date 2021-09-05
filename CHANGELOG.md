@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.4.0) (2021-09-05)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.3.0...v2.4.0)
+
+**Enhancements**
+
+- Add support for Star Wars FFG Talents [\#34](https://github.com/illandril/FoundryVTT-token-tooltips/issues/34)
+
+**Fixed&nbsp;Bugs**
+
+- Configuration option's help text are mixed up [\#33](https://github.com/illandril/FoundryVTT-token-tooltips/issues/33)
+
 ## [v2.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.3.0) (2021-06-18)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.2.2...v2.3.0)
@@ -75,10 +87,6 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.1...v2.0.0)
 
-**Enhancements**
-
-- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
-
 **Other&nbsp;Changes**
 
 - \[Minor Feature Request\] Add data attributes movement [\#18](https://github.com/illandril/FoundryVTT-token-tooltips/issues/18)
@@ -98,6 +106,10 @@
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
+
+**Enhancements**
+
+- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
 
 **Fixed&nbsp;Bugs**
 
