@@ -44,6 +44,11 @@ const Settings = {
     config: false,
   }),
 
+  TalentsMinimumPermission: new StringSetting('talentsMinimumPermission', 'NONE', {
+    config: false,
+  }),
+  HidePlayerTalentsFromGM: new BooleanSetting('hidePlayerTalentsFromGM', false, { config: false }),
+
   ItemsMinimumPermission: new StringSetting('itemsMinimumPermission', 'NONE', {
     config: false,
   }),

@@ -145,6 +145,20 @@ const getStandardItems = () => {
     )
   );
 
+  if (game.system.id === 'starwarsffg') {
+    // Talents
+    standardItems.push(
+      getStandardItem(
+        'talents',
+        game.i18n.localize(
+          'illandril-token-tooltips.setting.customOptionsMenu.standard.talents.icon'
+        ),
+        Settings.TalentsMinimumPermission,
+        Settings.HidePlayerTalentsFromGM
+      )
+    );
+  }
+
   if (game.system.id === 'dnd5e') {
     // Items
     standardItems.push(

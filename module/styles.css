@@ -23,12 +23,17 @@
 }
 
 .illandril-token-tooltips--data {
-  display: grid;
+  /* display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(var(--illandril-token-tooltips--tooltip-rows), max-content);
   grid-template-columns: max-content;
   justify-content: center;
-  column-gap: 0.25em;
+  column-gap: 0.25em; */
+  max-height: calc(var(--illandril-token-tooltips--tooltip-rows) * 1.75em);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 0.5em;
 }
 
 .illandril-token-tooltips--label img {
@@ -42,14 +47,16 @@
 }
 
 .illandril-token-tooltips--row {
-  display: inline-block;
   padding: 0.2em 0.5em;
+  line-height: 1.3em;
+  white-space: nowrap;
 }
 
 .illandril-token-tooltips--label,
 .illandril-token-tooltips--value {
   display: inline-block;
   vertical-align: text-top;
+  white-space: initial;
 }
 
 .illandril-token-tooltips--value {
@@ -82,25 +89,22 @@
   position: relative;
 }
 
+.illandril-token-tooltips--resource .fas,
+.illandril-token-tooltips--spellslot .fas {
+  vertical-align: baseline;
+}
+
 .illandril-token-tooltips--resource-number,
 .illandril-token-tooltips--spellslot-level {
   position: absolute;
   left: 0;
+  top: 0;
   right: 0;
-  bottom: 0;
   font-size: 0.7em;
   text-align: center;
   display: block;
   font-weight: bold;
   color: white;
-}
-
-.illandril-token-tooltips--resource-number {
-  top: 2px;
-}
-
-.illandril-token-tooltips--spellslot-level {
-  top: 3px;
 }
 
 .dnd5e.sheet.actor .inventory-list .item-detail.illandril-token-tooltips--tooltip-cell {

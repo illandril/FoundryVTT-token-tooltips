@@ -58,4 +58,28 @@ export default [
     // Pathfinder 1 & D&D 3.5
     value: (actor) => getProperty(actor, 'data.data.attributes.cmd'),
   },
+
+  // Soak
+  {
+    icon: () => null,
+    label: () => game.i18n.localize('SWFFG.Soak'),
+    // starwarsffg
+    value: (actor) => getProperty(actor, 'data.data.stats.soak'),
+  },
+
+  // Melee Defense
+  {
+    icon: () => null,
+    label: () => game.i18n.localize('illandril-token-tooltips.meleeDefenseAbbreviation'),
+    // starwarsffg
+    value: (actor) => getProperty(actor, 'data.data.stats.defence.melee'),
+  },
+
+  // Ranged Defense
+  {
+    icon: () => null,
+    label: () => game.i18n.localize('illandril-token-tooltips.rangedDefenseAbbreviation'),
+    // starwarsffg
+    value: (actor) => getProperty(actor, 'data.data.stats.defence.ranged'),
+  },
 ];

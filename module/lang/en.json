@@ -56,6 +56,10 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.name": "Spell Slots",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies (ex. data.spells.spell#)",
 
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.talents.name": "Talents",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.talents.icon": "the Talent's image",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.talents.key": "data.talentList.#.name",
+
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.name": "Item Uses",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.key": "DnD5e only (toggle per item in actor sheets)",
@@ -110,6 +114,9 @@
   "illandril-token-tooltips.touchACAbbreviation": "T",
   "illandril-token-tooltips.flatFootedACAbbreviation": "FF",
   "illandril-token-tooltips.cmdAbbreviation": "CMD",
+  "illandril-token-tooltips.meleeDefenseAbbreviation": "M.Def",
+  "illandril-token-tooltips.rangedDefenseAbbreviation": "R.Def",
+
 
   "illandril-token-tooltips.tooltip.damageImmunities.label": "Immunities",
   "illandril-token-tooltips.tooltip.damageResistances.label": "Resistances",

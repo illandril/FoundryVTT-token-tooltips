@@ -45,21 +45,17 @@ class Tooltip {
     this.dataElement = div(CSS_DATA);
     this.element.appendChild(this.dataElement);
 
-    this.standardRows = [
-      new StandardRow(
-        attributeLookups.hp,
-        Settings.HPMinimumPermission,
-        Settings.HidePlayerHPFromGM
-      ),
-    ];
+    this.standardRows = [];
+
+    for (let hp of attributeLookups.hps) {
+      this.standardRows.push(
+        new StandardRow(hp, Settings.HPMinimumPermission, Settings.HidePlayerHPFromGM)
+      );
+    }
 
     for (let ac of attributeLookups.acs) {
       this.standardRows.push(
-        new StandardRow(
-          ac,
-          Settings.ACMinimumPermission,
-          Settings.HidePlayerACFromGM
-        )
+        new StandardRow(ac, Settings.ACMinimumPermission, Settings.HidePlayerACFromGM)
       );
     }
 
@@ -156,8 +152,11 @@ class Tooltip {
   }
 
   fixPosition(token) {
-    document.documentElement.style.setProperty('--illandril-token-tooltips--tooltip-rows', Settings.RowsPerTooltip.get());
-    if ( Settings.ShowOnLeft.get() ) {
+    document.documentElement.style.setProperty(
+      '--illandril-token-tooltips--tooltip-rows',
+      Settings.RowsPerTooltip.get()
+    );
+    if (Settings.ShowOnLeft.get()) {
       const right = window.innerWidth - Math.ceil(token.worldTransform.tx - 8);
       this.element.style.right = `${right}px`;
       this.element.style.left = '';
@@ -173,6 +172,10 @@ class Tooltip {
 
   show() {
     this.element.classList.add(CSS_SHOW);
+    this.dataElement.style.width = '';
+    const lastRow = this.dataElement.lastChild;
+    const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
+    this.dataElement.style.width = `${newWidth}px`;
   }
 
   hide() {
@@ -188,6 +191,7 @@ class Tooltip {
     for (let standardRow of this.standardRows) {
       standardRow.update(this, actor);
     }
+    this.updateTalents(actor);
     this.updateItems(actor);
 
     this.updateCustomRows(actor);
@@ -199,7 +203,7 @@ class Tooltip {
   }
 
   updateName(token) {
-    if ( Settings.ShowTokenName.get() ) {
+    if (Settings.ShowTokenName.get()) {
       this.nameElement.style.display = '';
       this.nameElement.appendChild(document.createTextNode(token.name));
     } else {
@@ -221,6 +225,16 @@ class Tooltip {
       for (let item of items) {
         const attributeRow = new AttributeRow(item.name, item.icon);
         this._updateRow(attributeRow, item.value);
+      }
+    }
+  }
+
+  updateTalents(actor) {
+    if (showDataType(actor, Settings.TalentsMinimumPermission, Settings.HidePlayerTalentsFromGM)) {
+      const talents = attributeLookups.talents.get(actor);
+      for (let talent of talents) {
+        const attributeRow = new AttributeRow(talent.name, talent.icon);
+        this._updateRow(attributeRow, talent.value);
       }
     }
   }
@@ -272,7 +286,7 @@ const showDataType = (actor, minimumPermissionSetting, hideFromGMSetting) => {
     return false;
   } else if (game.user.isGM) {
     return !(actor.hasPlayerOwner && boolOrBoolSetting(hideFromGMSetting));
-  } else if ( minimumPermission === SHOW_TO_GMS_ONLY ) {
+  } else if (minimumPermission === SHOW_TO_GMS_ONLY) {
     return false;
   } else {
     return actor.testUserPermission(game.user, minimumPermission);

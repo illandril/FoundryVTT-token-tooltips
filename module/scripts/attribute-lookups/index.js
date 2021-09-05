@@ -1,5 +1,5 @@
 export { default as acs } from './ac.js';
-export * as hp from './hp.js';
+export { default as hps } from './hp.js';
 export { default as movements } from './movements.js';
 export { default as passives } from './passives.js';
 export { default as damageResImmVuln } from './damageResImmVuln.js';
@@ -8,3 +8,4 @@ export { default as resources } from './resources.js';
 export { default as savingThrows } from './saving-throws.js';
 export { default as spellSlots } from './spell-slots.js';
 export * as items from './items.js';
+export * as talents from './talents.js';
