@@ -43,6 +43,17 @@ const pf1Movement = (key, icon) => {
     value: (actor) => {
       const value = calculateValue(getProperty(actor, `data.data.attributes.speed.${key}`));
       if (value && value.value > 0) {
+        if(key === 'fly') {
+          const maneuverAbility = getProperty(actor, 'data.data.attributes.speed.fly.maneuverability');
+          if(maneuverAbility) {
+            const maneuverKey = `PF1.FlyManeuverability${capitalize(maneuverAbility)}`;
+            let maneuverLabel = maneuverAbility;
+            if(game.i18n.has(maneuverKey)) {
+              maneuverLabel = game.i18n.localize(maneuverKey);
+            }
+            value.extra = maneuverLabel;
+          }
+        }
         return value;
       }
       return null;

@@ -8,6 +8,7 @@ const CSS_CURRENT = `${CSS_PREFIX}current`;
 const CSS_MAX = `${CSS_PREFIX}max`;
 const CSS_TEMP = `${CSS_PREFIX}temp`;
 const CSS_UNITS = `${CSS_PREFIX}units`;
+const CSS_EXTRA = `${CSS_PREFIX}extra`;
 
 export default class AttributeRow {
   constructor(name, iconNameOrElem) {
@@ -54,14 +55,14 @@ export default class AttributeRow {
     }
   }
 
-  setValue(value, max = null, temp = null, tempmax = null, units = null) {
+  setValue(value, max = null, temp = null, tempmax = null, units = null, extra = null) {
     if(value instanceof Image) {
       emptyNode(this.currDisplay);
       this.currDisplay.appendChild(value);
       return;
     }
     if (typeof value === 'object') {
-      this.setValue(value.value, value.max, value.temp, (value.tempmax || value.tempmax), value.units);
+      this.setValue(value.value, value.max, value.temp, value.tempmax, value.units, value.extra);
       return;
     }
     emptyNode(this.currDisplay);
@@ -92,6 +93,20 @@ export default class AttributeRow {
       if (this.unitsDisplay) {
         this.valueDisplay.removeChild(this.unitsDisplay);
         this.unitsDisplay = null;
+      }
+    }
+    if (extra) {
+      if (this.extraDisplay) {
+        emptyNode(this.extraDisplay);
+      } else {
+        this.extraDisplay = span(CSS_EXTRA);
+        this.valueDisplay.appendChild(this.extraDisplay);
+      }
+      appendText(this.extraDisplay, '' + extra);
+    } else {
+      if (this.extraDisplay) {
+        this.valueDisplay.removeChild(this.extraDisplay);
+        this.extraDisplay = null;
       }
     }
   }
@@ -224,7 +239,7 @@ export const calculateValue = (attribute, opt_attributeKey) => {
     } else {
       units = null;
     }
-    return { value, max, temp, tempmax, units };
+    return { value, max, temp, tempmax, units, extra: attribute.extra };
   }
   return null;
 };

@@ -84,6 +84,18 @@
   content: ' ';
 }
 
+.illandril-token-tooltips--extra {
+  opacity: 0.75;
+}
+
+.illandril-token-tooltips--extra::before {
+  content: ' (';
+}
+
+.illandril-token-tooltips--extra::after {
+  content: ')';
+}
+
 .illandril-token-tooltips--resource,
 .illandril-token-tooltips--spellslot {
   position: relative;
