@@ -3,6 +3,7 @@ import { CSS_PREFIX } from '../module.js';
 import { icon, emptyNode, img, div, span, appendText } from './html.js';
 import { updateCustomAttributeRow } from './custom-attribute-display.js';
 import * as attributeLookups from '../attribute-lookups/index.js';
+import showNameOnly from '../attribute-lookups/showNameOnly.js';
 
 import AttributeRow, { calculateValue } from './attribute-row.js';
 
@@ -174,8 +175,10 @@ class Tooltip {
     this.element.classList.add(CSS_SHOW);
     this.dataElement.style.width = '';
     const lastRow = this.dataElement.lastChild;
-    const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
-    this.dataElement.style.width = `${newWidth}px`;
+    if(lastRow) {
+      const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
+      this.dataElement.style.width = `${newWidth}px`;
+    }
   }
 
   hide() {
@@ -188,6 +191,9 @@ class Tooltip {
     this.updateName(token);
 
     const actor = token.actor;
+    if(showNameOnly(actor)) {
+      return;
+    }
     for (let standardRow of this.standardRows) {
       standardRow.update(this, actor);
     }

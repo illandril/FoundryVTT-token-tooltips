@@ -1,4 +1,6 @@
 import dnd5eSystemID from './dnd5e/systemID.js';
+import isDND35LiteNPC from './d35e/isLiteNPC.js';
+import isPF1LiteNPC from './pf1/isLiteNPC.js';
 
 export const unsupportedSystems = [dnd5eSystemID];
 
@@ -7,10 +9,20 @@ const capitalize = (str) => {
 };
 
 const pf1SavingThrow = (key) => {
+  // Note: This is also for D&D 3.5 (D35E)
   return {
     icon: () => null,
     label: () => game.i18n.localize(`illandril-token-tooltips.savingThrow${capitalize(key)}`),
-    value: (actor) => getProperty(actor, `data.data.attributes.savingThrows.${key}`),
+    value: (actor) => {
+      if(isDND35LiteNPC(actor)) {
+        return null;
+      }
+      const value = getProperty(actor, `data.data.attributes.savingThrows.${key}`);
+      if(value && isPF1LiteNPC(actor) && value.total === 0) {
+        return null;
+      }
+      return value;
+    },
   };
 };
 

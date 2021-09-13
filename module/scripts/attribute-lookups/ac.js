@@ -1,3 +1,6 @@
+import isDND35LiteNPC from './d35e/isLiteNPC.js';
+import isPF1LiteNPC from './pf1/isLiteNPC.js';
+
 export default [
   // Standard AC
   {
@@ -22,8 +25,11 @@ export default [
       return '[AC]';
     },
     value: (actor) => {
+      if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
+        return null;
+      }
       return (
-        // Pathfinder
+        // Pathfinder 1 & 2, D&D 3.5
         getProperty(actor, 'data.data.attributes.ac.normal') ||
         // DnD5E
         getProperty(actor, 'data.data.attributes.ac') ||
@@ -40,7 +46,12 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('illandril-token-tooltips.touchACAbbreviation'),
     // Pathfinder 1 & D&D 3.5
-    value: (actor) => getProperty(actor, 'data.data.attributes.ac.touch'),
+    value: (actor) => {
+      if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
+        return null;
+      }
+      return getProperty(actor, 'data.data.attributes.ac.touch');
+    },
   },
 
   // Flat-footed AC
@@ -48,7 +59,12 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('illandril-token-tooltips.flatFootedACAbbreviation'),
     // Pathfinder 1 & D&D 3.5
-    value: (actor) => getProperty(actor, 'data.data.attributes.ac.flatFooted'),
+    value: (actor) => {
+      if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
+        return null;
+      }
+      return getProperty(actor, 'data.data.attributes.ac.flatFooted');
+    },
   },
 
   // Combat Maneuver Defense
@@ -56,7 +72,12 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('illandril-token-tooltips.cmdAbbreviation'),
     // Pathfinder 1 & D&D 3.5
-    value: (actor) => getProperty(actor, 'data.data.attributes.cmd'),
+    value: (actor) => {
+      if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
+        return null;
+      }
+      return getProperty(actor, 'data.data.attributes.cmd');
+    },
   },
 
   // Soak

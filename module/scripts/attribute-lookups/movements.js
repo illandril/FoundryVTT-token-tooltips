@@ -1,3 +1,5 @@
+import isDND35LiteNPC from './d35e/isLiteNPC.js';
+import isPF1LiteNPC from './pf1/isLiteNPC.js';
 import { calculateValue } from '../ui/attribute-row.js';
 
 const capitalize = (str) => {
@@ -37,10 +39,14 @@ const dnd5eMovement = (key, icon) => {
 };
 
 const pf1Movement = (key, icon) => {
+  // Note: This is also for D&D 3.5 (D35E)
   return {
     icon: () => icon,
     label: labelLookup(key),
     value: (actor) => {
+      if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
+        return null;
+      }
       const value = calculateValue(getProperty(actor, `data.data.attributes.speed.${key}`));
       if (value && value.value > 0) {
         if(key === 'fly') {

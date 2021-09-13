@@ -1,3 +1,6 @@
+import isPF1LiteNPC from './pf1/isLiteNPC.js';
+import pf1SystemID from './pf1/systemID.js';
+
 const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
@@ -34,7 +37,7 @@ export default [
       return game.i18n.localize('PF1.SkillPer');
     },
     value: (actor) => {
-      if (game.system.id !== 'pf1') {
+      if (game.system.id !== pf1SystemID || isPF1LiteNPC(actor)) {
         return null;
       }
       return getProperty(actor, `data.data.skills.per.mod`);
