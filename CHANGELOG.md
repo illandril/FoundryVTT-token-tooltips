@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.5.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.5.0) (2021-09-13)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.4.0...v2.5.0)
+
+**Enhancements**
+
+- \[FEATURE\] PF1e - Include Fly Maneuverability with Fly Speed for PF1e [\#36](https://github.com/illandril/FoundryVTT-token-tooltips/issues/36)
+- Add option to show tooltip only on PCs [\#35](https://github.com/illandril/FoundryVTT-token-tooltips/issues/35)
+
 ## [v2.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.4.0) (2021-09-05)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.3.0...v2.4.0)
@@ -87,6 +96,10 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.1...v2.0.0)
 
+**Enhancements**
+
+- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
+
 **Other&nbsp;Changes**
 
 - \[Minor Feature Request\] Add data attributes movement [\#18](https://github.com/illandril/FoundryVTT-token-tooltips/issues/18)
@@ -106,10 +119,6 @@
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
-
-**Enhancements**
-
-- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
 
 **Fixed&nbsp;Bugs**
 
