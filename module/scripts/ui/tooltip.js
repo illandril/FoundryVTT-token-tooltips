@@ -28,10 +28,17 @@ class StandardRow {
 
   update(tooltip, actor) {
     if (showDataType(actor, this.minimumPermissionSetting, this.hideFromGMSetting)) {
-      if (this.row === null) {
-        this.row = new AttributeRow(this.attributeLookup.label(), this.attributeLookup.icon());
+      if(this.attributeLookup.rows) {
+        for(let row of this.attributeLookup.rows(actor)) {
+          const attributeRow = new AttributeRow(row.label, row.icon);
+          tooltip._updateRow(attributeRow, row.value);
+        }
+      } else {
+        if (this.row === null) {
+          this.row = new AttributeRow(this.attributeLookup.label(), this.attributeLookup.icon());
+        }
+        tooltip._updateRow(this.row, this.attributeLookup.value(actor));
       }
-      tooltip._updateRow(this.row, this.attributeLookup.value(actor));
     }
   }
 }

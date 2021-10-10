@@ -1,5 +1,6 @@
 import isPF1LiteNPC from './pf1/isLiteNPC.js';
 import pf1SystemID from './pf1/systemID.js';
+import pf2eSystemID from './pf2e/systemID.js';
 
 const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -41,6 +42,23 @@ export default [
         return null;
       }
       return getProperty(actor, `data.data.skills.per.mod`);
+    },
+  },
+
+  // PF2 Perception
+  {
+    icon: () => 'eye',
+    label: () => {
+      return game.i18n.localize('PF2E.PerceptionLabel');
+    },
+    value: (actor) => {
+      if (game.system.id !== pf2eSystemID) {
+        return null;
+      }
+      const value = getProperty(actor, `data.data.attributes.perception.value`);
+      if(value !== undefined) {
+        return parseInt(value,10) + 10;
+      }
     },
   },
 ];

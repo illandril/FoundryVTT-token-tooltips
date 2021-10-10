@@ -1,5 +1,6 @@
 import { CSS_PREFIX } from '../module.js';
 import { icon, span, appendText } from '../ui/html.js';
+import pf2eSpellSlots from './pf2e/spellSlots.js';
 
 const CSS_SPELLSLOT = `${CSS_PREFIX}spellslot`;
 const CSS_SPELLSLOT_LEVEL = `${CSS_PREFIX}spellslot-level`;
@@ -39,18 +40,20 @@ const isSetSlotsValue = (value) => {
   return false;
 };
 
+const spellIcon = (label) => {
+  const slotIcon = span(CSS_SPELLSLOT);
+  slotIcon.appendChild(icon('star'));
+  const slotNumberDisp = span(CSS_SPELLSLOT_LEVEL);
+  appendText(slotNumberDisp, label);
+  slotIcon.appendChild(slotNumberDisp);
+  return slotIcon;
+};
+
 const spellSlot = (key, displayKey) => {
   const label = () =>
     typeof displayKey === 'number' ? '' + displayKey : game.i18n.localize(displayKey);
   return {
-    icon: () => {
-      const slotIcon = span(CSS_SPELLSLOT);
-      slotIcon.appendChild(icon('star'));
-      const slotNumberDisp = span(CSS_SPELLSLOT_LEVEL);
-      appendText(slotNumberDisp, label());
-      slotIcon.appendChild(slotNumberDisp);
-      return slotIcon;
-    },
+    icon: () => spellIcon(label()),
     label,
     value: (actor) => {
       const slots = getProperty(actor, key);
@@ -78,4 +81,6 @@ export default [
   spellSlot('data.data.spells.spell7', 7),
   spellSlot('data.data.spells.spell8', 8),
   spellSlot('data.data.spells.spell9', 9),
+
+  pf2eSpellSlots(spellIcon),
 ];
