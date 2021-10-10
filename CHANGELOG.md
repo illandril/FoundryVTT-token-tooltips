@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.6.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.6.0) (2021-10-10)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.5.0...v2.6.0)
+
+**Fixed&nbsp;Bugs**
+
+- PF1E Tooltip doesn't appear with Loot sheet selected [\#38](https://github.com/illandril/FoundryVTT-token-tooltips/issues/38)
+
 ## [v2.5.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.5.0) (2021-09-13)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.4.0...v2.5.0)
@@ -71,10 +79,6 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.1...v2.0.2)
 
-**Enhancements**
-
-- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
-
 **Fixed&nbsp;Bugs**
 
 - Temporary maximum HP increases are not shown in tooltip [\#24](https://github.com/illandril/FoundryVTT-token-tooltips/issues/24)
@@ -86,6 +90,7 @@
 
 **Enhancements**
 
+- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
 - \(Suggestion\) Option to Swap Tooltip to Left side of Token [\#21](https://github.com/illandril/FoundryVTT-token-tooltips/issues/21)
 
 **Other&nbsp;Changes**
