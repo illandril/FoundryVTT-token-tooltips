@@ -21,12 +21,10 @@ const getValue = (actor, rawAttributeKey) => {
 };
 
 const getMultiValue = (actor, rawAttributeKey) => {
-  console.log(rawAttributeKey);
   const attributeKeys = rawAttributeKey.replace('+', '~+~').replace('-', '~-~').split('~');
   let valueSoFar = 0;
   let addNext = true;
   for(let attributeKey of attributeKeys) {
-    console.log(attributeKey);
     if(attributeKey === '+') {
       addNext = true;
       continue;
@@ -37,7 +35,6 @@ const getMultiValue = (actor, rawAttributeKey) => {
       continue;
     }
     const keyValue = getValue(actor, attributeKey);
-    console.dir(keyValue);
     if(!keyValue || typeof(keyValue.value) !== 'number') {
       return null;
     }
