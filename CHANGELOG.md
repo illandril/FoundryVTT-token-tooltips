@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.7.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.7.0) (2021-11-03)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.6.0...v2.7.0)
+
+**Enhancements**
+
+- Request: Allow for math in the Datakey section.  [\#40](https://github.com/illandril/FoundryVTT-token-tooltips/issues/40)
+
+**Fixed&nbsp;Bugs**
+
+- \[BUG\] Resistances and weaknesses showing as "undefined" in PF2E [\#41](https://github.com/illandril/FoundryVTT-token-tooltips/issues/41)
+- \[BUG\] localizing error [\#39](https://github.com/illandril/FoundryVTT-token-tooltips/issues/39)
+
 ## [v2.6.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.6.0) (2021-10-10)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.5.0...v2.6.0)
@@ -46,10 +59,6 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.2.1...v2.2.2)
 
-**Enhancements**
-
-- \[Suggestion\] Setting to hide Token/Actor Name from Tooltip [\#29](https://github.com/illandril/FoundryVTT-token-tooltips/issues/29)
-
 ## [v2.2.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.2.1) (2021-06-02)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.2.0...v2.2.1)
@@ -72,12 +81,17 @@
 
 **Enhancements**
 
+- \[Suggestion\] Setting to hide Token/Actor Name from Tooltip [\#29](https://github.com/illandril/FoundryVTT-token-tooltips/issues/29)
 - data key "img" doesn't work [\#26](https://github.com/illandril/FoundryVTT-token-tooltips/issues/26)
 - Show resistances/etc in a single tooltip value \(potentially with generic array handling instead of specific to resistances\) [\#25](https://github.com/illandril/FoundryVTT-token-tooltips/issues/25)
 
 ## [v2.0.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.2) (2021-02-18)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.1...v2.0.2)
+
+**Enhancements**
+
+- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
 
 **Fixed&nbsp;Bugs**
 
@@ -90,7 +104,6 @@
 
 **Enhancements**
 
-- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
 - \(Suggestion\) Option to Swap Tooltip to Left side of Token [\#21](https://github.com/illandril/FoundryVTT-token-tooltips/issues/21)
 
 **Other&nbsp;Changes**
