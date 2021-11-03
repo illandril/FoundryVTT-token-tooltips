@@ -30,7 +30,15 @@ const pf2SavingThrow = (key, locKey) => {
   return {
     icon: () => null,
     label: () => game.i18n.localize(`illandril-token-tooltips.savingThrow${capitalize(locKey)}`),
-    value: (actor) => getProperty(actor, `data.data.saves.${key}`)
+    value: (actor) => {
+      const save = getProperty(actor, `data.data.saves.${key}`);
+      if(!save) {
+        return null;
+      }
+      const modifier = save.totalModifier || 0;
+      const dc = modifier + 10;
+      return `+${modifier} (DC ${dc})`;
+    }
   };
 };
 
