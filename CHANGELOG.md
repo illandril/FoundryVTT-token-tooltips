@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.7.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.7.1) (2021-11-03)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.7.0...v2.7.1)
+
 ## [v2.7.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.7.0) (2021-11-03)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.6.0...v2.7.0)
@@ -71,6 +75,10 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.1.0...v2.2.0)
 
+**Enhancements**
+
+- \[Suggestion\] Setting to hide Token/Actor Name from Tooltip [\#29](https://github.com/illandril/FoundryVTT-token-tooltips/issues/29)
+
 **Other&nbsp;Changes**
 
 - Support Foundry 0.8.x [\#27](https://github.com/illandril/FoundryVTT-token-tooltips/issues/27)
@@ -81,7 +89,6 @@
 
 **Enhancements**
 
-- \[Suggestion\] Setting to hide Token/Actor Name from Tooltip [\#29](https://github.com/illandril/FoundryVTT-token-tooltips/issues/29)
 - data key "img" doesn't work [\#26](https://github.com/illandril/FoundryVTT-token-tooltips/issues/26)
 - Show resistances/etc in a single tooltip value \(potentially with generic array handling instead of specific to resistances\) [\#25](https://github.com/illandril/FoundryVTT-token-tooltips/issues/25)
 
@@ -145,7 +152,6 @@
 **Other&nbsp;Changes**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
-- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 
 ## [v1.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.3.0) (2021-01-01)
 
@@ -175,7 +181,6 @@
 **Enhancements**
 
 - Add option to hide/show items/spells based on user permissions [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11)
-- Add option to show tooltips to players for more or fewer tokens  [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8)
 
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.1.0) (2020-09-01)
 
@@ -183,6 +188,7 @@
 
 **Enhancements**
 
+- Add option to show tooltips to players for more or fewer tokens  [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8)
 - Show max uses for charges [\#7](https://github.com/illandril/FoundryVTT-token-tooltips/issues/7)
 - Add a way to hide certain items from the tooltip [\#4](https://github.com/illandril/FoundryVTT-token-tooltips/issues/4)
 - Show counts for non-consumables with charges [\#3](https://github.com/illandril/FoundryVTT-token-tooltips/issues/3)
@@ -194,6 +200,7 @@
 
 **Other&nbsp;Changes**
 
+- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 - Update compatibility for 0.6.6 [\#5](https://github.com/illandril/FoundryVTT-token-tooltips/issues/5)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-token-tooltips/issues/1)
 
