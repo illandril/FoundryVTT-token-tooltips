@@ -63,6 +63,13 @@
   max-width: 15em;
 }
 
+.illandril-token-tooltips--current > :first-child {
+  margin-top: 0;
+}
+.illandril-token-tooltips--current > :last-child {
+  margin-bottom: 0;
+}
+
 .illandril-token-tooltips--label {
   padding-right: 0.5em;
   min-width: 2.5em;

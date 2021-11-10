@@ -1,5 +1,5 @@
 import { CSS_PREFIX } from '../module.js';
-import { icon, emptyNode, img, div, span, appendText } from './html.js';
+import { icon, emptyNode, img, div, span, appendText, htmlToNode } from './html.js';
 
 const CSS_ROW = `${CSS_PREFIX}row`;
 const CSS_LABEL = `${CSS_PREFIX}label`;
@@ -61,7 +61,7 @@ export default class AttributeRow {
       this.currDisplay.appendChild(value);
       return;
     }
-    if (typeof value === 'object') {
+    if (typeof value === 'object' && !(value instanceof Node)) {
       this.setValue(value.value, value.max, value.temp, value.tempmax, value.units, value.extra);
       return;
     }
@@ -149,6 +149,8 @@ const addWithoutTemp = (element, value) => {
     } else {
       appendText(element, '' + value);
     }
+  } else if (value instanceof Node) {
+    element.appendChild(value);
   } else if (!value) {
     appendText(element, '0');
   } else {
@@ -207,7 +209,9 @@ export const calculateValue = (attribute, opt_attributeKey) => {
       value = attribute.total;
     } else if (isValidAttributeValue(attribute.value)) {
       value = attribute.value;
-      if(Array.isArray(value)) {
+      if(typeof value === 'string' && attribute.type === 'LongText') {
+        value = htmlToNode(value);
+      } else if(Array.isArray(value)) {
         return calculateValue(value);
       }
     } else if (isValidAttributeValue(attribute.max)) {

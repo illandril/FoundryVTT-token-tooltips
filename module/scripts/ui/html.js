@@ -39,3 +39,14 @@ export const span = (cssClass) => {
 export const appendText = (element, text) => {
   element.appendChild(document.createTextNode(text));
 };
+
+const tinyMCEParser = new tinyMCE.html.DomParser({ validate: true });
+const tinyMCESerializer = new tinymce.html.Serializer();
+
+const sanitizeHTML = (html) => {
+  return tinyMCESerializer.serialize(tinyMCEParser.parse(html));
+};
+
+export const htmlToNode = (html) => {
+  return tinyMCE.dom.DOMUtils.DOM.createFragment(sanitizeHTML(html));
+}
