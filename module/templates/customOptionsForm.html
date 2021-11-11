@@ -18,14 +18,18 @@
         <dd>
           {{localize 'illandril-token-tooltips.setting.customOptionsMenu.instructions.permission'}}
         </dd>
+        <dt>{{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.gmPermission'}}</dt>
+        <dd>
+          {{localize 'illandril-token-tooltips.setting.customOptionsMenu.instructions.gmPermission'}}
+        </dd>
       </dl>
       <center>
         <a href="https://github.com/illandril/FoundryVTT-token-tooltips/issues" target="_blank">
           {{localize 'illandril-token-tooltips.setting.customOptionsMenu.instructions.bugs'}}
         </a>
       </center>
-      <hr>
     </div>
+    <hr>
     <div class="{{FORM_CSS_PREFIX}}data">
       <div class="{{FORM_CSS_PREFIX}}standardOptionsTitle">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.standardOptionsTitle'}}
@@ -42,10 +46,14 @@
       <div id="{{FORM_CSS_PREFIX}}header-permission" class="{{FORM_CSS_PREFIX}}header">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.permission'}}
       </div>
+      <div id="{{FORM_CSS_PREFIX}}header-permission" class="{{FORM_CSS_PREFIX}}header">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.gmPermission'}}
+      </div>
       <div id="{{FORM_CSS_PREFIX}}header-actions" class="{{FORM_CSS_PREFIX}}header"></div>
       {{#each standardOptions}}
-        {{> modules/illandril-token-tooltips/templates/standardOptionsFormRow.html option=this entityPermission=../standardEntityPermission FORM_CSS_PREFIX=../FORM_CSS_PREFIX}}
+        {{> modules/illandril-token-tooltips/templates/standardOptionsFormRow.html option=this entityPermission=../standardEntityPermission gmPermissions=../gmPermissions FORM_CSS_PREFIX=../FORM_CSS_PREFIX}}
       {{/each}}
+      <hr>
       <div class="{{FORM_CSS_PREFIX}}customOptionsTitle">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.customOptionsTitle'}}
       </div>
@@ -61,9 +69,12 @@
       <div class="{{FORM_CSS_PREFIX}}header">
         {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.permission'}}
       </div>
+      <div class="{{FORM_CSS_PREFIX}}header">
+        {{localize 'illandril-token-tooltips.setting.customOptionsMenu.header.gmPermission'}}
+      </div>
       <div class="{{FORM_CSS_PREFIX}}header"></div>
       {{#each customOptions}}
-       {{> modules/illandril-token-tooltips/templates/customOptionsFormRow.html option=this entityPermission=../entityPermission FORM_CSS_PREFIX=../FORM_CSS_PREFIX}}
+       {{> modules/illandril-token-tooltips/templates/customOptionsFormRow.html option=this entityPermission=../entityPermission gmPermissions=../gmPermissions FORM_CSS_PREFIX=../FORM_CSS_PREFIX}}
       {{/each}}
       <div id="{{FORM_CSS_PREFIX}}addRow">
         <a>

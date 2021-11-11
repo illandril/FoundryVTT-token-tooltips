@@ -10,15 +10,16 @@
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.icon": "The name of the Font Awesome icon to show in the tooltip. A preview of the icon is shown to the right of the input to help ensure you select the right icon. If left blank, the name will be shown instead of an icon. Note that not all Font Awesome icons are available (FoundryVTT itself is in control over which icons are available, not this module - this module is just using the icons that are shipped with FoundryVTT).",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.iconLink": "Search for icons on the Font Awesome Website",
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.attributeKey": "The property key used to lookup the value you want to show in the tooltip. For example, to show the CR of a creature using the DnD5e system, specify \"data.details.cr\". The Data Key Debugger can be enabled to assist in finding the correct Data Key for the information you want to display. You can use + or - to add or subtract multiple values (ex. \"data.skills.perception.value + 10\" will show a value 10 greater than the token's perception skill).",
-  "illandril-token-tooltips.setting.customOptionsMenu.instructions.permission": "The minimum permission a player must have to see this value in an actor's tooltip. Note: GMs are considered Owners for all actors. Click the GM toggle to hide the value from GMs in tooltips for actors with a player owner.",
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.permission": "The minimum permission a player must have to see this value in an actor's tooltip (assuming they can see the tooltip at all - see the Tooltip Visibility setting on the main settings page). Note: GMs are considered Owners for all actors.",
+  "illandril-token-tooltips.setting.customOptionsMenu.instructions.gmPermission": "This setting allows players to see their own details in the tooltip while hiding that information from GMs. Note: This checks if the token has a Player Owner, and not the character type, so an NPC character with a player owner counts as player info, and a PC character without a player owner counts as NPC info.",
 
   "illandril-token-tooltips.setting.customOptionsMenu.instructions.bugs": "Click here to report bugs or request features",
 
   "illandril-token-tooltips.setting.customOptionsMenu.header.name": "Name",
   "illandril-token-tooltips.setting.customOptionsMenu.header.icon": "Icon",
   "illandril-token-tooltips.setting.customOptionsMenu.header.attributeKey": "Data Key",
-  "illandril-token-tooltips.setting.customOptionsMenu.header.permission": "Permission",
-  "illandril-token-tooltips.setting.customOptionsMenu.header.hideFromGM": "Hide Player Details from GM",
+  "illandril-token-tooltips.setting.customOptionsMenu.header.permission": "Permission to Show",
+  "illandril-token-tooltips.setting.customOptionsMenu.header.gmPermission": "GM sees Player info?",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standardOptionsTitle": "Standard Tooltip Values (may not show in all systems)",
   "illandril-token-tooltips.setting.customOptionsMenu.customOptionsTitle": "Custom Tooltip Values",
@@ -41,7 +42,7 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.name": "Saving Throws",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.help": "Fortitude, Reflex, and Will Saving Throws (Pathfinder and D&D 3.5). Does not include Attribute-based saving throws (D&D 5).",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.icon": "label",
-  "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.key": "Varies (ex. data.attributes.savingThrows.fort)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.key": "Varies (ex. data.saves.will)",
 
   "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.name": "Dmg Res./Vuln.",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.help": "Damage Resistances, Immunities, and Vulnerabilities/Weaknesses. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
@@ -64,7 +65,6 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.items.key": "DnD5e only (toggle per item in actor sheets)",
 
-  "illandril-token-tooltips.setting.customOptionsMenu.hideFromGMToggle": "GM",
   "illandril-token-tooltips.setting.customOptionsMenu.moveDown": "Move Down",
   "illandril-token-tooltips.setting.customOptionsMenu.moveUp": "Move Up",
   "illandril-token-tooltips.setting.customOptionsMenu.delete": "Delete",
@@ -87,12 +87,15 @@
   "illandril-token-tooltips.setting.visibility.option.LIMITED": "Limited Permission Actor Tokens",
   "illandril-token-tooltips.setting.visibility.option.ALL": "All Tokens",
 
-  "illandril-token-tooltips.setting.entityPermission.option.NONE": "None",
-  "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited",
-  "illandril-token-tooltips.setting.entityPermission.option.OBSERVER": "Observer",
-  "illandril-token-tooltips.setting.entityPermission.option.OWNER": "Owner",
+  "illandril-token-tooltips.setting.entityPermission.option.NONE": "Show for Everyone",
+  "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited or better",
+  "illandril-token-tooltips.setting.entityPermission.option.OBSERVER": "Observer or better",
+  "illandril-token-tooltips.setting.entityPermission.option.OWNER": "Owner or GM",
   "illandril-token-tooltips.setting.entityPermission.option.SHOW_TO_GMS_ONLY": "GM Only",
   "illandril-token-tooltips.setting.entityPermission.option.HIDE_FROM_EVERYONE": "Hide from Everyone",
+
+  "illandril-token-tooltips.setting.gmPermission.option.ALL": "GM sees Player info",
+  "illandril-token-tooltips.setting.gmPermission.option.NPC_ONLY": "NPC only for GMs",
 
   "illandril-token-tooltips.setting.rowsPerTooltip.label": "Tooltip Rows",
   "illandril-token-tooltips.setting.rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",

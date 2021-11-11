@@ -13,27 +13,38 @@ const DEBUG_TOGGLE_CSS = `${FORM_CSS_PREFIX}toggleDebug`;
 const DEBUG_TOGGLE_ON_CSS = `${FORM_CSS_PREFIX}toggleDebug-on`;
 const ACTIONS_CSS = `${FORM_CSS_PREFIX}actions`;
 const CUSTOM_TITLE_CSS = `${FORM_CSS_PREFIX}customOptionsTitle`;
+const HEADER_CSS = `${FORM_CSS_PREFIX}header`;
 
 const ROW_TEMPLATE = 'modules/illandril-token-tooltips/templates/customOptionsFormRow.html';
 const STD_ROW_TEMPLATE = 'modules/illandril-token-tooltips/templates/standardOptionsFormRow.html';
 
+const GM_PERMISSION__ALL = 'ALL';
+const GM_PERMISSION__NPC_ONLY = 'NPC_ONLY';
+
 let entityPermission;
+let gmPermissions;
 let standardEntityPermission;
 
 Hooks.on('ready', () => {
   entityPermission = fixChoices(
     'entityPermission',
     Object.keys(CONST.ENTITY_PERMISSIONS).concat(SHOW_TO_GMS_ONLY),
-    true
+    true /* localize */
+  );
+  gmPermissions = fixChoices(
+    'gmPermission',
+    [GM_PERMISSION__ALL, GM_PERMISSION__NPC_ONLY],
+    true /* localize */
   );
   standardEntityPermission = fixChoices(
     'entityPermission',
     Object.keys(CONST.ENTITY_PERMISSIONS).concat(SHOW_TO_GMS_ONLY, HIDE_FROM_EVERYONE_OPTION),
-    true
+    true /* localize */
   );
   getTemplate(ROW_TEMPLATE);
   getTemplate(STD_ROW_TEMPLATE);
 });
+
 
 const getStandardItem = (name, icon, permissionSetting, gmSetting) => {
   const helpKey = `illandril-token-tooltips.setting.customOptionsMenu.standard.${name}.help`;
@@ -50,6 +61,7 @@ const getStandardItem = (name, icon, permissionSetting, gmSetting) => {
     permission: permissionSetting.get(),
     gmSetting,
     hideFromGM: gmSetting && gmSetting.get(),
+    gmPermission: gmSetting && (gmSetting.get() ? GM_PERMISSION__NPC_ONLY : GM_PERMISSION__ALL),
     help,
   };
 };
@@ -189,7 +201,7 @@ export default class CustomOptionsForm extends FormApplication {
       title: 'illandril-token-tooltips.setting.customOptionsMenu.title',
       template: 'modules/illandril-token-tooltips/templates/customOptionsForm.html',
       classes: ['sheet'],
-      width: 840,
+      width: 960,
       closeOnSubmit: true,
     });
   }
@@ -198,8 +210,11 @@ export default class CustomOptionsForm extends FormApplication {
     return {
       standardOptions: getStandardItems(),
       standardEntityPermission,
-      customOptions: Settings.CustomOptions.get(),
+      customOptions: Settings.CustomOptions.get().map(v => {
+        return { gmPermission: v.hideFromGM ? GM_PERMISSION__NPC_ONLY : GM_PERMISSION__ALL, ...v };
+      }),
       entityPermission,
+      gmPermissions,
       FORM_CSS_PREFIX,
     };
   }
@@ -209,17 +224,18 @@ export default class CustomOptionsForm extends FormApplication {
     const newOptions = [];
     if (Array.isArray(formData.name)) {
       for (let i = 0; i < formData.name.length; i++) {
+        const hideFromGM = formData.gmPermission[i] === GM_PERMISSION__NPC_ONLY;
         if (i < standardItems.length) {
           const standardItem = standardItems[i];
           standardItem.permissionSetting.set(formData.permission[i]);
-          standardItem.gmSetting?.set(formData.hideFromGM[i]);
+          standardItem.gmSetting?.set(hideFromGM);
         } else {
           newOptions.push({
             name: formData.name[i],
             icon: formData.icon[i],
             attributeKey: formData.attributeKey[i],
             permission: formData.permission[i],
-            hideFromGM: formData.hideFromGM[i],
+            hideFromGM: hideFromGM,
           });
         }
       }
@@ -270,6 +286,7 @@ export default class CustomOptionsForm extends FormApplication {
       await renderTemplate(ROW_TEMPLATE, {
         option: { name: 'New Value', permission: 'NONE' },
         entityPermission,
+        gmPermissions,
         FORM_CSS_PREFIX,
       })
     );
@@ -323,19 +340,12 @@ const getRow = (element) => {
     element = element.nextElementSibling;
   }
   if (element && element.classList.contains(ACTIONS_CSS)) {
-    return $([
-      // Name
-      element.previousElementSibling.previousElementSibling.previousElementSibling
-        .previousElementSibling,
-      // Icon
-      element.previousElementSibling.previousElementSibling.previousElementSibling,
-      // Key
-      element.previousElementSibling.previousElementSibling,
-      // Permission
-      element.previousElementSibling,
-      // Actions
-      element,
-    ]);
+    let elementsInRow = [];
+    do {
+      elementsInRow.push(element);
+      element = element.previousElementSibling;
+    } while(element && !(element.classList.contains(HEADER_CSS) || element.classList.contains(ACTIONS_CSS)));
+    return $(elementsInRow);
   }
   return null;
 };

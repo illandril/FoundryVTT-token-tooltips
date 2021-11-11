@@ -141,7 +141,7 @@
 
 .illandril-token-tooltips--customOptionForm-help dl {
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: max-content auto;
   grid-gap: 6px 12px;
   align-items: center;
   margin: 8px 16px;
@@ -158,31 +158,13 @@
 
 .illandril-token-tooltips--customOptionForm-data {
   display: grid;
-  grid-template-columns: 115px 150px auto max-content max-content;
+  grid-template-columns: 115px 145px auto max-content max-content max-content;
   align-items: center;
-  grid-gap: 4px 8px;
+  grid-gap: 8px 6px;
 }
 
 .illandril-token-tooltips--customOptionForm-header {
   font-weight: bold;
-}
-
-.illandril-token-tooltips--customOptionForm-permissionsCell select {
-  margin-right: 3px;
-}
-
-.illandril-token-tooltips--customOptionForm-hideFromGM input {
-  display: none;
-}
-
-.illandril-token-tooltips--customOptionForm-hideFromGM input + span {
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.illandril-token-tooltips--customOptionForm-hideFromGM input:checked + span {
-  text-decoration: line-through;
-  opacity: 0.5;
 }
 
 .illandril-token-tooltips--customOptionForm-actions.first .illandril-token-tooltips--customOptionForm-moveUp,
@@ -208,6 +190,7 @@
 .illandril-token-tooltips--customOptionForm-iconPreview {
   min-width: 20px;
   text-align: center;
+  margin-right: 4px;
 }
 
 .illandril-token-tooltips--customOptionForm-disabledInput {
@@ -246,12 +229,17 @@
   max-width: 430px;
 }
 
+#illandril-token-tooltips--customOptionForm-addRow,
 .illandril-token-tooltips--customOptionForm-standardOptionsTitle,
 .illandril-token-tooltips--customOptionForm-customOptionsTitle {
   grid-column-start: 1;
-  grid-column-end: 6;
-  font-weight: bold;
+  grid-column-end: 7;
   text-align: center;
+}
+
+.illandril-token-tooltips--customOptionForm-standardOptionsTitle,
+.illandril-token-tooltips--customOptionForm-customOptionsTitle {
+  font-weight: bold;
   opacity: 0.8;
 }
 
@@ -260,9 +248,6 @@
 }
 
 #illandril-token-tooltips--customOptionForm-addRow {
-  grid-column-start: 1;
-  grid-column-end: 6;
-  text-align: center;
   padding: 4px 6px;
 }
 
