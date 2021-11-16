@@ -1,0 +1,135 @@
+{
+    "illandril-token-tooltips.setting.customOptionsMenu.name": "ツールチップの値",
+    "illandril-token-tooltips.setting.customOptionsMenu.label": "ツールチップの値を設定する",
+    "illandril-token-tooltips.setting.customOptionsMenu.hint": "ツールチップにどの値を表示するかを設定します。カスタマイズすることにより、トークンのアクターに関連するあらゆる数値データをツールチップに表示することができます。",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.title": "ツールチップの値設定",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.top": "各標準ツールチップ値について、これらの値を表示するために必要な権限を選択します（注：すべての標準値がすべてのシステムで表示されるわけではありません）。カスタムツールチップの値には、名前、アイコン、データキーを指定します。",
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.name": "表示されるデータの名前です。アイコンが指定されていない場合は、アイコンの代わりに名前がツールチップに表示されます。",
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.icon": "ツールチップに表示する'Font Awesome'のアイコンの名前です。正しく入力されているか確認できるよう、右側にアイコンのプレビューが表示されます。空欄の場合は、アイコンではなく名前が表示されます。すべての'Font Awesome'アイコンが利用できるわけではないことに注意してください（どのアイコンが利用できるかは、このモジュールではなく、FoundryVTT自体が管理しています。 - このモジュールは、FoundryVTTに同梱されているアイコンを使用しているだけです）。",
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.iconLink": "'Font Awesome'でアイコンを検索",
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.attributeKey": "ツールチップに表示したい値を検索するために使用するプロパティキーです。例えば、DnD5eシステムを使用しているクリーチャーのCRを表示するには、\"data.details.cr\"と指定します。データキーデバッガーを有効にすると、表示したい情報に適したデータキーを見つけることができます。複数の値を足したり引いたりするには、+や-を使用します (ex. \"data.skills.perception.value + 10\"は、トークンの知覚スキルよりも10大きい値を表示します)。",
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.permission": "プレイヤーがアクターのツールチップにこの値を表示するために必要な最低限の権限です（ツールチップがすべて表示されると仮定しています-メイン設定ページの'ツールチップの可視範囲'を参照）。注：GMは全アクターのOwnerとみなされます。",
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.gmPermission": "この設定により、プレイヤーはツールチップで自分の詳細情報を見ることができますが、GMからはその情報を隠すことができます。注意：この設定では、キャラクタータイプではなく、トークンにプレイヤーオーナーがいるかどうかをチェックします。したがって、プレイヤーオーナーがいるNPCキャラクターはプレイヤー情報としてカウントされ、プレイヤーオーナーがいないPCキャラクターはNPC情報としてカウントされます。",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.instructions.bugs": "バグ報告や機能要望はこちらから",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.header.name": "名前",
+    "illandril-token-tooltips.setting.customOptionsMenu.header.icon": "アイコン",
+    "illandril-token-tooltips.setting.customOptionsMenu.header.attributeKey": "データキー",
+    "illandril-token-tooltips.setting.customOptionsMenu.header.permission": "可視権限",
+    "illandril-token-tooltips.setting.customOptionsMenu.header.gmPermission": "GMの参照範囲",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standardOptionsTitle": "標準的なツールチップの値（一部のシステムでは表示されない場合があります）",
+    "illandril-token-tooltips.setting.customOptionsMenu.customOptionsTitle": "カスタムツールチップの値",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.name": "Health",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.hp.key": "Varies (例. data.attributes.hp)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.name": "Armor Class",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.ac.key": "Varies (例. data.attributes.ac)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.name": "Movement",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.key": "Varies (例. data.stats.speed)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.name": "Passive Skills",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.key": "Varies (例. data.skills.prc.passive)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.name": "Resources",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.resources.key": "data.resources.#",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.name": "Saving Throws",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.help": "Fortitude、Reflex、Will Saving Throws（PathfinderとD&D　3.5）。属性ベースのセービングスローは含まない（D&D 5）。",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.icon": "label",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.savingThrows.key": "Varies (例. data.saves.will)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.name": "Dmg Res./Vuln.",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.help": "Damage Resistances, Immunities,Vulnerabilities/Weaknesses. 注：Damage and Condition Immunitiesが混在しているシステム(例：PF2e)では、Condition ImmunitiesはDamage Immunitiesに含まれます。",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.icon": "label",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.dmgResVuln.key": "Varies (ex. data.traits.di/dr/dv)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.name": "Cond. Imm.",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.help": "Condition Immunities.  注：Damage and Condition Immunitiesが混在しているシステム(例：PF2e)では、Condition ImmunitiesはDamage Immunitiesに含まれます。",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.icon": "label",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.condImm.key": "Varies (ex. data.traits.ci)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.name": "Spell Slots",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.spells.key": "Varies (ex. data.spells.spell#)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.talents.name": "Talents",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.talents.icon": "the Talent's image",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.talents.key": "data.talentList.#.name",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.name": "Item Uses",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.icon": "the Item's image",
+    "illandril-token-tooltips.setting.customOptionsMenu.standard.items.key": "DnD5e only (toggle per item in actor sheets)",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.moveDown": "下に移動",
+    "illandril-token-tooltips.setting.customOptionsMenu.moveUp": "上に移動",
+    "illandril-token-tooltips.setting.customOptionsMenu.delete": "削除",
+    "illandril-token-tooltips.setting.customOptionsMenu.deleteConfirm": "本当にこの値を削除してよろしいですか？",
+    "illandril-token-tooltips.setting.customOptionsMenu.add": "追加",
+    "illandril-token-tooltips.setting.customOptionsMenu.save": "カスタムツールチップの値を保存する",
+  
+    "illandril-token-tooltips.setting.customOptionsMenu.toggleDebug.offLabel": "データキーデバッガーを有効にする",
+    "illandril-token-tooltips.setting.customOptionsMenu.toggleDebug.onLabel": "データキーデバッガーを無効にする",
+    "illandril-token-tooltips.debugDisplay.empty": "トークンにカーソルを合わせると、そのアクターのデータキーが表示されます。",
+  
+    "illandril-token-tooltips.setting.visibility.label": "ツールチップの可視範囲",
+    "illandril-token-tooltips.setting.visibility.hint": "プレイヤーに対してどのトークンにツールチップを表示するかを調整します。GMはすべてのトークンにツールチップを表示することができます。",
+  
+    "illandril-token-tooltips.setting.visibility.option.FRIENDLY": "友好トークン (PC/NPC)",
+    "illandril-token-tooltips.setting.visibility.option.NEUTRAL": "中立・友好トークン (PC/NPC)",
+    "illandril-token-tooltips.setting.visibility.option.ALL_PLAYERS": "プレイヤートークン (任意の処理)",
+    "illandril-token-tooltips.setting.visibility.option.OWNER": "所有者(Owner)権限のアクタートークン",
+    "illandril-token-tooltips.setting.visibility.option.OBSERVER": "観察者(Observer)権限のアクタートークン",
+    "illandril-token-tooltips.setting.visibility.option.LIMITED": "限定的(Limited)権限のアクタートークン",
+    "illandril-token-tooltips.setting.visibility.option.ALL": "すべてのトークン",
+  
+    "illandril-token-tooltips.setting.entityPermission.option.NONE": "全員に見せる",
+    "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "限定的(Limited)と優良プレイヤー",
+    "illandril-token-tooltips.setting.entityPermission.option.OBSERVER": "観察者(Observer)と優良プレイヤー",
+    "illandril-token-tooltips.setting.entityPermission.option.OWNER": "所有者(Owner)とGM",
+    "illandril-token-tooltips.setting.entityPermission.option.SHOW_TO_GMS_ONLY": "GMのみ",
+    "illandril-token-tooltips.setting.entityPermission.option.HIDE_FROM_EVERYONE": "全員から隠す",
+  
+    "illandril-token-tooltips.setting.gmPermission.option.ALL": "PCの情報を参照できる",
+    "illandril-token-tooltips.setting.gmPermission.option.NPC_ONLY": "GM用NPCのみ",
+  
+    "illandril-token-tooltips.setting.rowsPerTooltip.label": "ツールチップの行数",
+    "illandril-token-tooltips.setting.rowsPerTooltip.hint": "ツールチップの各列に表示される最大の行数です。",
+  
+    "illandril-token-tooltips.setting.showOnLeft.label": "左側に表示する",
+    "illandril-token-tooltips.setting.showOnLeft.hint": "有効にすると、トークンの右側ではなく、左側にツールチップが表示されます。",
+  
+    "illandril-token-tooltips.setting.showTokenName.label": "トークンの名前を表示する",
+    "illandril-token-tooltips.setting.showTokenName.hint": "有効にすると、ツールチップの上部にトークンの名前が表示されます。",
+  
+    "illandril-token-tooltips.pactAbbreviation": "P",
+    "illandril-token-tooltips.powerAbbreviation": "P",
+    "illandril-token-tooltips.cantripAbbreviation": "C",
+    "illandril-token-tooltips.focusAbbreviation": "F",
+  
+    "illandril-token-tooltips.savingThrowFort": "Fort",
+    "illandril-token-tooltips.savingThrowRef": "Ref",
+    "illandril-token-tooltips.savingThrowWill": "Will",
+  
+    "illandril-token-tooltips.touchACAbbreviation": "T",
+    "illandril-token-tooltips.flatFootedACAbbreviation": "FF",
+    "illandril-token-tooltips.cmdAbbreviation": "CMD",
+    "illandril-token-tooltips.meleeDefenseAbbreviation": "M.Def",
+    "illandril-token-tooltips.rangedDefenseAbbreviation": "R.Def",
+  
+  
+    "illandril-token-tooltips.tooltip.damageImmunities.label": "Immunities",
+    "illandril-token-tooltips.tooltip.damageResistances.label": "Resistances",
+    "illandril-token-tooltips.tooltip.damageVulnerabilities.label": "Vulnerabilities",
+    "illandril-token-tooltips.tooltip.weaknesses.label": "Weaknesses",
+    "illandril-token-tooltips.tooltip.conditionImmunities.label": "Cond. Imm.",
+  
+    "illandril-token-tooltips.tooltipSwitch": "ツールチップに表示する",
+    "illandril-token-tooltips.tooltipShown": "ツールチップに表示する",
+    "illandril-token-tooltips.tooltipNotShown": "ツールチップで表示しない"
+  }
+  
