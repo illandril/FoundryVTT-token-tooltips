@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.8.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.8.2) (2022-01-14)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.1...v2.8.2)
+
+**Enhancements**
+
+- \[FEATURE\] Custom Tooltip values in the form X / Y [\#47](https://github.com/illandril/FoundryVTT-token-tooltips/issues/47)
+
 ## [v2.8.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.8.1) (2021-11-17)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.0...v2.8.1)
@@ -200,10 +208,6 @@
 - Add option to hide/show items/spells based on user permissions [\#11](https://github.com/illandril/FoundryVTT-token-tooltips/issues/11)
 - Add option to show tooltips to players for more or fewer tokens  [\#8](https://github.com/illandril/FoundryVTT-token-tooltips/issues/8)
 
-**Fixed&nbsp;Bugs**
-
-- Tooltip appears when Foundry first loads [\#6](https://github.com/illandril/FoundryVTT-token-tooltips/issues/6)
-
 ## [v1.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.1.0) (2020-09-01)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.0.0...v1.1.0)
@@ -216,6 +220,7 @@
 
 **Fixed&nbsp;Bugs**
 
+- Tooltip appears when Foundry first loads [\#6](https://github.com/illandril/FoundryVTT-token-tooltips/issues/6)
 - Counts are incorrect for consumables with charges [\#2](https://github.com/illandril/FoundryVTT-token-tooltips/issues/2)
 
 **Other&nbsp;Changes**
