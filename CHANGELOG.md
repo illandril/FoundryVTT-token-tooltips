@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.8.3](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.8.3) (2022-02-07)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.2...v2.8.3)
+
+**Enhancements**
+
+- \[FEATURE\] Show Tooltips for GMs only [\#49](https://github.com/illandril/FoundryVTT-token-tooltips/issues/49)
+- \[FEATURE\] - Support for Foundry v9? [\#46](https://github.com/illandril/FoundryVTT-token-tooltips/issues/46)
+
+**Fixed&nbsp;Bugs**
+
+- Console log is hard to read [\#48](https://github.com/illandril/FoundryVTT-token-tooltips/issues/48)
+
 ## [v2.8.2](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.8.2) (2022-01-14)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.1...v2.8.2)
