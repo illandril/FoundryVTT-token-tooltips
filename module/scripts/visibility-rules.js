@@ -41,4 +41,10 @@ export default [
       return true;
     },
   },
+  {
+    name: 'NONE',
+    shouldShowTooltip: (token) => {
+      return false;
+    },
+  },
 ];

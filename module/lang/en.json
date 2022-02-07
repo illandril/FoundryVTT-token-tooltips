@@ -86,6 +86,7 @@
   "illandril-token-tooltips.setting.visibility.option.OBSERVER": "Observed Actor Tokens",
   "illandril-token-tooltips.setting.visibility.option.LIMITED": "Limited Permission Actor Tokens",
   "illandril-token-tooltips.setting.visibility.option.ALL": "All Tokens",
+  "illandril-token-tooltips.setting.visibility.option.NONE": "No Tokens (Show tooltips to GMs only)",
 
   "illandril-token-tooltips.setting.entityPermission.option.NONE": "Show for Everyone",
   "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited or better",
