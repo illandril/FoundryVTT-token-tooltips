@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.9.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.9.0) (2022-04-25)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.3...v2.9.0)
+
+**Enhancements**
+
+- \[FEATURE\] Block Tooltips when holding Alt [\#52](https://github.com/illandril/FoundryVTT-token-tooltips/issues/52)
+- \[FEATURE\] [\#50](https://github.com/illandril/FoundryVTT-token-tooltips/issues/50)
+
+**Fixed&nbsp;Bugs**
+
+- Move values up & down [\#53](https://github.com/illandril/FoundryVTT-token-tooltips/issues/53)
+
 ## [v2.8.3](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.8.3) (2022-02-07)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.2...v2.8.3)
