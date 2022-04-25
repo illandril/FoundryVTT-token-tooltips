@@ -8,7 +8,7 @@ import { supportedSystems as condImmSupportedSystems } from '../attribute-lookup
 import { supportedSystems as damResImmVulnSupportedSystems } from '../attribute-lookups/damageResImmVuln.js';
 import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attribute-lookups/saving-throws.js';
 
-const FORM_CSS_PREFIX = `${CSS_PREFIX}customOptionForm-`;
+const FORM_CSS_PREFIX = `illandril-token-tooltips--customOptionForm-`;
 const DEBUG_TOGGLE_CSS = `${FORM_CSS_PREFIX}toggleDebug`;
 const DEBUG_TOGGLE_ON_CSS = `${FORM_CSS_PREFIX}toggleDebug-on`;
 const ACTIONS_CSS = `${FORM_CSS_PREFIX}actions`;
@@ -342,7 +342,7 @@ const getRow = (element) => {
   if (element && element.classList.contains(ACTIONS_CSS)) {
     let elementsInRow = [];
     do {
-      elementsInRow.push(element);
+      elementsInRow.unshift(element);
       element = element.previousElementSibling;
     } while(element && !(element.classList.contains(HEADER_CSS) || element.classList.contains(ACTIONS_CSS)));
     return $(elementsInRow);
