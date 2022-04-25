@@ -28,8 +28,8 @@ class StandardRow {
 
   update(tooltip, actor) {
     if (showDataType(actor, this.minimumPermissionSetting, this.hideFromGMSetting)) {
-      if(this.attributeLookup.rows) {
-        for(let row of this.attributeLookup.rows(actor)) {
+      if (this.attributeLookup.rows) {
+        for (let row of this.attributeLookup.rows(actor)) {
           const attributeRow = new AttributeRow(row.label, row.icon);
           tooltip._updateRow(attributeRow, row.value);
         }
@@ -182,7 +182,7 @@ class Tooltip {
     this.element.classList.add(CSS_SHOW);
     this.dataElement.style.width = '';
     const lastRow = this.dataElement.lastChild;
-    if(lastRow) {
+    if (lastRow) {
       const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
       this.dataElement.style.width = `${newWidth}px`;
     }
@@ -198,7 +198,7 @@ class Tooltip {
     this.updateName(token);
 
     const actor = token.actor;
-    if(showNameOnly(actor)) {
+    if (showNameOnly(actor)) {
       return;
     }
     for (let standardRow of this.standardRows) {
@@ -312,6 +312,12 @@ const attributeSort = (a, b) => {
 
 const shouldShowTooltip = (token) => {
   if (!(token && token.actor)) {
+    return false;
+  }
+  if (
+    !Settings.ShowOnHighlightHotkey.get() &&
+    token.mouseInteractionManager.state !== token.mouseInteractionManager.states.HOVER
+  ) {
     return false;
   }
   if (game.user.isGM) {

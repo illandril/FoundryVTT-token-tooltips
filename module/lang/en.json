@@ -107,6 +107,9 @@
   "illandril-token-tooltips.setting.showTokenName.label": "Show Token Name",
   "illandril-token-tooltips.setting.showTokenName.hint": "If checked, the tooltip will show on the Token's name at the top of the tooltip.",
 
+  "illandril-token-tooltips.setting.showOnHighlightHotkey.label": "Show on Highlight Hotkey",
+  "illandril-token-tooltips.setting.showOnHighlightHotkey.hint": "If checked, the tooltip will show (for the currently selected Token only) when you press the Highlight Objects hotkey (ALT by default).",
+
   "illandril-token-tooltips.pactAbbreviation": "P",
   "illandril-token-tooltips.powerAbbreviation": "P",
   "illandril-token-tooltips.cantripAbbreviation": "C",

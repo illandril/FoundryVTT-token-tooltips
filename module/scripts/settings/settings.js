@@ -103,6 +103,10 @@ const Settings = {
   ShowTokenName: new BooleanSetting('showTokenName', true, {
     hasHint: true,
   }),
+
+  ShowOnHighlightHotkey: new BooleanSetting('showOnHighlightHotkey', true, {
+    hasHint: true,
+  }),
 };
 
 Object.freeze(Settings);
