@@ -101,6 +101,9 @@
   "illandril-token-tooltips.setting.rowsPerTooltip.label": "Tooltip Rows",
   "illandril-token-tooltips.setting.rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",
 
+  "illandril-token-tooltips.setting.tooltipFontSize.label": "Tooltip Font Size",
+  "illandril-token-tooltips.setting.tooltipFontSize.hint": "The ratio of the font size of the Tooltip, relative to the font size used in most other places in the application.",
+
   "illandril-token-tooltips.setting.showOnLeft.label": "Show on Left",
   "illandril-token-tooltips.setting.showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
 

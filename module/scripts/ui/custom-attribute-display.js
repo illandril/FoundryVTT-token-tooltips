@@ -38,7 +38,6 @@ const getMultiValue = (actor, rawAttributeKey) => {
   let negate = false;
   let operation = operations.get('+');
   for (let attributeKey of attributeKeys) {
-    console.log(attributeKey);
     if (attributeKey === '-') {
       negate = true;
       continue;

@@ -26,6 +26,7 @@ const Settings = {
   },
 
   RowsPerTooltip: new RangeSetting('rowsPerTooltip', 5, 1, 20, 1, { hasHint: true }),
+  TooltipFontSize: new RangeSetting('tooltipFontSize', 1, 0.5, 3, 0.1, { hasHint: true }),
 
   HPMinimumPermission: new StringSetting('hpMinimumPermission', 'NONE', {
     config: false,

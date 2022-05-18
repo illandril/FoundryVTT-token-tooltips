@@ -1,14 +1,17 @@
 :root {
   --illandril-token-tooltips--tooltip-rows: 5;
+  --illandril-token-tooltips--tooltip-base-size: 1em;
 }
 
 .illandril-token-tooltips--tooltip {
   position: absolute;
   display: none;
   background: rgba(255, 255, 255, 0.75);
-  border-radius: 2px;
+  border-radius: 0.25em;
   border: 2px solid rgba(255, 255, 255, 0.9);
+  font-size: var(--illandril-token-tooltips--tooltip-base-size);
 }
+
 
 .illandril-token-tooltips--tooltip.illandril-token-tooltips--show {
   display: block;

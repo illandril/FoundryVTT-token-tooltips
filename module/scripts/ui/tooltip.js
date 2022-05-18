@@ -164,6 +164,11 @@ class Tooltip {
       '--illandril-token-tooltips--tooltip-rows',
       Settings.RowsPerTooltip.get()
     );
+    document.documentElement.style.setProperty(
+      '--illandril-token-tooltips--tooltip-base-size',
+      `${Settings.TooltipFontSize.get()}em`
+    );
+
     if (Settings.ShowOnLeft.get()) {
       const right = window.innerWidth - Math.ceil(token.worldTransform.tx - 8);
       this.element.style.right = `${right}px`;
