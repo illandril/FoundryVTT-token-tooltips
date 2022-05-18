@@ -1,5 +1,14 @@
 # Changelog
 
+## [v2.10.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.10.0) (2022-05-18)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.9.0...v2.10.0)
+
+**Enhancements**
+
+- Font size [\#55](https://github.com/illandril/FoundryVTT-token-tooltips/issues/55)
+- Display only for non-zero [\#54](https://github.com/illandril/FoundryVTT-token-tooltips/issues/54)
+
 ## [v2.9.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.9.0) (2022-04-25)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.8.3...v2.9.0)
@@ -61,6 +70,7 @@
 **Enhancements**
 
 - Request: Allow for math in the Datakey section.  [\#40](https://github.com/illandril/FoundryVTT-token-tooltips/issues/40)
+- Add option to show tooltip only on PCs [\#35](https://github.com/illandril/FoundryVTT-token-tooltips/issues/35)
 
 **Fixed&nbsp;Bugs**
 
@@ -82,7 +92,6 @@
 **Enhancements**
 
 - \[FEATURE\] PF1e - Include Fly Maneuverability with Fly Speed for PF1e [\#36](https://github.com/illandril/FoundryVTT-token-tooltips/issues/36)
-- Add option to show tooltip only on PCs [\#35](https://github.com/illandril/FoundryVTT-token-tooltips/issues/35)
 
 ## [v2.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.4.0) (2021-09-05)
 
@@ -202,7 +211,6 @@
 **Other&nbsp;Changes**
 
 - \[Foundry 0.7.x\] Remove isPC checks [\#12](https://github.com/illandril/FoundryVTT-token-tooltips/issues/12)
-- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 
 ## [v1.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.3.0) (2021-01-01)
 
@@ -251,6 +259,7 @@
 
 **Other&nbsp;Changes**
 
+- \[Foundry 0.7.x\] Remove hoverX spam workaround [\#9](https://github.com/illandril/FoundryVTT-token-tooltips/issues/9)
 - Update compatibility for 0.6.6 [\#5](https://github.com/illandril/FoundryVTT-token-tooltips/issues/5)
 - Add prettier.config.js [\#1](https://github.com/illandril/FoundryVTT-token-tooltips/issues/1)
 
