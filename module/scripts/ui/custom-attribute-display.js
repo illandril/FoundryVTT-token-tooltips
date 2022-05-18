@@ -6,13 +6,13 @@ const isImageKey = (key) => {
   return imageKeyPattern.test(key);
 };
 
-const intPattern = /^[0-9]+$/;
+const intPattern = /^-?[0-9]+$/;
 
 const getValue = (actor, rawAttributeKey) => {
   const attributeKey = rawAttributeKey.trim();
-  if(intPattern.test(attributeKey)) {
+  if (intPattern.test(attributeKey)) {
     const asInt = parseInt(attributeKey, 10);
-    if(!isNaN(asInt)) {
+    if (!isNaN(asInt)) {
       return { value: asInt };
     }
   }
@@ -20,41 +20,53 @@ const getValue = (actor, rawAttributeKey) => {
   return calculateValue(attribute, attributeKey);
 };
 
+const operations = new Map();
+operations.set('+', (a, b) => a + b);
+operations.set('*', (a, b) => a * b);
+operations.set('/', (a, b) => b === 0 ? null : a / b);
+operations.set('%', (a, b) => a % b);
+operations.set('>', (a, b) => (a > b ? a : null));
+operations.set('>=', (a, b) => (a >= b ? a : null));
+operations.set('<', (a, b) => (a < b ? a : null));
+operations.set('<=', (a, b) => (a <= b ? a : null));
+operations.set('!=', (a, b) => (a !== b ? a : null));
+operations.set('==', (a, b) => (a === b ? a : null));
+
 const getMultiValue = (actor, rawAttributeKey) => {
-  const attributeKeys = rawAttributeKey.replace('+', '~+~').replace('-', '~-~').split('~');
+  const attributeKeys = rawAttributeKey.replace(/\s*(\+|\-|\*|\/|%|[<>!=]=?\-?)\s*/g, '~$1~').split('~');
   let valueSoFar = 0;
-  let addNext = true;
-  for(let attributeKey of attributeKeys) {
-    if(attributeKey === '+') {
-      addNext = true;
+  let negate = false;
+  let operation = operations.get('+');
+  for (let attributeKey of attributeKeys) {
+    console.log(attributeKey);
+    if (attributeKey === '-') {
+      negate = true;
       continue;
-    } else if(attributeKey === '-') {
-      addNext = false;
+    } else if (operations.has(attributeKey)) {
+      operation = operations.get(attributeKey);
+      negate = false;
       continue;
     } else if (attributeKey.trim() === '') {
       continue;
     }
     const keyValue = getValue(actor, attributeKey);
-    if(!keyValue || typeof(keyValue.value) !== 'number') {
+    if (!keyValue || typeof keyValue.value !== 'number') {
       return null;
     }
-    if (addNext) {
-      valueSoFar += keyValue.value;
-    } else {
-      valueSoFar -= keyValue.value;
+    const thisValue = (negate ? -1 : 1) * keyValue.value;
+    negate = false;
+    valueSoFar = operation(valueSoFar, thisValue);
+    if (isNaN(valueSoFar) || typeof valueSoFar !== 'number') {
+      return null;
     }
+    operation = operations.get('+');
   }
   return { value: valueSoFar };
-}
+};
 
 export const updateCustomAttributeRow = (actor, customRow, customRows, i) => {
   const attributeKey = customRow.attributeKey;
-  let value;
-  if(attributeKey.includes('+') || attributeKey.includes('-')) {
-    value = getMultiValue(actor, attributeKey);
-  } else {
-    value = getValue(actor, attributeKey);
-  }
+  let value = getMultiValue(actor, attributeKey);
   if (!value) {
     return null;
   }

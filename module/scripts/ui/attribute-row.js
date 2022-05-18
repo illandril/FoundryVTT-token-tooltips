@@ -56,7 +56,7 @@ export default class AttributeRow {
   }
 
   setValue(value, max = null, temp = null, tempmax = null, units = null, extra = null) {
-    if(value instanceof Image) {
+    if (value instanceof Image) {
       emptyNode(this.currDisplay);
       this.currDisplay.appendChild(value);
       return;
@@ -144,8 +144,24 @@ const addWithoutTemp = (element, value) => {
       appendText(element, '⅛');
     } else if (value === 0.25) {
       appendText(element, '¼');
+    } else if (value === 0.375) {
+      appendText(element, '⅜');
     } else if (value === 0.5) {
       appendText(element, '½');
+    } else if (value === 0.625) {
+      appendText(element, '⅝');
+    } else if (value === 0.75) {
+      appendText(element, '¾');
+    } else if (value === 0.875) {
+      appendText(element, '⅞');
+    } else if (value >= 0.166 && value <= 0.167) {
+      appendText(element, '⅙');
+    } else if (value >= 0.333 && value <= 0.334) {
+      appendText(element, '⅓');
+    } else if (value >= 0.666 && value <= 0.667) {
+      appendText(element, '⅔');
+    } else if (value >= 0.833 && value <= 0.834) {
+      appendText(element, '⅚');
     } else {
       appendText(element, '' + value);
     }
@@ -159,10 +175,10 @@ const addWithoutTemp = (element, value) => {
 };
 
 const isValidAttributeValue = (value) => {
-  if(isValidNonArrayAttributeValue(value)) {
+  if (isValidNonArrayAttributeValue(value)) {
     return true;
   }
-  if(Array.isArray(value)) {
+  if (Array.isArray(value)) {
     return Array.prototype.every.call(value, isValidNonArrayAttributeValue);
   }
   return false;
@@ -191,7 +207,7 @@ export const calculateValue = (attribute, opt_attributeKey) => {
 
   if (isValidAttributeValue(attribute)) {
     let value;
-    if(Array.isArray(attribute)) {
+    if (Array.isArray(attribute)) {
       value = Array.prototype.join.call(attribute, ', ');
     } else if (typeof attribute === 'number' && attributeKey.endsWith('.pct')) {
       value = +attribute.toFixed(2) + '%';
@@ -209,9 +225,9 @@ export const calculateValue = (attribute, opt_attributeKey) => {
       value = attribute.total;
     } else if (isValidAttributeValue(attribute.value)) {
       value = attribute.value;
-      if(typeof value === 'string' && attribute.type === 'LongText') {
+      if (typeof value === 'string' && attribute.type === 'LongText') {
         value = htmlToNode(value);
-      } else if(Array.isArray(value)) {
+      } else if (Array.isArray(value)) {
         return calculateValue(value);
       }
     } else if (isValidAttributeValue(attribute.max)) {
