@@ -33,6 +33,11 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.name": "Movement",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.key": "Varies (ex. data.stats.speed)",
 
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.name": "Attribs (+Mod)",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.help": "Attributes and associated Modifiers (including Attribute-based Saves for appropriate systems).",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.icon": "label",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.key": "Varies (ex. data.abilities.str)",
+
   "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.name": "Passive Skills",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.passives.key": "Varies (ex. data.skills.prc.passive)",
 

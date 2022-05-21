@@ -1,5 +1,6 @@
 export { default as acs } from './ac.js';
 export { default as hps } from './hp.js';
+export { default as attributesPlus } from './attributesPlus.js';
 export { default as movements } from './movements.js';
 export { default as passives } from './passives.js';
 export { default as damageResImmVuln } from './damageResImmVuln.js';

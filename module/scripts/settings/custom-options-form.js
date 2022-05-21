@@ -4,6 +4,7 @@ import { isDebug, toggleDebug } from '../ui/custom-options-debug.js';
 import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from './settings.js';
 import { fixChoices } from './choice-setting.js';
 
+import { supportedSystems as attrPlusSupportedSystems } from '../attribute-lookups/attributesPlus.js';
 import { supportedSystems as condImmSupportedSystems } from '../attribute-lookups/conditionImmunities.js';
 import { supportedSystems as damResImmVulnSupportedSystems } from '../attribute-lookups/damageResImmVuln.js';
 import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attribute-lookups/saving-throws.js';
@@ -74,6 +75,20 @@ const getStandardItems = () => {
     // AC
     getStandardItem('ac', 'user-shield', Settings.ACMinimumPermission, Settings.HidePlayerACFromGM),
   ];
+
+  if (attrPlusSupportedSystems.includes(game.system.id)) {
+    // Attributes + Mod + Save
+    standardItems.push(
+      getStandardItem(
+        'attributesPlus',
+        game.i18n.localize(
+          'illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.icon'
+        ),
+        Settings.AttributePlusMinimumPermission,
+        Settings.HidePlayerAttributePlusFromGM
+      )
+    );
+  }
 
   if (!savingThrowsUnsupportedSystems.includes(game.system.id)) {
     // Saving Throws

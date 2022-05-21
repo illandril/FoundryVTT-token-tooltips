@@ -68,6 +68,12 @@ class Tooltip {
       );
     }
 
+    for (let ac of attributeLookups.attributesPlus) {
+      this.standardRows.push(
+        new StandardRow(ac, Settings.AttributePlusMinimumPermission, Settings.HidePlayerAttributePlusFromGM)
+      );
+    }
+
     for (let savingThrow of attributeLookups.savingThrows) {
       this.standardRows.push(
         new StandardRow(

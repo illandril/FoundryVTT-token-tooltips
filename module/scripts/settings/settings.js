@@ -38,6 +38,11 @@ const Settings = {
   }),
   HidePlayerACFromGM: new BooleanSetting('hidePlayerACFromGM', false, { config: false }),
 
+  AttributePlusMinimumPermission: new StringSetting('attributePlusMinimumPermission', HIDE_FROM_EVERYONE_OPTION, {
+    config: false,
+  }),
+  HidePlayerAttributePlusFromGM: new BooleanSetting('hidePlayerAttributePlusFromGM', false, { config: false }),
+
   PassivesMinimumPermission: new StringSetting('passivesMinimumPermission', 'NONE', {
     config: false,
   }),
