@@ -111,7 +111,13 @@
   "illandril-token-tooltips.setting.showTokenName.hint": "If checked, the tooltip will show on the Token's name at the top of the tooltip.",
 
   "illandril-token-tooltips.setting.showOnHighlightHotkey.label": "Show on Highlight Hotkey",
-  "illandril-token-tooltips.setting.showOnHighlightHotkey.hint": "If checked, the tooltip will show (for the currently selected Token only) when you press the Highlight Objects hotkey (ALT by default).",
+  "illandril-token-tooltips.setting.showOnHighlightHotkey.hint": "If checked, the tooltip will show (for the currently selected Token only) when you press the Highlight Objects hotkey (ALT by default; configurable in Configure Controls). Note: Not compatible with Show only with Tooltip Hotkey.",
+
+  "illandril-token-tooltips.setting.showOnlyWithTooltipHotkey.label": "Show only with Tooltip Hotkey",
+  "illandril-token-tooltips.setting.showOnlyWithTooltipHotkey.hint": "If checked, the tooltip will show only when the Show Tooltip Hotkey is pressed while hovering over a token (SHIFT by default; configurable in Configure Controls). Note: Not compatible with Show on Highlight Hotkey.",
+
+  "illandril-token-tooltips.hotkey.showTooltip.label": "Show Tooltip",
+  "illandril-token-tooltips.hotkey.showTooltip.hint": "If \"Show only with Tooltip Hotkey\" is enabled, tooltips will only show when this button is pressed while hovering over a token.",
 
   "illandril-token-tooltips.pactAbbreviation": "P",
   "illandril-token-tooltips.powerAbbreviation": "P",

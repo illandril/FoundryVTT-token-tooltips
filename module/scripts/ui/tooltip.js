@@ -1,4 +1,5 @@
 import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from '../settings/index.js';
+import { showTooltipHotkey } from '../settings/hotkeys.js';
 import { CSS_PREFIX } from '../module.js';
 import { icon, emptyNode, img, div, span, appendText } from './html.js';
 import { updateCustomAttributeRow } from './custom-attribute-display.js';
@@ -146,6 +147,17 @@ class Tooltip {
 
     Hooks.on('hoverToken', (token, hovered) => {
       this.onHover(token, hovered);
+      if (hovered) {
+        this.lastHoverToken = token;
+      } else if (this.lastHoverToken === token) {
+        this.lastHoverToken = null;
+      }
+    });
+
+    showTooltipHotkey.onToggle(() => {
+      if (this.lastHoverToken) {
+        this.onHover(this.lastHoverToken, true);
+      }
     });
   }
 
@@ -323,6 +335,9 @@ const shouldShowTooltip = (token) => {
     !Settings.ShowOnHighlightHotkey.get() &&
     token.mouseInteractionManager.state !== token.mouseInteractionManager.states.HOVER
   ) {
+    return false;
+  }
+  if (Settings.ShowOnlyWithTooltipHotkey.get() && !showTooltipHotkey.isPressed()) {
     return false;
   }
   if (game.user.isGM) {

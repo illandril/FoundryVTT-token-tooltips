@@ -108,6 +108,10 @@ const Settings = {
   ShowOnHighlightHotkey: new BooleanSetting('showOnHighlightHotkey', true, {
     hasHint: true,
   }),
+
+  ShowOnlyWithTooltipHotkey: new BooleanSetting('showOnlyWithTooltipHotkey', false, {
+    hasHint: true,
+  }),
 };
 
 Object.freeze(Settings);
