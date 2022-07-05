@@ -2,7 +2,7 @@
     "name": "illandril-token-tooltips",
     "title": "Illandril's Token Tooltips",
     "description": "Adds tooltips for tokens for any system. Some, but not all, systems have some values pre-configured for the tooltip, but custom tooltip values can be configured for any system. The DnD5e system has the most built-in support, but other modules (including Pathfinder 1 and 2, D&D 3.5, and more) have some values configured to show out-of-the-box.",
-    "version": "2.11.0",
+    "version": "2.11.1",
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "minimumCoreVersion": "0.8.5",
@@ -48,7 +48,7 @@
     },
     "changelog": "https://github.com/illandril/FoundryVTT-token-tooltips/blob/master/CHANGELOG.md",
     "manifest": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/latest/download/module.json",
-    "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v2.11.0/module.zip",
+    "download": "https://github.com/illandril/FoundryVTT-token-tooltips/releases/download/v2.11.1/module.zip",
     "media": [
         {
             "type": "cover",

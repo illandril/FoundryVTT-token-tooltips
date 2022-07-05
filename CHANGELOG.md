@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.11.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.11.1) (2022-07-05)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.11.0...v2.11.1)
+
+**Fixed&nbsp;Bugs**
+
+- Tooltip text unreadable  [\#60](https://github.com/illandril/FoundryVTT-token-tooltips/issues/60)
+
 ## [v2.11.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.11.0) (2022-05-21)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.10.0...v2.11.0)
@@ -79,9 +87,11 @@
 **Enhancements**
 
 - Request: Allow for math in the Datakey section.  [\#40](https://github.com/illandril/FoundryVTT-token-tooltips/issues/40)
+- \[FEATURE\] PF1e - Include Fly Maneuverability with Fly Speed for PF1e [\#36](https://github.com/illandril/FoundryVTT-token-tooltips/issues/36)
 
 **Fixed&nbsp;Bugs**
 
+- \[BUG\] Resistances and weaknesses showing as "undefined" in PF2E [\#41](https://github.com/illandril/FoundryVTT-token-tooltips/issues/41)
 - \[BUG\] localizing error [\#39](https://github.com/illandril/FoundryVTT-token-tooltips/issues/39)
 
 ## [v2.6.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.6.0) (2021-10-10)
@@ -98,7 +108,6 @@
 
 **Enhancements**
 
-- \[FEATURE\] PF1e - Include Fly Maneuverability with Fly Speed for PF1e [\#36](https://github.com/illandril/FoundryVTT-token-tooltips/issues/36)
 - Add option to show tooltip only on PCs [\#35](https://github.com/illandril/FoundryVTT-token-tooltips/issues/35)
 
 ## [v2.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.4.0) (2021-09-05)
@@ -111,7 +120,6 @@
 
 **Fixed&nbsp;Bugs**
 
-- \[BUG\] Resistances and weaknesses showing as "undefined" in PF2E [\#41](https://github.com/illandril/FoundryVTT-token-tooltips/issues/41)
 - Configuration option's help text are mixed up [\#33](https://github.com/illandril/FoundryVTT-token-tooltips/issues/33)
 
 ## [v2.3.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.3.0) (2021-06-18)
@@ -164,6 +172,10 @@
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.0.1...v2.0.2)
 
+**Enhancements**
+
+- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
+
 **Fixed&nbsp;Bugs**
 
 - Temporary maximum HP increases are not shown in tooltip [\#24](https://github.com/illandril/FoundryVTT-token-tooltips/issues/24)
@@ -175,7 +187,6 @@
 
 **Enhancements**
 
-- Add support for Bug Reporter [\#22](https://github.com/illandril/FoundryVTT-token-tooltips/issues/22)
 - \(Suggestion\) Option to Swap Tooltip to Left side of Token [\#21](https://github.com/illandril/FoundryVTT-token-tooltips/issues/21)
 
 **Other&nbsp;Changes**
