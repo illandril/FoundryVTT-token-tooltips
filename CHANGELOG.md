@@ -1,5 +1,9 @@
 # Changelog
 
+## [v3.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.0.0) (2022-08-07)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.11.1...v3.0.0)
+
 ## [v2.11.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.11.1) (2022-07-05)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.11.0...v2.11.1)
@@ -87,7 +91,6 @@
 **Enhancements**
 
 - Request: Allow for math in the Datakey section.  [\#40](https://github.com/illandril/FoundryVTT-token-tooltips/issues/40)
-- \[FEATURE\] PF1e - Include Fly Maneuverability with Fly Speed for PF1e [\#36](https://github.com/illandril/FoundryVTT-token-tooltips/issues/36)
 
 **Fixed&nbsp;Bugs**
 
@@ -108,6 +111,7 @@
 
 **Enhancements**
 
+- \[FEATURE\] PF1e - Include Fly Maneuverability with Fly Speed for PF1e [\#36](https://github.com/illandril/FoundryVTT-token-tooltips/issues/36)
 - Add option to show tooltip only on PCs [\#35](https://github.com/illandril/FoundryVTT-token-tooltips/issues/35)
 
 ## [v2.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.4.0) (2021-09-05)
@@ -188,6 +192,7 @@
 **Enhancements**
 
 - \(Suggestion\) Option to Swap Tooltip to Left side of Token [\#21](https://github.com/illandril/FoundryVTT-token-tooltips/issues/21)
+- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
 
 **Other&nbsp;Changes**
 
@@ -196,10 +201,6 @@
 ## [v2.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.0) (2021-02-04)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.1...v2.0.0)
-
-**Enhancements**
-
-- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
 
 **Other&nbsp;Changes**
 
