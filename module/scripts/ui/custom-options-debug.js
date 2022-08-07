@@ -38,9 +38,9 @@ Hooks.once('ready', () => {
 });
 
 Hooks.on('hoverToken', (token, hovered) => {
-  if (debug && hovered && token && token.actor && token.actor.data) {
+  if (debug && hovered && token && token.actor) {
     emptyNode(debugDisplay);
-    addDataRows(token.actor, null, token.actor.data);
+    addDataRows(token.actor, null, token.actor);
   }
 });
 

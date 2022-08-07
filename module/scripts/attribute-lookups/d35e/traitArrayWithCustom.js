@@ -14,7 +14,7 @@ const traitArrayWithCustom = (localeKey, propertyKey, valueLocalePrefix) => {
       if (game.system.id !== systemID) {
         return null;
       }
-      const property = getProperty(actor, `data.data.traits.${propertyKey}`);
+      const property = getProperty(actor.system, `traits.${propertyKey}`);
       const stdValues = (property?.value || []).map((value) => {
         const upperFirstValue = value.substring(0, 1).toUpperCase() + value.substring(1);
         return game.i18n.localize(`D35E.${valueLocalePrefix}${upperFirstValue}`) || value;

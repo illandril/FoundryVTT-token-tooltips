@@ -2,10 +2,10 @@ import pf2eSystemID from './systemID.js';
 
 const getSpellcastingEntries = (actor) => {
   const entries = [];
-  for (let item of actor.data.items) {
+  for (let item of actor.items) {
     if (item.type === 'spellcastingEntry') {
       entries.push({
-        sort: item.data.sort || 0,
+        sort: item.sort || 0,
         spellcastingEntry: actor.spellcasting.get(item.id),
       });
     }
@@ -19,7 +19,7 @@ const getFocusEntry = (actor, spellIcon) => {
   return {
     label,
     icon: spellIcon(label),
-    value: getProperty(actor, 'data.data.resources.focus'),
+    value: getProperty(actor.system, 'resources.focus'),
   };
 };
 
@@ -49,6 +49,7 @@ export default (spellIcon) => ({
         let hasFocus = false;
         for (let entry of spellcastingEntries) {
           if (entry.isFocusPool) {
+            console.log('Focus pool', entry);
             if (!hasFocus) {
               hasFocus = true;
               slots.push(getFocusEntry(actor, spellIcon));
@@ -57,6 +58,7 @@ export default (spellIcon) => ({
           }
           if (entry.getSpellData) {
             const spellData = entry.getSpellData();
+            console.log('Spell Data', spellData);
             for (let level of spellData.levels) {
               const levelEntry = getLevelEntry(level, spellIcon);
               levelEntry && slots.push(levelEntry);

@@ -17,7 +17,7 @@ const pf1SavingThrow = (key) => {
       if(isDND35LiteNPC(actor)) {
         return null;
       }
-      const value = getProperty(actor, `data.data.attributes.savingThrows.${key}`);
+      const value = getProperty(actor.system, `attributes.savingThrows.${key}`);
       if(value && isPF1LiteNPC(actor) && value.total === 0) {
         return null;
       }
@@ -31,7 +31,7 @@ const pf2SavingThrow = (key, locKey) => {
     icon: () => null,
     label: () => game.i18n.localize(`illandril-token-tooltips.savingThrow${capitalize(locKey)}`),
     value: (actor) => {
-      const save = getProperty(actor, `data.data.saves.${key}`);
+      const save = getProperty(actor.system, `saves.${key}`);
       if(!save) {
         return null;
       }

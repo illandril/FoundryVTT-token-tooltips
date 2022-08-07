@@ -1,4 +1,4 @@
-const SHOW_ITEM_SETTING = 'data.illandril.tooltips.show';
+const SHOW_ITEM_SETTING = 'system.illandril.tooltips.show';
 
 export const showInTooltip = (itemData) => {
   return itemData && !!getProperty(itemData, SHOW_ITEM_SETTING);
@@ -14,7 +14,7 @@ export const canCalculateUses = (item) => {
   if (item.type === 'consumable') {
     return true;
   }
-  const itemData = item.data;
+  const itemData = item.system;
   return (itemData.uses && itemData.uses.max) || itemData.quantity;
 };
 
@@ -26,7 +26,7 @@ export const shouldCalculateUses = (item) => {
 };
 
 export const calculateUses = (item) => {
-  const itemData = item.data;
+  const itemData = item.system;
   let uses = 1;
   let maxUses = 0;
   const itemUses = itemData.uses;

@@ -26,10 +26,11 @@ let entityPermission;
 let gmPermissions;
 let standardEntityPermission;
 
+const STANDARD_PERMISSION_LEVELS = ['NONE', 'LIMITED', 'OBSERVER', 'OWNER'];
 Hooks.on('ready', () => {
   entityPermission = fixChoices(
     'entityPermission',
-    Object.keys(CONST.ENTITY_PERMISSIONS).concat(SHOW_TO_GMS_ONLY),
+    [...STANDARD_PERMISSION_LEVELS, SHOW_TO_GMS_ONLY],
     true /* localize */
   );
   gmPermissions = fixChoices(
@@ -39,7 +40,7 @@ Hooks.on('ready', () => {
   );
   standardEntityPermission = fixChoices(
     'entityPermission',
-    Object.keys(CONST.ENTITY_PERMISSIONS).concat(SHOW_TO_GMS_ONLY, HIDE_FROM_EVERYONE_OPTION),
+    [...STANDARD_PERMISSION_LEVELS, SHOW_TO_GMS_ONLY, HIDE_FROM_EVERYONE_OPTION],
     true /* localize */
   );
   getTemplate(ROW_TEMPLATE);

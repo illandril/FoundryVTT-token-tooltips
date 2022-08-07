@@ -25,9 +25,9 @@ const dnd5eMovement = (key, icon) => {
     icon: () => icon,
     label: labelLookup(key),
     value: (actor) => {
-      let value = calculateValue(getProperty(actor, `data.data.attributes.movement.${key}`));
+      let value = calculateValue(getProperty(actor.system, `attributes.movement.${key}`));
       if (value && value.value > 0) {
-        const units = getProperty(actor, 'data.data.attributes.movement.units');
+        const units = getProperty(actor.system, 'attributes.movement.units');
         if (units) {
           value.units = units;
         }
@@ -47,10 +47,10 @@ const pf1Movement = (key, icon) => {
       if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
         return null;
       }
-      const value = calculateValue(getProperty(actor, `data.data.attributes.speed.${key}`));
+      const value = calculateValue(getProperty(actor.system, `attributes.speed.${key}`));
       if (value && value.value > 0) {
         if(key === 'fly') {
-          const maneuverAbility = getProperty(actor, 'data.data.attributes.speed.fly.maneuverability');
+          const maneuverAbility = getProperty(actor.system, 'attributes.speed.fly.maneuverability');
           if(maneuverAbility) {
             const maneuverKey = `PF1.FlyManeuverability${capitalize(maneuverAbility)}`;
             let maneuverLabel = maneuverAbility;
@@ -72,7 +72,7 @@ const pf2Movement = (key, icon) => {
     icon: () => icon,
     label: labelLookup(key),
     value: (actor) => {
-      const speed = getProperty(actor, 'data.data.attributes.speed');
+      const speed = getProperty(actor.system, 'attributes.speed');
       if (!speed) {
         return null;
       }
@@ -147,10 +147,10 @@ export default [
   multiMovement('land', 'walking', [pf1Movement, pf2Movement]),
   genericMovement(
     [
-      'data.data.cahracteristics.movement',
-      'data.data.cahracteristics.speed',
-      'data.data.stats.speed',
-      'data.data.bs',
+      'system.characteristics.movement',
+      'system.characteristics.speed',
+      'system.stats.speed',
+      'system.bs',
     ],
     'walking'
   ),

@@ -55,9 +55,8 @@ const getItemForRow = (inventoryRow, actor) => {
 };
 
 const addTooltipToggle = (tooltipCell, item) => {
-  const itemData = item.data;
-  if (canCalculateUses(itemData)) {
-    const shown = showInTooltip(itemData);
+  if (canCalculateUses(item)) {
+    const shown = showInTooltip(item);
     const tooltipToggle = document.createElement('a');
     tooltipToggle.classList.add(CSS_TOOLTIP_TOGGLE);
     tooltipToggle.setAttribute('role', 'switch');

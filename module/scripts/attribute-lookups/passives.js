@@ -21,7 +21,7 @@ const passive = (key, icon) => {
       }
       return `[${key.toUpperCase()}]`;
     },
-    value: (actor) => getProperty(actor, `data.data.skills.${key}.passive`),
+    value: (actor) => getProperty(actor.system, `skills.${key}.passive`),
   };
 };
 
@@ -41,7 +41,7 @@ export default [
       if (game.system.id !== pf1SystemID || isPF1LiteNPC(actor)) {
         return null;
       }
-      return getProperty(actor, `data.data.skills.per.mod`);
+      return getProperty(actor.system, `skills.per.mod`);
     },
   },
 
@@ -55,7 +55,7 @@ export default [
       if (game.system.id !== pf2eSystemID) {
         return null;
       }
-      const value = getProperty(actor, `data.data.attributes.perception.value`);
+      const value = getProperty(actor.system, `attributes.perception.value`);
       if(value !== undefined) {
         return parseInt(value,10) + 10;
       }

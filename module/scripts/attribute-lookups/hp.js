@@ -24,15 +24,15 @@ export default [
     value: (actor) => {
       return (
         // DnD5E and Pathfinder
-        getProperty(actor, 'data.data.attributes.hp') ||
+        getProperty(actor.system, 'attributes.hp') ||
         // Simple World-Building
-        getProperty(actor, 'data.data.health') ||
+        getProperty(actor.system, 'health') ||
         // Shadow of the Demon Lord
-        getProperty(actor, 'data.data.characteristics.health') ||
+        getProperty(actor.system, 'characteristics.health') ||
         // SWADE
-        getProperty(actor, 'data.data.wounds') ||
+        getProperty(actor.system, 'wounds') ||
         // GURPS
-        getProperty(actor, 'data.data.tracked.hp')
+        getProperty(actor.system, 'tracked.hp')
       );
     },
   },
@@ -40,12 +40,12 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('SWFFG.Wounds'),
     // starwarsffg
-    value: (actor) => getProperty(actor, 'data.data.stats.wounds'),
+    value: (actor) => getProperty(actor.system, 'stats.wounds'),
   },
   {
     icon: () => null,
     label: () => game.i18n.localize('SWFFG.Strain'),
     // starwarsffg
-    value: (actor) => getProperty(actor, 'data.data.stats.strain'),
+    value: (actor) => getProperty(actor.system, 'stats.strain'),
   }
 ];

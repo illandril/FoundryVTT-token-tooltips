@@ -26,7 +26,7 @@ const resource = (key, displayID) => {
       return `[${key.toUpperCase()}]`;
     },
     value: (actor) => {
-      const resource = getProperty(actor, `data.data.resources.${key}`);
+      const resource = getProperty(actor.system, `resources.${key}`);
       if (resource && (resource.value > 0 || resource.max > 0)) {
         return resource;
       }

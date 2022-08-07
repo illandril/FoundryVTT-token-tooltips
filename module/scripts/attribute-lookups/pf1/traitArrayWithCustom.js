@@ -23,7 +23,7 @@ const traitArrayWithCustom = (localeKey, propertyKey) => {
       if (game.system.id !== systemID) {
         return null;
       }
-      const property = getProperty(actor, `data.data.traits.${propertyKey}`);
+      const property = getProperty(actor.system, `traits.${propertyKey}`);
       const stdValues = (property?.value || []).map((value) => getLabel(value, propertyKey));
       const customValues = property?.custom?.split(';') || [];
       const allValues = stdValues.concat(customValues).filter((v) => !!v);

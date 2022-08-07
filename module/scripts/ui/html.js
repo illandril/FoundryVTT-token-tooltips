@@ -10,10 +10,10 @@ export const icon = (iconName) => {
 
 export const img = (url) => {
   if (url) {
-    const img = document.createElement('img');
-    img.src = url;
-    img.alt = '';
-    return img;
+    const elem = document.createElement('img');
+    elem.src = url;
+    elem.alt = '';
+    return elem;
   }
   return null;
 };
@@ -25,26 +25,33 @@ export const emptyNode = (node) => {
 };
 
 export const div = (cssClass) => {
-  const div = document.createElement('div');
-  div.classList.add(cssClass);
-  return div;
+  const elem = document.createElement('div');
+  elem.classList.add(cssClass);
+  return elem;
 };
 
 export const span = (cssClass) => {
-  const span = document.createElement('span');
-  span.classList.add(cssClass);
-  return span;
+  const elem = document.createElement('span');
+  elem.classList.add(cssClass);
+  return elem;
 };
 
 export const appendText = (element, text) => {
   element.appendChild(document.createTextNode(text));
 };
 
-const tinyMCEParser = new tinyMCE.html.DomParser({ validate: true });
-const tinyMCESerializer = new tinymce.html.Serializer();
+let tinyMCEParser;
+let tinyMCESerializer;
 
 const sanitizeHTML = (html) => {
-  return tinyMCESerializer.serialize(tinyMCEParser.parse(html));
+  if(!tinyMCEParser) {
+    tinyMCEParser = new tinyMCE.html.DomParser({ validate: true });
+  }
+  const parsedHTML = tinyMCEParser.parse(html);
+  if(!tinyMCESerializer) {
+    tinyMCESerializer = new tinymce.html.Serializer();
+  }
+  return tinyMCESerializer.serialize(parsedHTML);
 };
 
 export const htmlToNode = (html) => {

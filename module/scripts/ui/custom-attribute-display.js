@@ -16,7 +16,7 @@ const getValue = (actor, rawAttributeKey) => {
       return { value: asInt };
     }
   }
-  const attribute = getProperty(actor.data, attributeKey);
+  const attribute = getProperty(actor, attributeKey);
   return calculateValue(attribute, attributeKey);
 };
 

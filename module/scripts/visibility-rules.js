@@ -2,13 +2,13 @@ export default [
   {
     name: 'FRIENDLY',
     shouldShowTooltip: (token) => {
-      return token.data.disposition >= CONST.TOKEN_DISPOSITIONS.FRIENDLY;
+      return token.disposition >= CONST.TOKEN_DISPOSITIONS.FRIENDLY;
     },
   },
   {
     name: 'NEUTRAL',
     shouldShowTooltip: (token) => {
-      return token.data.disposition >= CONST.TOKEN_DISPOSITIONS.NEUTRAL;
+      return token.disposition >= CONST.TOKEN_DISPOSITIONS.NEUTRAL;
     },
   },
   {

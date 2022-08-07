@@ -57,7 +57,7 @@ const traitArrayWithCustom = (localeKey, propertyKey) => {
       if (game.system.id !== systemID) {
         return null;
       }
-      const property = getProperty(actor, `data.data.traits.${propertyKey}`);
+      const property = getProperty(actor.system, `traits.${propertyKey}`);
       let allValues;
       if (Array.isArray(property)) {
         allValues = property.map((value) => getLabel(value, propertyKey));

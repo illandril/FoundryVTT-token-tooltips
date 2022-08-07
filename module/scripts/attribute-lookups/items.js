@@ -6,12 +6,11 @@ const itemSort = (a, b) => {
 };
 
 export const get = (actor) => {
-  const items = getProperty(actor, 'data.items');
+  const items = actor.items;
   const fArr = [];
   const cArr = [];
   items &&
-    items.forEach((itemEntity) => {
-      const item = itemEntity.data;
+    items.forEach((item) => {
       if (shouldCalculateUses(item)) {
         const { uses, maxUses } = calculateUses(item);
         if (uses !== null) {

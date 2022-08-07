@@ -30,13 +30,13 @@ export default [
       }
       return (
         // Pathfinder 1 & 2, D&D 3.5
-        getProperty(actor, 'data.data.attributes.ac.normal') ||
+        getProperty(actor.system, 'attributes.ac.normal') ||
         // DnD5E
-        getProperty(actor, 'data.data.attributes.ac') ||
+        getProperty(actor.system, 'attributes.ac') ||
         // Shadow of the Demon Lord
-        getProperty(actor, 'data.data.characteristics.defense') ||
+        getProperty(actor.system, 'characteristics.defense') ||
         // SWADE
-        getProperty(actor, 'data.data.stats.toughness')
+        getProperty(actor.system, 'stats.toughness')
       );
     },
   },
@@ -50,7 +50,7 @@ export default [
       if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
         return null;
       }
-      return getProperty(actor, 'data.data.attributes.ac.touch');
+      return getProperty(actor.system, 'attributes.ac.touch');
     },
   },
 
@@ -63,7 +63,7 @@ export default [
       if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
         return null;
       }
-      return getProperty(actor, 'data.data.attributes.ac.flatFooted');
+      return getProperty(actor.system, 'attributes.ac.flatFooted');
     },
   },
 
@@ -76,7 +76,7 @@ export default [
       if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
         return null;
       }
-      return getProperty(actor, 'data.data.attributes.cmd');
+      return getProperty(actor.system, 'attributes.cmd');
     },
   },
 
@@ -85,7 +85,7 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('SWFFG.Soak'),
     // starwarsffg
-    value: (actor) => getProperty(actor, 'data.data.stats.soak'),
+    value: (actor) => getProperty(actor.system, 'stats.soak'),
   },
 
   // Melee Defense
@@ -93,7 +93,7 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('illandril-token-tooltips.meleeDefenseAbbreviation'),
     // starwarsffg
-    value: (actor) => getProperty(actor, 'data.data.stats.defence.melee'),
+    value: (actor) => getProperty(actor.system, 'stats.defence.melee'),
   },
 
   // Ranged Defense
@@ -101,6 +101,6 @@ export default [
     icon: () => null,
     label: () => game.i18n.localize('illandril-token-tooltips.rangedDefenseAbbreviation'),
     // starwarsffg
-    value: (actor) => getProperty(actor, 'data.data.stats.defence.ranged'),
+    value: (actor) => getProperty(actor.system, 'stats.defence.ranged'),
   },
 ];

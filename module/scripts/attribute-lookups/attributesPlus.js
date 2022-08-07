@@ -24,7 +24,7 @@ const d35ePF1Attribute = (key) => {
       if(isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
         return null;
       }
-      const prop = getProperty(actor, `data.data.abilities.${key}`);
+      const prop = getProperty(actor.system, `abilities.${key}`);
       if (prop) {
         const value = prop.total || 0;
         const modifier = prop.mod || 0;
@@ -42,7 +42,7 @@ const pf2eAttribute = (key) => {
       return game.i18n.localize(`PF2E.AbilityId.${key}`);
     },
     value: (actor) => {
-      const prop = getProperty(actor, `data.data.abilities.${key}`);
+      const prop = getProperty(actor.system, `abilities.${key}`);
       if (prop) {
         const value = prop.value || 0;
         const modifier = prop.mod || 0;
@@ -58,7 +58,7 @@ const dnd5eAttribute = (key, abbr) => {
     icon: () => null,
     label: () => abbr.toUpperCase(),
     value: (actor) => {
-      const prop = getProperty(actor, `data.data.abilities.${key}`);
+      const prop = getProperty(actor.system, `abilities.${key}`);
       if (prop) {
         const value = prop.value || 0;
         const modifier = prop.mod || 0;
