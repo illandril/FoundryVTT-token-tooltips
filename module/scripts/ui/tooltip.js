@@ -1,7 +1,7 @@
 import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from '../settings/index.js';
 import { showTooltipHotkey } from '../settings/hotkeys.js';
 import { CSS_PREFIX } from '../module.js';
-import { icon, emptyNode, img, div, span, appendText } from './html.js';
+import { emptyNode, div } from './html.js';
 import { updateCustomAttributeRow } from './custom-attribute-display.js';
 import * as attributeLookups from '../attribute-lookups/index.js';
 import showNameOnly from '../attribute-lookups/showNameOnly.js';
@@ -12,31 +12,35 @@ const CSS_TOOLTIP = `${CSS_PREFIX}tooltip`;
 const CSS_NAME = `${CSS_PREFIX}name`;
 const CSS_DATA = `${CSS_PREFIX}data`;
 const CSS_SHOW = `${CSS_PREFIX}show`;
-const CSS_ROW = `${CSS_PREFIX}row`;
-const CSS_LABEL = `${CSS_PREFIX}label`;
-const CSS_VALUE = `${CSS_PREFIX}value`;
-const CSS_CURRENT = `${CSS_PREFIX}current`;
-const CSS_MAX = `${CSS_PREFIX}max`;
-const CSS_TEMP = `${CSS_PREFIX}temp`;
 
 class StandardRow {
-  constructor(attributeLookup, minimumPermissionSetting, hideFromGMSetting) {
+  constructor(attributeLookup, minimumPermissionSetting, hideFromGMSetting, gropuID) {
     this.attributeLookup = attributeLookup;
     this.minimumPermissionSetting = minimumPermissionSetting;
     this.hideFromGMSetting = hideFromGMSetting;
     this.row = null;
+    this.gropuID = gropuID;
   }
 
   update(tooltip, actor) {
     if (showDataType(actor, this.minimumPermissionSetting, this.hideFromGMSetting)) {
-      if (this.attributeLookup.rows) {
+      if (this.attributeLookup.asyncRows) {
+        const reference = tooltip._prepareAsyncReference(this.attributeLookup.id);
+        (async () => {
+          const rows = await this.attributeLookup.asyncRows(actor);
+          for (let row of rows) {
+            const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
+            tooltip._updateRow(attributeRow, row.value, reference);
+          }
+        })();
+      } else if (this.attributeLookup.rows) {
         for (let row of this.attributeLookup.rows(actor)) {
-          const attributeRow = new AttributeRow(row.label, row.icon);
+          const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
           tooltip._updateRow(attributeRow, row.value);
         }
       } else {
         if (this.row === null) {
-          this.row = new AttributeRow(this.attributeLookup.label(), this.attributeLookup.icon());
+          this.row = new AttributeRow(this.attributeLookup.label(), this.attributeLookup.icon(), this.groupID);
         }
         tooltip._updateRow(this.row, this.attributeLookup.value(actor));
       }
@@ -58,19 +62,19 @@ class Tooltip {
 
     for (let hp of attributeLookups.hps) {
       this.standardRows.push(
-        new StandardRow(hp, Settings.HPMinimumPermission, Settings.HidePlayerHPFromGM)
+        new StandardRow(hp, Settings.HPMinimumPermission, Settings.HidePlayerHPFromGM, 'HP')
       );
     }
 
     for (let ac of attributeLookups.acs) {
       this.standardRows.push(
-        new StandardRow(ac, Settings.ACMinimumPermission, Settings.HidePlayerACFromGM)
+        new StandardRow(ac, Settings.ACMinimumPermission, Settings.HidePlayerACFromGM, 'AC')
       );
     }
 
     for (let ac of attributeLookups.attributesPlus) {
       this.standardRows.push(
-        new StandardRow(ac, Settings.AttributePlusMinimumPermission, Settings.HidePlayerAttributePlusFromGM)
+        new StandardRow(ac, Settings.AttributePlusMinimumPermission, Settings.HidePlayerAttributePlusFromGM, 'Attributes')
       );
     }
 
@@ -79,7 +83,8 @@ class Tooltip {
         new StandardRow(
           savingThrow,
           Settings.SavingThrowsMinimumPermission,
-          Settings.HidePlayerSavingThrowsFromGM
+          Settings.HidePlayerSavingThrowsFromGM,
+          'Saving Throws'
         )
       );
     }
@@ -89,7 +94,8 @@ class Tooltip {
         new StandardRow(
           damageResImmVuln,
           Settings.DmgResVulnMinimumPermission,
-          Settings.HidePlayerDmgResVulnFromGM
+          Settings.HidePlayerDmgResVulnFromGM,
+          'Damage Resistances/Imm/Vuln'
         )
       );
     }
@@ -99,7 +105,8 @@ class Tooltip {
         new StandardRow(
           conditionImmunity,
           Settings.CondImmMinimumPermission,
-          Settings.HidePlayerCondImmFromGM
+          Settings.HidePlayerCondImmFromGM,
+          'Condition Immunities'
         )
       );
     }
@@ -109,7 +116,8 @@ class Tooltip {
         new StandardRow(
           passive,
           Settings.PassivesMinimumPermission,
-          Settings.HidePlayerPassivesFromGM
+          Settings.HidePlayerPassivesFromGM,
+          'Passives'
         )
       );
     }
@@ -119,7 +127,8 @@ class Tooltip {
         new StandardRow(
           movement,
           Settings.MovementMinimumPermission,
-          Settings.HidePlayerMovementFromGM
+          Settings.HidePlayerMovementFromGM,
+          'Movements'
         )
       );
     }
@@ -129,7 +138,8 @@ class Tooltip {
         new StandardRow(
           resource,
           Settings.ResourcesMinimumPermission,
-          Settings.HidePlayerResourcesFromGM
+          Settings.HidePlayerResourcesFromGM,
+          'Resources'
         )
       );
     }
@@ -139,7 +149,8 @@ class Tooltip {
         new StandardRow(
           spellSlot,
           Settings.SpellsMinimumPermission,
-          Settings.HidePlayerSpellsFromGM
+          Settings.HidePlayerSpellsFromGM,
+          'Spell Slots'
         )
       );
     }
@@ -247,11 +258,19 @@ class Tooltip {
     }
   }
 
-  _updateRow(row, attribute) {
+  _prepareAsyncReference(id) {
+    const referenceStart = document.createComment(`Async Start: ${id}`);
+    const referenceEnd = document.createComment(`Async End: ${id}`);
+    this.dataElement.appendChild(referenceStart);
+    this.dataElement.appendChild(referenceEnd);
+    return referenceEnd;
+  }
+
+  _updateRow(row, attribute, reference) {
     const value = calculateValue(attribute);
     if (value) {
       row.setValue(value);
-      this.dataElement.appendChild(row.element);
+      this.dataElement.insertBefore(row.element, reference);
     }
   }
 
@@ -259,7 +278,7 @@ class Tooltip {
     if (showDataType(actor, Settings.ItemsMinimumPermission, Settings.HidePlayerItemsFromGM)) {
       const items = attributeLookups.items.get(actor);
       for (let item of items) {
-        const attributeRow = new AttributeRow(item.name, item.icon);
+        const attributeRow = new AttributeRow(item.name, item.icon, 'Items');
         this._updateRow(attributeRow, item.value);
       }
     }
@@ -269,7 +288,7 @@ class Tooltip {
     if (showDataType(actor, Settings.TalentsMinimumPermission, Settings.HidePlayerTalentsFromGM)) {
       const talents = attributeLookups.talents.get(actor);
       for (let talent of talents) {
-        const attributeRow = new AttributeRow(talent.name, talent.icon);
+        const attributeRow = new AttributeRow(talent.name, talent.icon, 'Talents');
         this._updateRow(attributeRow, talent.value);
       }
     }

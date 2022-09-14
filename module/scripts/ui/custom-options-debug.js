@@ -40,11 +40,15 @@ Hooks.once('ready', () => {
 Hooks.on('hoverToken', (token, hovered) => {
   if (debug && hovered && token && token.actor) {
     emptyNode(debugDisplay);
-    addDataRows(token.actor, null, token.actor);
+    addDataRows(token.actor, null, token.actor, new Set());
   }
 });
 
-const addDataRows = (actor, keySoFar, data) => {
+const addDataRows = (actor, keySoFar, data, seen) => {
+  if(seen.has(data)) {
+    return;
+  }
+  seen.add(data);
   const keys = Object.keys(data);
   keys.sort();
   for (let key of keys) {
@@ -76,7 +80,7 @@ const addDataRows = (actor, keySoFar, data) => {
     }
 
     if (typeof value === 'object') {
-      addDataRows(actor, fullKey, value);
+      addDataRows(actor, fullKey, value, seen);
     }
   }
 };

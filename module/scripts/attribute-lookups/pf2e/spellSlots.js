@@ -25,7 +25,6 @@ const getFocusEntry = (actor, spellIcon) => {
 
 const getLevelEntry = (level, spellIcon) => {
   if (level.uses && level.uses.value !== undefined && level.uses.max > 0) {
-    let levelSlot;
     let label;
     if (level.isCantrip) {
       label = game.i18n.localize('illandril-token-tooltips.cantripAbbreviation');
@@ -41,7 +40,8 @@ const getLevelEntry = (level, spellIcon) => {
 };
 
 export default (spellIcon) => ({
-  rows: (actor) => {
+  id: 'pf2e Spell Slots',
+  asyncRows: async (actor) => {
     const slots = [];
     if (game.system.id === pf2eSystemID) {
       if (actor.spellcasting) {
@@ -49,7 +49,6 @@ export default (spellIcon) => ({
         let hasFocus = false;
         for (let entry of spellcastingEntries) {
           if (entry.isFocusPool) {
-            console.log('Focus pool', entry);
             if (!hasFocus) {
               hasFocus = true;
               slots.push(getFocusEntry(actor, spellIcon));
@@ -57,15 +56,13 @@ export default (spellIcon) => ({
             continue;
           }
           if (entry.getSpellData) {
-            const spellData = entry.getSpellData();
-            console.log('Spell Data', spellData);
+            const spellData = await entry.getSpellData();
             for (let level of spellData.levels) {
               const levelEntry = getLevelEntry(level, spellIcon);
               levelEntry && slots.push(levelEntry);
             }
           }
         }
-        //spellcastingEntries
       }
     }
     return slots;

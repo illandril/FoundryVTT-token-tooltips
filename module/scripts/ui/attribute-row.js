@@ -11,10 +11,13 @@ const CSS_UNITS = `${CSS_PREFIX}units`;
 const CSS_EXTRA = `${CSS_PREFIX}extra`;
 
 export default class AttributeRow {
-  constructor(name, iconNameOrElem) {
+  constructor(name, iconNameOrElem, group) {
     this.name = null;
     this.iconName = null;
     const row = div(CSS_ROW);
+    group && row.setAttribute('data-group', group);
+    row.setAttribute('data-name', name);
+
 
     const label = span(CSS_LABEL);
     this.label = label;
