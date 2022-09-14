@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.0.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.0.1) (2022-09-14)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v3.0.0...v3.0.1)
+
+**Fixed&nbsp;Bugs**
+
+- Tooltips do not display on certain characters [\#63](https://github.com/illandril/FoundryVTT-token-tooltips/issues/63)
+
 ## [v3.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.0.0) (2022-08-07)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v2.11.1...v3.0.0)
@@ -192,7 +200,6 @@
 **Enhancements**
 
 - \(Suggestion\) Option to Swap Tooltip to Left side of Token [\#21](https://github.com/illandril/FoundryVTT-token-tooltips/issues/21)
-- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
 
 **Other&nbsp;Changes**
 
@@ -201,6 +208,10 @@
 ## [v2.0.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.0.0) (2021-02-04)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.4.1...v2.0.0)
+
+**Enhancements**
+
+- Add support for other systems [\#19](https://github.com/illandril/FoundryVTT-token-tooltips/issues/19)
 
 **Other&nbsp;Changes**
 
