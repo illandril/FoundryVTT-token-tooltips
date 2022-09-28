@@ -1,4 +1,5 @@
 import VISIBILITY_RULES from '../visibility-rules.js';
+import SIMPLIFY_HP_RULES from '../simplify-hp-rules.js';
 
 import ArraySetting from './array-setting.js';
 import BooleanSetting from './boolean-setting.js';
@@ -13,6 +14,13 @@ const visibilityChoice = new ChoiceSetting(
   'visibility',
   VISIBILITY_RULES[0].name,
   VISIBILITY_RULES.map((rule) => rule.name),
+  { hasHint: true }
+);
+
+const simplifyHPChoice = new ChoiceSetting(
+  'simplifyHP',
+  SIMPLIFY_HP_RULES[0].name,
+  SIMPLIFY_HP_RULES.map((rule) => rule.name),
   { hasHint: true }
 );
 
@@ -32,6 +40,13 @@ const Settings = {
     config: false,
   }),
   HidePlayerHPFromGM: new BooleanSetting('hidePlayerHPFromGM', false, { config: false }),
+  SimplifyHP: {
+    simplifyHP: (rawValue, token) => {
+      const setting = simplifyHPChoice.get();
+      const rule = SIMPLIFY_HP_RULES.find((rule) => rule.name === setting) || SIMPLIFY_HP_RULES[0];
+      return rule.simplifyHP(rawValue, token);
+    },
+  },
 
   ACMinimumPermission: new StringSetting('acMinimumPermission', 'NONE', {
     config: false,
@@ -76,6 +91,13 @@ const Settings = {
     config: false,
   }),
   HidePlayerMovementFromGM: new BooleanSetting('hidePlayerMovementFromGM', false, {
+    config: false,
+  }),
+
+  RulerMinimumPermission: new StringSetting('rulerMinimumPermission', 'NONE', {
+    config: false,
+  }),
+  HidePlayerRulerFromGM: new BooleanSetting('hidePlayerRulerFromGM', false, {
     config: false,
   }),
 

@@ -1,9 +1,9 @@
-export const icon = (iconName) => {
+export const icon = (iconName, thin) => {
   if (!iconName) {
     return null;
   }
   const iconElem = document.createElement('i');
-  iconElem.classList.add('fas');
+  iconElem.classList.add(thin ? 'fat' : 'fas');
   iconElem.classList.add('fa-' + iconName);
   return iconElem;
 };

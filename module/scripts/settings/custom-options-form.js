@@ -1,4 +1,4 @@
-import { log, CSS_PREFIX, KEY as MODULE_KEY } from '../module.js';
+import { log, KEY as MODULE_KEY } from '../module.js';
 import { isDebug, toggleDebug } from '../ui/custom-options-debug.js';
 
 import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from './settings.js';
@@ -150,6 +150,16 @@ const getStandardItems = () => {
       'walking',
       Settings.MovementMinimumPermission,
       Settings.HidePlayerMovementFromGM
+    )
+  );
+
+  // Ruler
+  standardItems.push(
+    getStandardItem(
+      'ruler',
+      'ruler',
+      Settings.RulerMinimumPermission,
+      Settings.HidePlayerRulerFromGM
     )
   );
 

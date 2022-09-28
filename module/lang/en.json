@@ -33,6 +33,9 @@
   "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.name": "Movement",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.movement.key": "Varies (ex. data.stats.speed)",
 
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.ruler.name": "Distance Ruler",
+  "illandril-token-tooltips.setting.customOptionsMenu.standard.ruler.key": "Calculated distance from the selected token",
+
   "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.name": "Attribs (+Mod)",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.help": "Attributes and associated Modifiers (including Attribute-based Saves for appropriate systems).",
   "illandril-token-tooltips.setting.customOptionsMenu.standard.attributesPlus.icon": "label",
@@ -92,6 +95,19 @@
   "illandril-token-tooltips.setting.visibility.option.LIMITED": "Limited Permission Actor Tokens",
   "illandril-token-tooltips.setting.visibility.option.ALL": "All Tokens",
   "illandril-token-tooltips.setting.visibility.option.NONE": "No Tokens (Show tooltips to GMs only)",
+
+  "illandril-token-tooltips.setting.simplifyHP.label": "Simplify HP for Players",
+  "illandril-token-tooltips.setting.simplifyHP.hint": "Simplify the HP value shown to players (if HP is shown - Configure Tooltip Values above to configure when HP is visible at all). The unsimplified value is always shown to GMs.",
+
+  "illandril-token-tooltips.setting.simplifyHP.option.NONE": "Don't simplify (Show the HP value)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FOUR_HEARTS__PLAYERS_ALL": "Four Hearts (All Tokens)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FOUR_HEARTS__PLAYERS_NON_FRIENDLY": "Four Hearts (Non-Friendly)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FOUR_HEARTS__PLAYERS_HOSTILE": "Four Hearts (Hostile)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FOUR_HEARTS__PLAYERS_NON_OBSERVER": "Four Hearts (Non-Observed)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FIVE_HEARTS__PLAYERS_ALL": "Five Hearts (All Tokens)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FIVE_HEARTS__PLAYERS_NON_FRIENDLY": "Five Hearts (Non-Friendly)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FIVE_HEARTS__PLAYERS_HOSTILE": "Five Hearts (Hostile)",
+  "illandril-token-tooltips.setting.simplifyHP.option.FIVE_HEARTS__PLAYERS_NON_OBSERVER": "Five Hearts (Non-Observed)",
 
   "illandril-token-tooltips.setting.entityPermission.option.NONE": "Show for Everyone",
   "illandril-token-tooltips.setting.entityPermission.option.LIMITED": "Limited or better",

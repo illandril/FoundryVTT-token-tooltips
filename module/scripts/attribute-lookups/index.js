@@ -10,3 +10,4 @@ export { default as savingThrows } from './saving-throws.js';
 export { default as spellSlots } from './spell-slots.js';
 export * as items from './items.js';
 export * as talents from './talents.js';
+export { default as distanceFromActiveToken } from './distanceFromActiveToken.js';

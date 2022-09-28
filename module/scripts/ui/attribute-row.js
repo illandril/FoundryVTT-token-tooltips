@@ -191,6 +191,9 @@ const isValidNonArrayAttributeValue = (value) => {
   if (value === null || value === '') {
     return false;
   }
+  if (value instanceof Node) {
+    return true;
+  }
   if (typeof value === 'number' && !isNaN(value)) {
     return true;
   }

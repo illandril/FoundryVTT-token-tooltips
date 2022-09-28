@@ -1,3 +1,5 @@
+import Settings from '../settings/settings.js';
+
 export default [
   // Standard HP
   {
@@ -21,8 +23,8 @@ export default [
       }
       return '[HP]';
     },
-    value: (actor) => {
-      return (
+    value: (actor, token) => {
+      let value = (
         // DnD5E and Pathfinder
         getProperty(actor.system, 'attributes.hp') ||
         // Simple World-Building
@@ -34,6 +36,7 @@ export default [
         // GURPS
         getProperty(actor.system, 'tracked.hp')
       );
+      return Settings.SimplifyHP.simplifyHP(value, token);
     },
   },
   {

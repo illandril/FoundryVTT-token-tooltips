@@ -22,19 +22,19 @@ class StandardRow {
     this.gropuID = gropuID;
   }
 
-  update(tooltip, actor) {
+  update(tooltip, actor, token) {
     if (showDataType(actor, this.minimumPermissionSetting, this.hideFromGMSetting)) {
       if (this.attributeLookup.asyncRows) {
         const reference = tooltip._prepareAsyncReference(this.attributeLookup.id);
         (async () => {
-          const rows = await this.attributeLookup.asyncRows(actor);
+          const rows = await this.attributeLookup.asyncRows(actor, token);
           for (let row of rows) {
             const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
             tooltip._updateRow(attributeRow, row.value, reference);
           }
         })();
       } else if (this.attributeLookup.rows) {
-        for (let row of this.attributeLookup.rows(actor)) {
+        for (let row of this.attributeLookup.rows(actor, token)) {
           const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
           tooltip._updateRow(attributeRow, row.value);
         }
@@ -42,7 +42,7 @@ class StandardRow {
         if (this.row === null) {
           this.row = new AttributeRow(this.attributeLookup.label(), this.attributeLookup.icon(), this.groupID);
         }
-        tooltip._updateRow(this.row, this.attributeLookup.value(actor));
+        tooltip._updateRow(this.row, this.attributeLookup.value(actor, token));
       }
     }
   }
@@ -133,6 +133,17 @@ class Tooltip {
       );
     }
 
+    for (let distance of attributeLookups.distanceFromActiveToken) {
+      this.standardRows.push(
+        new StandardRow(
+          distance,
+          Settings.RulerMinimumPermission,
+          Settings.HidePlayerRulerFromGM,
+          'Distance from Active Token'
+        )
+      );
+    }
+
     for (let resource of attributeLookups.resources) {
       this.standardRows.push(
         new StandardRow(
@@ -214,8 +225,16 @@ class Tooltip {
 
   show() {
     this.element.classList.add(CSS_SHOW);
+    this.fixWidth();
+  }
+
+  isShown() {
+    return this.element.classList.contains(CSS_SHOW);
+  }
+
+  fixWidth() {
     this.dataElement.style.width = '';
-    const lastRow = this.dataElement.lastChild;
+    const lastRow = this.dataElement.lastElementChild;
     if (lastRow) {
       const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
       this.dataElement.style.width = `${newWidth}px`;
@@ -236,7 +255,7 @@ class Tooltip {
       return;
     }
     for (let standardRow of this.standardRows) {
-      standardRow.update(this, actor);
+      standardRow.update(this, actor, token);
     }
     this.updateTalents(actor);
     this.updateItems(actor);
@@ -271,6 +290,9 @@ class Tooltip {
     if (value) {
       row.setValue(value);
       this.dataElement.insertBefore(row.element, reference);
+      if(this.isShown()) {
+        this.fixWidth();
+      }
     }
   }
 

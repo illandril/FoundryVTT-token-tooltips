@@ -107,6 +107,13 @@
   content: ')';
 }
 
+.illandril-token-tooltips--hp-hearts {
+  color: #900;
+}
+.illandril-token-tooltips--hp-hearts > * + * {
+  margin-left: 0.1em;
+}
+
 .illandril-token-tooltips--resource,
 .illandril-token-tooltips--spellslot {
   position: relative;
@@ -208,7 +215,7 @@
 
 .illandril-token-tooltips--customOptionForm-disabledInput[data-help]::after {
   content: '\f059';
-  font-family: 'Font Awesome 5 Free';
+  font-family: var(--font-awesome);
   position: absolute;
   right: 0;
   opacity: 0.65;
