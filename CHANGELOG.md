@@ -1,5 +1,19 @@
 # Changelog
 
+## [v3.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.1.0) (2022-09-28)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v3.0.1...v3.1.0)
+
+**Enhancements**
+
+- Comparing the distance between 2 characters; Show HP as Hearts [\#64](https://github.com/illandril/FoundryVTT-token-tooltips/issues/64)
+
+**Fixed&nbsp;Bugs**
+
+- Tooltips do not show for actor disposition options [\#67](https://github.com/illandril/FoundryVTT-token-tooltips/issues/67)
+- Test [\#66](https://github.com/illandril/FoundryVTT-token-tooltips/issues/66)
+- Tooltip background only one column wide [\#65](https://github.com/illandril/FoundryVTT-token-tooltips/issues/65)
+
 ## [v3.0.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.0.1) (2022-09-14)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v3.0.0...v3.0.1)
