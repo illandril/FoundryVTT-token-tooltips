@@ -37,11 +37,15 @@ const getMultiValue = (actor, rawAttributeKey) => {
   let valueSoFar = 0;
   let negate = false;
   let operation = operations.get('+');
+  let fullValue;
+  let hadOperation = false;
   for (let attributeKey of attributeKeys) {
     if (attributeKey === '-') {
+      hadOperation = true;
       negate = true;
       continue;
     } else if (operations.has(attributeKey)) {
+      hadOperation = true;
       operation = operations.get(attributeKey);
       negate = false;
       continue;
@@ -49,6 +53,7 @@ const getMultiValue = (actor, rawAttributeKey) => {
       continue;
     }
     const keyValue = getValue(actor, attributeKey);
+    fullValue = keyValue;
     if (!keyValue || typeof keyValue.value !== 'number') {
       return null;
     }
@@ -59,6 +64,9 @@ const getMultiValue = (actor, rawAttributeKey) => {
       return null;
     }
     operation = operations.get('+');
+  }
+  if (!hadOperation) {
+    return fullValue
   }
   return { value: valueSoFar };
 };
