@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.1.1](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.1.1) (2022-12-05)
+
+[Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v3.1.0...v3.1.1)
+
+**Fixed&nbsp;Bugs**
+
+- Allow custom data key values to show current and max values \(X / Y\) [\#70](https://github.com/illandril/FoundryVTT-token-tooltips/issues/70)
+
 ## [v3.1.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v3.1.0) (2022-09-28)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v3.0.1...v3.1.0)
@@ -41,6 +49,7 @@
 **Enhancements**
 
 - Optionally display tooltip only when hotkey is held [\#57](https://github.com/illandril/FoundryVTT-token-tooltips/issues/57)
+- Font size [\#55](https://github.com/illandril/FoundryVTT-token-tooltips/issues/55)
 - Add attributes, saves, and modifiers [\#51](https://github.com/illandril/FoundryVTT-token-tooltips/issues/51)
 
 ## [v2.10.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.10.0) (2022-05-18)
@@ -49,7 +58,6 @@
 
 **Enhancements**
 
-- Font size [\#55](https://github.com/illandril/FoundryVTT-token-tooltips/issues/55)
 - Display only for non-zero [\#54](https://github.com/illandril/FoundryVTT-token-tooltips/issues/54)
 
 ## [v2.9.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v2.9.0) (2022-04-25)
@@ -143,6 +151,7 @@
 **Enhancements**
 
 - Add support for Star Wars FFG Talents [\#34](https://github.com/illandril/FoundryVTT-token-tooltips/issues/34)
+- Hide from Everyone with GM enabled still hides it from GM [\#32](https://github.com/illandril/FoundryVTT-token-tooltips/issues/32)
 
 **Fixed&nbsp;Bugs**
 
@@ -154,7 +163,6 @@
 
 **Enhancements**
 
-- Hide from Everyone with GM enabled still hides it from GM [\#32](https://github.com/illandril/FoundryVTT-token-tooltips/issues/32)
 - Suggestion: Allow static items to be rearranged [\#30](https://github.com/illandril/FoundryVTT-token-tooltips/issues/30)
 
 **Other&nbsp;Changes**
@@ -242,14 +250,11 @@
 **Fixed&nbsp;Bugs**
 
 - Spell slots and resources not showing for GMs, regardless of settings [\#16](https://github.com/illandril/FoundryVTT-token-tooltips/issues/16)
+- Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
 
 ## [v1.4.0](https://github.com/illandril/FoundryVTT-token-tooltips/tree/v1.4.0) (2021-01-16)
 
 [Full Changelog](https://github.com/illandril/FoundryVTT-token-tooltips/compare/v1.3.0...v1.4.0)
-
-**Fixed&nbsp;Bugs**
-
-- Issues showing speed for some tokens [\#15](https://github.com/illandril/FoundryVTT-token-tooltips/issues/15)
 
 **Other&nbsp;Changes**
 
