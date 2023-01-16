@@ -1,6 +1,5 @@
 import { log, KEY as MODULE_KEY } from '../module.js';
 import Settings, { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from './settings.js';
-import CustomOptionsForm from './custom-options-form.js';
 
 import { getSettingsList } from './setting.js';
 
@@ -11,14 +10,6 @@ export { Settings as default, HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY };
 window.ITTCustomOptions = Settings.CustomOptions;
 
 Hooks.once('init', () => {
-  game.settings.registerMenu(MODULE_KEY, 'customOptionsMenu', {
-    name: `${MODULE_KEY}.setting.customOptionsMenu.name`,
-    label: `${MODULE_KEY}.setting.customOptionsMenu.label`,
-    hint: `${MODULE_KEY}.setting.customOptionsMenu.hint`,
-    icon: 'fas fa-bars',
-    type: CustomOptionsForm,
-    restricted: true,
-  });
   getSettingsList().forEach((setting) => {
     setting.register();
   });

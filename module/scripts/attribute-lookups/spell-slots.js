@@ -1,5 +1,5 @@
 import { CSS_PREFIX } from '../module.js';
-import { icon, span, appendText } from '../ui/html.js';
+import { icon, span } from '../ui/html.js';
 import pf2eSpellSlots from './pf2e/spellSlots.js';
 
 const CSS_SPELLSLOT = `${CSS_PREFIX}spellslot`;
@@ -44,19 +44,18 @@ const spellIcon = (label) => {
   const slotIcon = span(CSS_SPELLSLOT);
   slotIcon.appendChild(icon('star'));
   const slotNumberDisp = span(CSS_SPELLSLOT_LEVEL);
-  appendText(slotNumberDisp, label);
+  slotNumberDisp.appendChild(document.createTextNode(label));
   slotIcon.appendChild(slotNumberDisp);
   return slotIcon;
 };
 
 const spellSlot = (key, displayKey) => {
-  const label = () =>
-    typeof displayKey === 'number' ? '' + displayKey : game.i18n.localize(displayKey);
+  const label = () => typeof displayKey === 'number' ? '' + displayKey : game.i18n.localize(displayKey);
   return {
     icon: () => spellIcon(label()),
     label,
     value: (actor) => {
-      const slots = getProperty(actor, key);
+      const slots = foundry.utils.getProperty(actor, key);
       if (isSetSlots(slots)) {
         return slots;
       }

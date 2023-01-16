@@ -11,17 +11,17 @@ const passive = (key, icon) => {
     icon: () => icon,
     label: () => {
       switch (game.system.id) {
-        case 'dnd5e':
-          return (
-            game.i18n.localize(`DND5E.Skill${capitalize(key)}`) +
-            ' (' +
-            game.i18n.localize('DND5E.Passive') +
-            ')'
-          );
+      case 'dnd5e':
+        return (
+          game.i18n.localize(`DND5E.Skill${capitalize(key)}`)
+            + ' ('
+            + game.i18n.localize('DND5E.Passive')
+            + ')'
+        );
       }
       return `[${key.toUpperCase()}]`;
     },
-    value: (actor) => getProperty(actor.system, `skills.${key}.passive`),
+    value: (actor) => foundry.utils.getProperty(actor.system, `skills.${key}.passive`),
   };
 };
 
@@ -41,7 +41,7 @@ export default [
       if (game.system.id !== pf1SystemID || isPF1LiteNPC(actor)) {
         return null;
       }
-      return getProperty(actor.system, `skills.per.mod`);
+      return foundry.utils.getProperty(actor.system, `skills.per.mod`);
     },
   },
 
@@ -55,9 +55,9 @@ export default [
       if (game.system.id !== pf2eSystemID) {
         return null;
       }
-      const value = getProperty(actor.system, `attributes.perception.value`);
-      if(value !== undefined) {
-        return parseInt(value,10) + 10;
+      const value = foundry.utils.getProperty(actor.system, `attributes.perception.value`);
+      if (value !== undefined) {
+        return parseInt(value, 10) + 10;
       }
     },
   },

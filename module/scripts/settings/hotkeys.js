@@ -1,7 +1,7 @@
 import { KEY as MODULE_KEY } from '../module.js';
 
 let showTooltipHotkeyPressed = false;
-let showTooltipHotkeyCallbacks = [];
+const showTooltipHotkeyCallbacks = [];
 
 Hooks.once('init', () => {
   game.keybindings.register(MODULE_KEY, 'showTooltip', {
@@ -17,13 +17,13 @@ Hooks.once('init', () => {
     ],
     onDown: () => {
       showTooltipHotkeyPressed = true;
-      for (let callback of showTooltipHotkeyCallbacks) {
+      for (const callback of showTooltipHotkeyCallbacks) {
         callback();
       }
     },
     onUp: () => {
       showTooltipHotkeyPressed = false;
-      for (let callback of showTooltipHotkeyCallbacks) {
+      for (const callback of showTooltipHotkeyCallbacks) {
         callback();
       }
     },

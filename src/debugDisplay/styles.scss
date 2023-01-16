@@ -1,0 +1,23 @@
+.illandril-token-tooltips--debugDisplay--display {
+  position: absolute;
+  bottom: 10px;
+  right: 325px;
+  max-height: 500px;
+  max-width: 400px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  overflow: auto;
+  padding: 8px;
+  z-index: var(--z-index-tooltip);
+
+  .illandril-token-tooltips--row {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-gap: 0 4px;
+    line-height: 1.5em;
+  }
+  .illandril-token-tooltips--row .illandril-token-tooltips--label {
+    user-select: text;
+  }
+}

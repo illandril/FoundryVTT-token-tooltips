@@ -1,0 +1,197 @@
+{
+  "illandril-token-tooltips": {
+    "setting": {
+      "debug": {
+        "label": "Debug Mode",
+        "hint": "Leave this disabled unless specifically asked to enable it by Illandril (otherwise, it will slow things down)."
+      },
+      "menu": {
+        "customOptions": {
+          "name": "Tooltip Values",
+          "label": "Configure Tooltip Values",
+          "hint": "Customize which values are shown in the Tooltip. Custom Tooltip Values allow you to show tooltips for any numerical data associated with a token's actor.",
+
+          "title": "Tooltip Values Configuration",
+
+          "instructions": {
+            "top": "For each Standard Tooltip Value, select the permission required to see those values (note: not all standard values show for all systems). For each Custom Tooltip Value, specify a Name, Icon, and Data Key.",
+            "name": "A name for the data shown. If no icon is specified, the name will be displayed instead of an icon in the tooltip.",
+            "icon": "The name of the Font Awesome icon to show in the tooltip. A preview of the icon is shown to the right of the input to help ensure you select the right icon. If left blank, the name will be shown instead of an icon. Note that not all Font Awesome icons are available (FoundryVTT itself is in control over which icons are available, not this module - this module is just using the icons that are shipped with FoundryVTT).",
+            "iconLink": "Search for icons on the Font Awesome Website",
+            "attributeKey": "The property key used to lookup the value you want to show in the tooltip. For example, to show the CR of a creature using the DnD5e system, specify \"data.details.cr\". The Data Key Debugger can be enabled to assist in finding the correct Data Key for the information you want to display.\nYou can use +, -, * (multiply), / (divide), and % (modulo) to perform basic math (operations are applied left-to-right, NOT PEMDAS). You can also use <, >, <=, >=, != (not equal), or == (equal) to suppress a line if the specified condition is not met (ex. \"data.skills.perception.value != 0 + 10\" will show a value 10 greater than the token's perception skill, but only if the token's perception skill is not zero).",
+            "permission": "The minimum permission a player must have to see this value in an actor's tooltip (assuming they can see the tooltip at all - see the Tooltip Visibility setting on the main settings page). Note: GMs are considered Owners for all actors.",
+            "gmPermission": "This setting allows players to see their own details in the tooltip while hiding that information from GMs. Note: This checks if the token has a Player Owner, and not the character type, so an NPC character with a player owner counts as player info, and a PC character without a player owner counts as NPC info.",
+            "bugs": "Click here to report bugs or request features"
+          },
+
+          "header": {
+            "name": "Name",
+            "icon": "Icon",
+            "attributeKey": "Data Key",
+            "permission": "Permission to Show",
+            "gmPermission": "GM sees Player info?"
+          },
+
+          "standardOptionsTitle": "Standard Tooltip Values (may not show in all systems)",
+          "customOptionsTitle": "Custom Tooltip Values",
+
+          "standard": {
+            "hp.name": "Health",
+            "hp.key": "Varies (ex. data.attributes.hp)",
+
+            "ac.name": "Armor Class",
+            "ac.key": "Varies (ex. data.attributes.ac)",
+
+            "movement.name": "Movement",
+            "movement.key": "Varies (ex. data.stats.speed)",
+
+            "ruler.name": "Distance Ruler",
+            "ruler.key": "Calculated distance from the selected token",
+
+            "attributesPlus.name": "Attribs (+Mod)",
+            "attributesPlus.help": "Attributes and associated Modifiers (including Attribute-based Saves for appropriate systems).",
+            "attributesPlus.icon": "label",
+            "attributesPlus.key": "Varies (ex. data.abilities.str)",
+
+            "passives.name": "Passive Skills",
+            "passives.key": "Varies (ex. data.skills.prc.passive)",
+
+            "resources.name": "Resources",
+            "resources.key": "data.resources.#",
+
+            "savingThrows.name": "Saving Throws",
+            "savingThrows.help": "Fortitude, Reflex, and Will Saving Throws (Pathfinder and D&D 3.5). Does not include Attribute-based saving throws (D&D 5).",
+            "savingThrows.icon": "label",
+            "savingThrows.key": "Varies (ex. data.saves.will)",
+
+            "dmgResVuln.name": "Dmg Res./Vuln.",
+            "dmgResVuln.help": "Damage Resistances, Immunities, and Vulnerabilities/Weaknesses. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
+            "dmgResVuln.icon": "label",
+            "dmgResVuln.key": "Varies (ex. data.traits.di/dr/dv)",
+
+            "condImm.name": "Cond. Imm.",
+            "condImm.help": "Condition Immunities. Note: for systems that mix Damage and Condition Immunities (ex. PF2e), Condition Immunities are included with Damage Immunities.",
+            "condImm.icon": "label",
+            "condImm.key": "Varies (ex. data.traits.ci)",
+
+            "spells.name": "Spell Slots",
+            "spells.key": "Varies (ex. data.spells.spell#)",
+
+            "talents.name": "Talents",
+            "talents.icon": "the Talent's image",
+            "talents.key": "data.talentList.#.name",
+
+            "items.name": "Item Uses",
+            "items.icon": "the Item's image",
+            "items.key": "DnD5e only (toggle per item in actor sheets)"
+          },
+
+          "moveDown": "Move Down",
+          "moveUp": "Move Up",
+          "delete": "Delete",
+          "deleteConfirm": "Are you sure you want to delete this value?",
+          "add": "Add",
+          "save": "Save Custom Tooltip Values",
+
+          "toggleDebug.offLabel": "Enable Data Key Debugger",
+          "toggleDebug.onLabel": "Disable Data Key Debugger"
+        }
+      },
+      "visibility": {
+        "label": "Tooltip Visibility",
+        "hint": "Tooltip Visibility adjusts which tokens show tooltips for players. Tooltips are shown for all tokens for GMs.",
+        "choice": {
+          "FRIENDLY": "Friendly Tokens (PC and NPC)",
+          "NEUTRAL": "Neutral and Friendly Tokens (PC and NPC)",
+          "ALL_PLAYERS": "Player Tokens (any disposition)",
+          "OWNER": "Owned Actor Tokens",
+          "OBSERVER": "Observed Actor Tokens",
+          "LIMITED": "Limited Permission Actor Tokens",
+          "ALL": "All Tokens",
+          "NONE": "No Tokens (Show tooltips to GMs only)"
+        }
+      },
+      "simplifyHP": {
+        "label": "Simplify HP for Players",
+        "hint": "Simplify the HP value shown to players (if HP is shown - Configure Tooltip Values above to configure when HP is visible at all). The unsimplified value is always shown to GMs.",
+        "choice": {
+          "NONE": "Don't simplify (Show the HP value)",
+          "FOUR_HEARTS__PLAYERS_ALL": "Four Hearts (All Tokens)",
+          "FOUR_HEARTS__PLAYERS_NON_FRIENDLY": "Four Hearts (Non-Friendly)",
+          "FOUR_HEARTS__PLAYERS_HOSTILE": "Four Hearts (Hostile)",
+          "FOUR_HEARTS__PLAYERS_NON_OBSERVER": "Four Hearts (Non-Observed)",
+          "FIVE_HEARTS__PLAYERS_ALL": "Five Hearts (All Tokens)",
+          "FIVE_HEARTS__PLAYERS_NON_FRIENDLY": "Five Hearts (Non-Friendly)",
+          "FIVE_HEARTS__PLAYERS_HOSTILE": "Five Hearts (Hostile)",
+          "FIVE_HEARTS__PLAYERS_NON_OBSERVER": "Five Hearts (Non-Observed)"
+        }
+      },
+      "entityPermission.choice": {
+        "NONE": "Show for Everyone",
+        "LIMITED": "Limited or better",
+        "OBSERVER": "Observer or better",
+        "OWNER": "Owner or GM",
+        "SHOW_TO_GMS_ONLY": "GM Only",
+        "HIDE_FROM_EVERYONE": "Hide from Everyone"
+      },
+      "gmPermission.choice": {
+        "ALL": "GM sees Player info",
+        "NPC_ONLY": "NPC only for GMs"
+      },
+
+      "rowsPerTooltip.label": "Tooltip Rows",
+      "rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",
+
+      "tooltipFontSize.label": "Tooltip Font Size",
+      "tooltipFontSize.hint": "The ratio of the font size of the Tooltip, relative to the font size used in most other places in the application.",
+
+      "showOnLeft.label": "Show on Left",
+      "showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
+
+      "showTokenName.label": "Show Token Name",
+      "showTokenName.hint": "If checked, the tooltip will show on the Token's name at the top of the tooltip.",
+
+      "showOnHighlightHotkey.label": "Show on Highlight Hotkey",
+      "showOnHighlightHotkey.hint": "If checked, the tooltip will show (for the currently selected Token only) when you press the Highlight Objects hotkey (ALT by default; configurable in Configure Controls). Note: Not compatible with Show only with Tooltip Hotkey.",
+
+      "showOnlyWithTooltipHotkey.label": "Show only with Tooltip Hotkey",
+      "showOnlyWithTooltipHotkey.hint": "If checked, the tooltip will show only when the Show Tooltip Hotkey is pressed while hovering over a token (SHIFT by default; configurable in Configure Controls). Note: Not compatible with Show on Highlight Hotkey."
+    },
+
+    "debugDisplay.empty": "Hover over a token to see Data Keys for that actor",
+
+    "hotkey": {
+      "showTooltip": {
+        "label": "Show Tooltip",
+        "hint": "If \"Show only with Tooltip Hotkey\" is enabled, tooltips will only show when this button is pressed while hovering over a token."
+      }
+    },
+
+    "pactAbbreviation": "P",
+    "powerAbbreviation": "P",
+    "cantripAbbreviation": "C",
+    "focusAbbreviation": "F",
+
+    "savingThrowFort": "Fort",
+    "savingThrowRef": "Ref",
+    "savingThrowWill": "Will",
+
+    "touchACAbbreviation": "T",
+    "flatFootedACAbbreviation": "FF",
+    "cmdAbbreviation": "CMD",
+    "meleeDefenseAbbreviation": "M.Def",
+    "rangedDefenseAbbreviation": "R.Def",
+
+    "tooltip": {
+      "damageImmunities.label": "Immunities",
+      "damageResistances.label": "Resistances",
+      "damageVulnerabilities.label": "Vulnerabilities",
+      "weaknesses.label": "Weaknesses",
+      "conditionImmunities.label": "Cond. Imm."
+    },
+
+    "tooltipSwitch": "Show in Tooltip",
+    "tooltipShown": "Shown in Tooltip",
+    "tooltipNotShown": "Not Shown in Tooltip"
+  }
+}

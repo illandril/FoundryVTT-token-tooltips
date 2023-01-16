@@ -1,0 +1,39 @@
+{
+  "compatibility": {
+    "minimum": 10,
+    "verified": 10
+  },
+  "esmodules": [
+    "module.js"
+  ],
+  "styles": [
+    "styles.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
+    }
+  ],
+  "license": "LICENSE",
+  "media": [
+    {
+      "type": "cover",
+      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/main/screenshots/cover.jpg"
+    },
+    {
+      "type": "screenshot",
+      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/main/screenshots/example-a.png"
+    },
+    {
+      "type": "screenshot",
+      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/main/screenshots/example-b.png"
+    }
+  ]
+}

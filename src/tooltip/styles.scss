@@ -1,0 +1,131 @@
+:root {
+  --illandril-token-tooltips--tooltip-rows: 5;
+  --illandril-token-tooltips--tooltip-base-size: 1em;
+}
+
+.illandril-token-tooltips--tooltip {
+  position: absolute;
+  display: none;
+  background: rgba(255, 255, 255, 0.8);
+  color: rgba(0,0,0,0.9);
+  border-radius: 0.25em;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  font-size: var(--illandril-token-tooltips--tooltip-base-size);
+
+  &.illandril-token-tooltips--show {
+    display: block;
+  }
+
+  .illandril-token-tooltips--name {
+    font-weight: bold;
+    text-align: center;
+    padding: 2px 6px;
+    font-size: 1.15em;
+    color: rgba(0, 0, 100, 0.8);
+  }
+
+  .illandril-token-tooltips--data {
+    max-height: calc(var(--illandril-token-tooltips--tooltip-rows) * 1.75em);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
+  }
+
+  .illandril-token-tooltips--row {
+    padding: 0.2em 0.5em;
+    line-height: 1.3em;
+    white-space: nowrap;
+  }
+
+  .illandril-token-tooltips--label {
+    padding-right: 0.5em;
+    min-width: 2.5em;
+    text-align: center;
+    font-weight: bold;
+
+    & img {
+      height: 1.15em;
+      vertical-align: text-bottom;
+    }
+  }
+
+  .illandril-token-tooltips--label,
+  .illandril-token-tooltips--value {
+    display: inline-block;
+    vertical-align: text-top;
+    white-space: initial;
+
+    & img {
+      border: none;
+    }
+  }
+
+  .illandril-token-tooltips--value {
+    max-width: 15em;
+    & > :empty {
+      display: none;
+    }
+  }
+
+  .illandril-token-tooltips--current {
+    & > :first-child {
+      margin-top: 0;
+    }
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .illandril-token-tooltips--temp::after {
+    content: '+';
+    font-size: 0.75em;
+    vertical-align: top;
+  }
+
+  .illandril-token-tooltips--max::before {
+    content: ' / ';
+  }
+
+  .illandril-token-tooltips--units::before {
+    content: ' ';
+  }
+
+  .illandril-token-tooltips--extra {
+    opacity: 0.75;
+    &::before {
+      content: ' (';
+    }
+    &::after {
+      content: ')';
+    }
+  }
+
+  .illandril-token-tooltips--hp-hearts {
+    color: #900;
+    & > * + * {
+      margin-left: 0.1em;
+    }
+  }
+
+  .illandril-token-tooltips--resource,
+  .illandril-token-tooltips--spellslot {
+    position: relative;
+    & .fas {
+      vertical-align: baseline;
+    }
+  }
+
+  .illandril-token-tooltips--resource-number,
+  .illandril-token-tooltips--spellslot-level {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    font-size: 0.7em;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    color: white;
+  }
+}

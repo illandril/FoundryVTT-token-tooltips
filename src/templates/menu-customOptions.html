@@ -1,0 +1,126 @@
+<form autocomplete="off" onsubmit="event.preventDefault()">
+  <section class="form-body">
+    <input type="checkbox" id="{{CSS.HELP_TOGGLE_ID}}">
+    <div>
+      <a href="https://github.com/illandril/FoundryVTT-token-tooltips/issues" target="_blank">
+        {{menuLocalize 'instructions.bugs'}}
+      </a>
+      <label for="{{CSS.HELP_TOGGLE_ID}}">
+        <span class="{{CSS.HELP_TOGGLE_ON}}">
+          <i class="fas fa-circle-question"></i>
+          Hide Help
+        </span>
+        <span class="{{CSS.HELP_TOGGLE_OFF}}">
+          <i class="far fa-circle-question"></i>
+          Show Help
+        </span>
+      </label>
+    </div>
+    <div class="notes">
+      {{menuLocalize 'instructions.top'}}
+      <dl>
+        <dt>{{menuLocalize 'header.name'}}</dt>
+        <dd>{{menuLocalize 'instructions.name'}}</dd>
+        <dt>{{menuLocalize 'header.icon'}}</dt>
+        <dd>
+          {{menuLocalize 'instructions.icon'}}
+          <br>
+          <a href="https://fontawesome.com/icons" target="_blank">{{menuLocalize 'instructions.iconLink'}}</a>
+        </dd>
+        <dt>
+          {{menuLocalize 'header.attributeKey'}}
+        </dt>
+        <dd>
+          {{menuLocalize 'instructions.attributeKey'}}
+        </dd>
+        <dt>{{menuLocalize 'header.permission'}}</dt>
+        <dd>
+          {{menuLocalize 'instructions.permission'}}
+        </dd>
+        <dt>{{menuLocalize 'header.gmPermission'}}</dt>
+        <dd>
+          {{menuLocalize 'instructions.gmPermission'}}
+        </dd>
+      </dl>
+    </div>
+    <div class="{{CSS.DATA}}">
+      <div class="{{CSS.STANDARD_OPTIONS_TITLE}}">
+        {{menuLocalize 'standardOptionsTitle'}}
+      </div>
+      <div id="{{CSS.HEADER}}-name" class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.name'}}
+      </div>
+      <div id="{{CSS.HEADER}}-icon" class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.icon'}}
+      </div>
+      <div id="{{CSS.HEADER}}-attributeKey" class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.attributeKey'}}
+      </div>
+      <div id="{{CSS.HEADER}}-permission" class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.permission'}}
+      </div>
+      <div id="{{CSS.HEADER}}-permission" class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.gmPermission'}}
+      </div>
+      <div id="{{CSS.HEADER}}-actions" class="{{CSS.HEADER}}"></div>
+      {{#each standardOptions}}
+        {{> modules/illandril-token-tooltips/templates/menu-customOptions-standardRow.html
+           option=this
+           entityPermission=../standardEntityPermission
+           gmPermissions=../gmPermissions
+           CSS=../CSS
+           menuLocalize=../menuLocalize
+        }}
+      {{/each}}
+    </div>
+    <div class="{{CSS.DATA}}">
+      <div class="{{CSS.CUSTOM_OPTIONS_TITLE}}">
+        {{menuLocalize 'customOptionsTitle'}}
+      </div>
+      <div class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.name'}}
+      </div>
+      <div class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.icon'}}
+      </div>
+      <div class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.attributeKey'}}
+      </div>
+      <div class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.permission'}}
+      </div>
+      <div class="{{CSS.HEADER}}">
+        {{menuLocalize 'header.gmPermission'}}
+      </div>
+      <div class="{{CSS.HEADER}}"></div>
+      {{#each customOptions}}
+       {{> modules/illandril-token-tooltips/templates/menu-customOptions-customRow.html
+          option=this
+          entityPermission=../entityPermission
+          gmPermissions=../gmPermissions
+          CSS=../CSS
+          menuLocalize=../menuLocalize
+        }}
+      {{/each}}
+      <button type="button" id="{{CSS.ADD_ROW_ID}}">
+        <i class="fas fa-plus"></i>
+        {{menuLocalize 'add'}}
+      </button>
+    </div>
+  </section>
+  <footer class="form-footer">
+    <button type="button" class="{{CSS.DEBUG_TOGGLE}}">
+      <i class="fas fa-bug"></i>
+      <span class="{{CSS.DEBUG_TOGGLE}}-onLabel">
+        {{menuLocalize 'toggleDebug.onLabel'}}
+      </span>
+      <span class="{{CSS.DEBUG_TOGGLE}}-offLabel">
+        {{menuLocalize 'toggleDebug.offLabel'}}
+      </span>
+    </button>
+    <button type="submit" name="submit">
+      <i class="far fa-save"></i>
+      {{menuLocalize 'save'}}
+    </button>
+  </footer>
+</form>

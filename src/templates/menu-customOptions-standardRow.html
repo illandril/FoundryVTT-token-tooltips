@@ -1,0 +1,63 @@
+<div aria-labelledby="{{CSS.HEADER}}-name" class="{{CSS.DISABLED_INPUT}}" {{#if option.help}}data-help="{{option.help}}"{{/if}}>
+  <input type="hidden" name="name" value="{{option.name}}"/>
+  {{option.name}}
+</div>
+<div class="{{CSS.ICON_CELL}}">
+  <div aria-labelledby="{{CSS.HEADER}}-icon" class="{{CSS.DISABLED_INPUT}}">
+    <input type="hidden" name="icon" value="{{option.icon}}" />
+    {{option.icon}}
+  </div>
+  <div class="{{CSS.ICON_PREVIEW}}">
+    <i class="fas fa-{{option.iconPreview}}"></i>
+  </div>
+</div>
+<div
+  aria-labelledby="{{CSS.HEADER}}-attributeKey"
+  class="{{CSS.DISABLED_INPUT}}"
+>
+  <input type="hidden" name="attributeKey" value="{{option.attributeKey}}" />
+  {{option.attributeKey}}
+</div>
+<div class="{{CSS.PERMISSIONS_CELL}}">
+  <select
+    type="text"
+    name="permission"
+    value="{{option.permission}}"
+    aria-labelledby="{{CSS.HEADER}}-permission"
+  >
+    {{selectOptions entityPermission selected=option.permission}}
+  </select>
+</div>
+<div class="{{CSS.GM_PERMISSIONS_CELL}}">
+  {{#if option.gmSetting}}
+  <select
+    type="text"
+    name="gmPermission"
+    aria-labelledby="{{CSS.HEADER}}-permission"
+  >
+    {{selectOptions gmPermissions selected=option.gmPermission}}
+  </select>
+  {{else}}
+  <input type="hidden" name="gmPermission" value="{{option.gmPermission}}" />
+  {{/if}}
+</div>
+<div class="{{CSS.ACTIONS}}" style="visibility:hidden;">
+  <a
+    class="{{CSS.MOVE_DOWN}}"
+    title="{{menuLocalize 'moveDown'}}"
+  >
+    <i class="fas fa-arrow-down"></i>
+  </a>
+  <a
+    class="{{CSS.MOVE_UP}}"
+    title="{{menuLocalize 'moveUp'}}"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  <a
+    class="{{CSS.DELETE}}"
+    title="{{menuLocalize 'delete'}}"
+  >
+    <i class="fas fa-trash"></i>
+  </a>
+</div>
