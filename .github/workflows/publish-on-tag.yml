@@ -1,0 +1,77 @@
+# When...
+# - A commit is tagged with v#.#.#
+# This workflow will...
+# - Run tests using node
+# - Publish a package to GitHub Packages
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Publish a version
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Install npm dependencies
+        run: npm ci --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Run validation
+        run: npm run validate
+
+  publish-module:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+    steps:
+      - name: Extract version number
+        id: version
+        uses: actions/github-script@v6
+        with:
+          script: return context.ref.substring(11);
+          result-encoding: string
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Install npm dependencies
+        run: npm ci --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build
+        run: npm run build
+
+      - name: Bundle
+        run: cd dist; zip -r module.zip *; cd -
+
+      - name: Publish
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ steps.version.outputs.result }}
+          generateReleaseNotes: true
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: './dist/module.json, ./dist/module.zip'
+          tag: ${{ github.ref_name }}

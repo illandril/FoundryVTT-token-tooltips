@@ -1,14 +1,21 @@
-name: Issue assignment
+name: Issue / PR assignment
 
 on:
   issues:
     types: [opened]
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
 
 jobs:
   auto-assign:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Auto-assign issue'
+      - name: 'Auto-assign issue / PR'
         uses: pozil/auto-assign-issue@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
