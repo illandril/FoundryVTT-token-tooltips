@@ -1,5 +1,5 @@
+import htmlToNode from '../../html/htmlToNode';
 import module from '../../module';
-import { htmlToNode } from '../../ui/html';
 import calculateValidAttributeValue from './calculateValidAttributeValue';
 import isNumberLikeValue from './isNumberLikeValue';
 import toValidAttributeValue from './toValidAttributeValue';

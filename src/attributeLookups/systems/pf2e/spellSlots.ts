@@ -1,70 +1,95 @@
+import module from '../../../module';
+import calculateValue from '../../../tooltip/calculateValue';
+import { AsyncAttributeLookup, AsyncRow } from '../../AttributeLookup';
+import spellIcon from '../../spellSlots/spellIcon';
 import pf2eSystemID from './systemID';
 
-const getSpellcastingEntries = (actor: Actor) => {
-  const entries = [];
+const getSpellcastingEntries = (actor: pf2e.internal.actor.ActorPF2e): pf2e.internal.item.spellcastingEntry.SpellcastingEntryPF2e[] => {
+  const entries: {
+    sort: number
+    spellcastingEntry: pf2e.internal.item.spellcastingEntry.SpellcastingEntryPF2e
+  }[] = [];
   for (const item of actor.items) {
     if (item.type === 'spellcastingEntry') {
-      entries.push({
-        sort: item.sort || 0,
-        spellcastingEntry: actor.spellcasting.get(item.id),
-      });
+      const spellcastingEntry = actor.spellcasting.get(item.id);
+      if (spellcastingEntry) {
+        entries.push({
+          sort: item.sort || 0,
+          spellcastingEntry,
+        });
+      }
     }
   }
   entries.sort((a, b) => a.sort - b.sort);
-  return entries.map((e) => e.spellcastingEntry);
+  return entries.map((entry) => entry.spellcastingEntry);
 };
 
-const getFocusEntry = (actor: Actor, spellIcon) => {
+const getFocusEntry = (actor: pf2e.internal.actor.ActorPF2e): AsyncRow => {
   const label = game.i18n.localize('illandril-token-tooltips.focusAbbreviation');
   return {
     label,
     icon: spellIcon(label),
-    value: foundry.utils.getProperty(actor.system, 'resources.focus'),
+    value: calculateValue(foundry.utils.getProperty(actor.system, 'resources.focus')),
   };
 };
 
-const getLevelEntry = (level, spellIcon) => {
+const getLevelEntry = (level: pf2e.internal.item.spellcastingEntry.SpellcastingSlotLevel): AsyncRow | null => {
   if (level.uses && level.uses.value !== undefined && level.uses.max > 0) {
     let label;
     if (level.isCantrip) {
       label = game.i18n.localize('illandril-token-tooltips.cantripAbbreviation');
     } else {
-      label = level.level;
+      label = `${level.level}`;
     }
     return {
       icon: spellIcon(label),
       label,
-      value: level.uses,
+      value: calculateValue(level.uses),
     };
   }
+  return null;
 };
 
-export default (spellIcon: (label: string) => string | null) => ({
-  id: 'pf2e Spell Slots',
-  asyncRows: async (actor) => {
-    const slots = [];
-    if (game.system.id === pf2eSystemID) {
-      if (actor.spellcasting) {
-        const spellcastingEntries = getSpellcastingEntries(actor);
-        let hasFocus = false;
-        for (const entry of spellcastingEntries) {
-          if (entry.isFocusPool) {
-            if (!hasFocus) {
-              hasFocus = true;
-              slots.push(getFocusEntry(actor, spellIcon));
-            }
-            continue;
-          }
-          if (entry.getSpellData) {
-            const spellData = await entry.getSpellData();
-            for (const level of spellData.levels) {
-              const levelEntry = getLevelEntry(level, spellIcon);
-              levelEntry && slots.push(levelEntry);
-            }
+export default new AsyncAttributeLookup(
+  'pf2e Spell Slots',
+  async (baseActor: Actor) => {
+    if (game.system.id !== pf2eSystemID) {
+      return [];
+    }
+    const actor = baseActor as pf2e.internal.actor.ActorPF2e;
+    module.logger.debug('pf2e spell slots', actor.name, actor);
+    if (!actor.spellcasting) {
+      module.logger.debug('pf2e spell slots: actor has no spellcasting', actor.name);
+      return [];
+    }
+    module.logger.debug('pf2e spell slots: spellcasting', actor.spellcasting);
+
+    const slots: AsyncRow[] = [];
+    const spellcastingEntries = getSpellcastingEntries(actor);
+    let hasFocus = false;
+    for (const entry of spellcastingEntries) {
+      module.logger.debug('pf2e spell slots: spellcasting entry', entry);
+      if (entry.isFocusPool) {
+        if (!hasFocus) {
+          hasFocus = true;
+          slots.push(getFocusEntry(actor));
+        }
+        continue;
+      }
+      if (entry.getSpellData) {
+        // We want the rows to be in order, including the focus entry, and awaiting on an entry
+        // in a loop is an acceptable performance risk. Chances are high that the user will have
+        // only one or two spellcasting entries, so most will never notice the added delay
+        // eslint-disable-next-line no-await-in-loop
+        const spellData = await entry.getSpellData();
+        for (const level of spellData.levels) {
+          const levelEntry = getLevelEntry(level);
+          if (levelEntry) {
+            slots.push(levelEntry);
           }
         }
       }
     }
     return slots;
   },
-});
+);

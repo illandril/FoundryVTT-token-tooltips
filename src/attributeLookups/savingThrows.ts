@@ -1,7 +1,9 @@
+import capitalize from '../dataConversion/capitalize';
+import nanToZero from '../dataConversion/nanToZero';
+import unknownObject from '../dataConversion/unknownObject';
 import module from '../module';
 import calculateValue from '../tooltip/calculateValue';
 import AttributeLookup from './AttributeLookup';
-import capitalize from './dataConversion/capitalize';
 import isDND35LiteNPC from './systems/d35e/isLiteNPC';
 import dnd5eSystemID from './systems/dnd5e/systemID';
 import isPF1LiteNPC from './systems/pf1/isLiteNPC';
@@ -17,8 +19,8 @@ const pf1SavingThrow = (key: string) => {
       if (isDND35LiteNPC(actor)) {
         return null;
       }
-      const value = foundry.utils.getProperty(actor.system, `attributes.savingThrows.${key}`);
-      if (value && isPF1LiteNPC(actor) && value?.total === 0) {
+      const value = unknownObject(foundry.utils.getProperty(actor.system, `attributes.savingThrows.${key}`));
+      if (value && isPF1LiteNPC(actor) && nanToZero(value.total) === 0) {
         return null;
       }
       return calculateValue(value);
@@ -31,11 +33,11 @@ const pf2SavingThrow = (key: string, locKey: string) => {
     () => null,
     () => module.localize(`savingThrow${capitalize(locKey)}`),
     (actor) => {
-      const save = foundry.utils.getProperty(actor.system, `saves.${key}`);
+      const save = unknownObject(foundry.utils.getProperty(actor.system, `saves.${key}`));
       if (!save) {
         return null;
       }
-      const modifier = save.totalModifier || 0;
+      const modifier = nanToZero(save.totalModifier);
       const dc = modifier + 10;
       return {
         value: `+${modifier} (DC ${dc})`,

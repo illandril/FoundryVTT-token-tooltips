@@ -29,7 +29,6 @@
   </select>
 </div>
 <div class="{{CSS.GM_PERMISSIONS_CELL}}">
-  {{#if option.gmSetting}}
   <select
     type="text"
     name="gmPermission"
@@ -37,9 +36,6 @@
   >
     {{selectOptions gmPermissions selected=option.gmPermission}}
   </select>
-  {{else}}
-  <input type="hidden" name="gmPermission" value="{{option.gmPermission}}" />
-  {{/if}}
 </div>
 <div class="{{CSS.ACTIONS}}" style="visibility:hidden;">
   <a

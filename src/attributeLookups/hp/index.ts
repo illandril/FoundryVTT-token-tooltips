@@ -39,7 +39,7 @@ export default [
         // GURPS
         'tracked.hp',
       ]);
-      return simplifyHP(calculateValue(value, 'hp'), token);
+      return simplifyHP(calculateValue(value, 'hp'), actor, token);
     },
   ),
   // starwarsffg

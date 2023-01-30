@@ -4,7 +4,7 @@ import CustomOptions, { CustomOption } from '../settings/CustomOptions';
 import { PermissionLevel } from '../settings/SpecialPermissions';
 import addEventListenerToAll from './addEventListenerToAll';
 import getStandardItems from './getStandardOptions';
-import permissionMenus, { GM_PERMISSION__ALL, GM_PERMISSION__NPC_ONLY } from './permissionMenus';
+import permissionMenus, { GM_PERMISSION } from './permissionMenus';
 import CSS from './styles';
 
 const customRowTemplate = module.registerTemplate('menu-customOptions-customRow.html');
@@ -41,7 +41,7 @@ class CustomOptionsForm extends FormApplication {
     const customOptions = CustomOptions.get();
     const customOptionsPlusGM = customOptions.map(
       (customOption) => {
-        const gmPermission = customOption.hideFromGM ? GM_PERMISSION__NPC_ONLY : GM_PERMISSION__ALL;
+        const gmPermission = customOption.hideFromGM ? GM_PERMISSION.NPC_ONLY : GM_PERMISSION.ALL;
         return {
           gmPermission,
           ...customOption,
@@ -63,7 +63,7 @@ class CustomOptionsForm extends FormApplication {
     const newOptions: CustomOption[] = [];
     if (Array.isArray(formData.name)) {
       for (let i = 0; i < formData.name.length; i++) {
-        const hideFromGM = formData.gmPermission[i] === GM_PERMISSION__NPC_ONLY;
+        const hideFromGM = formData.gmPermission[i] === GM_PERMISSION.NPC_ONLY;
         if (i < standardItems.length) {
           const standardItem = standardItems[i];
           standardItem.permissionSetting.set(formData.permission[i]);
@@ -174,7 +174,6 @@ class CustomOptionsForm extends FormApplication {
           menuLocalize,
         }),
       );
-      module.logger.warn(newRow.get());
       newRow.insertBefore(jQuery(addRow));
       this._activateRowListeners(newRow);
       this.setPosition({ height: 'auto' });

@@ -1,16 +1,17 @@
-import AttributeLookup from '../attributeLookups/AttributeLookup';
+import AttributeLookup, { AsyncAttributeLookup } from '../attributeLookups/AttributeLookup';
+import module from '../module';
 import { StandardOption } from '../settings/StandardOptions';
 import AttributeRow from './row/AttributeRow';
 import showStandardRow from './showStandardRow';
 import Tooltip from './Tooltip';
 
 class StandardRow {
-  attributeLookup: AttributeLookup;
-  option: StandardOption;
-  groupID: string | undefined;
+  readonly attributeLookup: AttributeLookup | AsyncAttributeLookup;
+  readonly option: StandardOption;
+  readonly groupID: string | undefined;
   row: AttributeRow | null;
 
-  constructor(attributeLookup: AttributeLookup, option: StandardOption, groupID?: string) {
+  constructor(attributeLookup: AttributeLookup | AsyncAttributeLookup, option: StandardOption, groupID?: string) {
     this.attributeLookup = attributeLookup;
     this.option = option;
     this.row = null;
@@ -18,27 +19,33 @@ class StandardRow {
   }
 
   update(tooltip: Tooltip, actor: Actor, token: Token) {
-    if (showStandardRow(actor, this.option)) {
-      // if (this.attributeLookup.asyncRows) {
-      //   const reference = tooltip._prepareAsyncReference(this.attributeLookup.id);
-      //   (async () => {
-      //     const rows = await this.attributeLookup.asyncRows(actor, token);
-      //     for (const row of rows) {
-      //       const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
-      //       tooltip._updateRow(attributeRow, row.value, reference);
-      //     }
-      //   })();
-      // } else if (this.attributeLookup.rows) {
-      //   for (const row of this.attributeLookup.rows(actor, token)) {
-      //     const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
-      //     tooltip._updateRow(attributeRow, row.value);
-      //   }
-      // } else {
-      if (this.row === null) {
-        this.row = new AttributeRow(this.attributeLookup.label(), this.attributeLookup.icon(), this.groupID);
+    module.logger.debug('StandardRow update', this.groupID);
+    if (showStandardRow(actor, token, this.option)) {
+      if (this.attributeLookup instanceof AsyncAttributeLookup) {
+        const asyncLookup: AsyncAttributeLookup = this.attributeLookup;
+        const reference = tooltip._prepareAsyncReference(asyncLookup.id);
+        void (async () => {
+          try {
+            const rows = await asyncLookup.asyncRows(actor, token);
+            for (const row of rows) {
+              const attributeRow = new AttributeRow(row.label, row.icon, this.groupID);
+              tooltip._updateRow(attributeRow, row.value, reference);
+            }
+          } catch (err) {
+            module.logger.error('Error with async lookup', this.groupID, err, actor, token);
+          }
+        })();
+      } else {
+        try {
+          const syncLookup: AttributeLookup = this.attributeLookup;
+          if (this.row === null) {
+            this.row = new AttributeRow(syncLookup.label(), syncLookup.icon(), this.groupID);
+          }
+          tooltip._updateRow(this.row, syncLookup.value(actor, token));
+        } catch (err) {
+          module.logger.error('Error with sync lookup', this.groupID, err, actor, token);
+        }
       }
-      tooltip._updateRow(this.row, this.attributeLookup.value(actor, token));
-      // }
     }
   }
 }

@@ -1,4 +1,4 @@
-import nanToZero from '../../../tooltip/row/nanToZero';
+import nanToZero from '../../../dataConversion/nanToZero';
 import AttributeLookup from '../../AttributeLookup';
 
 type Maybe5eAttribute = undefined | {

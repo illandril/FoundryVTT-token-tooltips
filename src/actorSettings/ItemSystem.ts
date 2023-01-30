@@ -1,4 +1,4 @@
-import nanToZero from '../tooltip/row/nanToZero';
+import nanToZero from '../dataConversion/nanToZero';
 
 export const showInTooltip = (item: Item) => {
   const flag = item.getFlag('illandril-token-tooltips', 'show');
@@ -11,13 +11,6 @@ export const setShowInTooltip = (item: Item, show: boolean) => {
 
 export const canCalculateUses = (item: Item) => {
   return calculateUses(item) !== null;
-};
-
-export const shouldCalculateUses = (item: Item) => {
-  if (!showInTooltip(item)) {
-    return false;
-  }
-  return canCalculateUses(item);
 };
 
 const extractNumber = (value: unknown) => {

@@ -1,22 +1,19 @@
+import splitOn from '../../../dataConversion/splitOn';
+import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
+import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import splitOn from '../../dataConversion/splitOn';
-import stringArray from '../../dataConversion/stringArray';
 import systemID from './systemID';
 
 const getLabel = (value: string, propertyKey: string): string => {
+  let labelLookup: { [key: string]: string | undefined } | undefined;
   if (propertyKey === 'ci') {
-    return CONFIG.PF1.conditionTypes[value] || value;
-  } if (propertyKey === 'di' || propertyKey === 'dv') {
-    return CONFIG.PF1.damageTypes[value] || value;
+    labelLookup = CONFIG.PF1.conditionTypes;
+  } else if (propertyKey === 'di' || propertyKey === 'dv') {
+    labelLookup = CONFIG.PF1.damageTypes;
   }
-  return value;
-};
-
-type MaybeTrait = undefined | {
-  value?: unknown
-  custom?: unknown
+  return labelLookup?.[value] ?? value;
 };
 
 const traitArrayWithCustom = (localeKey: string, propertyKey: string) => {
@@ -27,10 +24,13 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string) => {
       if (game.system.id !== systemID) {
         return null;
       }
-      const property = foundry.utils.getProperty(actor.system, `traits.${propertyKey}`) as MaybeTrait;
-      const values = stringArray(property?.value) || [];
+      const property = unknownObject(foundry.utils.getProperty(actor.system, `traits.${propertyKey}`));
+      if (!property) {
+        return null;
+      }
+      const values = stringArrayOrSet(property.value) || [];
       const stdValues = values.map((value) => getLabel(value, propertyKey));
-      const customValues = splitOn(property?.custom, ';') || [];
+      const customValues = splitOn(property.custom, ';') || [];
       const allValues = stdValues.concat(customValues).filter((value) => !!value);
       return calculateValue(allValues);
     },

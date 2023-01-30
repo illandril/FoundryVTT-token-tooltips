@@ -1,4 +1,7 @@
-import { emptyNode, div, span, optionalIcon } from '../../ui/html';
+import div from '../../html/div';
+import emptyNode from '../../html/emptyNode';
+import { optionalIcon } from '../../html/icon';
+import span from '../../html/span';
 import { CalculatedValue } from '../calculateValue';
 import addValue from './addValue';
 import CSS from './CSS';

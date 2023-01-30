@@ -1,10 +1,9 @@
-import nanToZero from '../../../tooltip/row/nanToZero';
+import capitalize from '../../../dataConversion/capitalize';
+import nanToZero from '../../../dataConversion/nanToZero';
 import AttributeLookup from '../../AttributeLookup';
-import capitalize from '../../dataConversion/capitalize';
-import isDND35LiteNPC from '../d35e/isLiteNPC';
 import d35eSystemID from '../d35e/systemID';
-import isPF1LiteNPC from '../pf1/isLiteNPC';
 import pf1SystemID from '../pf1/systemID';
+import isLiteNPC from './isLiteNPC';
 
 type MaybePF1Attribute = undefined | {
   total?: unknown
@@ -24,7 +23,7 @@ const attribute = (key: string) => {
       }
     },
     (actor) => {
-      if (isDND35LiteNPC(actor) || isPF1LiteNPC(actor)) {
+      if (isLiteNPC(actor)) {
         return null;
       }
       const prop = foundry.utils.getProperty(actor.system, `abilities.${key}`) as MaybePF1Attribute;

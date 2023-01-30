@@ -4,8 +4,10 @@ import {
   HIDE_FROM_EVERYONE_OPTION,
 } from '../settings/SpecialPermissions';
 
-export const GM_PERMISSION__ALL = 'ALL';
-export const GM_PERMISSION__NPC_ONLY = 'NPC_ONLY';
+export enum GM_PERMISSION {
+  ALL = 'ALL',
+  NPC_ONLY = 'NPC_ONLY',
+}
 
 const fixChoices = (key: string, choices: string[]) => {
   const choiceObject: Record<string, string> = {};
@@ -26,7 +28,7 @@ const permissionMenus: {
   standardEntityPermission: {},
 };
 
-const STANDARD_PERMISSION_LEVELS = ['NONE', 'LIMITED', 'OBSERVER', 'OWNER'];
+const STANDARD_PERMISSION_LEVELS = ['NONE', 'LIMITED', 'OBSERVER', 'OWNER', 'FRIENDLY', 'NEUTRAL'];
 Hooks.on('ready', () => {
   permissionMenus.entityPermission = fixChoices(
     'entityPermission',
@@ -34,7 +36,7 @@ Hooks.on('ready', () => {
   );
   permissionMenus.gmPermissions = fixChoices(
     'gmPermission',
-    [GM_PERMISSION__ALL, GM_PERMISSION__NPC_ONLY],
+    [GM_PERMISSION.ALL, GM_PERMISSION.NPC_ONLY],
   );
   permissionMenus.standardEntityPermission = fixChoices(
     'entityPermission',

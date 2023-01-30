@@ -1,10 +1,10 @@
+import icon from '../html/icon';
 import module from '../module';
 import { HIDE_FROM_EVERYONE_OPTION } from '../settings/SpecialPermissions';
 import { Items } from '../settings/StandardOptions';
-import { icon } from '../ui/html';
 import './Actor5e.scss';
 import * as CSS from './CSS';
-import { canCalculateUses, showInTooltip, setShowInTooltip, calculateUses } from './ItemSystem';
+import { canCalculateUses, showInTooltip, setShowInTooltip } from './ItemSystem';
 
 const CSS5E_ITEM_DETAIL = 'item-detail';
 
@@ -86,7 +86,7 @@ const addTooltipToggle = (tooltipCell: Element, item: Item) => {
     tooltipToggle.setAttribute('aria-label', ariaLabel);
 
     const titleKey = `tooltip${shown ? '' : 'Not'}Shown`;
-    tooltipToggle.title = module.localize(titleKey) + '\n' + JSON.stringify(calculateUses(item));
+    tooltipToggle.title = module.localize(titleKey);
     tooltipToggle.addEventListener('click', () => setShowInTooltip(item, !shown), false);
     tooltipToggle.appendChild(icon('hand-pointer'));
 

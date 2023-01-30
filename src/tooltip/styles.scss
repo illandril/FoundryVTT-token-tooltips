@@ -107,25 +107,24 @@
       margin-left: 0.1em;
     }
   }
+  .illandril-token-tooltips--hp-hearts-full::after {
+    content: '+'
+  }
 
   .illandril-token-tooltips--resource,
   .illandril-token-tooltips--spellslot {
-    position: relative;
-    & .fas {
-      vertical-align: baseline;
+    display: grid;
+    grid-template-areas: 'icon';
+    align-items: center;
+
+    & > * {
+      grid-area: icon;
     }
   }
 
   .illandril-token-tooltips--resource-number,
   .illandril-token-tooltips--spellslot-level {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
     font-size: 0.7em;
-    text-align: center;
-    display: block;
-    font-weight: bold;
     color: white;
   }
 }

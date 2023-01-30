@@ -1,9 +1,9 @@
+import capitalize from '../../../dataConversion/capitalize';
+import splitOn from '../../../dataConversion/splitOn';
+import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import capitalize from '../../dataConversion/capitalize';
-import splitOn from '../../dataConversion/splitOn';
-import stringArray from '../../dataConversion/stringArray';
 import systemID from './systemID';
 
 type MaybeTrait = undefined | {
@@ -20,7 +20,7 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
         return null;
       }
       const property = foundry.utils.getProperty(actor.system, `traits.${propertyKey}`) as MaybeTrait;
-      const values = stringArray(property?.value) || [];
+      const values = stringArrayOrSet(property?.value) || [];
       const stdValues = values.map((value) => {
         const upperFirstValue = capitalize(value);
         return game.i18n.localize(`D35E.${valueLocalePrefix}${upperFirstValue}`) || value;

@@ -1,131 +1,90 @@
 import { supportedSystems as attrPlusSupportedSystems } from '../attributeLookups/attributesPlus';
-// import { supportedSystems as condImmSupportedSystems } from '../attributeLookups/conditionImmunities';
-// import { supportedSystems as damResImmVulnSupportedSystems } from '../attributeLookups/damageResImmVuln';
+import { supportedSystems as condImmSupportedSystems } from '../attributeLookups/conditionImmunities';
+import { supportedSystems as damResImmVulnSupportedSystems } from '../attributeLookups/damageResImmVuln';
 import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attributeLookups/savingThrows';
 import module from '../module';
+import { StandardPermissionLevel } from '../settings/SpecialPermissions';
 import * as StandardOptions from '../settings/StandardOptions';
-import { GM_PERMISSION__NPC_ONLY, GM_PERMISSION__ALL } from './permissionMenus';
+import { GM_PERMISSION } from './permissionMenus';
 
-// eslint-disable-next-line max-lines-per-function
 const getStandardItems = () => {
-  const standardItems = [
-    // HP
-    getStandardItem('hp', 'heart', StandardOptions.HP),
-
-    // AC
-    getStandardItem('ac', 'user-shield', StandardOptions.AC),
+  const items: StandardItem[] = [
+    getItem('hp', 'heart', StandardOptions.HP),
+    getItem('ac', 'user-shield', StandardOptions.AC),
   ];
 
+  // Attributes plus modifiers
   if (attrPlusSupportedSystems.includes(game.system.id)) {
-    // Attributes + Mod + Save
-    standardItems.push(
-      getStandardItem(
-        'attributesPlus',
-        module.localize('setting.menu.customOptions.standard.attributesPlus.icon'),
-        StandardOptions.AttributePlus,
-      ),
-    );
+    items.push(getItem('attributesPlus', LOCALIZED_ICON, StandardOptions.AttributePlus));
   }
 
   if (!savingThrowsUnsupportedSystems.includes(game.system.id)) {
-    // Saving Throws
-    standardItems.push(
-      getStandardItem(
-        'savingThrows',
-        module.localize('setting.menu.customOptions.standard.savingThrows.icon'),
-        StandardOptions.SavingThrows,
-      ),
-    );
+    items.push(getItem('savingThrows', LOCALIZED_ICON, StandardOptions.SavingThrows));
   }
 
-  // if (damResImmVulnSupportedSystems.includes(game.system.id)) {
-  //   // Damage Resistances / Immunities / Vulnerabilities
-  //   standardItems.push(
-  //     getStandardItem(
-  //       'dmgResVuln',
-  //       module.localize(
-  //         'setting.menu.customOptions.standard.dmgResVuln.icon',
-  //       ),
-  //       StandardOptions.DmgResVulnMinimumPermission,
-  //       StandardOptions.HidePlayerDmgResVulnFromGM,
-  //     ),
-  //   );
-  // }
+  // Damage Resistances and Immunities
+  if (damResImmVulnSupportedSystems.includes(game.system.id)) {
+    items.push(getItem('dmgResVuln', LOCALIZED_ICON, StandardOptions.DmgResVuln));
+  }
 
-  // if (condImmSupportedSystems.includes(game.system.id)) {
-  //   // Condition Immunities
-  //   standardItems.push(
-  //     getStandardItem(
-  //       'condImm',
-  //       module.localize(
-  //         'setting.menu.customOptions.standard.condImm.icon',
-  //       ),
-  //       StandardOptions.CondImmMinimumPermission,
-  //       StandardOptions.HidePlayerCondImmFromGM,
-  //     ),
-  //   );
-  // }
+  // Condition Immunities
+  if (condImmSupportedSystems.includes(game.system.id)) {
+    items.push(getItem('condImm', LOCALIZED_ICON, StandardOptions.CondImm));
+  }
 
-  // Passive Skills
-  standardItems.push(
-    getStandardItem('passives', 'eye, search, brain', StandardOptions.Passives),
-  );
-
-  // Movement
-  standardItems.push(
-    getStandardItem('movement', 'walking', StandardOptions.Movement),
-  );
-
-  // Ruler
-  standardItems.push(
-    getStandardItem('ruler', 'ruler', StandardOptions.Ruler),
-  );
-
-  // Resources
-  standardItems.push(
-    getStandardItem('resources', 'circle', StandardOptions.Resources),
-  );
-
-  // Spell Slots
-  standardItems.push(
-    getStandardItem('spells', 'star', StandardOptions.Spells),
-  );
+  items.push(getItem('passives', 'eye, search, brain', StandardOptions.Passives));
+  items.push(getItem('movement', 'walking', StandardOptions.Movement));
+  items.push(getItem('ruler', 'ruler', StandardOptions.Ruler));
+  items.push(getItem('resources', 'circle', StandardOptions.Resources));
+  items.push(getItem('spells', 'star', StandardOptions.Spells));
 
   if (game.system.id === 'starwarsffg') {
-    // Talents
-    const icon = module.localize(
-      'setting.menu.customOptions.standard.talents.icon',
-    );
-    standardItems.push(
-      getStandardItem('talents', icon, StandardOptions.Talents),
-    );
+    items.push(getItem('talents', LOCALIZED_ICON, StandardOptions.Talents));
   }
 
   if (game.system.id === 'dnd5e') {
-    // Items
-    const icon = module.localize(
-      'setting.menu.customOptions.standard.items.icon',
-    );
-    standardItems.push(
-      getStandardItem('items', icon, StandardOptions.Items),
-    );
+    items.push(getItem('items', LOCALIZED_ICON, StandardOptions.Items));
   }
-  return standardItems;
+
+  return items;
 };
 
-const getStandardItem = (
-  name: string, icon: string,
+const LOCALIZED_ICON = Symbol('Localized Icon');
+
+type StandardItem = {
+  isHP: boolean
+  name: string
+  icon: string
+  iconPreview: string
+  attributeKey: string
+  permissionSetting: typeof StandardOptions.HP.permission
+  permission: StandardPermissionLevel
+  gmSetting: typeof StandardOptions.HP.hideFromGM
+  hideFromGM: boolean
+  gmPermission: GM_PERMISSION
+  help: string | undefined
+};
+
+const getItem = (
+  name: string, icon: string | typeof LOCALIZED_ICON,
   option: StandardOptions.StandardOption,
-) => {
+): StandardItem => {
   const keyPrefix = `setting.menu.customOptions.standard.${name}`;
   const helpKey = `${keyPrefix}.help`;
   const help = module.localize(helpKey, undefined, true);
+  let iconString: string;
+  if (icon === LOCALIZED_ICON) {
+    iconString = module.localize(`${keyPrefix}.icon`);
+  } else {
+    iconString = icon;
+  }
   return {
+    isHP: name === 'hp',
     name: module.localize(
       `${keyPrefix}.name`,
     ),
-    icon,
-    iconPreview: icon.replace(/,.+/, ''),
+    icon: iconString,
+    iconPreview: iconString.replace(/,.+/, ''),
     attributeKey: module.localize(
       `${keyPrefix}.key`,
     ),
@@ -133,7 +92,7 @@ const getStandardItem = (
     permission: option.permission.get(),
     gmSetting: option.hideFromGM,
     hideFromGM: option.hideFromGM.get(),
-    gmPermission: option.hideFromGM.get() ? GM_PERMISSION__NPC_ONLY : GM_PERMISSION__ALL,
+    gmPermission: option.hideFromGM.get() ? GM_PERMISSION.NPC_ONLY : GM_PERMISSION.ALL,
     help,
   };
 };

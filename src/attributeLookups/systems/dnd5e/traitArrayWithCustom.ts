@@ -1,15 +1,11 @@
+import capitalize from '../../../dataConversion/capitalize';
+import splitOn from '../../../dataConversion/splitOn';
+import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
+import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import capitalize from '../../dataConversion/capitalize';
-import splitOn from '../../dataConversion/splitOn';
-import stringArray from '../../dataConversion/stringArray';
 import systemID from './systemID';
-
-type MaybeTrait = undefined | {
-  value?: unknown
-  custom?: unknown
-};
 
 const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocalePrefix: string) => {
   return new AttributeLookup(
@@ -19,8 +15,12 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
       if (game.system.id !== systemID) {
         return null;
       }
-      const property = foundry.utils.getProperty(actor.system, `traits.${propertyKey}`) as MaybeTrait;
-      const values = stringArray(property?.value) || [];
+      module.logger.debug('dnd5e traitWithCustom', propertyKey, actor.name, actor.system);
+      const property = unknownObject(foundry.utils.getProperty(actor.system, `traits.${propertyKey}`));
+      if (property === null) {
+        return null;
+      }
+      const values = stringArrayOrSet(property?.value) || [];
       const stdValues = values.map((value) => {
         const upperFirstValue = capitalize(value);
         return game.i18n.localize(`DND5E.${valueLocalePrefix}${upperFirstValue}`) || value;

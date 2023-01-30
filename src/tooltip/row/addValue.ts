@@ -1,7 +1,7 @@
+import nanToZero from '../../dataConversion/nanToZero';
 import { ValidNonArrayAttributeType } from '../calculateValue';
 import booleanNode from './booleanNode';
 import CSS from './CSS';
-import nanToZero from './nanToZero';
 import numberToNiceString from './numberToNiceString';
 
 const addValue = (

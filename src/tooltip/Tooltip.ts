@@ -1,10 +1,14 @@
 import * as attributeLookups from '../attributeLookups';
+import showNameOnly from '../attributeLookups/showNameOnly';
+import div from '../html/div';
+import emptyNode from '../html/emptyNode';
 import module from '../module';
 import CustomOptions from '../settings/CustomOptions';
+import { showTooltipHotkey } from '../settings/hotkeys';
 import * as StandardOptions from '../settings/StandardOptions';
-import { emptyNode, div } from '../ui/html';
 import calculateValue from './calculateValue';
 import updateCustomAttributeRow from './customAttribute/updateCustomAttributeRow';
+import { getControlledToken } from './getControlledToken';
 import isTooltipVisible from './isTooltipVisible';
 import AttributeRow from './row/AttributeRow';
 import showDataType from './showDataType';
@@ -53,7 +57,6 @@ export default class Tooltip {
   #dataElement = div(CSS_DATA);
   #standardRows: StandardRow[];
   #customRows: AttributeRow[];
-  #lastHoverToken: Token | null = null;
 
   constructor() {
     this.#element.appendChild(this.#nameElement);
@@ -69,19 +72,22 @@ export default class Tooltip {
     });
 
     Hooks.on('hoverToken', (token, hovered) => {
-      this.#onHover(token, hovered);
-      if (hovered) {
-        this.#lastHoverToken = token;
-      } else if (this.#lastHoverToken === token) {
-        this.#lastHoverToken = null;
+      this.#onHover(hovered ? token : game.canvas.tokens?.hover ?? null);
+    });
+    Hooks.on('highlightObjects', (highlight) => {
+      const showOnHighlight = ShowOnHighlightHotkey.get();
+      module.logger.debug('highlightObjects', highlight, showOnHighlight);
+      if (showOnHighlight) {
+        this.#onHover(highlight ? getControlledToken() : null);
       }
     });
-
-    // showTooltipHotkey.onToggle(() => {
-    //   if (this.lastHoverToken) {
-    //     this.onHover(this.lastHoverToken, true);
-    //   }
-    // });
+    showTooltipHotkey.onToggle(() => {
+      if (showTooltipHotkey.isPressed()) {
+        this.#onHover(game.canvas.tokens?.hover ?? null);
+      } else {
+        this.#onHover(null);
+      }
+    });
   }
 
   #prepareStandardRows() {
@@ -94,34 +100,36 @@ export default class Tooltip {
     for (const lookup of attributeLookups.attributesPlus) {
       this.#standardRows.push(new StandardRow(lookup, StandardOptions.AttributePlus, 'Attributes'));
     }
-    // for (const lookup of attributeLookups.savingThrows) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.SavingThrows, 'Saving Throws'));
-    // }
-    // for (const lookup of attributeLookups.damageResImmVuln) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.DmgResVuln, 'Damage Resistances/Imm/Vuln'));
-    // }
-    // for (const lookup of attributeLookups.conditionImmunities) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.CondImm, 'Condition Immunities'));
-    // }
-    // for (const lookup of attributeLookups.passives) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.Passives, 'Passives'));
-    // }
-    // for (const lookup of attributeLookups.movements) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.Movement, 'Movements'));
-    // }
-    // for (const lookup of attributeLookups.distanceFromActiveToken) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.Ruler, 'Distance from Active Token'));
-    // }
-    // for (const lookup of attributeLookups.resources) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.Resources, 'Resources'));
-    // }
-    // for (const lookup of attributeLookups.spellSlots) {
-    //   this.#standardRows.push(new StandardRow(lookup, StandardOptions.Spells, 'Spell Slots'));
-    // }
+    for (const lookup of attributeLookups.savingThrows) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.SavingThrows, 'Saving Throws'));
+    }
+    for (const lookup of attributeLookups.damageResImmVuln) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.DmgResVuln, 'Damage Resistances/Imm/Vuln'));
+    }
+    for (const lookup of attributeLookups.conditionImmunities) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.CondImm, 'Condition Immunities'));
+    }
+    for (const lookup of attributeLookups.passives) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.Passives, 'Passives'));
+    }
+    for (const lookup of attributeLookups.movements) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.Movement, 'Movements'));
+    }
+    for (const lookup of attributeLookups.distanceFromActiveToken) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.Ruler, 'Distance from Active Token'));
+    }
+    for (const lookup of attributeLookups.resources) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.Resources, 'Resources'));
+    }
+    for (const lookup of attributeLookups.spellSlots) {
+      this.#standardRows.push(new StandardRow(lookup, StandardOptions.Spells, 'Spell Slots'));
+    }
   }
 
-  #onHover(token: Token, hovered: boolean) {
-    if (hovered && shouldShowTooltip(token)) {
+  #onHover(token: Token | null) {
+    module.logger.info('onHover', token !== null);
+    if (token && shouldShowTooltip(token)) {
+      module.logger.debug('onHover', token);
       this.#updateData(token);
       this.#fixPosition(token);
       this.#show();
@@ -168,21 +176,22 @@ export default class Tooltip {
   }
 
   #updateData(token: Token) {
+    module.logger.debug('updateData', token);
     this.#clearElements();
 
     this.#updateName(token);
 
     const actor = token.actor;
-    // if (showNameOnly(actor)) {
-    //   return;
-    // }
+    if (showNameOnly(actor)) {
+      return;
+    }
     for (const standardRow of this.#standardRows) {
       standardRow.update(this, actor, token);
     }
-    this.#updateTalents(actor);
-    this.#updateItems(actor);
+    this.#updateTalents(actor, token);
+    this.#updateItems(actor, token);
 
-    this.#updateCustomRows(actor);
+    this.#updateCustomRows(actor, token);
   }
 
   #clearElements() {
@@ -199,7 +208,7 @@ export default class Tooltip {
     }
   }
 
-  #prepareAsyncReference(id: string) {
+  _prepareAsyncReference(id: string) {
     const referenceStart = document.createComment(`Async Start: ${id}`);
     const referenceEnd = document.createComment(`Async End: ${id}`);
     this.#dataElement.appendChild(referenceStart);
@@ -222,38 +231,50 @@ export default class Tooltip {
     }
   }
 
-  #updateItems(actor: Actor) {
-    if (showStandardRow(actor, StandardOptions.Items)) {
-      // const items = attributeLookups.items.get(actor);
-      // for (const item of items) {
-      //   const attributeRow = new AttributeRow(item.name, item.icon, 'Items');
-      //   this._updateRow(attributeRow, item.value);
-      // }
+  #updateItems(actor: Actor, token: Token) {
+    if (showStandardRow(actor, token, StandardOptions.Items)) {
+      try {
+        const items = attributeLookups.items.get(actor);
+        for (const item of items) {
+          const attributeRow = new AttributeRow(item.name, item.icon, 'Items');
+          this._updateRow(attributeRow, item.value);
+        }
+      } catch (err) {
+        module.logger.error('Error updating items', err, actor);
+      }
     }
   }
 
-  #updateTalents(actor: Actor) {
-    if (showStandardRow(actor, StandardOptions.Talents)) {
-      // const talents = attributeLookups.talents.get(actor);
-      // for (const talent of talents) {
-      //   const attributeRow = new AttributeRow(talent.name, talent.icon, 'Talents');
-      //   this._updateRow(attributeRow, talent.value);
-      // }
+  #updateTalents(actor: Actor, token: Token) {
+    if (showStandardRow(actor, token, StandardOptions.Talents)) {
+      try {
+        const talents = attributeLookups.talents.get(actor);
+        for (const talent of talents) {
+          const attributeRow = new AttributeRow(talent.name, talent.icon, 'Talents');
+          this._updateRow(attributeRow, talent.value);
+        }
+      } catch (err) {
+        module.logger.error('Error updating talents', err, actor);
+      }
     }
   }
 
-  #updateCustomRows(actor: Actor) {
+  #updateCustomRows(actor: Actor, token: Token) {
     const customOptions = CustomOptions.get();
     if (!customOptions || customOptions.length === 0) {
       return;
     }
     customOptions.forEach((customOption, i) => {
-      if (!showDataType(actor, customOption.permission, customOption.hideFromGM)) {
+      if (!showDataType(actor, token, customOption.permission, customOption.hideFromGM)) {
         return;
       }
-      const row = updateCustomAttributeRow(actor, customOption, this.#customRows, i);
-      if (row) {
-        this.#dataElement.appendChild(row.element);
+      try {
+        const row = updateCustomAttributeRow(actor, customOption, this.#customRows, i);
+        if (row) {
+          this.#dataElement.appendChild(row.element);
+        }
+      } catch (err) {
+        module.logger.error('Error updating custom row', actor, customOption);
       }
     });
   }
@@ -263,15 +284,9 @@ const shouldShowTooltip = (token: Token) => {
   if (!(token && token.actor)) {
     return false;
   }
-  // if (
-  //   !ShowOnHighlightHotkey.get()
-  //   && token.mouseInteractionManager.state !== token.mouseInteractionManager.states.HOVER
-  // ) {
-  //   return false;
-  // }
-  // if (ShowOnlyWithTooltipHotkey.get() && !showTooltipHotkey.isPressed()) {
-  //   return false;
-  // }
+  if (ShowOnlyWithTooltipHotkey.get() && !showTooltipHotkey.isPressed()) {
+    return false;
+  }
   if (game.user?.isGM) {
     return true;
   }

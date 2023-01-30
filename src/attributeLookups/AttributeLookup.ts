@@ -1,14 +1,32 @@
 import calculateValue, { CalculatedValue } from '../tooltip/calculateValue';
 
-type IconLookup = () => string | null;
-type LabelLookup = () => string;
-type ValueLookup = (actor: Actor, token: Token) => CalculatedValue | null;
+type Icon = string | HTMLElement | null;
+type Label = string;
+type Value = CalculatedValue | null;
+
+type IconLookup = () => Icon;
+type LabelLookup = () => Label;
+export type ValueLookup = (actor: Actor, token: Token) => Value;
 
 export default class AttributeLookup {
   constructor(
-    public icon: IconLookup,
-    public label: LabelLookup,
-    public value: ValueLookup,
+    public readonly icon: IconLookup,
+    public readonly label: LabelLookup,
+    public readonly value: ValueLookup,
+  ) {}
+}
+
+export type AsyncRow = {
+  icon: Icon
+  label: Label
+  value: Value
+};
+type AsyncRowLookup = (actor: Actor, token: Token) => Promise<AsyncRow[]>;
+
+export class AsyncAttributeLookup {
+  constructor(
+    public readonly id: string,
+    public readonly asyncRows: AsyncRowLookup,
   ) {}
 }
 

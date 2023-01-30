@@ -131,6 +131,8 @@
         "LIMITED": "Limited or better",
         "OBSERVER": "Observer or better",
         "OWNER": "Owner or GM",
+        "FRIENDLY": "Friendly (+GM)",
+        "NEUTRAL": "Neutral or better (+GM)",
         "SHOW_TO_GMS_ONLY": "GM Only",
         "HIDE_FROM_EVERYONE": "Hide from Everyone"
       },

@@ -1,7 +1,7 @@
+import emptyNode from '../html/emptyNode';
 import module from '../module';
 import updateCustomAttributeRow from '../tooltip/customAttribute/updateCustomAttributeRow';
 import AttributeRow from '../tooltip/row/AttributeRow';
-import { emptyNode } from '../ui/html';
 import './styles.scss';
 
 const CSS_PREFIX = module.cssPrefix.childPrefix('debugDisplay');
