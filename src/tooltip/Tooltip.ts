@@ -127,13 +127,13 @@ export default class Tooltip {
   }
 
   #onHover(token: Token | null) {
-    module.logger.info('onHover', token !== null);
     if (token && shouldShowTooltip(token)) {
-      module.logger.debug('onHover', token);
+      module.logger.debug('onHover show', token);
       this.#updateData(token);
       this.#fixPosition(token);
       this.#show();
     } else {
+      module.logger.debug('onHover hide', token);
       this.#hide();
     }
   }
