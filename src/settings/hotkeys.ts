@@ -1,12 +1,10 @@
 import module from '../module';
 
-const MODULE_KEY = 'illandril-token-tooltips';
-
 let showTooltipHotkeyPressed = false;
 const showTooltipHotkeyCallbacks: (() => void)[] = [];
 
 Hooks.once('init', () => {
-  game.keybindings.register(MODULE_KEY, 'showTooltip', {
+  game.keybindings.register(module.id, 'showTooltip', {
     name: module.localize('hotkey.showTooltip.label'),
     hint: module.localize('hotkey.showTooltip.hint'),
     editable: [
