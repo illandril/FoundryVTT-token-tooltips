@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/illandril/FoundryVTT-token-tooltips#readme",
   "dependencies": {
-    "@illandril/foundryvtt-utils": "^8.2.0"
+    "@illandril/foundryvtt-utils": "^8.2.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.20.11",
