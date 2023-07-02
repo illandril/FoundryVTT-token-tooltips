@@ -25,7 +25,7 @@
   }
 
   .illandril-token-tooltips--data {
-    max-height: calc(var(--illandril-token-tooltips--tooltip-rows) * 1.75em);
+    max-height: calc(var(--illandril-token-tooltips--tooltip-rows) * 2.75em);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -126,5 +126,11 @@
   .illandril-token-tooltips--spellslot-level {
     font-size: 0.7em;
     color: white;
+  }
+
+  .illandril-token-tooltips--damage-type--icon-and-text {
+    > i {
+      display: inline;
+    }
   }
 }

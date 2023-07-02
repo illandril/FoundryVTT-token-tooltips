@@ -1,4 +1,5 @@
 import capitalize from '../../../dataConversion/capitalize';
+import filterEmpty from '../../../dataConversion/filterEmpty';
 import splitOn from '../../../dataConversion/splitOn';
 import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import module from '../../../module';
@@ -26,7 +27,7 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
         return game.i18n.localize(`D35E.${valueLocalePrefix}${upperFirstValue}`) || value;
       });
       const customValues = splitOn(property?.custom, /[;,]/) || [];
-      const allValues = stdValues.concat(customValues).filter((value) => !!value);
+      const allValues = stdValues.concat(customValues).filter(filterEmpty);
       return calculateValue(allValues);
     },
   );

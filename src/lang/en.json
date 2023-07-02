@@ -126,6 +126,17 @@
           "FIVE_HEARTS__PLAYERS_NON_OBSERVER": "Five Hearts (Non-Observed)"
         }
       },
+      "simplifyDamageTypes": {
+        "label": "Res. / Imm. / Vuln. Style",
+        "hint": "(DnD5e / PF2e only for now) Specify how damage and condition type values for resistances, immunities, and vulnerabilities are shown. Not all types have icons - if a type does not have an icon, the name will be shown even if Icon is selected.",
+        "choice": {
+          "NONE": "Label (black)",
+          "COLOR": "Label (color)",
+          "ICON": "Icon (black)",
+          "COLOR_ICON": "Icon (color)",
+          "ICON_AND_TEXT": "Icon and Label (color)"
+        }
+      },
       "entityPermission.choice": {
         "NONE": "Show for Everyone",
         "LIMITED": "Limited or better",

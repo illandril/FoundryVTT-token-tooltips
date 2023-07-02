@@ -1,4 +1,5 @@
 import AttributeLookup from './AttributeLookup';
+import simplifyDamageType from './damageTypes/simplifyDamageType';
 import d35eSystemID from './systems/d35e/systemID';
 import d35eTraitArrayWithCustom from './systems/d35e/traitArrayWithCustom';
 import dnd5eSystemID from './systems/dnd5e/systemID';
@@ -10,6 +11,6 @@ export const supportedSystems = [d35eSystemID, dnd5eSystemID, pf1SystemID];
 
 export default [
   d35eTraitArrayWithCustom('conditionImmunities', 'ci', 'CondType'),
-  dnd5eTraitArrayWithCustom('conditionImmunities', 'ci', 'Con'),
+  dnd5eTraitArrayWithCustom('conditionImmunities', 'ci', 'Con', simplifyDamageType),
   pf1TraitArrayWithCustom('conditionImmunities', 'ci'),
 ] satisfies AttributeLookup[];

@@ -1,3 +1,4 @@
+import filterEmpty from '../dataConversion/filterEmpty';
 import img from '../html/img';
 
 type MaybeTalent = {
@@ -30,5 +31,5 @@ export const get = (actor: Actor): TalentDefinition[] => {
       icon,
       value: talent.name,
     };
-  }).filter((value): value is TalentDefinition => value !== null);
+  }).filter(filterEmpty);
 };

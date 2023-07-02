@@ -1,13 +1,15 @@
 import capitalize from '../../../dataConversion/capitalize';
+import filterEmpty from '../../../dataConversion/filterEmpty';
 import splitOn from '../../../dataConversion/splitOn';
 import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
+import { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
 import systemID from './systemID';
 
-const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocalePrefix: string) => {
+const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocalePrefix: string, simplifier?: LocalizedValueSimplifier) => {
   return new AttributeLookup(
     () => null,
     () => module.localize(`tooltip.${localeKey}.label`),
@@ -21,13 +23,27 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
         return null;
       }
       const values = stringArrayOrSet(property?.value) || [];
-      const stdValues = values.map((value) => {
+      const stdValues = values.filter(filterEmpty).map((value) => {
         const upperFirstValue = capitalize(value);
-        return game.i18n.localize(`DND5E.${valueLocalePrefix}${upperFirstValue}`) || value;
+        return {
+          localized: game.i18n.localize(`DND5E.${valueLocalePrefix}${upperFirstValue}`) || value,
+          raw: value,
+        };
       });
-      const customValues = splitOn(property?.custom, ';') || [];
-      const allValues = stdValues.concat(customValues).filter((value) => !!value);
-      return calculateValue(allValues);
+      const customValues = splitOn(property?.custom, ';')?.filter(filterEmpty).map((value) => {
+        return {
+          localized: value,
+          raw: value,
+        };
+      }) || [];
+      const allValues = stdValues.concat(customValues);
+      let simplifiedValues: string[] | Node[];
+      if (simplifier) {
+        simplifiedValues = allValues.map(simplifier);
+      } else {
+        simplifiedValues = allValues.map(({ localized }) => localized);
+      }
+      return calculateValue(simplifiedValues);
     },
   );
 };

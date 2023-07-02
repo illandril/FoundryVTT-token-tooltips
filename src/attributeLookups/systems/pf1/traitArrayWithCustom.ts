@@ -1,3 +1,4 @@
+import filterEmpty from '../../../dataConversion/filterEmpty';
 import splitOn from '../../../dataConversion/splitOn';
 import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import unknownObject from '../../../dataConversion/unknownObject';
@@ -31,7 +32,7 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string) => {
       const values = stringArrayOrSet(property.value) || [];
       const stdValues = values.map((value) => getLabel(value, propertyKey));
       const customValues = splitOn(property.custom, ';') || [];
-      const allValues = stdValues.concat(customValues).filter((value) => !!value);
+      const allValues = stdValues.concat(customValues).filter(filterEmpty);
       return calculateValue(allValues);
     },
   );
