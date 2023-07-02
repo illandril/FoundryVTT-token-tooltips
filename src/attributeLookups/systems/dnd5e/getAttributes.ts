@@ -26,5 +26,5 @@ const attribute = (key: string, abbr: string) => {
   );
 };
 
-export default () => Object.entries(dnd5e.config.abilityAbbreviations)
-  .map(([key, value]) => attribute(key, value as string));
+export default () => Object.entries(dnd5e.config.abilities)
+  .map(([key, value]) => attribute(key, value.abbreviation));
