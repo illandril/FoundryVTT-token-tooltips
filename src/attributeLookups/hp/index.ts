@@ -22,6 +22,8 @@ export default [
           return game.i18n.localize('SWADE.Wounds');
         case 'gurps4e':
           return game.i18n.localize('GURPS4E.attributes.hp');
+        case 'gurps':
+          return game.i18n.localize('GURPS.HP');
         default:
           return '[HP]';
       }
@@ -36,8 +38,10 @@ export default [
         'characteristics.health',
         // SWADE
         'wounds',
-        // GURPS
+        // gurps4e
         'tracked.hp',
+        // gurps
+        'HP',
       ]);
       return simplifyHP(calculateValue(value, 'hp'), actor, token);
     },
@@ -53,4 +57,6 @@ export default [
     () => game.i18n.localize('SWFFG.Strain'),
     ['stats.strain'],
   ),
+  // gurps
+
 ] satisfies AttributeLookup[];
