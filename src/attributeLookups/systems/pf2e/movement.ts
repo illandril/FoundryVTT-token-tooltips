@@ -21,7 +21,7 @@ const pf2Movement = (key: string) => {
         }
       }
     }
-    if (value && value?.value > 0) {
+    if (value && typeof value.value === 'number' && value.value > 0) {
       return value;
     }
     return null;

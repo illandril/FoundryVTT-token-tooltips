@@ -8,7 +8,7 @@ const d35eOrPF1Movement = (key: string) => {
       return null;
     }
     const value = calculateValue(foundry.utils.getProperty(actor.system, `attributes.speed.${key}`));
-    if (value && value.value > 0) {
+    if (value && typeof value.value === 'number' && value.value > 0) {
       if (key === 'fly') {
         const maneuverAbility = foundry.utils.getProperty(actor.system, 'attributes.speed.fly.maneuverability');
         if (typeof maneuverAbility === 'string') {

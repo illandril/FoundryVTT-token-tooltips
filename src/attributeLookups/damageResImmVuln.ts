@@ -36,7 +36,7 @@ export default [
   sfrpgTraitArrayWithCustom('damageImmunities', 'di', 'Damage.Types.', simplifyDamageType),
   sfrpgTraitArrayWithCustom('damageVulnerabilities', 'dv', 'Damage.Types.', simplifyDamageType),
 
-  dnd4eResistancesAndImmunities('Resistances', simplifyDamageType),
-  dnd4eResistancesAndImmunities('Immunities', simplifyDamageType),
-  dnd4eResistancesAndImmunities('Vulnerabilities', simplifyDamageType),
+  dnd4eResistancesAndImmunities('Resistances'),
+  dnd4eResistancesAndImmunities('Immunities'),
+  dnd4eResistancesAndImmunities('Vulnerabilities'),
 ] satisfies AttributeLookup[];
