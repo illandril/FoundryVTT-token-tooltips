@@ -1,5 +1,6 @@
 import capitalize from '../../../dataConversion/capitalize';
 import filterEmpty from '../../../dataConversion/filterEmpty';
+import localizeOrFallback from '../../../dataConversion/localizeOrFallback';
 import splitOn from '../../../dataConversion/splitOn';
 import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import unknownObject from '../../../dataConversion/unknownObject';
@@ -26,7 +27,7 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
       const stdValues = values.filter(filterEmpty).map((value) => {
         const upperFirstValue = capitalize(value);
         return {
-          localized: game.i18n.localize(`DND5E.${valueLocalePrefix}${upperFirstValue}`) || value,
+          localized: localizeOrFallback(`DND5E.${valueLocalePrefix}${upperFirstValue}`, value),
           raw: value,
         };
       });

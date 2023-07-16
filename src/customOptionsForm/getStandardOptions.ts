@@ -32,6 +32,10 @@ const getStandardItems = () => {
     items.push(getItem('condImm', LOCALIZED_ICON, StandardOptions.CondImm));
   }
 
+  if (damResImmVulnSupportedSystems.includes(game.system.id) || condImmSupportedSystems.includes(game.system.id)) {
+    items.push();
+  }
+
   items.push(getItem('passives', 'eye, search, brain', StandardOptions.Passives));
   items.push(getItem('movement', 'walking', StandardOptions.Movement));
   items.push(getItem('ruler', 'ruler', StandardOptions.Ruler));

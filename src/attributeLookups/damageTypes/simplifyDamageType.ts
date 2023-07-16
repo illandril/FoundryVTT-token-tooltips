@@ -2,7 +2,15 @@ import icon from '../../html/icon';
 import span from '../../html/span';
 import module from '../../module';
 import { LocalizedAndRawValue, LocalizedValueSimplifier } from '../LocalizedValueSimplifier';
+import d35eSystemID from '../systems/d35e/systemID';
+import dnd4eSystemID from '../systems/dnd4e/systemID';
+import dnd5eSystemID from '../systems/dnd5e/systemID';
+import pf1SystemID from '../systems/pf1/systemID';
+import pf2eSystemID from '../systems/pf2e/systemID';
+import sfrpgSystemID from '../systems/sfrpg/systemID';
 import damageTypeMap from './damageTypeMap';
+
+const supportedSystems = [d35eSystemID, dnd4eSystemID, dnd5eSystemID, pf1SystemID, pf2eSystemID, sfrpgSystemID];
 
 const iconAndTextClass = module.cssPrefix.childPrefix('damage-type').child('icon-and-text');
 
@@ -13,6 +21,7 @@ export const SimplifyDamageTypeChoice = module.settings.register<SimplifyDamageT
   choices: [
     'NONE', 'ICON', 'COLOR_ICON', 'COLOR', 'ICON_AND_TEXT',
   ],
+  config: () => supportedSystems.includes(game.system.id),
 });
 
 const stylizeDamageType = (value: LocalizedAndRawValue, useIcon: boolean, useColor: boolean, appendText: boolean) => {
@@ -22,13 +31,20 @@ const stylizeDamageType = (value: LocalizedAndRawValue, useIcon: boolean, useCol
   let node: HTMLElement;
   if (useIcon && config?.iconKey) {
     const iconNode = icon(config.iconKey);
-    if (appendText) {
+    if (config.cssClass) {
+      iconNode.classList.add(config.cssClass);
+    }
+    if (!appendText) {
+      iconNode.title = value.localized;
+    }
+    if (appendText || value.suffix) {
       node = span(iconAndTextClass);
       node.appendChild(iconNode);
-      node.appendChild(document.createTextNode('\u00a0'));
-      node.appendChild(document.createTextNode(value.localized));
+      if (appendText) {
+        node.appendChild(document.createTextNode('\u00a0'));
+        node.appendChild(document.createTextNode(value.localized));
+      }
     } else {
-      iconNode.title = value.localized;
       node = iconNode;
     }
   } else {
@@ -38,11 +54,17 @@ const stylizeDamageType = (value: LocalizedAndRawValue, useIcon: boolean, useCol
   if (useColor && config?.color) {
     node.style.color = config.color;
   }
+  if (value.suffix) {
+    node.appendChild(document.createTextNode('\u00a0'));
+    node.appendChild(document.createTextNode(value.suffix));
+  }
   return node;
 };
 
 const Simplifiers = {
-  NONE: (value) => document.createTextNode(value.localized),
+  NONE: (value) => {
+    return document.createTextNode(`${value.localized}${value.suffix ? '\u00a0' : ''}${value.suffix ?? ''}`);
+  },
   ICON: (value) => stylizeDamageType(value, true, false, false),
   COLOR_ICON: (value) => stylizeDamageType(value, true, true, false),
   COLOR: (value) => stylizeDamageType(value, false, true, false),

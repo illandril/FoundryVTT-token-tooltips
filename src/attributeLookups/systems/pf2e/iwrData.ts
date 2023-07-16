@@ -1,4 +1,6 @@
 
+import localizeOrFallback from '../../../dataConversion/localizeOrFallback';
+import string from '../../../dataConversion/string';
 import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
@@ -15,25 +17,29 @@ const iwrLookup = (localeKey: string, propertyKey: string, simplifier?: Localize
       if (game.system.id !== systemID) {
         return null;
       }
-      const property = foundry.utils.getProperty(actor, `system.attributes.${propertyKey}`);
-      module.logger.debug('pf2e iwrLookup', propertyKey, actor.name, propertyKey, property);
+      const entries = foundry.utils.getProperty(actor, `system.attributes.${propertyKey}`);
+      module.logger.debug('pf2e iwrLookup', propertyKey, actor.name, propertyKey, entries);
 
-      if (!Array.isArray(property)) {
+      if (!Array.isArray(entries)) {
         return null;
       }
 
       const values: Node[] = [];
-      for (const value of property) {
-        const valueObj = unknownObject(value);
-        const label = valueObj?.label;
-        const type = valueObj?.type;
-        if (typeof label === 'string') {
+      for (const entry of entries) {
+        const entryObj = unknownObject(entry);
+        const type = string(entryObj?.type);
+        const value = entryObj?.value;
+        const typeLocaleKey = type && string(unknownObject(entryObj?.typeLabels)?.[type]);
+        if (typeof type === 'string') {
+          const label = typeLocaleKey ? localizeOrFallback(typeLocaleKey, type) : type;
+          const suffix = typeof value === 'number' ? `${value}` : undefined;
           values.push(simplifier
             ? simplifier({
               localized: label,
-              raw: typeof type === 'string' ? type : label,
+              raw: type,
+              suffix: suffix,
             })
-            : document.createTextNode(label));
+            : document.createTextNode(`${label}${suffix ? ` ${suffix}` : ''}`));
         }
       }
       return calculateValue(values);

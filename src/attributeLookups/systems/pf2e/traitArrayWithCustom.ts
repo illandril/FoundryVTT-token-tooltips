@@ -45,7 +45,7 @@ const getLabel = (value: unknown, propertyKey: string, simplifier?: LocalizedVal
     type = string(valueObj.type);
     fallback = string(valueObj.label || type);
     if (typeof valueObj.value === 'number' || typeof valueObj.value === 'string') {
-      suffix = ` (${valueObj.value})`;
+      suffix = `(${valueObj.value})`;
     }
   }
   const label = getLabelFromType(type, propertyKey, fallback);
@@ -56,14 +56,9 @@ const getLabel = (value: unknown, propertyKey: string, simplifier?: LocalizedVal
     ? simplifier({
       localized: label,
       raw: type || fallback || label,
+      suffix,
     })
-    : document.createTextNode(label);
-  if (suffix) {
-    const withSuffix = document.createDocumentFragment();
-    withSuffix.append(labelNode);
-    withSuffix.append(document.createTextNode(suffix));
-    return withSuffix;
-  }
+    : document.createTextNode(`${label}${suffix ? ` ${suffix}` : ''}`);
   return labelNode;
 };
 

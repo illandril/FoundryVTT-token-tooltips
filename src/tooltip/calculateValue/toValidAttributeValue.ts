@@ -8,7 +8,7 @@ const toValidAttributeValue = (value: unknown): ValidAttributeType | null => {
   }
   if (Array.isArray(value)) {
     const mapped = Array.prototype.map.call(value, toValidNonArrayAttributeValue);
-    if (mapped.length > 0 && mapped.every((entry) => entry !== null)) {
+    if (mapped.length > 0 && mapped.every((entry) => entry !== null && entry !== undefined && entry !== '')) {
       return mapped as ValidNonArrayAttributeType[];
     }
   }

@@ -25,8 +25,8 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
       const property = foundry.utils.getProperty(actor.system, `traits.${propertyKey}`) as MaybeTrait;
       const values = stringArrayOrSet(property?.value) || [];
       const stdValues = values.map((value) => {
-        const upperFirstValue = capitalize(value);
-        const label = localizeOrFallback(`D35E.${valueLocalePrefix}${upperFirstValue}`, value);
+        const capitalized = value.split('-').map(capitalize).join('');
+        const label = localizeOrFallback(`SFRPG.${valueLocalePrefix}${capitalized}`, value);
         return simplifier
           ? simplifier({
             localized: label,

@@ -133,4 +133,11 @@
       display: inline;
     }
   }
+
+  .illandril-token-tooltips--damage-types--rotate-left::before {
+    transform: rotate(-90deg);
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+  }
 }

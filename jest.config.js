@@ -7,7 +7,13 @@ import utilGlobals from '@illandril/foundryvtt-utils/dist/tests/globals.js';
 import deepmerge from 'deepmerge';
 import localGlobals from './globals.js';
 
-const globals = deepmerge(utilGlobals, localGlobals);
+const globals = deepmerge(deepmerge(utilGlobals, {
+  game: {
+    system: {
+      id: 'example',
+    },
+  },
+}), localGlobals);
 
 export default {
   // Automatically clear mock calls, instances, contexts and results before every test
