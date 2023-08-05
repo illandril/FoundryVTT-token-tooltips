@@ -23,7 +23,7 @@ const CSS_SHOW = module.cssPrefix.child('show');
 
 module.settings.register('rowsPerTooltip', Number, 5, {
   hasHint: true,
-  range: { min: 1, max: 20, step: 1 },
+  range: { min: 1, max: 30, step: 1 },
   onChange: (value) => {
     document.documentElement.style.setProperty(
       '--illandril-token-tooltips--tooltip-rows',
