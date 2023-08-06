@@ -202,7 +202,7 @@ export default class Tooltip {
   #updateName(token: Token) {
     if (ShowTokenName.get()) {
       this.#nameElement.style.display = '';
-      this.#nameElement.appendChild(document.createTextNode(token.name));
+      this.#nameElement.appendChild(document.createTextNode(token.name || ''));
     } else {
       this.#nameElement.style.display = 'none';
     }

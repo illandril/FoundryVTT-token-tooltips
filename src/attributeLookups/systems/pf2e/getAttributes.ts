@@ -13,9 +13,15 @@ const attribute = (key: string) => {
     (actor) => {
       const prop = foundry.utils.getProperty(actor.system, `abilities.${key}`) as MaybeAttribute;
       if (prop) {
-        const value = nanToZero(prop.value);
         const modifier = nanToZero(prop.mod);
-        return { value: `${value} (${modifier >= 0 ? '+' : ''}${modifier})` };
+        if (foundry.utils.isNewerVersion('5.3.0', game.system.version)) {
+          // Prior to 5.3.0, Pathfinder 2e used values with modifiers
+          // Starting in 5.3.0, Pathfinder 2e followed the remastered rules,
+          // which replaced ability scores with pure modifiers.
+          const value = nanToZero(prop.value);
+          return { value: `${value} (${modifier >= 0 ? '+' : ''}${modifier})` };
+        }
+        return { value: `${modifier >= 0 ? '+' : ''}${modifier}` };
       }
       return null;
     },

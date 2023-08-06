@@ -63,6 +63,7 @@ class CustomOptionsForm extends FormApplication {
     const newOptions: CustomOption[] = [];
     if (Array.isArray(formData.name)) {
       for (let i = 0; i < formData.name.length; i++) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
         const hideFromGM = formData.gmPermission[i] === GM_PERMISSION.NPC_ONLY;
         if (i < standardItems.length) {
           const standardItem = standardItems[i];

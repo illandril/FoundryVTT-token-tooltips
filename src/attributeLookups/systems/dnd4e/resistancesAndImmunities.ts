@@ -17,7 +17,7 @@ const parseResistances = (resistances: unknown) => {
     if (!resistance || typeof resistance !== 'object') {
       continue;
     }
-    const { immune, value } = resistance as { immune: boolean | unknown, value: number | unknown };
+    const { immune, value } = resistance as { immune: unknown, value: unknown };
     values.push({
       key,
       value: typeof value === 'number' ? value : 0,
