@@ -32,14 +32,14 @@
   },
   "homepage": "https://github.com/illandril/FoundryVTT-token-tooltips#readme",
   "dependencies": {
-    "@illandril/foundryvtt-utils": "^8.3.0"
+    "@illandril/foundryvtt-utils": "^8.3.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.22.5",
-    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-env": "^7.22.10",
     "@babel/preset-typescript": "^7.22.5",
-    "@illandril/eslint-config-foundryvtt": "^1.8.6",
-    "@illandril/foundryvtt-types": "^5.1.2",
+    "@illandril/eslint-config-foundryvtt": "^1.8.7",
+    "@illandril/foundryvtt-types": "^5.1.4",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@testing-library/dom": "^9.3.1",
@@ -58,10 +58,10 @@
     "jquery": "^3.7.0",
     "npm-run-all2": "^6.0.6",
     "rimraf": "^5.0.1",
-    "rollup": "^3.27.2",
+    "rollup": "^3.28.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-scss": "^4.0.0",
-    "sass": "^1.64.2",
+    "sass": "^1.65.1",
     "typescript": "^5.1.6",
     "wcag-contrast": "^3.0.0"
   }
