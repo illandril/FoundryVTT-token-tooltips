@@ -16,22 +16,28 @@ const extractValue = (
   const total = toValidNonArrayAttributeValue(attribute.total);
   if (total !== null) {
     module.logger.debug('extractValue: attribute.total', total);
-    value = total;
+    return total;
+  }
+
+  const current = toValidNonArrayAttributeValue(attribute.current);
+  if (current !== null) {
+    module.logger.debug('extractValue: attribute.current', current);
+    return current;
+  }
+
+  const dotValue = toValidAttributeValue(attribute.value);
+  module.logger.debug('extractValue: attribute.value', dotValue);
+  if (typeof dotValue === 'string' && attribute.type === 'LongText') {
+    module.logger.debug('extractValue: attribute.value was a LongText type');
+    value = htmlToNode(dotValue);
+  } else if (Array.isArray(dotValue)) {
+    module.logger.debug('extractValue: attribute.value was an Array type');
+    return dotValue;
+  } else if (dotValue === null && hasMax) {
+    module.logger.debug('extractValue: attribute.value was null, but had max');
+    value = 0;
   } else {
-    const dotValue = toValidAttributeValue(attribute.value);
-    module.logger.debug('extractValue: attribute.value', dotValue);
-    if (typeof dotValue === 'string' && attribute.type === 'LongText') {
-      module.logger.debug('extractValue: attribute.value was a LongText type');
-      value = htmlToNode(dotValue);
-    } else if (Array.isArray(dotValue)) {
-      module.logger.debug('extractValue: attribute.value was an Array type');
-      return dotValue;
-    } else if (dotValue === null && hasMax) {
-      module.logger.debug('extractValue: attribute.value was null, but had max');
-      value = 0;
-    } else {
-      value = dotValue;
-    }
+    value = dotValue;
   }
   return value;
 };

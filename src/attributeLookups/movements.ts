@@ -1,5 +1,6 @@
 import capitalize from '../dataConversion/capitalize';
 import AttributeLookup, { SimpleActorAttributeLookup, ValueLookup } from './AttributeLookup';
+import a5eMovement from './systems/a5e/movement';
 import d35eOrPF1Movement from './systems/d35eOrPF1/movement';
 import dnd5eMovement from './systems/dnd5e/movement';
 import pf2Movement from './systems/pf2e/movement';
@@ -14,6 +15,8 @@ const labelLookup = (key: string) => () => {
       return game.i18n.localize(`PF2E.SpeedTypes${capitalize(key)}`);
     case 'D35E':
       return game.i18n.localize(`D35E.Speed${capitalize(key)}`);
+    case 'a5e':
+      return game.i18n.localize(`A5E.Movement${capitalize(key)}ingSpeedAbbr`);
     default:
       return `[${key.toUpperCase()}]`;
   }
@@ -58,7 +61,7 @@ const genericMovement = (keys: string[], icon: string) => {
 };
 
 export default [
-  multiMovement('walk', 'walking', [dnd5eMovement]),
+  multiMovement('walk', 'walking', [dnd5eMovement, a5eMovement]),
   multiMovement('land', 'walking', [d35eOrPF1Movement, pf2Movement]),
   genericMovement(
     [
@@ -69,8 +72,8 @@ export default [
     ],
     'walking',
   ),
-  multiMovement('burrow', 'angle-double-down', [dnd5eMovement, d35eOrPF1Movement, pf2Movement]),
-  multiMovement('climb', 'spider', [dnd5eMovement, d35eOrPF1Movement, pf2Movement]),
-  multiMovement('fly', 'feather-alt', [dnd5eMovement, d35eOrPF1Movement, pf2Movement]),
-  multiMovement('swim', 'swimmer', [dnd5eMovement, d35eOrPF1Movement, pf2Movement]),
+  multiMovement('burrow', 'angle-double-down', [dnd5eMovement, d35eOrPF1Movement, pf2Movement, a5eMovement]),
+  multiMovement('climb', 'spider', [dnd5eMovement, d35eOrPF1Movement, pf2Movement, a5eMovement]),
+  multiMovement('fly', 'feather-alt', [dnd5eMovement, d35eOrPF1Movement, pf2Movement, a5eMovement]),
+  multiMovement('swim', 'swimmer', [dnd5eMovement, d35eOrPF1Movement, pf2Movement, a5eMovement]),
 ] satisfies AttributeLookup[];

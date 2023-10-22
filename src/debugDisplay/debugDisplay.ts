@@ -58,6 +58,7 @@ const addDataRows = (actor: Actor, keySoFar: string | null, data: Record<string,
       || key === 'id'
       || key === 'sort'
       || key === 'token'
+      || key === ''
     ) {
       continue;
     }

@@ -4,11 +4,12 @@ import unknownObject from '../dataConversion/unknownObject';
 import module from '../module';
 import calculateValue from '../tooltip/calculateValue';
 import AttributeLookup from './AttributeLookup';
+import a5eSystemId from './systems/a5e/systemID';
 import isDND35LiteNPC from './systems/d35e/isLiteNPC';
 import dnd5eSystemID from './systems/dnd5e/systemID';
 import isPF1LiteNPC from './systems/pf1/isLiteNPC';
 
-export const unsupportedSystems = [dnd5eSystemID];
+export const unsupportedSystems = [a5eSystemId, dnd5eSystemID];
 
 const pf1SavingThrow = (key: string) => {
   // Note: This is also for D&D 3.5 (D35E)

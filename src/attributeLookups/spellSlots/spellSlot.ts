@@ -5,6 +5,7 @@ import spellIcon from './spellIcon';
 type MaybeSetSlotsObject = {
   total?: unknown
   value?: unknown
+  current?: unknown
   max?: unknown
 };
 const isSetSlots = (value: unknown) => {
@@ -16,7 +17,7 @@ const isSetSlots = (value: unknown) => {
   }
   if (typeof value === 'object') {
     const objValue = value as MaybeSetSlotsObject;
-    if (isSetSlotsValue(objValue.total) || isSetSlotsValue(objValue.value)) {
+    if (isSetSlotsValue(objValue.total) || isSetSlotsValue(objValue.value) || isSetSlotsValue(objValue.current)) {
       return isNonZeroMax(objValue.max);
     }
   }

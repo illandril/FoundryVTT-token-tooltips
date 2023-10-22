@@ -2,6 +2,7 @@ import icon from '../../html/icon';
 import span from '../../html/span';
 import module from '../../module';
 import { LocalizedAndRawValue, LocalizedValueSimplifier } from '../LocalizedValueSimplifier';
+import a5eSystemID from '../systems/a5e/systemID';
 import d35eSystemID from '../systems/d35e/systemID';
 import dnd4eSystemID from '../systems/dnd4e/systemID';
 import dnd5eSystemID from '../systems/dnd5e/systemID';
@@ -10,7 +11,7 @@ import pf2eSystemID from '../systems/pf2e/systemID';
 import sfrpgSystemID from '../systems/sfrpg/systemID';
 import damageTypeMap from './damageTypeMap';
 
-const supportedSystems = [d35eSystemID, dnd4eSystemID, dnd5eSystemID, pf1SystemID, pf2eSystemID, sfrpgSystemID];
+const supportedSystems = [a5eSystemID, d35eSystemID, dnd4eSystemID, dnd5eSystemID, pf1SystemID, pf2eSystemID, sfrpgSystemID];
 
 const iconAndTextClass = module.cssPrefix.childPrefix('damage-type').child('icon-and-text');
 

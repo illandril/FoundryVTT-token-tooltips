@@ -1,5 +1,7 @@
 import AttributeLookup from './AttributeLookup';
 import simplifyDamageType from './damageTypes/simplifyDamageType';
+import a5eSystemID from './systems/a5e/systemID';
+import a5eTraitArrayWithCustom from './systems/a5e/traitArrayWithCustom';
 import dnd4eResistancesAndImmunities from './systems/dnd4e/resistancesAndImmunities';
 import dnd4eSystemId from './systems/dnd4e/systemID';
 import dnd5eSystemID from './systems/dnd5e/systemID';
@@ -12,7 +14,7 @@ import pf2eTraitArrayWithCustom from './systems/pf2e/traitArrayWithCustom';
 import sfrpgSystemID from './systems/sfrpg/systemID';
 import sfrpgTraitArrayWithCustom from './systems/sfrpg/traitArrayWithCustom';
 
-export const supportedSystems = [dnd5eSystemID, pf1SystemID, pf2eSystemID, sfrpgSystemID, dnd4eSystemId];
+export const supportedSystems = [dnd5eSystemID, pf1SystemID, pf2eSystemID, sfrpgSystemID, dnd4eSystemId, a5eSystemID];
 
 export default [
   dnd5eTraitArrayWithCustom('damageImmunities', 'di', 'Damage', simplifyDamageType),
@@ -39,4 +41,8 @@ export default [
   dnd4eResistancesAndImmunities('Resistances'),
   dnd4eResistancesAndImmunities('Immunities'),
   dnd4eResistancesAndImmunities('Vulnerabilities'),
+
+  a5eTraitArrayWithCustom('damageImmunities', 'damageImmunities', 'damageTypes.', false, simplifyDamageType),
+  a5eTraitArrayWithCustom('damageResistances', 'damageResistances', 'damageTypes.', false, simplifyDamageType),
+  a5eTraitArrayWithCustom('damageVulnerabilities', 'damageVulnerabilities', 'damageTypes.', false, simplifyDamageType),
 ] satisfies AttributeLookup[];
