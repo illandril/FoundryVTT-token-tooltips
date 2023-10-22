@@ -1,4 +1,5 @@
 import AttributeLookup from './AttributeLookup';
+// import calculateDistanceWithUnits from './distance/calculateDistanceWithUnits';
 
 const getActiveToken = () => {
   const speaker = ChatMessage.getSpeaker();
@@ -8,11 +9,11 @@ const getActiveToken = () => {
   return game.canvas.tokens?.get(speaker.token);
 };
 
-const calculateDistance = (grid: GridLayer, activeToken: Token, targetToken: Token): number => {
-  const ttRect = targetToken.bounds;
-  const atRect = activeToken.bounds;
-  const ttPos = { x: targetToken.center.x, y: targetToken.center.y };
-  const atPos = { x: activeToken.center.x, y: activeToken.center.y };
+const calculateDistance = (grid: GridLayer, token: Token, other: Token): number => {
+  const ttRect = other.bounds;
+  const atRect = token.bounds;
+  const ttPos = { x: other.center.x, y: other.center.y };
+  const atPos = { x: token.center.x, y: token.center.y };
   if (ttRect.width > grid.size) {
     if (ttRect.right < atRect.left) {
       ttPos.x = ttRect.right - grid.size / 2;
@@ -52,6 +53,16 @@ const calculateDistance = (grid: GridLayer, activeToken: Token, targetToken: Tok
   return grid.measureDistance(ttPos, atPos, { gridSpaces: true });
 };
 
+
+const calculateDistanceWithUnits = (scene: Scene, grid: GridLayer, token: Token, other: Token) => {
+  const distance = calculateDistance(grid, token, other);
+
+  return {
+    value: distance,
+    units: scene.grid.units,
+  };
+};
+
 export default [
   new AttributeLookup(
     () => 'ruler',
@@ -62,17 +73,12 @@ export default [
       if (!grid || !scene) {
         return null;
       }
-      const activeToken = getActiveToken();
-      if (!activeToken) {
+      const other = getActiveToken();
+      if (!other) {
         return null;
       }
 
-      const distance = calculateDistance(grid, activeToken, token);
-
-      return {
-        value: distance,
-        units: scene.grid.units,
-      };
+      return calculateDistanceWithUnits(scene, grid, token, other);
     },
   ),
 ] satisfies AttributeLookup[];
