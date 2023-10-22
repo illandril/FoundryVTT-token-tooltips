@@ -23,7 +23,7 @@ const numberToNiceString = (value: number) => {
   } else if (value >= 0.833 && value <= 0.834) {
     string = '⅚';
   } else {
-    string = `${value}`;
+    string = new Intl.NumberFormat(navigator.language, { maximumFractionDigits: 3 }).format(value);
   }
   return string;
 };

@@ -26,7 +26,10 @@ export default addValue;
 
 const addValueWithoutTemp = (element: HTMLElement, value: ValidNonArrayAttributeType) => {
   element.classList.remove(CSS.TEMP);
+  appendValue(element, value);
+};
 
+export const appendValue = (element: Node, value: ValidNonArrayAttributeType) => {
   let node: Node;
   if (typeof value === 'boolean') {
     node = booleanNode(value);

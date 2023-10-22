@@ -427,3 +427,96 @@ describe('operations', () => {
     });
   });
 });
+
+describe('strings', () => {
+  beforeEach(() => {
+    jest.spyOn(navigator, 'language', 'get').mockReturnValue('en-US');
+  });
+
+  it.each([
+    ['test', '"test"'],
+    ['test', ' "test"'],
+    ['test', '"test" '],
+    ['test', '    "test"    '],
+    ['test', '\t"test"'],
+    ['test', '"test"\t'],
+    ['test', ' \t \t "test" \t  \t'],
+    ['test', '`test`'],
+    ['test', '\'test\''],
+    ['test', '"test\''],
+    ['test', '\'test`'],
+    ['Some string', '"Some string"'],
+    [' - ', '" - "'],
+    ['"42"', '\'"42"\''],
+    ['"42"', '""42""'],
+  ])('should return %j for %j', (expected, input) => {
+    const value = getMultiValue({} as Actor, input);
+    expect(value).toEqual({
+      value: expected,
+    });
+  });
+});
+
+describe('concatenation', () => {
+  const mockActor = {
+    system: {
+      one: 1,
+      two: 2,
+      three: 3,
+      four: 4,
+      five: 5,
+      ten: 10,
+      fifteen: 15,
+      twenty: 20,
+      units: 'lbs',
+      carryWeight: {
+        value: 1312,
+        max: 1600,
+        units: 'ounces',
+      },
+    },
+  } as Actor;
+
+  it.each([
+    'system.one & "/" & system.six',
+    'system.six & "/" & system.one',
+    'system.one & "/" + system.two',
+    'system.one & "/" system.two',
+    'system.twenty / system.five & " - " & system.ten > system.five & "." & system.five < system.three',
+  ])('should return null if any part is invalid (%j)', (input) => {
+    const value = getMultiValue(mockActor, input);
+    expect(value).toBeNull();
+  });
+
+  it.each([
+    ['12345', '1&"2"&1+2&2*2&10/2'],
+    ['AB', '"A"&&&&&"B"'],
+    ['1/2', 'system.one & "/" & system.two'],
+    ['15 / 45', 'system.ten + system.five & " / " & system.three * system.fifteen'],
+    ['1234', 'system.one & system.two & system.three & system.four'],
+    ['4 - 10.3', 'system.twenty / system.five & " - " & system.ten > system.five & "." & system.three < system.five'],
+    ['1/2', '(system.one) & "/" & (system.two)'],
+    ['6 lbs', 'system.two * system.three & " " & system.units'],
+    ['1,312 / 1,600 ounces', 'system.carryWeight.value & " / " & system.carryWeight.max & " " & system.carryWeight.units'],
+    ['¾ hours', 'system.three / system.four & ` ` & \'hours\''],
+  ])('should return %j for key=%j (en-US)', (expected, input) => {
+    const value = getMultiValue(mockActor, input);
+
+    expect(value?.value instanceof Node).toBe(true);
+    expect((value?.value as Node).textContent).toBe(expected);
+  });
+
+  it.each([
+    ['12345', '1&"2"&1+2&2*2&10/2'],
+    ['6 lbs', 'system.two * system.three & " " & system.units'],
+    ['1.312 / 1.600 ounces', 'system.carryWeight.value & " / " & system.carryWeight.max & " " & system.carryWeight.units'],
+    ['¾ hours', 'system.three / system.four & ` ` & \'hours\''],
+  ])('should return %j for key=%j (de-DE)', (expected, input) => {
+    jest.spyOn(navigator, 'language', 'get').mockReturnValue('de-DE');
+
+    const value = getMultiValue(mockActor, input);
+
+    expect(value?.value instanceof Node).toBe(true);
+    expect((value?.value as Node).textContent).toBe(expected);
+  });
+});
