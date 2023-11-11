@@ -14,12 +14,87 @@ const normalizeAttributeKey = (rawAttributeKey: string) => {
     .split('~');
 };
 
-const getMultiValuePart = (actor: Actor, rawAttributeKey: string): CalculatedValue | null => {
+const getAsSingleValue = (actor: Actor, rawAttributeKey: string): CalculatedValue | null => {
+  const keyValue = getSingleValue(actor, rawAttributeKey);
+  if (keyValue) {
+    return keyValue;
+  }
+
   const stringMatch = stringPattern.exec(rawAttributeKey);
   if (stringMatch) {
     return { value: stringMatch[1] };
   }
+  return null;
+};
 
+const extractNextKeyData = (actor: Actor, attributeKeys: string[], startIndex: number) => {
+  let attributeKey = '';
+  for (let i = startIndex; i < attributeKeys.length; i++) {
+    attributeKey += attributeKeys[i];
+    const value = getSingleValue(actor, attributeKey);
+    if (value) {
+      return {
+        attributeKey,
+        value,
+        endIndex: i,
+      };
+    }
+  }
+  return {
+    attributeKey: attributeKeys[startIndex],
+    value: null,
+    endIndex: startIndex,
+  };
+};
+
+const extractNextKey = (actor: Actor, attributeKeys: string[], startIndex: number) => {
+  const {
+    attributeKey,
+    value,
+    endIndex,
+  } = extractNextKeyData(actor, attributeKeys, startIndex);
+
+  if (attributeKey.trim() === '') {
+    return {
+      attributeKey,
+      value: null,
+      endIndex,
+      skip: true,
+    };
+  }
+  if (attributeKey === '-') {
+    return {
+      attributeKey,
+      value: null,
+      endIndex,
+      negate: true,
+      skip: true,
+    };
+  }
+  const maybeOperation = getOperation(attributeKey);
+  if (maybeOperation) {
+    return {
+      attributeKey,
+      value: null,
+      endIndex,
+      negate: false,
+      operation: maybeOperation,
+      skip: true,
+    };
+  }
+
+  return {
+    attributeKey,
+    value,
+    endIndex,
+  };
+};
+
+const getMultiValuePart = (actor: Actor, rawAttributeKey: string): CalculatedValue | null => {
+  const asSingleValue = getAsSingleValue(actor, rawAttributeKey);
+  if (asSingleValue) {
+    return asSingleValue;
+  }
   const attributeKeys = normalizeAttributeKey(rawAttributeKey);
 
   let valueSoFar = 0;
@@ -27,23 +102,21 @@ const getMultiValuePart = (actor: Actor, rawAttributeKey: string): CalculatedVal
   let operation: Operation = add;
   let fullValue;
   let hadOperation = false;
-  for (const attributeKey of attributeKeys) {
-    if (attributeKey.trim() === '') {
-      continue;
-    } else if (attributeKey === '-') {
+  for (let i = 0; i < attributeKeys.length; i++) {
+    const extracted = extractNextKey(actor, attributeKeys, i);
+    i = extracted.endIndex;
+    if (typeof extracted.negate === 'boolean') {
+      negate = extracted.negate;
       hadOperation = true;
-      negate = true;
-      continue;
-    } else {
-      const maybeOperation = getOperation(attributeKey);
-      if (maybeOperation) {
-        hadOperation = true;
-        operation = maybeOperation;
-        negate = false;
-        continue;
-      }
     }
-    const keyValue = getSingleValue(actor, attributeKey);
+    if (extracted.operation) {
+      operation = extracted.operation;
+      hadOperation = true;
+    }
+    if (extracted.skip) {
+      continue;
+    }
+    const keyValue = extracted.value;
     fullValue = keyValue;
     if (!keyValue || typeof keyValue.value !== 'number') {
       return hadOperation ? null : keyValue;

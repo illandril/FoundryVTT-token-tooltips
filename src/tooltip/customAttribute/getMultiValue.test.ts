@@ -502,7 +502,7 @@ describe('concatenation', () => {
   ])('should return %j for key=%j (en-US)', (expected, input) => {
     const value = getMultiValue(mockActor, input);
 
-    expect(value?.value instanceof Node).toBe(true);
+    expect(value?.value).toEqual(expect.any(Node));
     expect((value?.value as Node).textContent).toBe(expected);
   });
 
@@ -518,5 +518,56 @@ describe('concatenation', () => {
 
     expect(value?.value instanceof Node).toBe(true);
     expect((value?.value as Node).textContent).toBe(expected);
+  });
+});
+
+describe('dashed attribute keys', () => {
+  it('should return attribute value if there is an exact match', () => {
+    const value = getMultiValue({
+      flags: {
+        'ceane-talent': {
+          strain: {
+            total: 123,
+          },
+        },
+      },
+    } as unknown as Actor, 'flags.ceane-talent.strain.total');
+
+    expect(value).toEqual({
+      value: 123,
+    });
+  });
+
+  it('should support concatenation', () => {
+    const value = getMultiValue({
+      flags: {
+        'example-module': {
+          value: {
+            cur: 123,
+            max: 234,
+          },
+        },
+      },
+    } as unknown as Actor, 'flags.example-module.value.cur&" / "&flags.example-module.value.max');
+
+    expect(value?.value instanceof Node).toBe(true);
+    expect((value?.value as Node).textContent).toBe('123 / 234');
+  });
+
+  it('should support subtraction', () => {
+    const value = getMultiValue({
+      flags: {
+        'example-module': {
+          value: {
+            cur: 123,
+            max: 234,
+          },
+        },
+      },
+    } as unknown as Actor, 'flags.example-module.value.max-flags.example-module.value.cur');
+
+    expect(value).toEqual({
+      value: 111,
+    });
   });
 });
