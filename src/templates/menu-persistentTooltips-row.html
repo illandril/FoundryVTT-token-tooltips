@@ -1,0 +1,56 @@
+<div class="{{CSS.TYPE_CELL}}">
+  <select
+    type="text"
+    name="type"
+    aria-labelledby="{{CSS.HEADER}}-type"
+  >
+    {{selectOptions types selected=option.type}}
+  </select>
+</div>
+<div class="{{CSS.ID_CELL}}">
+  <input
+    type="text"
+    name="id"
+    value="{{option.id}}"
+    aria-labelledby="{{CSS.HEADER}}-id"
+  />
+  <div class="{{CSS.ID_STATE}}"></div>
+</div>
+<div class="{{CSS.POSITION_CELL}}">
+  <select
+    type="text"
+    name="position"
+    aria-labelledby="{{CSS.HEADER}}-position"
+  >
+    {{selectOptions positions selected=option.position}}
+  </select>
+</div>
+<div class="{{CSS.ROTATION_CELL}}">
+  <select
+    type="text"
+    name="rotation"
+    aria-labelledby="{{CSS.HEADER}}-rotation"
+  >
+    {{selectOptions rotations selected=option.rotation}}
+  </select>
+</div>
+<div class="{{CSS.ACTIONS}}">
+  <a
+    class="{{CSS.MOVE_DOWN}}"
+    title="{{menuLocalize 'moveDown'}}"
+  >
+    <i class="fas fa-arrow-down"></i>
+  </a>
+  <a
+    class="{{CSS.MOVE_UP}}"
+    title="{{menuLocalize 'moveUp'}}"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  <a
+    class="{{CSS.DELETE}}"
+    title="{{menuLocalize 'delete'}}"
+  >
+    <i class="fas fa-trash"></i>
+  </a>
+</div>

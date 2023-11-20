@@ -5,7 +5,6 @@ import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attribu
 import module from '../module';
 import { StandardPermissionLevel } from '../settings/SpecialPermissions';
 import * as StandardOptions from '../settings/StandardOptions';
-import { GM_PERMISSION } from './permissionMenus';
 
 const getStandardItems = () => {
   const items: StandardItem[] = [
@@ -63,9 +62,10 @@ type StandardItem = {
   attributeKey: string
   permissionSetting: typeof StandardOptions.HP.permission
   permission: StandardPermissionLevel
-  gmSetting: typeof StandardOptions.HP.hideFromGM
-  hideFromGM: boolean
-  gmPermission: GM_PERMISSION
+  hideFromGMSetting: typeof StandardOptions.HP.hideFromGM
+  showPlayerToGM: boolean
+  hideFromPersistentSetting: typeof StandardOptions.HP.hideFromPersistent
+  showOnPersistent: boolean
   help: string | undefined
 };
 
@@ -94,9 +94,10 @@ const getItem = (
     ),
     permissionSetting: option.permission,
     permission: option.permission.get(),
-    gmSetting: option.hideFromGM,
-    hideFromGM: option.hideFromGM.get(),
-    gmPermission: option.hideFromGM.get() ? GM_PERMISSION.NPC_ONLY : GM_PERMISSION.ALL,
+    hideFromGMSetting: option.hideFromGM,
+    showPlayerToGM: !option.hideFromGM.get(),
+    showOnPersistent: !option.hideFromPersistent.get(),
+    hideFromPersistentSetting: option.hideFromPersistent,
     help,
   };
 };

@@ -1,0 +1,139 @@
+
+#illandril-token-tooltips--menu--persistentTooltips {
+  #illandril-token-tooltips--menu--persistentTooltips--helpToggle {
+    display: none;
+    & + div {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 1rem;
+      & label {
+        cursor: pointer;
+        margin-left: 2rem;
+      }
+    }
+    &:not(:checked) {
+      & ~ .notes,
+      & ~ div .illandril-token-tooltips--menu--persistentTooltips--helpToggle-on {
+        display: none;
+      }
+    }
+    &:checked {
+      & ~ div .illandril-token-tooltips--menu--persistentTooltips--helpToggle-off {
+        display: none;
+      }
+    }
+  }
+
+  .notes {
+    max-width: 50rem;
+    margin-inline: auto;
+    padding-top: 1rem;
+
+    div {
+      white-space: pre-line;
+    }
+    div + div {
+      margin-top: 0.25rem;
+    }
+
+    .illandril-token-tooltips--menu--persistentTooltips--idState {
+      padding: 0 0.5rem;
+    }
+  }
+
+  .illandril-token-tooltips--menu--persistentTooltips--data {
+    display: grid;
+    grid-template-columns: repeat(5, max-content);
+    align-items: center;
+    grid-gap: 0.625rem 0.5rem;
+    padding: 1rem;
+
+    input[name="id"] {
+      width: 10rem;
+    }
+
+    select {
+      font-weight: inherit;
+      width: 100%;
+    }
+    /*
+    & > :nth-child(10n+1),
+    & > :nth-child(10n+2),
+    & > :nth-child(10n+3),
+    & > :nth-child(10n+4),
+    & > :nth-child(10n+5) {
+      font-weight: bold;
+    }
+    */
+  }
+
+  .illandril-token-tooltips--menu--persistentTooltips--actions {
+    text-align: center;
+
+    &.first .illandril-token-tooltips--menu--persistentTooltips--moveUp,
+    &.last .illandril-token-tooltips--menu--persistentTooltips--moveDown {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    & a + a {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .illandril-token-tooltips--menu--persistentTooltips--idCell {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .illandril-token-tooltips--menu--persistentTooltips--idState {
+    position: relative;
+    min-width: 1em;
+    display: inline-block;
+
+    &::after {
+      content: '\f071';
+      font-family: var(--font-awesome);
+      opacity: 0.65;
+      font-size: 85%;
+      font-weight: bold;
+      color: var(--color-level-error);
+      text-align: center;
+    }
+    &[data-name]::after {
+      content: '\f00c';
+      color: var(--color-level-success);
+    }
+    &[data-name][data-token]::after {
+      content: '\f560';
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &[data-name]:hover::before {
+      content: attr(data-name);
+      color: #000;
+      position: absolute;
+      top: 0;
+      left: calc(100% + 4px);
+      background: #fff;
+      border-radius: 2px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      padding: 2px 4px;
+      width: max-content;
+      max-width: 430px;
+      white-space: initial;
+      font-weight: normal;
+      z-index: 1;
+    }
+  }
+
+  #illandril-token-tooltips--menu--persistentTooltips--addRow {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    text-align: center;
+  }
+}

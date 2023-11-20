@@ -21,6 +21,7 @@
             "attributeKey": "The property key used to lookup the value you want to show in the tooltip. For example, to show the CR of a creature using the DnD5e system, specify `system.details.cr`. The Data Key Debugger can be enabled to assist in finding the correct Data Key for the information you want to display.\nYou can use +, -, * (multiply), / (divide), and % (modulo) to perform basic math (operations are applied left-to-right, NOT PEMDAS; e.g. `5+5*2` would be 20, not 15). You can also use <, >, <=, >=, != (not equal), or == (equal) to suppress a line if the specified condition is not met (e.g. `system.skills.perception.value != 0 + 10` will show a value 10 greater than the token's perception skill, but only if the token's perception skill is not zero). You can also use & to concatenate multiple values together, and \"quotes\" to specify fixed strings (e.g. `system.carryWeight.value & \" lbs\"` would show as `72 lbs`)",
             "permission": "The minimum permission a player must have to see this value in an actor's tooltip (assuming they can see the tooltip at all - see the Tooltip Visibility setting on the main settings page). Note: GMs are considered Owners for all actors.",
             "gmPermission": "This setting allows players to see their own details in the tooltip while hiding that information from GMs. Note: This checks if the token has a Player Owner, and not the character type, so an NPC character with a player owner counts as player info, and a PC character without a player owner counts as NPC info.",
+            "showOnPersistent": "This setting allows details to show on the hover tooltips, but be hidden on the persistent tooltips. Note: The other permission settings must pass in addition to this setting being enabled for details to show on the persistent tooltips - data cannot be shown in the persistent tooltip but hidden in the hover tooltip.",
             "bugs": "Click here to report bugs or request features"
           },
 
@@ -29,7 +30,8 @@
             "icon": "Icon",
             "attributeKey": "Data Key",
             "permission": "Permission to Show",
-            "gmPermission": "GM sees Player info?"
+            "gmPermission": "GM sees\nPlayer info?",
+            "showOnPersistent": "Show on\nPersistent?"
           },
 
           "standardOptionsTitle": "Standard Tooltip Values (may not show in all systems)",
@@ -95,6 +97,63 @@
 
           "toggleDebug.offLabel": "Enable Data Key Debugger",
           "toggleDebug.onLabel": "Disable Data Key Debugger"
+        },
+        "persistentTooltips": {
+          "name": "Persistent Tooltips",
+          "label": "Configure Persistent Tooltips",
+          "hint": "Configure Tooltips to always show in certain areas of the screen. Note: Unlike most other settings for this module, this is configurable per client instead of applying to everyone, allowing you to have persistent tooltips on a Tabletop Monitor for players to always see without cluttering up your GM screen.",
+
+          "title": "Persistent Tooltip Configuration",
+
+          "instructions": {
+            "bugs": "Click here to report bugs or request features",
+            "top": "Persistent Tooltips are visible whenever the associated Actor is visible on the current scene. If multiple tooltips are configured in the same location, they will be placed side-by-side. If a configured tooltip is not showing, verify that the ID is correct (check for extra whitespace before or after the ID), and make sure you have permission to see the tooltip by hovering over the token.",
+            "type": "Actor looks up the token for the tooltip based on the Actor ID. User looks up the token for the tooltip based on the specified user's selected character (selected as their character via User Configuration, not token selection).",
+            "id": "To get the ID for an Actor, open the actor's Actor Sheet and click on the book icon in the dialog title to copy the actor's ID.\nTo get the ID for a User, right-click on the user in the Players list and open the User Configuration dialog, then click the book icon in the dialog title to copy the user's ID.",
+            "id_bad": "Indicates that the specified ID was invalid - double check the type and ID values.",
+            "id_good": "Indicates that the specified ID was valid, but there is no associated token on the current scene. Hover over the icon to see the name of the associated User or Actor.",
+            "id_best": "Indicates that the specified ID was valid, and there is an associated token on the current scene. Hover over the icon to see the name of the associated Token.",
+            "rotation": "The rotation of the tooltip, in degrees (clockwise)."
+          },
+
+          "header": {
+            "type": "Type",
+            "id": "ID",
+            "position": "Position",
+            "rotation": "Rotation"
+          },
+
+          "positions": {
+            "top": {
+              "left": "Top Left",
+              "center": "Top",
+              "right": "Top Right"
+            },
+            "center": {
+              "left": "Left",
+              "center": "Center",
+              "right": "Right"
+            },
+            "bottom": {
+              "left": "Bottom Left",
+              "center": "Bottom",
+              "right": "Bottom Right"
+            }
+          },
+
+          "rotations": {
+            "0": "0°",
+            "90": "90°",
+            "180": "180°",
+            "270": "270°"
+          },
+
+          "moveDown": "Move Down",
+          "moveUp": "Move Up",
+          "delete": "Delete",
+          "deleteConfirm": "Are you sure you want to delete this value?",
+          "add": "Add",
+          "save": "Save Persistent Tooltips"
         }
       },
       "visibility": {
@@ -191,11 +250,17 @@
         "hint": "If checked, distances shown by the distance ruler will also factor in elevation differences between the two tokens for Gridless scenes."
       },
 
-      "rowsPerTooltip.label": "Tooltip Rows",
+      "rowsPerTooltip.label": "Tooltip Rows (Hover)",
       "rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",
 
-      "tooltipFontSize.label": "Tooltip Font Size",
-      "tooltipFontSize.hint": "The ratio of the font size of the Tooltip, relative to the font size used in most other places in the application.",
+      "tooltipFontSize.label": "Tooltip Font Size (Hover)",
+      "tooltipFontSize.hint": "The ratio of the font size of the Tooltips that show on hover, relative to the font size used in most other places in the application.",
+
+      "rowsPerPersistent.label": "Persistent Tooltip Rows",
+      "rowsPerPersistent.hint": "The maximum number of rows shown in each column in Persistent Tooltips.",
+
+      "persistentFontSize.label": "Persistent Tooltip Font Size",
+      "persistentFontSize.hint": "The ratio of the font size of Persistent Tooltips, relative to the font size used in most other places in the application.",
 
       "showOnLeft.label": "Show on Left",
       "showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",

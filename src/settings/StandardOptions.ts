@@ -10,16 +10,21 @@ const titleCase = (key: string) => {
 
 export type PermissionSetting = ReturnType<typeof module.settings.register<StandardPermissionLevel>>;
 export type HideFromGMSetting = ReturnType<typeof module.settings.register<boolean>>;
+export type HideFromPersistentSetting = ReturnType<typeof module.settings.register<boolean>>;
 
 export class StandardOption {
   readonly permission: PermissionSetting;
   readonly hideFromGM: HideFromGMSetting;
+  readonly hideFromPersistent: HideFromPersistentSetting;
   constructor(key: string, defaultPermission: StandardPermissionLevel) {
     this.permission = module.settings.register<StandardPermissionLevel>(
       `${key}MinimumPermission`, String, defaultPermission, { config: false },
     );
     this.hideFromGM = module.settings.register<boolean>(
       `hidePlayer${titleCase(key)}FromGM`, Boolean, false, { config: false },
+    );
+    this.hideFromPersistent = module.settings.register<boolean>(
+      `hide${titleCase(key)}FromPersistent`, Boolean, false, { config: false },
     );
   }
 }

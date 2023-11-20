@@ -32,13 +32,46 @@
 
   .illandril-token-tooltips--menu--customOptions--data {
     display: grid;
-    grid-template-columns: 115px 145px auto max-content max-content max-content;
+    grid-template-columns: repeat(2, max-content) 1fr repeat(4, max-content);
     align-items: center;
-    grid-gap: 8px 6px;
+    grid-gap: 0.625rem 0.5rem;
+
+    input[name="name"] {
+      width: 7.5rem;
+    }
+
+    input[name="icon"] {
+      width: 5rem;
+    }
+
+    select {
+      font-weight: inherit;
+      width: 100%;
+    }
+
+    & > :nth-child(14n+1),
+    & > :nth-child(14n+2),
+    & > :nth-child(14n+3),
+    & > :nth-child(14n+4),
+    & > :nth-child(14n+5),
+    & > :nth-child(14n+6),
+    & > :nth-child(14n+7),
+    & > :nth-child(14n+8) {
+      font-weight: bold;
+    }
   }
 
   .illandril-token-tooltips--menu--customOptions--header {
     font-weight: bold;
+    white-space: pre-line;
+    font-size: 1.1em;
+    opacity: 0.8;
+  }
+
+  .illandril-token-tooltips--menu--customOptions--gmPermissionsCell,
+  .illandril-token-tooltips--menu--customOptions--showOnPersistentCell,
+  .illandril-token-tooltips--menu--customOptions--header_boolean {
+    text-align: center;
   }
 
   .illandril-token-tooltips--menu--customOptions--actions {
@@ -62,18 +95,18 @@
   }
 
   .illandril-token-tooltips--menu--customOptions--iconPreview {
-    min-width: 20px;
+    min-width: 1rem;
     text-align: center;
-    margin-right: 4px;
+    margin-left: 0.25rem;
   }
 
   .illandril-token-tooltips--menu--customOptions--disabledInput {
     border-bottom: 1px solid rgba(0,0,0,0.2);
-    padding: 0 4px;
     white-space: nowrap;
 
     &[data-help] {
       position: relative;
+      padding-right: 1rem;
 
       &::after {
         content: '\f059';
@@ -83,6 +116,7 @@
         opacity: 0.65;
         font-size: 85%;
         line-height: 150%;
+        font-weight: normal;
       }
 
       &:hover::after {
@@ -95,12 +129,15 @@
         top: 0;
         left: calc(100% + 4px);
         background: #fff;
+        color: #000;
         border-radius: 2px;
         border: 1px solid rgba(0, 0, 0, 0.5);
         padding: 2px 4px;
         width: max-content;
         max-width: 430px;
         white-space: initial;
+        font-weight: normal;
+        z-index: 1;
       }
     }
   }
@@ -109,7 +146,7 @@
   .illandril-token-tooltips--menu--customOptions--standardOptionsTitle,
   .illandril-token-tooltips--menu--customOptions--customOptionsTitle {
     grid-column-start: 1;
-    grid-column-end: 7;
+    grid-column-end: 8;
     text-align: center;
   }
 
@@ -117,10 +154,8 @@
   .illandril-token-tooltips--menu--customOptions--customOptionsTitle {
     font-weight: bold;
     opacity: 0.8;
-  }
-
-  .illandril-token-tooltips--menu--customOptions--customOptionsTitle {
-    padding-top: 12px;
+    padding-top: 1rem;
+    font-size: 1.3em;
   }
 
   .form-footer {

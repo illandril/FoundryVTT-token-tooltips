@@ -13,6 +13,7 @@ const CSS = {
   CUSTOM_OPTIONS_TITLE: FORM_CSS_PREFIX.child('customOptionsTitle'),
   STANDARD_OPTIONS_TITLE: FORM_CSS_PREFIX.child('standardOptionsTitle'),
   HEADER: FORM_CSS_PREFIX.child('header'),
+  HEADER_BOOLEAN: FORM_CSS_PREFIX.child('header_boolean'),
 
   ADD_ROW_ID: FORM_CSS_PREFIX.child('addRow'),
   DELETE: FORM_CSS_PREFIX.child('delete'),
@@ -26,6 +27,7 @@ const CSS = {
   ICON_PREVIEW: FORM_CSS_PREFIX.child('iconPreview'),
   PERMISSIONS_CELL: FORM_CSS_PREFIX.child('permissionsCell'),
   GM_PERMISSIONS_CELL: FORM_CSS_PREFIX.child('gmPermissionsCell'),
+  SHOW_ON_PERSISTENT_CELL: FORM_CSS_PREFIX.child('showOnPersistentCell'),
 } as const;
 
 export default CSS;

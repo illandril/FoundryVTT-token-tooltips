@@ -3,6 +3,8 @@ import showNameOnly from '../attributeLookups/showNameOnly';
 import div from '../html/div';
 import emptyNode from '../html/emptyNode';
 import module from '../module';
+import { LookupDetails } from '../persistentTooltip/lookup';
+import { PersistentTooltipPosition } from '../persistentTooltip/types';
 import CustomOptions from '../settings/CustomOptions';
 import { showTooltipHotkey } from '../settings/hotkeys';
 import * as StandardOptions from '../settings/StandardOptions';
@@ -16,10 +18,10 @@ import showStandardRow from './showStandardRow';
 import StandardRow from './StandardRow';
 
 const CSS_TOOLTIP = module.cssPrefix.child('tooltip');
+const CSS_WRAPPER = module.cssPrefix.child('wrapper');
 const CSS_NAME = module.cssPrefix.child('name');
 const CSS_DATA = module.cssPrefix.child('data');
 const CSS_SHOW = module.cssPrefix.child('show');
-
 
 module.settings.register('rowsPerTooltip', Number, 5, {
   hasHint: true,
@@ -43,7 +45,34 @@ module.settings.register('tooltipFontSize', Number, 1, {
     );
   },
   callOnChangeOnInit: true,
+});
 
+module.settings.register('rowsPerPersistent', Number, 5, {
+  hasHint: true,
+  scope: 'client',
+  range: { min: 1, max: 30, step: 1 },
+  onChange: (value) => {
+    document.documentElement.style.setProperty(
+      '--illandril-token-tooltips--persistent-tooltip-rows',
+      `${value}`,
+    );
+    updateAllPersistentTooltips();
+  },
+  callOnChangeOnInit: true,
+});
+
+module.settings.register('persistentFontSize', Number, 1, {
+  hasHint: true,
+  scope: 'client',
+  range: { min: 0.5, max: 3, step: 0.1 },
+  onChange: (value) => {
+    document.documentElement.style.setProperty(
+      '--illandril-token-tooltips--persistent-tooltip-base-size',
+      `${value}em`,
+    );
+    updateAllPersistentTooltips();
+  },
+  callOnChangeOnInit: true,
 });
 
 const ShowOnLeft = module.settings.register('showOnLeft', Boolean, false, { hasHint: true });
@@ -51,14 +80,88 @@ const ShowTokenName = module.settings.register('showTokenName', Boolean, true, {
 const ShowOnHighlightHotkey = module.settings.register('showOnHighlightHotkey', Boolean, true, { hasHint: true });
 const ShowOnlyWithTooltipHotkey = module.settings.register('showOnlyWithTooltipHotkey', Boolean, false, { hasHint: true });
 
+export type PersistentTooltipArgs = {
+  position: PersistentTooltipPosition
+} & LookupDetails;
+
+const fixedWrappers: Record<PersistentTooltipPosition['vertical'], Record<PersistentTooltipPosition['horizontal'], HTMLDivElement | null>> = {
+  top: {
+    left: null,
+    center: null,
+    right: null,
+  },
+  center: {
+    left: null,
+    center: null,
+    right: null,
+  },
+  bottom: {
+    left: null,
+    center: null,
+    right: null,
+  },
+};
+
+const getFixedWrapper = ({ vertical, horizontal }: PersistentTooltipPosition) => {
+  const existingWrapper = fixedWrappers[vertical][horizontal];
+  if (existingWrapper) {
+    return existingWrapper;
+  }
+
+  const uiMiddle = document.getElementById('ui-middle');
+  const uiTop = document.getElementById('ui-top');
+  const uiBottom = document.getElementById('ui-bottom');
+  const newWrapper = div(CSS_WRAPPER);
+
+  newWrapper.setAttribute('data-horizontal', horizontal);
+  newWrapper.setAttribute('data-vertical', vertical);
+
+  const fixSize = () => {
+    const activeTool = document.querySelector('.control-tool.active');
+    newWrapper.style.left = `${Math.ceil(activeTool?.getBoundingClientRect()?.right ?? uiMiddle?.getBoundingClientRect().left ?? 0) + 8}px`;
+    newWrapper.style.right = `${Math.ceil(Math.max(window.innerWidth - (uiMiddle?.getBoundingClientRect().right ?? 0), 0)) + 8}px`;
+    newWrapper.style.top = `${Math.ceil(uiTop?.getBoundingClientRect().height ?? 0) + 8}px`;
+    newWrapper.style.bottom = `${Math.ceil(uiBottom?.getBoundingClientRect().height ?? 0) + 8}px`;
+  };
+
+  const observer = new ResizeObserver(fixSize);
+  if (uiMiddle) {
+    observer.observe(uiMiddle);
+  }
+  if (uiTop) {
+    observer.observe(uiTop);
+  }
+  if (uiBottom) {
+    observer.observe(uiBottom);
+  }
+  fixSize();
+
+  fixedWrappers[vertical][horizontal] = newWrapper;
+  document.body.appendChild(newWrapper);
+  return newWrapper;
+};
+
+const persistentTooltipUpdaters = new Set<() => void>();
+export const updateAllPersistentTooltips = () => {
+  for (const updater of persistentTooltipUpdaters) {
+    updater();
+  }
+};
+Hooks.on('canvasReady', updateAllPersistentTooltips);
+Hooks.on('controlToken', updateAllPersistentTooltips);
+Hooks.on('updateToken', updateAllPersistentTooltips);
+Hooks.on('updateActor', updateAllPersistentTooltips);
+Hooks.on('updateUser', updateAllPersistentTooltips);
+
 export default class Tooltip {
   #element = div(CSS_TOOLTIP);
+  #persistentUpdater?: () => void;
   #nameElement = div(CSS_NAME);
   #dataElement = div(CSS_DATA);
   #standardRows: StandardRow[];
   #customRows: AttributeRow[];
 
-  constructor() {
+  constructor(fixed?: PersistentTooltipArgs) {
     this.#element.appendChild(this.#nameElement);
     this.#element.appendChild(this.#dataElement);
 
@@ -66,7 +169,20 @@ export default class Tooltip {
     this.#prepareStandardRows();
     this.#customRows = [];
 
+    if (fixed) {
+      this.#initializePersistent(fixed);
+    } else {
+      this.#initializeDynamic();
+    }
+  }
+
+  get isPersistent() {
+    return !!this.#persistentUpdater;
+  }
+
+  #initializeDynamic() {
     document.body.appendChild(this.#element);
+
     window.addEventListener('mousedown', () => {
       this.#element.classList.remove(CSS_SHOW);
     });
@@ -88,6 +204,35 @@ export default class Tooltip {
         this.#onHover(null);
       }
     });
+  }
+
+  #initializePersistent(persistentSettings: PersistentTooltipArgs) {
+    getFixedWrapper(persistentSettings.position).appendChild(this.#element);
+    if (persistentSettings.position.rotation === 180) {
+      this.#element.style.rotate = '180deg';
+    } else if (persistentSettings.position.rotation === 90) {
+      this.#element.setAttribute('data-vertical', 'true');
+    } else if (persistentSettings.position.rotation === 270) {
+      this.#element.setAttribute('data-vertical', 'true');
+      this.#element.style.rotate = '180deg';
+    }
+    this.#persistentUpdater = () => {
+      this.#updatePersistent(persistentSettings);
+    };
+    persistentTooltipUpdaters.add(this.#persistentUpdater);
+    this.#updatePersistent(persistentSettings);
+  }
+
+  #updatePersistent(fixed: PersistentTooltipArgs) {
+    const token = fixed.getCurrentToken();
+    if (token && shouldShowTooltip(token)) {
+      module.logger.debug('updatePersistent show', token);
+      this.#updateData(token);
+      this.#show();
+    } else {
+      module.logger.debug('updatePersistent hide', token);
+      this.#hide();
+    }
   }
 
   #prepareStandardRows() {
@@ -163,11 +308,17 @@ export default class Tooltip {
   }
 
   #fixWidth() {
-    this.#dataElement.style.width = '';
     const lastRow = this.#dataElement.lastElementChild;
     if (lastRow instanceof HTMLElement) {
-      const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
-      this.#dataElement.style.width = `${newWidth}px`;
+      if (this.#element.getAttribute('data-vertical')) {
+        this.#dataElement.style.height = `max-content`;
+        const newHeight = lastRow.offsetTop + lastRow.offsetHeight;
+        this.#dataElement.style.height = `${newHeight}px`;
+      } else {
+        this.#dataElement.style.width = `max-content`;
+        const newWidth = lastRow.offsetLeft + lastRow.offsetWidth;
+        this.#dataElement.style.width = `${newWidth}px`;
+      }
     }
   }
 
@@ -232,7 +383,7 @@ export default class Tooltip {
   }
 
   #updateItems(actor: Actor, token: Token) {
-    if (showStandardRow(actor, token, StandardOptions.Items)) {
+    if (showStandardRow(actor, token, StandardOptions.Items, this.isPersistent)) {
       try {
         const items = attributeLookups.items.get(actor);
         for (const item of items) {
@@ -246,7 +397,7 @@ export default class Tooltip {
   }
 
   #updateTalents(actor: Actor, token: Token) {
-    if (showStandardRow(actor, token, StandardOptions.Talents)) {
+    if (showStandardRow(actor, token, StandardOptions.Talents, this.isPersistent)) {
       try {
         const talents = attributeLookups.talents.get(actor);
         for (const talent of talents) {
@@ -265,6 +416,9 @@ export default class Tooltip {
       return;
     }
     customOptions.forEach((customOption, i) => {
+      if (customOption?.hideOnPersistent && this.isPersistent) {
+        return;
+      }
       if (!showDataType(actor, token, customOption.permission, customOption.hideFromGM)) {
         return;
       }
@@ -278,10 +432,18 @@ export default class Tooltip {
       }
     });
   }
+
+  destroy() {
+    if (!this.#persistentUpdater) {
+      throw new Error('Non-persistent tooltips should not be destroyed');
+    }
+    this.#element.remove();
+    persistentTooltipUpdaters.delete(this.#persistentUpdater);
+  }
 }
 
 const shouldShowTooltip = (token: Token) => {
-  if (!(token && token.actor)) {
+  if (!(token && token?.actor)) {
     return false;
   }
   if (ShowOnlyWithTooltipHotkey.get() && !showTooltipHotkey.isPressed()) {

@@ -1,0 +1,63 @@
+<form autocomplete="off" onsubmit="event.preventDefault()">
+  <section class="form-body">
+    <input type="checkbox" id="{{CSS.HELP_TOGGLE_ID}}">
+    <div>
+      <a href="https://github.com/illandril/FoundryVTT-token-tooltips/issues" target="_blank">
+        {{menuLocalize 'instructions.bugs'}}
+      </a>
+      <label for="{{CSS.HELP_TOGGLE_ID}}">
+        <span class="{{CSS.HELP_TOGGLE_ON}}">
+          <i class="fas fa-circle-question"></i>
+          Hide Help
+        </span>
+        <span class="{{CSS.HELP_TOGGLE_OFF}}">
+          <i class="far fa-circle-question"></i>
+          Show Help
+        </span>
+      </label>
+    </div>
+    <div class="notes">
+      {{menuLocalize 'instructions.top'}}
+      <dl>
+        <dt>{{menuLocalize 'header.type'}}</dt>
+        <dd>{{menuLocalize 'instructions.type'}}</dd>
+        <dt>{{menuLocalize 'header.id'}}</dt>
+        <dd>
+          <div>{{menuLocalize 'instructions.id'}}</div>
+          <div><div class="{{CSS.ID_STATE}}"></div>{{menuLocalize 'instructions.id_bad'}}</div>
+          <div><div class="{{CSS.ID_STATE}}" data-name="Example"></div>{{menuLocalize 'instructions.id_good'}}</div>
+          <div><div class="{{CSS.ID_STATE}}" data-name="Example" data-token></div>{{menuLocalize 'instructions.id_best'}}</div>
+        </dd>
+        <dt>{{menuLocalize 'header.rotation'}}</dt>
+        <dd>{{menuLocalize 'instructions.rotation'}}</dd>
+      </dl>
+    </div>
+    <div class="{{CSS.DATA}}">
+      <div id="{{CSS.HEADER}}-type" class="{{CSS.HEADER}}">{{menuLocalize 'header.type'}}</div>
+      <div id="{{CSS.HEADER}}-id" class="{{CSS.HEADER}}">{{menuLocalize 'header.id'}}</div>
+      <div id="{{CSS.HEADER}}-position" class="{{CSS.HEADER}}">{{menuLocalize 'header.position'}}</div>
+      <div id="{{CSS.HEADER}}-rotation" class="{{CSS.HEADER}}">{{menuLocalize 'header.rotation'}}</div>
+      <div id="{{CSS.HEADER}}-actions" class="{{CSS.HEADER}}"></div>
+      {{#each persistentTooltips}}
+        {{> modules/illandril-token-tooltips/templates/menu-persistentTooltips-row.html
+           option=this
+           types=../types
+           positions=../positions
+           rotations=../rotations
+           CSS=../CSS
+           menuLocalize=../menuLocalize
+        }}
+      {{/each}}
+      <button type="button" id="{{CSS.ADD_ROW_ID}}">
+        <i class="fas fa-plus"></i>
+        {{menuLocalize 'add'}}
+      </button>
+    </div>
+  </section>
+  <footer class="form-footer">
+    <button type="submit" name="submit">
+      <i class="far fa-save"></i>
+      {{menuLocalize 'save'}}
+    </button>
+  </footer>
+</form>

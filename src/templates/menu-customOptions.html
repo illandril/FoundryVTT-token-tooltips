@@ -41,33 +41,45 @@
         <dd>
           {{menuLocalize 'instructions.gmPermission'}}
         </dd>
+        <dt>{{menuLocalize 'header.showOnPersistent'}}</dt>
+        <dd>
+          {{menuLocalize 'instructions.showOnPersistent'}}
+        </dd>
       </dl>
     </div>
     <div class="{{CSS.DATA}}">
       <div class="{{CSS.STANDARD_OPTIONS_TITLE}}">
         {{menuLocalize 'standardOptionsTitle'}}
       </div>
-      <div id="{{CSS.HEADER}}-name" class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.name'}}
-      </div>
-      <div id="{{CSS.HEADER}}-icon" class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.icon'}}
-      </div>
-      <div id="{{CSS.HEADER}}-attributeKey" class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.attributeKey'}}
-      </div>
-      <div id="{{CSS.HEADER}}-permission" class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.permission'}}
-      </div>
-      <div id="{{CSS.HEADER}}-permission" class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.gmPermission'}}
-      </div>
+      <div
+        id="{{CSS.HEADER}}-name"
+        class="{{CSS.HEADER}}"
+      >{{menuLocalize 'header.name'}}</div>
+      <div
+        id="{{CSS.HEADER}}-icon"
+        class="{{CSS.HEADER}}"
+      >{{menuLocalize 'header.icon'}}</div>
+      <div
+        id="{{CSS.HEADER}}-attributeKey"
+        class="{{CSS.HEADER}}"
+      >{{menuLocalize 'header.attributeKey'}}</div>
+      <div
+        id="{{CSS.HEADER}}-permission"
+        class="{{CSS.HEADER}}"
+      >{{menuLocalize 'header.permission'}}</div>
+      <div
+        id="{{CSS.HEADER}}-gmPermission"
+        class="{{CSS.HEADER}} {{CSS.HEADER_BOOLEAN}}"
+      >{{menuLocalize 'header.gmPermission'}}</div>
+      <div
+        id="{{CSS.HEADER}}-showOnPersistent"
+        class="{{CSS.HEADER}} {{CSS.HEADER_BOOLEAN}}"
+      >{{menuLocalize 'header.showOnPersistent'}}</div>
       <div id="{{CSS.HEADER}}-actions" class="{{CSS.HEADER}}"></div>
       {{#each standardOptions}}
         {{> modules/illandril-token-tooltips/templates/menu-customOptions-standardRow.html
            option=this
            entityPermission=../standardEntityPermission
-           gmPermissions=../gmPermissions
            CSS=../CSS
            menuLocalize=../menuLocalize
         }}
@@ -77,27 +89,17 @@
       <div class="{{CSS.CUSTOM_OPTIONS_TITLE}}">
         {{menuLocalize 'customOptionsTitle'}}
       </div>
-      <div class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.name'}}
-      </div>
-      <div class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.icon'}}
-      </div>
-      <div class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.attributeKey'}}
-      </div>
-      <div class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.permission'}}
-      </div>
-      <div class="{{CSS.HEADER}}">
-        {{menuLocalize 'header.gmPermission'}}
-      </div>
+      <div class="{{CSS.HEADER}}">{{menuLocalize 'header.name'}}</div>
+      <div class="{{CSS.HEADER}}">{{menuLocalize 'header.icon'}}</div>
+      <div class="{{CSS.HEADER}}">{{menuLocalize 'header.attributeKey'}}</div>
+      <div class="{{CSS.HEADER}}">{{menuLocalize 'header.permission'}}</div>
+      <div class="{{CSS.HEADER}} {{CSS.HEADER_BOOLEAN}}">{{menuLocalize 'header.gmPermission'}}</div>
+      <div class="{{CSS.HEADER}} {{CSS.HEADER_BOOLEAN}}">{{menuLocalize 'header.showOnPersistent'}}</div>
       <div class="{{CSS.HEADER}}"></div>
       {{#each customOptions}}
        {{> modules/illandril-token-tooltips/templates/menu-customOptions-customRow.html
           option=this
           entityPermission=../entityPermission
-          gmPermissions=../gmPermissions
           CSS=../CSS
           menuLocalize=../menuLocalize
         }}

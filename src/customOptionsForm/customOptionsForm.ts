@@ -2,9 +2,10 @@ import { isDebug, toggleDebug } from '../debugDisplay/debugDisplay';
 import module from '../module';
 import CustomOptions, { CustomOption } from '../settings/CustomOptions';
 import { PermissionLevel } from '../settings/SpecialPermissions';
+import { updateAllPersistentTooltips } from '../tooltip/Tooltip';
 import addEventListenerToAll from './addEventListenerToAll';
 import getStandardItems from './getStandardOptions';
-import permissionMenus, { GM_PERMISSION } from './permissionMenus';
+import permissionMenus from './permissionMenus';
 import CSS from './styles';
 
 const customRowTemplate = module.registerTemplate('menu-customOptions-customRow.html');
@@ -14,7 +15,8 @@ type CustomFormData = {
   name: string | string[]
   icon: string[]
   attributeKey: string[]
-  gmPermission: string[]
+  showPlayerToGM: boolean[]
+  showOnPersistent: boolean[]
   permission: PermissionLevel[]
 };
 const menuLocalize = (key: string) => module.localize(`setting.menu.customOptions.${key}`);
@@ -41,9 +43,9 @@ class CustomOptionsForm extends FormApplication {
     const customOptions = CustomOptions.get();
     const customOptionsPlusGM = customOptions.map(
       (customOption) => {
-        const gmPermission = customOption.hideFromGM ? GM_PERMISSION.NPC_ONLY : GM_PERMISSION.ALL;
         return {
-          gmPermission,
+          showPlayerToGM: !customOption.hideFromGM,
+          showOnPersistent: !customOption.hideOnPersistent,
           ...customOption,
         };
       },
@@ -63,24 +65,32 @@ class CustomOptionsForm extends FormApplication {
     const newOptions: CustomOption[] = [];
     if (Array.isArray(formData.name)) {
       for (let i = 0; i < formData.name.length; i++) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-        const hideFromGM = formData.gmPermission[i] === GM_PERMISSION.NPC_ONLY;
+        const hideFromGM = !formData.showPlayerToGM[i];
+        const hideOnPersistent = !formData.showOnPersistent[i];
         if (i < standardItems.length) {
           const standardItem = standardItems[i];
           standardItem.permissionSetting.set(formData.permission[i]);
-          standardItem.gmSetting?.set(hideFromGM);
+          standardItem.hideFromGMSetting?.set(hideFromGM);
+          standardItem.hideFromPersistentSetting?.set(hideOnPersistent);
         } else {
           newOptions.push({
             name: formData.name[i],
             icon: formData.icon[i],
             attributeKey: formData.attributeKey[i],
             permission: formData.permission[i],
-            hideFromGM: hideFromGM,
+            hideFromGM,
+            hideOnPersistent,
           });
         }
       }
     }
     CustomOptions.set(newOptions);
+
+    // The settings don't always update immediately,
+    // so give it time to propogate before updating
+    setTimeout(() => {
+      updateAllPersistentTooltips();
+    }, 100);
   }
 
   onUpdateIcon(event: Event) {
@@ -155,30 +165,30 @@ class CustomOptionsForm extends FormApplication {
     this._fixDebugToggleCSS();
   }
 
-  onAdd(event: Event) {
-    if (!(event.target instanceof HTMLElement)) {
-      module.logger.error('onAdd called with an event that did not target an HTMLElement');
-      return;
-    }
-    const addRow = event.target;
-    if (!addRow) {
-      module.logger.error('onAdd called with an event target with no parentElement');
-      return;
-    }
-
+  onAdd() {
     void (async () => {
       const newRow = jQuery(
         await customRowTemplate.render({
           ...permissionMenus,
-          option: { name: 'New Value', permission: 'NONE' },
+          option: {
+            name: 'New Value',
+            permission: 'NONE',
+            showPlayerToGM: true,
+            showOnPersistent: true,
+          },
           CSS,
           menuLocalize,
         }),
       );
-      newRow.insertBefore(jQuery(addRow));
-      this._activateRowListeners(newRow);
-      this.setPosition({ height: 'auto' });
-      newRow.first().select();
+      const addRow = this.element[0].querySelector(`#${CSS.ADD_ROW_ID}`);
+      if (!addRow) {
+        module.logger.error('Could not add a new row, because the add button could not be found');
+      } else {
+        newRow.insertBefore(jQuery(addRow));
+        this._activateRowListeners(newRow);
+        this.setPosition({ height: 'auto' });
+        newRow.first().select();
+      }
     })();
   }
 

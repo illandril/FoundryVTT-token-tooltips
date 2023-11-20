@@ -20,7 +20,7 @@ class StandardRow {
 
   update(tooltip: Tooltip, actor: Actor, token: Token) {
     module.logger.debug('StandardRow update', this.groupID);
-    if (showStandardRow(actor, token, this.option)) {
+    if (showStandardRow(actor, token, this.option, tooltip.isPersistent)) {
       if (this.attributeLookup instanceof AsyncAttributeLookup) {
         const asyncLookup: AsyncAttributeLookup = this.attributeLookup;
         const reference = tooltip._prepareAsyncReference(asyncLookup.id);

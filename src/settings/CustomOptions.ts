@@ -7,6 +7,7 @@ export type CustomOption = {
   attributeKey: string
   permission: PermissionLevel
   hideFromGM: boolean
+  hideOnPersistent?: boolean
 };
 
 const CustomOptions = module.settings.register<CustomOption[]>(

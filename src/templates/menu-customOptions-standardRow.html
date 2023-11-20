@@ -29,13 +29,24 @@
   </select>
 </div>
 <div class="{{CSS.GM_PERMISSIONS_CELL}}">
-  <select
-    type="text"
-    name="gmPermission"
-    aria-labelledby="{{CSS.HEADER}}-permission"
-  >
-    {{selectOptions gmPermissions selected=option.gmPermission}}
-  </select>
+  <input
+    type="checkbox"
+    name="showPlayerToGM"
+    aria-labelledby="{{CSS.HEADER}}-gmPermission"
+    {{#if option.showPlayerToGM}}
+    checked
+    {{/if}}
+  />
+</div>
+<div class="{{CSS.SHOW_ON_PERSISTENT_CELL}}">
+  <input
+    type="checkbox"
+    name="showOnPersistent"
+    aria-labelledby="{{CSS.HEADER}}-showOnPersistent"
+    {{#if option.showOnPersistent}}
+    checked
+    {{/if}}
+  />
 </div>
 <div class="{{CSS.ACTIONS}}" style="visibility:hidden;">
   <a
