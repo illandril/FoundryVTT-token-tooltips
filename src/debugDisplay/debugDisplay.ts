@@ -50,6 +50,9 @@ const addDataRows = (actor: Actor, keySoFar: string | null, data: Record<string,
   }
   seen.add(data);
   const keys = Object.keys(data);
+  if (!keys.includes('token')) {
+    keys.push('token');
+  }
   keys.sort();
   for (const key of keys) {
     if (
@@ -57,7 +60,6 @@ const addDataRows = (actor: Actor, keySoFar: string | null, data: Record<string,
       || key === 'permission'
       || key === 'id'
       || key === 'sort'
-      || key === 'token'
       || key === ''
     ) {
       continue;
