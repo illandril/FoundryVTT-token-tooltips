@@ -75,3 +75,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: './dist/module.json, ./dist/module.zip'
           tag: ${{ github.ref_name }}
+
+      - name: Release
+        uses: illandril/FoundryVTT-package-release-action@v1
+        with:
+          package-release-token: ${{ secrets.PACKAGE_RELEASE_TOKEN }}
+          manifest-url: "https://github.com/${{ github.repository }}/releases/download/v${{ steps.version.outputs.result }}/module.json"
