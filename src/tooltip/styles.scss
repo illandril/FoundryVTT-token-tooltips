@@ -12,6 +12,7 @@
   display: flex;
   pointer-events: none;
   gap: 8px;
+  z-index: var(--z-index-canvas, 0);
 
   &[data-vertical="bottom"] {
     align-items: flex-end;
@@ -56,6 +57,7 @@
   border: 0.125rem solid rgba(255, 255, 255, 0.9);
   font-size: var(--illandril-token-tooltips--tooltip-base-size);
   padding: 0.5em;
+  z-index: var(--z-index-tooltip, 9999);
 
   &.illandril-token-tooltips--show {
     display: block;
