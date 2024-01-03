@@ -54,7 +54,8 @@ const getStandardItems = () => {
 
 const LOCALIZED_ICON = Symbol('Localized Icon');
 
-type StandardItem = {
+export type StandardItem = {
+  key: string
   isHP: boolean
   name: string
   icon: string
@@ -64,16 +65,16 @@ type StandardItem = {
   permission: StandardPermissionLevel
   hideFromGMSetting: typeof StandardOptions.HP.hideFromGM
   showPlayerToGM: boolean
-  hideFromPersistentSetting: typeof StandardOptions.HP.hideFromPersistent
+  hideOnPersistentSetting: typeof StandardOptions.HP.hideOnPersistent
   showOnPersistent: boolean
   help: string | undefined
 };
 
 const getItem = (
-  name: string, icon: string | typeof LOCALIZED_ICON,
+  key: string, icon: string | typeof LOCALIZED_ICON,
   option: StandardOptions.StandardOption,
 ): StandardItem => {
-  const keyPrefix = `setting.menu.customOptions.standard.${name}`;
+  const keyPrefix = `setting.menu.customOptions.standard.${key}`;
   const helpKey = `${keyPrefix}.help`;
   const help = module.localize(helpKey, undefined, true);
   let iconString: string;
@@ -83,7 +84,8 @@ const getItem = (
     iconString = icon;
   }
   return {
-    isHP: name === 'hp',
+    key,
+    isHP: key === 'hp',
     name: module.localize(
       `${keyPrefix}.name`,
     ),
@@ -96,8 +98,8 @@ const getItem = (
     permission: option.permission.get(),
     hideFromGMSetting: option.hideFromGM,
     showPlayerToGM: !option.hideFromGM.get(),
-    showOnPersistent: !option.hideFromPersistent.get(),
-    hideFromPersistentSetting: option.hideFromPersistent,
+    showOnPersistent: !option.hideOnPersistent.get(),
+    hideOnPersistentSetting: option.hideOnPersistent,
     help,
   };
 };

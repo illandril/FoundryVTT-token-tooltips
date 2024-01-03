@@ -22,6 +22,8 @@
             "permission": "The minimum permission a player must have to see this value in an actor's tooltip (assuming they can see the tooltip at all - see the Tooltip Visibility setting on the main settings page). Note: GMs are considered Owners for all actors.",
             "gmPermission": "This setting allows players to see their own details in the tooltip while hiding that information from GMs. Note: This checks if the token has a Player Owner, and not the character type, so an NPC character with a player owner counts as player info, and a PC character without a player owner counts as NPC info.",
             "showOnPersistent": "This setting allows details to show on the hover tooltips, but be hidden on the persistent tooltips. Note: The other permission settings must pass in addition to this setting being enabled for details to show on the persistent tooltips - data cannot be shown in the persistent tooltip but hidden in the hover tooltip.",
+            "show": "Show Help",
+            "hide": "Hide Help",
             "bugs": "Click here to report bugs or request features"
           },
 
@@ -98,6 +100,25 @@
           "toggleDebug.offLabel": "Enable Data Key Debugger",
           "toggleDebug.onLabel": "Disable Data Key Debugger"
         },
+        "importExport": {
+          "name": "Import / Export Tooltip Values",
+          "label": "Import / Export",
+          "hint": "Export Tooltip Values from one world and Import them to another (or share them with Illandril to help with debugging issues).",
+
+          "title": "Illandril's Token Tooltips Import / Export",
+
+          "instructions": {
+            "bugs": "Click here to report bugs or request features",
+            "notes": "This utility only imports or exports the Tooltip Values settings. Other tooltip settings (e.g. Persistent Tooltips, Simplify HP for Players, etc) are not included. Clicking Export will prompt you to download a `.json` file. Clicking Import will prompt you to select a previously downloaded `.json` file. Import may fail if you attempt to import settings exported from a different version of Illandril's Token Tooltips."
+          },
+
+          "import": "Import",
+          "export": "Export",
+          "close": "Close",
+          "confirmImport": "Are you sure you want to overwrite your current Tooltip Values settings? WARNING: There is no \"undo\" - if you import to the wrong place, and don't have a valid saved export to restore from, you will need to manually restore your previous settings one by one from memory.",
+          "error": "The selected file could not be read. Make sure you are using an export from a world that was using the same version of Illandril's Token Tooltips.",
+          "success": "Tooltip Values have been imported. Consider clicking Configure Tooltip Values to confirm you imported the expected settings."
+        },
         "persistentTooltips": {
           "name": "Persistent Tooltips",
           "label": "Configure Persistent Tooltips",
@@ -106,6 +127,8 @@
           "title": "Persistent Tooltip Configuration",
 
           "instructions": {
+            "show": "Show Help",
+            "hide": "Hide Help",
             "bugs": "Click here to report bugs or request features",
             "top": "Persistent Tooltips are visible whenever the associated Actor is visible on the current scene. If multiple tooltips are configured in the same location, they will be placed side-by-side. If a configured tooltip is not showing, verify that the ID is correct (check for extra whitespace before or after the ID), and make sure you have permission to see the tooltip by hovering over the token.",
             "type": "Actor looks up the token for the tooltip based on the Actor ID. User looks up the token for the tooltip based on the specified user's selected character (selected as their character via User Configuration, not token selection).",

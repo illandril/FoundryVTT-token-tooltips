@@ -1,0 +1,27 @@
+<form autocomplete="off" onsubmit="event.preventDefault()">
+  <section class="form-body">
+    <div>
+      <a href="https://github.com/illandril/FoundryVTT-token-tooltips/issues" target="_blank">
+        {{menuLocalize 'instructions.bugs'}}
+      </a>
+    </div>
+    <div>
+      {{menuLocalize 'instructions.notes'}}
+    </div>
+  </section>
+  <footer class="form-footer">
+    <button type="button" class="{{CSS.IMPORT}}">
+      <input type="file" accept="application/json,.json">
+      <i class="fas fa-upload"></i>
+      {{menuLocalize 'import'}}
+    </button>
+    <button type="button" class="{{CSS.EXPORT}}">
+      <i class="fas fa-download"></i>
+      {{menuLocalize 'export'}}
+    </button>
+    <button type="button" class="{{CSS.CLOSE}}">
+      <i class="fas fa-x"></i>
+      {{menuLocalize 'close'}}
+    </button>
+  </footer>
+</form>

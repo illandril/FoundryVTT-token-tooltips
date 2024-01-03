@@ -71,7 +71,7 @@ class CustomOptionsForm extends FormApplication {
           const standardItem = standardItems[i];
           standardItem.permissionSetting.set(formData.permission[i]);
           standardItem.hideFromGMSetting?.set(hideFromGM);
-          standardItem.hideFromPersistentSetting?.set(hideOnPersistent);
+          standardItem.hideOnPersistentSetting?.set(hideOnPersistent);
         } else {
           newOptions.push({
             name: formData.name[i],

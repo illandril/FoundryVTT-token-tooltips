@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default-member */
 import * as Manifest from '@illandril/foundryvtt-utils/dist/Manifest.js';
 import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import fs from 'fs-extra';
 import copy from 'rollup-plugin-copy';
@@ -20,6 +21,7 @@ export default {
     sourcemapPathTransform: (sourcePath) => sourcePath.replace(/^..[/\\]?/, ''),
   },
   plugins: [
+    commonjs(),
     nodeResolve({ extensions: ['.js', '.ts'] }),
     babel({
       babelHelpers: 'bundled',

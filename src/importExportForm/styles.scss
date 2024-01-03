@@ -1,0 +1,25 @@
+
+#illandril-token-tooltips--menu--importExport {
+  .form-body {
+    max-width: 30em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+    padding: 0.5em 1em;
+  }
+
+  .illandril-token-tooltips--menu--importExport--import {
+    input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .form-footer {
+    margin-top: 0.5em;
+    display: flex;
+    gap: 0.5em;
+  }
+}
