@@ -55,7 +55,8 @@ export default [
       if (game.system.id !== pf2eSystemID) {
         return null;
       }
-      const value = foundry.utils.getProperty(actor.system, `attributes.perception.value`);
+      const key = foundry.utils.isNewerVersion('5.12.0', game.system.version) ? 'attributes.perception.value' : 'perception.value';
+      const value = foundry.utils.getProperty(actor.system, key);
       let numValue: number | null;
       if (typeof value === 'string') {
         numValue = stringToInt(value);
