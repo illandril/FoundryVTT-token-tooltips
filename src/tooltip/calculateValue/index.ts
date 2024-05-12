@@ -4,7 +4,7 @@ import calculateValidAttributeValue from './calculateValidAttributeValue';
 import toValidAttributeValue from './toValidAttributeValue';
 import type { CalculatedValue, MaybeAttributeObject } from './types';
 
-export * from './types';
+export type * from './types';
 
 const calculateValue = (attribute: unknown, attributeKey = ''): CalculatedValue | null => {
   module.logger.debug('calculateValue', attributeKey, attribute);

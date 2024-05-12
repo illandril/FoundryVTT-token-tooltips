@@ -1,11 +1,4 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["@illandril/biome-config", "@illandril/foundryvtt-types/biome"],
-  "linter": {
-    "rules": {
-      "style": {
-        "useNamingConvention": "warn"
-      }
-    }
-  }
+  "extends": ["@illandril/biome-config", "@illandril/foundryvtt-types/biome"]
 }
