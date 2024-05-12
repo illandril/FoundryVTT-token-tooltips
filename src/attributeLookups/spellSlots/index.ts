@@ -1,7 +1,7 @@
 import type AttributeLookup from '../AttributeLookup';
 import type { AsyncAttributeLookup } from '../AttributeLookup';
 import pf2eSpellSlots from '../systems/pf2e/spell-slots';
-import spellSlot from './spellSlot.js';
+import spellSlot from './spellSlot';
 
 export default [
   // Simple World-Building

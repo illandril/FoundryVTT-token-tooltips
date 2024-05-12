@@ -285,6 +285,9 @@
       "persistentFontSize.label": "Persistent Tooltip Font Size",
       "persistentFontSize.hint": "The ratio of the font size of Persistent Tooltips, relative to the font size used in most other places in the application.",
 
+      "darkMode.label": "Dark Mode",
+      "darkMode.hint": "If checked, the tooltip will show in a dark color scheme (as opposed to light).",
+
       "showOnLeft.label": "Show on Left",
       "showOnLeft.hint": "If checked, the tooltip will show on the left side of tokens (as opposed to the right side).",
 

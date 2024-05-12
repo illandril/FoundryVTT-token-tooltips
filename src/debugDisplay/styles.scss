@@ -4,9 +4,9 @@
   right: 325px;
   max-height: 500px;
   max-width: 400px;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
+  background: var(--illandril-token-tooltips--tooltip-bg);
+  color: var(--illandril-token-tooltips--tooltip-fg);
+  border: 1px solid var(--illandril-token-tooltips--tooltip-border-color);
   overflow: auto;
   padding: 8px;
   z-index: var(--z-index-tooltip);

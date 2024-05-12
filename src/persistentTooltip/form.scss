@@ -1,4 +1,3 @@
-
 #illandril-token-tooltips--menu--persistentTooltips {
   #illandril-token-tooltips--menu--persistentTooltips--helpToggle {
     display: none;
@@ -93,7 +92,7 @@
     display: inline-block;
 
     &::after {
-      content: '\f071';
+      content: "\f071";
       font-family: var(--font-awesome);
       opacity: 0.65;
       font-size: 85%;
@@ -102,11 +101,11 @@
       text-align: center;
     }
     &[data-name]::after {
-      content: '\f00c';
+      content: "\f00c";
       color: var(--color-level-success);
     }
     &[data-name][data-token]::after {
-      content: '\f560';
+      content: "\f560";
     }
 
     &:hover::after {
@@ -115,13 +114,13 @@
 
     &[data-name]:hover::before {
       content: attr(data-name);
-      color: #000;
+      color: var(--illandril-token-tooltips--tooltip-fg);
       position: absolute;
       top: 0;
       left: calc(100% + 4px);
-      background: #fff;
+      background: var(--illandril-token-tooltips--tooltip-bg);
       border-radius: 2px;
-      border: 1px solid rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--illandril-token-tooltips--tooltip-border-color);
       padding: 2px 4px;
       width: max-content;
       max-width: 430px;

@@ -1,6 +1,7 @@
 import icon from '../../html/icon';
 import span from '../../html/span';
 import module from '../../module';
+import { isDarkMode } from '../../tooltip/darkMode';
 import type { LocalizedAndRawValue, LocalizedValueSimplifier } from '../LocalizedValueSimplifier';
 import a5eSystemID from '../systems/a5e/systemID';
 import d35eSystemID from '../systems/d35e/systemID';
@@ -64,8 +65,11 @@ const stylizeDamageType = (value: LocalizedAndRawValue, useIcon: boolean, useCol
     node = document.createElement('span');
     node.appendChild(document.createTextNode(value.localized));
   }
-  if (useColor && config?.color) {
-    node.style.color = config.color;
+  if (useColor) {
+    const color = isDarkMode() ? config?.colorDark : config?.color;
+    if (color) {
+      node.style.color = color;
+    }
   }
   if (value.suffix) {
     node.appendChild(document.createTextNode('\u00a0'));

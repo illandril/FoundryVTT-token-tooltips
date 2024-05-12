@@ -11,6 +11,7 @@ import * as StandardOptions from '../settings/standard-options';
 import StandardRow from './StandardRow';
 import calculateValue from './calculateValue';
 import updateCustomAttributeRow from './customAttribute/updateCustomAttributeRow';
+import { disableDarkMode, enableDarkMode } from './darkMode';
 import { getControlledToken } from './getControlledToken';
 import isTooltipVisible from './isTooltipVisible';
 import AttributeRow from './row/AttributeRow';
@@ -61,6 +62,15 @@ module.settings.register('persistentFontSize', Number, 1, {
       '--illandril-token-tooltips--persistent-tooltip-base-size',
       `${value}em`,
     );
+    updateAllPersistentTooltips();
+  },
+  callOnChangeOnInit: true,
+});
+
+module.settings.register('darkMode', Boolean, false, {
+  hasHint: true,
+  onChange: (value) => {
+    value ? enableDarkMode() : disableDarkMode();
     updateAllPersistentTooltips();
   },
   callOnChangeOnInit: true,
