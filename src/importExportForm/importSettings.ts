@@ -1,7 +1,7 @@
 import getStandardItems, { type StandardItem } from '../customOptionsForm/getStandardOptions';
 import module from '../module';
 import CustomOptions, { type CustomOption } from '../settings/CustomOptions';
-import type { StandardPermissionLevel } from '../settings/specialPermissions';
+import type { StandardPermissionLevel } from '../settings/special-permissions';
 import { updateAllPersistentTooltips } from '../tooltip/Tooltip';
 
 export type ImportObject = {

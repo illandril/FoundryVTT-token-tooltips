@@ -1,5 +1,5 @@
 import module from '../module';
-import type { PermissionLevel } from './specialPermissions';
+import type { PermissionLevel } from './special-permissions';
 
 export type CustomOption = {
   name: string;

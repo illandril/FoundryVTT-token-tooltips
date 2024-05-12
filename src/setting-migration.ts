@@ -1,6 +1,6 @@
 import module from './module';
-import { HIDE_FROM_EVERYONE_OPTION } from './settings/specialPermissions';
-import { Movement, Resources } from './settings/standardOptions';
+import { HIDE_FROM_EVERYONE_OPTION } from './settings/special-permissions';
+import { Movement, Resources } from './settings/standard-options';
 
 const SettingsVersion = module.settings.register('settingsVersion', Number, 0, { config: false });
 

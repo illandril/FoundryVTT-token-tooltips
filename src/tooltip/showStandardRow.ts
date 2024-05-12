@@ -1,4 +1,4 @@
-import type { StandardOption } from '../settings/standardOptions';
+import type { StandardOption } from '../settings/standard-options';
 import showDataType from './showDataType';
 
 const showStandardRow = (actor: Actor, token: Token, option: StandardOption, isPersistent: boolean) => {

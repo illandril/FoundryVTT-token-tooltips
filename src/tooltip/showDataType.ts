@@ -2,7 +2,7 @@ import {
   HIDE_FROM_EVERYONE_OPTION,
   SHOW_TO_GMS_ONLY,
   type StandardPermissionLevel,
-} from '../settings/specialPermissions';
+} from '../settings/special-permissions';
 
 const showDataType = (actor: Actor, token: Token, minimumPermission: StandardPermissionLevel, hideFromGM: boolean) => {
   if (minimumPermission === HIDE_FROM_EVERYONE_OPTION) {

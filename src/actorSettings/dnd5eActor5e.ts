@@ -1,7 +1,7 @@
 import icon from '../html/icon';
 import module from '../module';
-import { HIDE_FROM_EVERYONE_OPTION } from '../settings/specialPermissions';
-import { Items } from '../settings/standardOptions';
+import { HIDE_FROM_EVERYONE_OPTION } from '../settings/special-permissions';
+import { Items } from '../settings/standard-options';
 import './Actor5e.scss';
 import { canCalculateUses, setShowInTooltip, showInTooltip } from './item-system';
 

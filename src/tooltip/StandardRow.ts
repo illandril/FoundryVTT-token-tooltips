@@ -1,7 +1,7 @@
 import type AttributeLookup from '../attributeLookups/AttributeLookup';
 import { AsyncAttributeLookup } from '../attributeLookups/AttributeLookup';
 import module from '../module';
-import type { StandardOption } from '../settings/standardOptions';
+import type { StandardOption } from '../settings/standard-options';
 import type Tooltip from './Tooltip';
 import AttributeRow from './row/AttributeRow';
 import showStandardRow from './showStandardRow';

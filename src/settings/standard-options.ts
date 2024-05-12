@@ -1,5 +1,5 @@
 import module from '../module';
-import { HIDE_FROM_EVERYONE_OPTION, type StandardPermissionLevel } from './specialPermissions';
+import { HIDE_FROM_EVERYONE_OPTION, type StandardPermissionLevel } from './special-permissions';
 
 const titleCase = (key: string) => {
   if (key === 'hp' || key === 'ac') {

@@ -1,7 +1,7 @@
 import { isDebug, toggleDebug } from '../debugDisplay/debugDisplay';
 import module from '../module';
 import CustomOptions, { type CustomOption } from '../settings/CustomOptions';
-import type { PermissionLevel } from '../settings/specialPermissions';
+import type { PermissionLevel } from '../settings/special-permissions';
 import { updateAllPersistentTooltips } from '../tooltip/Tooltip';
 import addEventListenerToAll from './addEventListenerToAll';
 import getStandardItems from './getStandardOptions';

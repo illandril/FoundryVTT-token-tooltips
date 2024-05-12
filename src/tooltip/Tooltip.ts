@@ -7,7 +7,7 @@ import type { LookupDetails } from '../persistentTooltip/lookup';
 import type { PersistentTooltipPosition } from '../persistentTooltip/types';
 import CustomOptions from '../settings/CustomOptions';
 import { showTooltipHotkey } from '../settings/hotkeys';
-import * as StandardOptions from '../settings/standardOptions';
+import * as StandardOptions from '../settings/standard-options';
 import StandardRow from './StandardRow';
 import calculateValue from './calculateValue';
 import updateCustomAttributeRow from './customAttribute/updateCustomAttributeRow';

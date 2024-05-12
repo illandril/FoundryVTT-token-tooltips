@@ -1,5 +1,5 @@
 import module from '../module';
-import { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from '../settings/specialPermissions';
+import { HIDE_FROM_EVERYONE_OPTION, SHOW_TO_GMS_ONLY } from '../settings/special-permissions';
 
 const fixChoices = (key: string, choices: string[]) => {
   const choiceObject: Record<string, string> = {};

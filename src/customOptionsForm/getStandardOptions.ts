@@ -3,8 +3,8 @@ import { supportedSystems as condImmSupportedSystems } from '../attributeLookups
 import { supportedSystems as damResImmVulnSupportedSystems } from '../attributeLookups/damageResImmVuln';
 import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attributeLookups/savingThrows';
 import module from '../module';
-import type { StandardPermissionLevel } from '../settings/specialPermissions';
-import * as StandardOptions from '../settings/standardOptions';
+import type { StandardPermissionLevel } from '../settings/special-permissions';
+import * as StandardOptions from '../settings/standard-options';
 
 const getStandardItems = () => {
   const items: StandardItem[] = [
