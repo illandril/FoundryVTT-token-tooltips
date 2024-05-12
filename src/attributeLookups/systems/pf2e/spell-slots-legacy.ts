@@ -1,12 +1,14 @@
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
-import { AsyncRow } from '../../AttributeLookup';
+import type { AsyncRow } from '../../AttributeLookup';
 import spellIcon from '../../spellSlots/spellIcon';
 
-const getSpellcastingEntries = (actor: pf2e.internal.actor.ActorPF2e): pf2e.internal.item.spellcastingEntry.SpellcastingEntryPF2e[] => {
+const getSpellcastingEntries = (
+  actor: pf2e.internal.actor.ActorPF2e,
+): pf2e.internal.item.spellcastingEntry.SpellcastingEntryPF2e[] => {
   const entries: {
-    sort: number
-    spellcastingEntry: pf2e.internal.item.spellcastingEntry.SpellcastingEntryPF2e
+    sort: number;
+    spellcastingEntry: pf2e.internal.item.spellcastingEntry.SpellcastingEntryPF2e;
   }[] = [];
   for (const item of actor.items) {
     if (item.type === 'spellcastingEntry') {
@@ -34,7 +36,7 @@ const getFocusEntry = (actor: pf2e.internal.actor.ActorPF2e): AsyncRow => {
 
 const getLevelEntry = (level: pf2e.internal.item.spellcastingEntry.SpellcastingSlotLevel): AsyncRow | null => {
   if (level.uses && level.uses.value !== undefined && level.uses.max > 0) {
-    let label;
+    let label: string;
     if (level.isCantrip) {
       label = game.i18n.localize('illandril-token-tooltips.cantripAbbreviation');
     } else {
@@ -49,6 +51,7 @@ const getLevelEntry = (level: pf2e.internal.item.spellcastingEntry.SpellcastingS
   return null;
 };
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
 export default async (baseActor: Actor) => {
   const actor = baseActor as pf2e.internal.actor.ActorPF2e;
   module.logger.debug('pf2e spell slots', actor.name, actor);
@@ -74,7 +77,6 @@ export default async (baseActor: Actor) => {
       // We want the rows to be in order, including the focus entry, and awaiting on an entry
       // in a loop is an acceptable performance risk. Chances are high that the user will have
       // only one or two spellcasting entries, so most will never notice the added delay
-      // eslint-disable-next-line no-await-in-loop
       const spellData = await entry.getSpellData();
       for (const level of spellData.levels) {
         const levelEntry = getLevelEntry(level);

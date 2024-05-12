@@ -1,5 +1,5 @@
 import unknownObject from '../../../dataConversion/unknownObject';
-import { CalculatedValue } from '../../../tooltip/calculateValue';
+import type { CalculatedValue } from '../../../tooltip/calculateValue';
 
 const a5eMovement = (key: string) => {
   return (actor: Actor): CalculatedValue | null => {

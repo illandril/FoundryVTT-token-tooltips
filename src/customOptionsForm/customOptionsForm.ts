@@ -1,37 +1,33 @@
 import { isDebug, toggleDebug } from '../debugDisplay/debugDisplay';
 import module from '../module';
-import CustomOptions, { CustomOption } from '../settings/CustomOptions';
-import { PermissionLevel } from '../settings/SpecialPermissions';
+import CustomOptions, { type CustomOption } from '../settings/CustomOptions';
+import type { PermissionLevel } from '../settings/specialPermissions';
 import { updateAllPersistentTooltips } from '../tooltip/Tooltip';
 import addEventListenerToAll from './addEventListenerToAll';
 import getStandardItems from './getStandardOptions';
 import permissionMenus from './permissionMenus';
-import CSS from './styles';
+import * as css from './styles';
 
 const customRowTemplate = module.registerTemplate('menu-customOptions-customRow.html');
 module.registerTemplate('menu-customOptions-standardRow.html');
 
 type CustomFormData = {
-  name: string | string[]
-  icon: string[]
-  attributeKey: string[]
-  showPlayerToGM: boolean[]
-  showOnPersistent: boolean[]
-  permission: PermissionLevel[]
+  name: string | string[];
+  icon: string[];
+  attributeKey: string[];
+  showPlayerToGM: boolean[];
+  showOnPersistent: boolean[];
+  permission: PermissionLevel[];
 };
 const menuLocalize = (key: string) => module.localize(`setting.menu.customOptions.${key}`);
 
 class CustomOptionsForm extends FormApplication {
-  constructor(object?: never, options?: FormApplicationOptions) {
-    super(object, options);
-  }
-
   /**
    * Default Options for this FormApplication
    */
   static get defaultOptions(): FormApplicationOptions {
     return {
-      ...super.defaultOptions,
+      ...FormApplication.defaultOptions,
       ...customOptionsFormOptions,
       classes: ['sheet'],
       // width: 960,
@@ -41,25 +37,23 @@ class CustomOptionsForm extends FormApplication {
 
   getData() {
     const customOptions = CustomOptions.get();
-    const customOptionsPlusGM = customOptions.map(
-      (customOption) => {
-        return {
-          showPlayerToGM: !customOption.hideFromGM,
-          showOnPersistent: !customOption.hideOnPersistent,
-          ...customOption,
-        };
-      },
-    );
+    const customOptionsPlusGM = customOptions.map((customOption) => {
+      return {
+        showPlayerToGM: !customOption.hideFromGM,
+        showOnPersistent: !customOption.hideOnPersistent,
+        ...customOption,
+      };
+    });
     return {
       ...permissionMenus,
       standardOptions: getStandardItems(),
       customOptions: customOptionsPlusGM,
-      CSS,
+      // biome-ignore lint/style/useNamingConvention: Legacy
+      CSS: css,
       menuLocalize,
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async _updateObject(_event: unknown, formData: CustomFormData) {
     const standardItems = getStandardItems();
     const newOptions: CustomOption[] = [];
@@ -117,7 +111,6 @@ class CustomOptionsForm extends FormApplication {
       module.logger.error('onDelete called with a target with no associated row');
       return;
     }
-    // eslint-disable-next-line no-alert
     if (confirm(module.localize('setting.menu.customOptions.deleteConfirm'))) {
       row.remove();
     }
@@ -176,11 +169,12 @@ class CustomOptionsForm extends FormApplication {
             showPlayerToGM: true,
             showOnPersistent: true,
           },
-          CSS,
+          // biome-ignore lint/style/useNamingConvention: Legacy
+          CSS: css,
           menuLocalize,
         }),
       );
-      const addRow = this.element[0].querySelector(`#${CSS.ADD_ROW_ID}`);
+      const addRow = this.element[0].querySelector(`#${css.ADD_ROW_ID}`);
       if (!addRow) {
         module.logger.error('Could not add a new row, because the add button could not be found');
       } else {
@@ -202,14 +196,14 @@ class CustomOptionsForm extends FormApplication {
 
     module.logger.debug('Activating CustomOptionsForm listeners');
 
-    const addButton = document.getElementById(CSS.ADD_ROW_ID);
+    const addButton = document.getElementById(css.ADD_ROW_ID);
     if (!addButton) {
-      module.logger.error(`Could not find #${CSS.ADD_ROW_ID} button when adding listeners`);
+      module.logger.error(`Could not find #${css.ADD_ROW_ID} button when adding listeners`);
     } else {
       addButton.addEventListener('click', this.onAdd.bind(this));
     }
 
-    const debugToggles = form.querySelectorAll(`.${CSS.DEBUG_TOGGLE}`);
+    const debugToggles = form.querySelectorAll(`.${css.DEBUG_TOGGLE}`);
     const onToggleDebug = this.onToggleDebug.bind(this);
     for (const debugToggle of debugToggles) {
       debugToggle.addEventListener('click', onToggleDebug);
@@ -220,14 +214,14 @@ class CustomOptionsForm extends FormApplication {
 
   _activateRowListeners(html: JQuery) {
     addEventListenerToAll(html, 'input[name="icon"]', 'input', this.onUpdateIcon.bind(this));
-    addEventListenerToAll(html, `.${CSS.DELETE}`, 'click', this.onDelete.bind(this));
-    addEventListenerToAll(html, `.${CSS.MOVE_DOWN}`, 'click', this.onMoveDown.bind(this));
-    addEventListenerToAll(html, `.${CSS.MOVE_UP}`, 'click', this.onMoveUp.bind(this));
+    addEventListenerToAll(html, `.${css.DELETE}`, 'click', this.onDelete.bind(this));
+    addEventListenerToAll(html, `.${css.MOVE_DOWN}`, 'click', this.onMoveDown.bind(this));
+    addEventListenerToAll(html, `.${css.MOVE_UP}`, 'click', this.onMoveUp.bind(this));
     this._refreshActionCells();
   }
 
   _refreshActionCells() {
-    const allCustomActions = this.element.find(`.${CSS.CUSTOM_OPTIONS_TITLE} ~ .${CSS.ACTIONS}`);
+    const allCustomActions = this.element.find(`.${css.CUSTOM_OPTIONS_TITLE} ~ .${css.ACTIONS}`);
     allCustomActions.removeClass('first');
     allCustomActions.removeClass('last');
     allCustomActions.first().addClass('first');
@@ -235,11 +229,11 @@ class CustomOptionsForm extends FormApplication {
   }
 
   _fixDebugToggleCSS() {
-    const debugToggle = this.element.find(`.${CSS.DEBUG_TOGGLE}`);
+    const debugToggle = this.element.find(`.${css.DEBUG_TOGGLE}`);
     if (isDebug()) {
-      debugToggle.addClass(CSS.DEBUG_TOGGLE_ON);
+      debugToggle.addClass(css.DEBUG_TOGGLE_ON);
     } else {
-      debugToggle.removeClass(CSS.DEBUG_TOGGLE_ON);
+      debugToggle.removeClass(css.DEBUG_TOGGLE_ON);
     }
   }
 }
@@ -252,22 +246,20 @@ const customOptionsFormOptions = module.settings.registerMenu('customOptions', {
 
 const getRow = (providedElement: Element) => {
   let element: Element | null = providedElement;
-  while (element && !element.parentElement?.classList.contains(CSS.DATA)) {
+  while (element && !element.parentElement?.classList.contains(css.DATA)) {
     element = element.parentElement;
   }
 
-  while (element && !element.classList.contains(CSS.ACTIONS)) {
+  while (element && !element.classList.contains(css.ACTIONS)) {
     element = element.nextElementSibling;
   }
-  if (element && element.classList.contains(CSS.ACTIONS)) {
-    const elementsInRow = [];
+  if (element?.classList.contains(css.ACTIONS)) {
+    const elementsInRow: Element[] = [];
     do {
       elementsInRow.unshift(element);
       element = element.previousElementSibling;
-    } while (element && !(element.classList.contains(CSS.HEADER) || element.classList.contains(CSS.ACTIONS)));
+    } while (element && !(element.classList.contains(css.HEADER) || element.classList.contains(css.ACTIONS)));
     return jQuery(elementsInRow);
   }
   return null;
 };
-
-

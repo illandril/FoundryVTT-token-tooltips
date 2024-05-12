@@ -53,7 +53,9 @@ const calculateTileOffset = (grid: GridLayer, token: Token, other: Token) => {
   }
 
   return {
-    horizontal, vertical, elevation,
+    horizontal,
+    vertical,
+    elevation,
   };
 };
 

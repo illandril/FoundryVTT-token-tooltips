@@ -5,14 +5,14 @@ export const add: Operation = (a, b) => a + b;
 const operations = {
   '+': add,
   '*': (a, b) => a * b,
-  '/': (a, b) => b === 0 ? null : a / b,
+  '/': (a, b) => (b === 0 ? null : a / b),
   '%': (a, b) => a % b,
-  '>': (a, b) => a > b ? a : null,
-  '>=': (a, b) => a >= b ? a : null,
-  '<': (a, b) => a < b ? a : null,
-  '<=': (a, b) => a <= b ? a : null,
-  '!=': (a, b) => a !== b ? a : null,
-  '==': (a, b) => a === b ? a : null,
+  '>': (a, b) => (a > b ? a : null),
+  '>=': (a, b) => (a >= b ? a : null),
+  '<': (a, b) => (a < b ? a : null),
+  '<=': (a, b) => (a <= b ? a : null),
+  '!=': (a, b) => (a !== b ? a : null),
+  '==': (a, b) => (a === b ? a : null),
 } satisfies Record<string, Operation>;
 
 type OperationKey = keyof typeof operations;

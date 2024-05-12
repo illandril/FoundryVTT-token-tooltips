@@ -5,10 +5,12 @@ import d35eSystemID from '../d35e/systemID';
 import pf1SystemID from '../pf1/systemID';
 import isLiteNPC from './isLiteNPC';
 
-type MaybePF1Attribute = undefined | {
-  total?: unknown
-  mod?: unknown
-};
+type MaybePF1Attribute =
+  | undefined
+  | {
+      total?: unknown;
+      mod?: unknown;
+    };
 const attribute = (key: string) => {
   return new AttributeLookup(
     () => null,

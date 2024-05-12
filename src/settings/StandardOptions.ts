@@ -1,5 +1,5 @@
 import module from '../module';
-import { HIDE_FROM_EVERYONE_OPTION, StandardPermissionLevel } from './SpecialPermissions';
+import { HIDE_FROM_EVERYONE_OPTION, type StandardPermissionLevel } from './specialPermissions';
 
 const titleCase = (key: string) => {
   if (key === 'hp' || key === 'ac') {
@@ -18,14 +18,17 @@ export class StandardOption {
   readonly hideOnPersistent: HideOnPersistentSetting;
   constructor(key: string, defaultPermission: StandardPermissionLevel) {
     this.permission = module.settings.register<StandardPermissionLevel>(
-      `${key}MinimumPermission`, String, defaultPermission, { config: false },
+      `${key}MinimumPermission`,
+      String,
+      defaultPermission,
+      { config: false },
     );
-    this.hideFromGM = module.settings.register<boolean>(
-      `hidePlayer${titleCase(key)}FromGM`, Boolean, false, { config: false },
-    );
-    this.hideOnPersistent = module.settings.register<boolean>(
-      `hide${titleCase(key)}FromPersistent`, Boolean, false, { config: false },
-    );
+    this.hideFromGM = module.settings.register<boolean>(`hidePlayer${titleCase(key)}FromGM`, Boolean, false, {
+      config: false,
+    });
+    this.hideOnPersistent = module.settings.register<boolean>(`hide${titleCase(key)}FromPersistent`, Boolean, false, {
+      config: false,
+    });
   }
 }
 

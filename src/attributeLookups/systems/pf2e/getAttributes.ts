@@ -1,10 +1,12 @@
 import nanToZero from '../../../dataConversion/nanToZero';
 import AttributeLookup from '../../AttributeLookup';
 
-type MaybeAttribute = undefined | {
-  value?: unknown
-  mod?: unknown
-};
+type MaybeAttribute =
+  | undefined
+  | {
+      value?: unknown;
+      mod?: unknown;
+    };
 
 const attribute = (key: string) => {
   return new AttributeLookup(

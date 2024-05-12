@@ -1,6 +1,6 @@
 import Tooltip from '../tooltip/Tooltip';
 import lookup from './lookup';
-import { PersistentTooltipOption } from './types';
+import type { PersistentTooltipOption } from './types';
 
 let previousTooltips: Tooltip[];
 
@@ -21,10 +21,12 @@ const render = (settings: PersistentTooltipOption[]) => {
   for (const setting of settings) {
     const args = lookup(setting);
     if (args) {
-      previousTooltips.push(new Tooltip({
-        ...args,
-        ...getCommonTooltipConfig(setting),
-      }));
+      previousTooltips.push(
+        new Tooltip({
+          ...args,
+          ...getCommonTooltipConfig(setting),
+        }),
+      );
     }
   }
 };

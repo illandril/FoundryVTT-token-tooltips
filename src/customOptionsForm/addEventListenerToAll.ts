@@ -1,5 +1,6 @@
 const addEventListenerToAll = (
-  html: JQuery, selector: string,
+  html: JQuery,
+  selector: string,
   type: keyof HTMLElementEventMap,
   listener: (event: Event) => void,
 ) => {

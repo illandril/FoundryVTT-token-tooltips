@@ -1,9 +1,10 @@
-import AttributeLookup, { AsyncAttributeLookup } from '../attributeLookups/AttributeLookup';
+import type AttributeLookup from '../attributeLookups/AttributeLookup';
+import { AsyncAttributeLookup } from '../attributeLookups/AttributeLookup';
 import module from '../module';
-import { StandardOption } from '../settings/StandardOptions';
+import type { StandardOption } from '../settings/standardOptions';
+import type Tooltip from './Tooltip';
 import AttributeRow from './row/AttributeRow';
 import showStandardRow from './showStandardRow';
-import Tooltip from './Tooltip';
 
 class StandardRow {
   readonly attributeLookup: AttributeLookup | AsyncAttributeLookup;

@@ -3,6 +3,7 @@ import calculateValue from '../../../tooltip/calculateValue';
 import isLiteNPC from './isLiteNPC';
 
 const d35eOrPF1Movement = (key: string) => {
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
   return (actor: Actor) => {
     if (isLiteNPC(actor)) {
       return null;

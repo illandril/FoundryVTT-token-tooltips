@@ -3,17 +3,20 @@
  * https://jestjs.io/docs/configuration
  */
 
-import utilGlobals from '@illandril/foundryvtt-utils/dist/tests/globals.js';
+import utilGlobals from '@illandril/foundryvtt-utils/tests/globals';
 import deepmerge from 'deepmerge';
 import localGlobals from './globals.js';
 
-const globals = deepmerge(deepmerge(utilGlobals, {
-  game: {
-    system: {
-      id: 'example',
+const globals = deepmerge(
+  deepmerge(utilGlobals, {
+    game: {
+      system: {
+        id: 'example',
+      },
     },
-  },
-}), localGlobals);
+  }),
+  localGlobals,
+);
 
 export default {
   // Automatically clear mock calls, instances, contexts and results before every test
@@ -29,9 +32,7 @@ export default {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [
-    'src/tests/',
-  ],
+  coveragePathIgnorePatterns: ['src/tests/'],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'babel',
@@ -144,15 +145,10 @@ export default {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  setupFiles: [
-    '@illandril/foundryvtt-utils/dist/tests/setup',
-  ],
+  setupFiles: ['@illandril/foundryvtt-utils/tests/setup'],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: [
-    '@illandril/foundryvtt-utils/dist/tests/setupAfterEnv',
-    './src/tests/setupAfterEnv.ts',
-  ],
+  setupFilesAfterEnv: ['@illandril/foundryvtt-utils/tests/setupAfterEnv', './src/tests/setupAfterEnv.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -193,9 +189,7 @@ export default {
   // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: [
-    '/node_modules/(?!@illandril).+\\.js$',
-  ],
+  transformIgnorePatterns: ['/node_modules/(?!@illandril).+\\.js$'],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

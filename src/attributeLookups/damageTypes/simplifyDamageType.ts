@@ -1,7 +1,7 @@
 import icon from '../../html/icon';
 import span from '../../html/span';
 import module from '../../module';
-import { LocalizedAndRawValue, LocalizedValueSimplifier } from '../LocalizedValueSimplifier';
+import type { LocalizedAndRawValue, LocalizedValueSimplifier } from '../LocalizedValueSimplifier';
 import a5eSystemID from '../systems/a5e/systemID';
 import d35eSystemID from '../systems/d35e/systemID';
 import dnd4eSystemID from '../systems/dnd4e/systemID';
@@ -11,20 +11,32 @@ import pf2eSystemID from '../systems/pf2e/systemID';
 import sfrpgSystemID from '../systems/sfrpg/systemID';
 import damageTypeMap from './damageTypeMap';
 
-const supportedSystems = [a5eSystemID, d35eSystemID, dnd4eSystemID, dnd5eSystemID, pf1SystemID, pf2eSystemID, sfrpgSystemID];
+const supportedSystems = [
+  a5eSystemID,
+  d35eSystemID,
+  dnd4eSystemID,
+  dnd5eSystemID,
+  pf1SystemID,
+  pf2eSystemID,
+  sfrpgSystemID,
+];
 
 const iconAndTextClass = module.cssPrefix.childPrefix('damage-type').child('icon-and-text');
 
-type SimplifyDamageTypeOption = ('NONE' | 'ICON' | 'COLOR_ICON' | 'COLOR' | 'ICON_AND_TEXT');
+type SimplifyDamageTypeOption = 'NONE' | 'ICON' | 'COLOR_ICON' | 'COLOR' | 'ICON_AND_TEXT';
 
-export const SimplifyDamageTypeChoice = module.settings.register<SimplifyDamageTypeOption>('simplifyDamageTypes', String, 'NONE', {
-  hasHint: true,
-  choices: [
-    'NONE', 'ICON', 'COLOR_ICON', 'COLOR', 'ICON_AND_TEXT',
-  ],
-  config: () => supportedSystems.includes(game.system.id),
-});
+export const SimplifyDamageTypeChoice = module.settings.register<SimplifyDamageTypeOption>(
+  'simplifyDamageTypes',
+  String,
+  'NONE',
+  {
+    hasHint: true,
+    choices: ['NONE', 'ICON', 'COLOR_ICON', 'COLOR', 'ICON_AND_TEXT'],
+    config: () => supportedSystems.includes(game.system.id),
+  },
+);
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
 const stylizeDamageType = (value: LocalizedAndRawValue, useIcon: boolean, useColor: boolean, appendText: boolean) => {
   const type = value.raw.toLowerCase();
   const config = damageTypeMap.get(type);
@@ -63,15 +75,19 @@ const stylizeDamageType = (value: LocalizedAndRawValue, useIcon: boolean, useCol
 };
 
 const Simplifiers = {
+  // biome-ignore lint/style/useNamingConvention: Legacy
   NONE: (value) => {
     return document.createTextNode(`${value.localized}${value.suffix ? '\u00a0' : ''}${value.suffix ?? ''}`);
   },
+  // biome-ignore lint/style/useNamingConvention: Legacy
   ICON: (value) => stylizeDamageType(value, true, false, false),
+  // biome-ignore lint/style/useNamingConvention: Legacy
   COLOR_ICON: (value) => stylizeDamageType(value, true, true, false),
+  // biome-ignore lint/style/useNamingConvention: Legacy
   COLOR: (value) => stylizeDamageType(value, false, true, false),
+  // biome-ignore lint/style/useNamingConvention: Legacy
   ICON_AND_TEXT: (value) => stylizeDamageType(value, true, true, true),
 } satisfies Record<SimplifyDamageTypeOption, LocalizedValueSimplifier>;
-
 
 export default (value: LocalizedAndRawValue) => {
   const simplifier = Simplifiers[SimplifyDamageTypeChoice.get()] ?? Simplifiers.NONE;

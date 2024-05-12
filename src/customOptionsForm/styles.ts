@@ -2,32 +2,29 @@ import module from '../module';
 import './styles.scss';
 
 const FORM_CSS_PREFIX = module.cssPrefix.childPrefix('menu').childPrefix('customOptions');
-const CSS = {
-  HELP_TOGGLE_ID: FORM_CSS_PREFIX.child('helpToggle'),
-  HELP_TOGGLE_ON: FORM_CSS_PREFIX.child('helpToggle-on'),
-  HELP_TOGGLE_OFF: FORM_CSS_PREFIX.child('helpToggle-off'),
 
-  DEBUG_TOGGLE: FORM_CSS_PREFIX.child('toggleDebug'),
-  DEBUG_TOGGLE_ON: FORM_CSS_PREFIX.child('toggleDebug-on'),
-  ACTIONS: FORM_CSS_PREFIX.child('actions'),
-  CUSTOM_OPTIONS_TITLE: FORM_CSS_PREFIX.child('customOptionsTitle'),
-  STANDARD_OPTIONS_TITLE: FORM_CSS_PREFIX.child('standardOptionsTitle'),
-  HEADER: FORM_CSS_PREFIX.child('header'),
-  HEADER_BOOLEAN: FORM_CSS_PREFIX.child('header_boolean'),
+export const HELP_TOGGLE_ID = FORM_CSS_PREFIX.child('helpToggle');
+export const HELP_TOGGLE_ON = FORM_CSS_PREFIX.child('helpToggle-on');
+export const HELP_TOGGLE_OFF = FORM_CSS_PREFIX.child('helpToggle-off');
 
-  ADD_ROW_ID: FORM_CSS_PREFIX.child('addRow'),
-  DELETE: FORM_CSS_PREFIX.child('delete'),
-  MOVE_DOWN: FORM_CSS_PREFIX.child('moveDown'),
-  MOVE_UP: FORM_CSS_PREFIX.child('moveUp'),
-  DATA: FORM_CSS_PREFIX.child('data'),
+export const DEBUG_TOGGLE = FORM_CSS_PREFIX.child('toggleDebug');
+export const DEBUG_TOGGLE_ON = FORM_CSS_PREFIX.child('toggleDebug-on');
+export const ACTIONS = FORM_CSS_PREFIX.child('actions');
+export const CUSTOM_OPTIONS_TITLE = FORM_CSS_PREFIX.child('customOptionsTitle');
+export const STANDARD_OPTIONS_TITLE = FORM_CSS_PREFIX.child('standardOptionsTitle');
+export const HEADER = FORM_CSS_PREFIX.child('header');
+export const HEADER_BOOLEAN = FORM_CSS_PREFIX.child('header_boolean');
 
-  DISABLED_INPUT: FORM_CSS_PREFIX.child('disabledInput'),
+export const ADD_ROW_ID = FORM_CSS_PREFIX.child('addRow');
+export const DELETE = FORM_CSS_PREFIX.child('delete');
+export const MOVE_DOWN = FORM_CSS_PREFIX.child('moveDown');
+export const MOVE_UP = FORM_CSS_PREFIX.child('moveUp');
+export const DATA = FORM_CSS_PREFIX.child('data');
 
-  ICON_CELL: FORM_CSS_PREFIX.child('iconCell'),
-  ICON_PREVIEW: FORM_CSS_PREFIX.child('iconPreview'),
-  PERMISSIONS_CELL: FORM_CSS_PREFIX.child('permissionsCell'),
-  GM_PERMISSIONS_CELL: FORM_CSS_PREFIX.child('gmPermissionsCell'),
-  SHOW_ON_PERSISTENT_CELL: FORM_CSS_PREFIX.child('showOnPersistentCell'),
-} as const;
+export const DISABLED_INPUT = FORM_CSS_PREFIX.child('disabledInput');
 
-export default CSS;
+export const ICON_CELL = FORM_CSS_PREFIX.child('iconCell');
+export const ICON_PREVIEW = FORM_CSS_PREFIX.child('iconPreview');
+export const PERMISSIONS_CELL = FORM_CSS_PREFIX.child('permissionsCell');
+export const GM_PERMISSIONS_CELL = FORM_CSS_PREFIX.child('gmPermissionsCell');
+export const SHOW_ON_PERSISTENT_CELL = FORM_CSS_PREFIX.child('showOnPersistentCell');

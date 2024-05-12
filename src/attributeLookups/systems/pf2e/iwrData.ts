@@ -1,11 +1,10 @@
-
 import localizeOrFallback from '../../../dataConversion/localizeOrFallback';
 import string from '../../../dataConversion/string';
 import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
+import type { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
 import systemID from './systemID';
 
 // iwr = Immunities, Weaknesses, and Resistances
@@ -13,6 +12,7 @@ const iwrLookup = (localeKey: string, propertyKey: string, simplifier?: Localize
   return new AttributeLookup(
     () => null,
     () => module.localize(`tooltip.${localeKey}.label`),
+    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
     (actor) => {
       if (game.system.id !== systemID) {
         return null;
@@ -33,13 +33,15 @@ const iwrLookup = (localeKey: string, propertyKey: string, simplifier?: Localize
         if (typeof type === 'string') {
           const label = typeLocaleKey ? localizeOrFallback(typeLocaleKey, type) : type;
           const suffix = typeof value === 'number' ? `${value}` : undefined;
-          values.push(simplifier
-            ? simplifier({
-              localized: label,
-              raw: type,
-              suffix: suffix,
-            })
-            : document.createTextNode(`${label}${suffix ? ` ${suffix}` : ''}`));
+          values.push(
+            simplifier
+              ? simplifier({
+                  localized: label,
+                  raw: type,
+                  suffix: suffix,
+                })
+              : document.createTextNode(`${label}${suffix ? ` ${suffix}` : ''}`),
+          );
         }
       }
       return calculateValue(values);

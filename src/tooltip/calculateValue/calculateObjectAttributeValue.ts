@@ -4,12 +4,9 @@ import calculateValidAttributeValue from './calculateValidAttributeValue';
 import isNumberLikeValue from './isNumberLikeValue';
 import toValidAttributeValue from './toValidAttributeValue';
 import toValidNonArrayAttributeValue from './toValidNonArrayAttributeValue';
-import { CalculatedValue, MaybeAttributeObject, ValidNonArrayAttributeType } from './Types';
+import type { CalculatedValue, MaybeAttributeObject, ValidNonArrayAttributeType } from './types';
 
-const extractValue = (
-  attribute: MaybeAttributeObject,
-  hasMax: boolean,
-) => {
+const extractValue = (attribute: MaybeAttributeObject, hasMax: boolean) => {
   module.logger.debug('extractValue', attribute, hasMax);
 
   let value: ValidNonArrayAttributeType | null;
@@ -43,9 +40,9 @@ const extractValue = (
 };
 
 const calculateTempValue = (value: unknown, temp: unknown) => {
-  let calculated;
+  let calculated: string | number | null;
   if (isNumberLikeValue(value) && isNumberLikeValue(temp)) {
-    calculated = temp as string | number;
+    calculated = temp;
   } else {
     calculated = null;
   }
@@ -80,12 +77,18 @@ const calculateObjectAttributeValue = (
 
   module.logger.debug(
     'calculateObjectAttributeValue',
-    'value', value,
-    'max', max,
-    'temp', temp,
-    'tempmax', tempmax,
-    'units', units,
-    'extra', extra,
+    'value',
+    value,
+    'max',
+    max,
+    'temp',
+    temp,
+    'tempmax',
+    tempmax,
+    'units',
+    units,
+    'extra',
+    extra,
   );
 
   return { value, max, temp, tempmax, units, extra };

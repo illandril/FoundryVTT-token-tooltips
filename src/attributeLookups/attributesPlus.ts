@@ -1,4 +1,4 @@
-import AttributeLookup from './AttributeLookup';
+import type AttributeLookup from './AttributeLookup';
 import getA5eAttributes from './systems/a5e/getAttributes';
 import a5eSystemID from './systems/a5e/systemID';
 import d35eSystemID from './systems/d35e/systemID';
@@ -26,7 +26,7 @@ Hooks.once('ready', () => {
       values.push(...getPF2Attributes());
       break;
     default:
-      // No defaults
+    // No defaults
   }
 });
 

@@ -1,5 +1,5 @@
 import toValidNonArrayAttributeValue from './toValidNonArrayAttributeValue';
-import { ValidAttributeType, ValidNonArrayAttributeType } from './Types';
+import type { ValidAttributeType, ValidNonArrayAttributeType } from './types';
 
 const toValidAttributeValue = (value: unknown): ValidAttributeType | null => {
   const validNonArrayValue = toValidNonArrayAttributeValue(value);

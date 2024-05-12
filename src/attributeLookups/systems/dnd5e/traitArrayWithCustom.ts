@@ -7,10 +7,15 @@ import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
+import type { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
 import systemID from './systemID';
 
-const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocalePrefix: string, simplifier?: LocalizedValueSimplifier) => {
+const traitArrayWithCustom = (
+  localeKey: string,
+  propertyKey: string,
+  valueLocalePrefix: string,
+  simplifier?: LocalizedValueSimplifier,
+) => {
   return new AttributeLookup(
     () => null,
     () => module.localize(`tooltip.${localeKey}.label`),
@@ -31,12 +36,15 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
           raw: value,
         };
       });
-      const customValues = splitOn(property?.custom, ';')?.filter(filterEmpty).map((value) => {
-        return {
-          localized: value,
-          raw: value,
-        };
-      }) || [];
+      const customValues =
+        splitOn(property?.custom, ';')
+          ?.filter(filterEmpty)
+          .map((value) => {
+            return {
+              localized: value,
+              raw: value,
+            };
+          }) || [];
       const allValues = stdValues.concat(customValues);
       let simplifiedValues: string[] | Node[];
       if (simplifier) {

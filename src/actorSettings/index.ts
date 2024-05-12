@@ -1,1 +1,1 @@
-import './Actor5e';
+import './dnd5eActor5e';

@@ -1,12 +1,12 @@
-import { showInTooltip, calculateUses } from '../actorSettings/ItemSystem';
+import { calculateUses, showInTooltip } from '../actorSettings/item-system';
 import img from '../html/img';
-import { CalculatedValue } from '../tooltip/calculateValue';
+import type { CalculatedValue } from '../tooltip/calculateValue';
 
 type ItemAttribute = {
-  name: string
-  icon: HTMLImageElement | null
-  sort: number
-  value: CalculatedValue
+  name: string;
+  icon: HTMLImageElement | null;
+  sort: number;
+  value: CalculatedValue;
 };
 const itemSort = (a: ItemAttribute, b: ItemAttribute) => {
   return a.sort - b.sort;
@@ -16,7 +16,7 @@ export const get = (actor: Actor) => {
   const items = actor.items;
   const fArr: ItemAttribute[] = [];
   const cArr: ItemAttribute[] = [];
-  items.forEach((item) => {
+  for (const item of items) {
     if (showInTooltip(item)) {
       const calculatedUses = calculateUses(item);
       if (!calculatedUses) {
@@ -34,7 +34,7 @@ export const get = (actor: Actor) => {
         });
       }
     }
-  });
+  }
   fArr.sort(itemSort);
   cArr.sort(itemSort);
   return fArr.concat(cArr);

@@ -1,10 +1,14 @@
 import icon from '../html/icon';
 import module from '../module';
-import { HIDE_FROM_EVERYONE_OPTION } from '../settings/SpecialPermissions';
-import { Items } from '../settings/StandardOptions';
+import { HIDE_FROM_EVERYONE_OPTION } from '../settings/specialPermissions';
+import { Items } from '../settings/standardOptions';
 import './Actor5e.scss';
-import * as CSS from './CSS';
-import { canCalculateUses, showInTooltip, setShowInTooltip } from './ItemSystem';
+import { canCalculateUses, setShowInTooltip, showInTooltip } from './item-system';
+
+const cssPrefix = module.cssPrefix.childPrefix('actorSettings');
+
+const CSS_TOOLTIP_CELL = cssPrefix.child('tooltipToggleCell');
+const CSS_TOOLTIP_TOGGLE = cssPrefix.child('tooltipToggle');
 
 const CSS5E_ITEM_DETAIL = 'item-detail';
 
@@ -43,7 +47,7 @@ const addTooltipToggleHeaders = (inventoryHeaders: NodeListOf<Element>) => {
   Array.prototype.forEach.call(inventoryHeaders, (inventoryHeader: Element) => {
     const tooltipHeader = document.createElement('div');
     tooltipHeader.classList.add(CSS5E_ITEM_DETAIL);
-    tooltipHeader.classList.add(CSS.TOOLTIP_CELL);
+    tooltipHeader.classList.add(CSS_TOOLTIP_CELL);
 
     const itemControlsHeader = inventoryHeader.querySelector('.item-controls');
     inventoryHeader.insertBefore(tooltipHeader, itemControlsHeader);
@@ -58,7 +62,7 @@ const addTooltipToggleCells = (inventoryRows: NodeListOf<Element>, actor: Actor)
     } else {
       const tooltipCell = document.createElement('div');
       tooltipCell.classList.add(CSS5E_ITEM_DETAIL);
-      tooltipCell.classList.add(CSS.TOOLTIP_CELL);
+      tooltipCell.classList.add(CSS_TOOLTIP_CELL);
 
       addTooltipToggle(tooltipCell, item);
 
@@ -78,7 +82,7 @@ const addTooltipToggle = (tooltipCell: Element, item: Item) => {
     const shown = showInTooltip(item);
 
     const tooltipToggle = document.createElement('a');
-    tooltipToggle.classList.add(CSS.TOOLTIP_TOGGLE);
+    tooltipToggle.classList.add(CSS_TOOLTIP_TOGGLE);
     tooltipToggle.setAttribute('role', 'switch');
     tooltipToggle.setAttribute('aria-checked', shown ? 'true' : 'false');
 

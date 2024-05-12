@@ -5,10 +5,16 @@ import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
+import type { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
 import systemID from './systemID';
 
-const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocalePrefix: string, capitalizeLocaleLookup: boolean, simplifier?: LocalizedValueSimplifier) => {
+const traitArrayWithCustom = (
+  localeKey: string,
+  propertyKey: string,
+  valueLocalePrefix: string,
+  capitalizeLocaleLookup: boolean,
+  simplifier?: LocalizedValueSimplifier,
+) => {
   return new AttributeLookup(
     () => null,
     () => module.localize(`tooltip.${localeKey}.label`),

@@ -1,8 +1,7 @@
-
 import icon from '../../html/icon';
 import span from '../../html/span';
 import module from '../../module';
-import { CalculatedValue } from '../../tooltip/calculateValue';
+import type { CalculatedValue } from '../../tooltip/calculateValue';
 
 const CSS_HP_HEARTS = module.cssPrefix.child('hp-hearts');
 

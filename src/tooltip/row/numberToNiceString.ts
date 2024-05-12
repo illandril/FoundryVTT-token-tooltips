@@ -1,3 +1,4 @@
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
 const numberToNiceString = (value: number) => {
   let string: string;
   if (value === 0.125) {

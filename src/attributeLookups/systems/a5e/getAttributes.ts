@@ -1,11 +1,13 @@
 import nanToZero from '../../../dataConversion/nanToZero';
 import AttributeLookup from '../../AttributeLookup';
 
-type Maybe5eAttribute = undefined | {
-  value?: unknown
-  mod?: unknown
-  save?: unknown
-};
+type Maybe5eAttribute =
+  | undefined
+  | {
+      value?: unknown;
+      mod?: unknown;
+      save?: unknown;
+    };
 
 const attribute = (key: string, abbr: string) => {
   return new AttributeLookup(
@@ -26,5 +28,8 @@ const attribute = (key: string, abbr: string) => {
   );
 };
 
-export default () => Object.entries((game as { a5e?: { config?: { abilityAbbreviations?: Record<string, string> } } })?.a5e?.config?.abilityAbbreviations ?? {})
-  .map(([key, value]) => attribute(key, value));
+export default () =>
+  Object.entries(
+    (game as { a5e?: { config?: { abilityAbbreviations?: Record<string, string> } } })?.a5e?.config
+      ?.abilityAbbreviations ?? {},
+  ).map(([key, value]) => attribute(key, value));

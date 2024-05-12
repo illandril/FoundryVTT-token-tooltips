@@ -1,6 +1,6 @@
 import module from './module';
-import { HIDE_FROM_EVERYONE_OPTION } from './settings/SpecialPermissions';
-import { Movement, Resources } from './settings/StandardOptions';
+import { HIDE_FROM_EVERYONE_OPTION } from './settings/specialPermissions';
+import { Movement, Resources } from './settings/standardOptions';
 
 const SettingsVersion = module.settings.register('settingsVersion', Number, 0, { config: false });
 
@@ -14,7 +14,7 @@ Hooks.once('ready', () => {
         config: false,
       });
       if (!showResources.get()) {
-        module.logger.info(`Migrating old showResources setting - hiding resources`);
+        module.logger.info('Migrating old showResources setting - hiding resources');
         Resources.permission.set(HIDE_FROM_EVERYONE_OPTION);
       }
 
@@ -22,7 +22,7 @@ Hooks.once('ready', () => {
         config: false,
       });
       if (!showMovement.get()) {
-        module.logger.info(`Migrating old showMovement setting - hiding movement`);
+        module.logger.info('Migrating old showMovement setting - hiding movement');
         Movement.permission.set(HIDE_FROM_EVERYONE_OPTION);
       }
     }

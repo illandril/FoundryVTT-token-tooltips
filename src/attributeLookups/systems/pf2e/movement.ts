@@ -1,7 +1,8 @@
 import unknownObject from '../../../dataConversion/unknownObject';
-import calculateValue, { CalculatedValue } from '../../../tooltip/calculateValue';
+import calculateValue, { type CalculatedValue } from '../../../tooltip/calculateValue';
 
 const pf2Movement = (key: string) => {
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
   return (actor: Actor) => {
     const speed = unknownObject(foundry.utils.getProperty(actor.system, 'attributes.speed'));
     if (!speed) {
@@ -10,14 +11,12 @@ const pf2Movement = (key: string) => {
     let value: CalculatedValue | null | undefined;
     if (speed.type === key) {
       value = calculateValue(speed);
-    } else {
-      if (Array.isArray(speed.otherSpeeds)) {
-        for (const maybeOtherSpeed of speed.otherSpeeds) {
-          const otherSpeed = unknownObject(maybeOtherSpeed);
-          if (otherSpeed?.type === key) {
-            value = calculateValue(otherSpeed);
-            break;
-          }
+    } else if (Array.isArray(speed.otherSpeeds)) {
+      for (const maybeOtherSpeed of speed.otherSpeeds) {
+        const otherSpeed = unknownObject(maybeOtherSpeed);
+        if (otherSpeed?.type === key) {
+          value = calculateValue(otherSpeed);
+          break;
         }
       }
     }

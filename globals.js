@@ -1,6 +1,5 @@
 import fs from 'fs-extra';
 
-// eslint-disable-next-line import/no-named-as-default-member
 const packageJSON = fs.readJSONSync('package.json');
 const id = packageJSON.name.replace('@illandril/foundryvtt', 'illandril');
 const version = packageJSON.version;

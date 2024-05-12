@@ -9,6 +9,7 @@ const getActiveToken = () => {
   return game.canvas.tokens?.get(speaker.token);
 };
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
 const calculateDistance = (grid: GridLayer, token: Token, other: Token): number => {
   const ttRect = other.bounds;
   const atRect = token.bounds;
@@ -53,7 +54,6 @@ const calculateDistance = (grid: GridLayer, token: Token, other: Token): number 
   return grid.measureDistance(ttPos, atPos, { gridSpaces: true });
 };
 
-
 const calculateDistanceWithUnits = (scene: Scene, grid: GridLayer, token: Token, other: Token) => {
   const distance = calculateDistance(grid, token, other);
 
@@ -70,7 +70,7 @@ export default [
     (_actor, token) => {
       const grid = game.canvas.grid;
       const scene = game.canvas.scene;
-      if (!grid || !scene) {
+      if (!(grid && scene)) {
         return null;
       }
       const other = getActiveToken();

@@ -2,12 +2,15 @@ import { saveAs } from 'file-saver';
 import getStandardItems from '../customOptionsForm/getStandardOptions';
 import module from '../module';
 import CustomOptions from '../settings/CustomOptions';
-import { ImportObject } from './importSettings';
+import type { ImportObject } from './importSettings';
 
 const downloadJson = (data: unknown, suffix: string) => {
-  saveAs(new Blob([JSON.stringify(data)], {
-    type: 'application/json;charset=utf-8',
-  }), `${module.id}_${suffix}_${game.world.id}_${new Date().toISOString()}.json`);
+  saveAs(
+    new Blob([JSON.stringify(data)], {
+      type: 'application/json;charset=utf-8',
+    }),
+    `${module.id}_${suffix}_${game.world.id}_${new Date().toISOString()}.json`,
+  );
 };
 
 const exportSettings = () => {

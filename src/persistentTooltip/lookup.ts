@@ -1,19 +1,21 @@
 import module from '../module';
 
 type LookupInput = {
-  type: string
-  id: string
-  silent?: boolean
+  type: string;
+  id: string;
+  silent?: boolean;
 };
 
 export type LookupDetails = {
-  name: string
-  getCurrentToken: () => Token | null
+  name: string;
+  getCurrentToken: () => Token | null;
 };
 
 const getToken = (actor: foundry.documents.BaseActor | null) => {
   return actor
-    ? game.canvas.tokens?.placeables.find((placeable) => placeable.document?.actorLink && placeable.actor?.id === actor.id) ?? null
+    ? game.canvas.tokens?.placeables.find(
+        (placeable) => placeable.document?.actorLink && placeable.actor?.id === actor.id,
+      ) ?? null
     : null;
 };
 
@@ -44,7 +46,6 @@ const getUserTooltipConfig = (setting: LookupInput): LookupDetails | null => {
     getCurrentToken: () => getToken(user.character),
   };
 };
-
 
 const lookup = (setting: LookupInput) => {
   let args: LookupDetails | null;

@@ -1,7 +1,7 @@
 import nanToZero from './nanToZero';
 
 it.each([
-  [0, NaN],
+  [0, Number.NaN],
   [0, 0 / 0],
   [0, 0],
   [0, ''],

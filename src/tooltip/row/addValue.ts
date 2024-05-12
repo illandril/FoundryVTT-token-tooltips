@@ -1,8 +1,8 @@
 import nanToZero from '../../dataConversion/nanToZero';
-import { ValidNonArrayAttributeType } from '../calculateValue';
+import type { ValidNonArrayAttributeType } from '../calculateValue';
 import booleanNode from './booleanNode';
-import CSS from './CSS';
 import numberToNiceString from './numberToNiceString';
+import * as css from './styles';
 
 const addValue = (
   element: HTMLElement,
@@ -17,7 +17,7 @@ const addValue = (
       addValueWithoutTemp(element, value);
     } else {
       addValueWithoutTemp(element, nanToZero(value) + tempValue);
-      element.classList.add(CSS.TEMP);
+      element.classList.add(css.TEMP);
     }
   }
 };
@@ -25,7 +25,7 @@ const addValue = (
 export default addValue;
 
 const addValueWithoutTemp = (element: HTMLElement, value: ValidNonArrayAttributeType) => {
-  element.classList.remove(CSS.TEMP);
+  element.classList.remove(css.TEMP);
   appendValue(element, value);
 };
 

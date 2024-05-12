@@ -1,7 +1,7 @@
 type Position = {
-  x: number
-  y: number
-  elevation: number
+  x: number;
+  y: number;
+  elevation: number;
 };
 
 const calculateDistanceEuclidian = (from: Position, to: Position) => {

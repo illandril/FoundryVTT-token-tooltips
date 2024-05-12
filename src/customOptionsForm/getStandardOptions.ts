@@ -3,8 +3,8 @@ import { supportedSystems as condImmSupportedSystems } from '../attributeLookups
 import { supportedSystems as damResImmVulnSupportedSystems } from '../attributeLookups/damageResImmVuln';
 import { unsupportedSystems as savingThrowsUnsupportedSystems } from '../attributeLookups/savingThrows';
 import module from '../module';
-import { StandardPermissionLevel } from '../settings/SpecialPermissions';
-import * as StandardOptions from '../settings/StandardOptions';
+import type { StandardPermissionLevel } from '../settings/specialPermissions';
+import * as StandardOptions from '../settings/standardOptions';
 
 const getStandardItems = () => {
   const items: StandardItem[] = [
@@ -55,23 +55,24 @@ const getStandardItems = () => {
 const LOCALIZED_ICON = Symbol('Localized Icon');
 
 export type StandardItem = {
-  key: string
-  isHP: boolean
-  name: string
-  icon: string
-  iconPreview: string
-  attributeKey: string
-  permissionSetting: typeof StandardOptions.HP.permission
-  permission: StandardPermissionLevel
-  hideFromGMSetting: typeof StandardOptions.HP.hideFromGM
-  showPlayerToGM: boolean
-  hideOnPersistentSetting: typeof StandardOptions.HP.hideOnPersistent
-  showOnPersistent: boolean
-  help: string | undefined
+  key: string;
+  isHP: boolean;
+  name: string;
+  icon: string;
+  iconPreview: string;
+  attributeKey: string;
+  permissionSetting: typeof StandardOptions.HP.permission;
+  permission: StandardPermissionLevel;
+  hideFromGMSetting: typeof StandardOptions.HP.hideFromGM;
+  showPlayerToGM: boolean;
+  hideOnPersistentSetting: typeof StandardOptions.HP.hideOnPersistent;
+  showOnPersistent: boolean;
+  help: string | undefined;
 };
 
 const getItem = (
-  key: string, icon: string | typeof LOCALIZED_ICON,
+  key: string,
+  icon: string | typeof LOCALIZED_ICON,
   option: StandardOptions.StandardOption,
 ): StandardItem => {
   const keyPrefix = `setting.menu.customOptions.standard.${key}`;
@@ -86,14 +87,10 @@ const getItem = (
   return {
     key,
     isHP: key === 'hp',
-    name: module.localize(
-      `${keyPrefix}.name`,
-    ),
+    name: module.localize(`${keyPrefix}.name`),
     icon: iconString,
     iconPreview: iconString.replace(/,.+/, ''),
-    attributeKey: module.localize(
-      `${keyPrefix}.key`,
-    ),
+    attributeKey: module.localize(`${keyPrefix}.key`),
     permissionSetting: option.permission,
     permission: option.permission.get(),
     hideFromGMSetting: option.hideFromGM,

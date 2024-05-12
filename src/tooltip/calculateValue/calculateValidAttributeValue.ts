@@ -1,10 +1,8 @@
-import { CalculatedValue, ValidAttributeType } from './Types';
+import type { CalculatedValue, ValidAttributeType } from './types';
 
-const calculateValidAttributeValue = (
-  attribute: ValidAttributeType,
-  attributeKey: string,
-): CalculatedValue => {
-  let value;
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
+const calculateValidAttributeValue = (attribute: ValidAttributeType, attributeKey: string): CalculatedValue => {
+  let value: ValidAttributeType;
   if (Array.isArray(attribute)) {
     if (Array.prototype.some.call(attribute, (entry) => entry instanceof Node)) {
       value = document.createDocumentFragment();
@@ -24,7 +22,7 @@ const calculateValidAttributeValue = (
       value = Array.prototype.join.call(attribute, ', ');
     }
   } else if (typeof attribute === 'number' && attributeKey.endsWith('.pct')) {
-    value = attribute.toFixed(2) + '%';
+    value = `${attribute.toFixed(2)}%`;
   } else {
     value = attribute;
   }

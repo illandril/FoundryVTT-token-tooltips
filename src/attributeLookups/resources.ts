@@ -30,7 +30,7 @@ const resourceLookup = (key: string, displayID: string) => {
       if (!resource || typeof resource.value !== 'number') {
         return null;
       }
-      if (resource.value > 0 || typeof resource.max === 'number' && resource.max > 0) {
+      if (resource.value > 0 || (typeof resource.max === 'number' && resource.max > 0)) {
         return calculateValue(resource);
       }
       return null;

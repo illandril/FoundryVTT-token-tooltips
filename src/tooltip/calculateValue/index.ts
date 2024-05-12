@@ -2,14 +2,11 @@ import module from '../../module';
 import calculateObjectAttributeValue from './calculateObjectAttributeValue';
 import calculateValidAttributeValue from './calculateValidAttributeValue';
 import toValidAttributeValue from './toValidAttributeValue';
-import { CalculatedValue, MaybeAttributeObject } from './Types';
+import type { CalculatedValue, MaybeAttributeObject } from './types';
 
-export * from './Types';
+export * from './types';
 
-const calculateValue = (
-  attribute: unknown,
-  attributeKey = '',
-): CalculatedValue | null => {
+const calculateValue = (attribute: unknown, attributeKey = ''): CalculatedValue | null => {
   module.logger.debug('calculateValue', attributeKey, attribute);
   if (attribute === undefined || attribute === null) {
     module.logger.debug('calculateValue: attribute is undefined or null', attribute);

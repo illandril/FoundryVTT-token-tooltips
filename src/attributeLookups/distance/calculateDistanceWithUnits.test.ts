@@ -7,10 +7,14 @@ beforeAll(() => {
   Hooks.callAll('init');
 });
 
-const mockTokenCenter = ({ x, y, elevation }: {
-  x: number
-  y: number
-  elevation: number
+const mockTokenCenter = ({
+  x,
+  y,
+  elevation,
+}: {
+  x: number;
+  y: number;
+  elevation: number;
 }) => {
   return {
     center: {
@@ -22,12 +26,18 @@ const mockTokenCenter = ({ x, y, elevation }: {
     } as Partial<TokenDocument>,
   } as Partial<Token> as Token;
 };
-const mockTokenBounds = ({ left, right, top, bottom, elevation }: {
-  left: number
-  right: number
-  top: number
-  bottom: number
-  elevation: number
+const mockTokenBounds = ({
+  left,
+  right,
+  top,
+  bottom,
+  elevation,
+}: {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+  elevation: number;
 }) => {
   return {
     bounds: {
@@ -194,13 +204,13 @@ describe('Square', () => {
     type: foundry.CONST.GRID_TYPES.SQUARE,
   } as Partial<GridLayer> as GridLayer;
 
-
   describe('Grid', () => {
     beforeEach(() => {
       SquareDistanceChoice.set('GRID');
     });
 
     describe.each([true, false])('IncludeElevation=%j', (includeElevation) => {
+      // biome-ignore lint/suspicious/noDuplicateTestHooks: Not sure why this gets flagged - not duplicate
       beforeEach(() => {
         SquareIncludeElevation.set(includeElevation);
       });
@@ -280,7 +290,6 @@ describe('Square', () => {
             { left: 300, right: 600, top: 200, bottom: 500 },
             { left: 0, right: 300, top: 0, bottom: 300 },
           ],
-
 
           // 1/2x1/2
           [
@@ -374,8 +383,18 @@ describe('Square', () => {
           ],
         ])('passes ({x: 0, y: 0}, %j, _) for bounds (%j, %j) to grid.measureDistance', (position, boundsA, boundsB) => {
           const measureDistance = jest.spyOn(grid, 'measureDistance').mockReturnValue(5);
-          calculateDistanceWithUnits(scene, grid, mockTokenBounds({ ...boundsA, elevation: 10 }), mockTokenBounds({ ...boundsB, elevation: 40 }));
-          calculateDistanceWithUnits(scene, grid, mockTokenBounds({ ...boundsB, elevation: 10 }), mockTokenBounds({ ...boundsA, elevation: 40 }));
+          calculateDistanceWithUnits(
+            scene,
+            grid,
+            mockTokenBounds({ ...boundsA, elevation: 10 }),
+            mockTokenBounds({ ...boundsB, elevation: 40 }),
+          );
+          calculateDistanceWithUnits(
+            scene,
+            grid,
+            mockTokenBounds({ ...boundsB, elevation: 10 }),
+            mockTokenBounds({ ...boundsA, elevation: 40 }),
+          );
           expect(measureDistance).toHaveBeenNthCalledWith(1, { x: 0, y: 0 }, position, expect.anything());
           expect(measureDistance).toHaveBeenNthCalledWith(2, { x: 0, y: 0 }, position, expect.anything());
           expect(measureDistance).toBeCalledTimes(2);
@@ -387,20 +406,70 @@ describe('Square', () => {
           SquareMeasureFrom.set('CENTER_FAR');
         });
         it.each([
-          [{ x: 0, y: 0 }, { left: 0, right: 100, top: 0, bottom: 100 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 100, y: 0 }, { left: 100, right: 200, top: 0, bottom: 100 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 0, y: 100 }, { left: 0, right: 100, top: 100, bottom: 200 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 100, y: 100 }, { left: 100, right: 200, top: 100, bottom: 200 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 300, y: 0 }, { left: 200, right: 400, top: 0, bottom: 200 }, { left: 0, right: 200, top: 0, bottom: 200 }],
-          [{ x: 300, y: 200 }, { left: 200, right: 400, top: 100, bottom: 300 }, { left: 0, right: 200, top: 0, bottom: 200 }],
-          [{ x: 300, y: 200 }, { left: 200, right: 400, top: 100, bottom: 300 }, { left: 0, right: 200, top: 0, bottom: 200 }],
-          [{ x: 400, y: 400 }, { left: 300, right: 500, top: 300, bottom: 500 }, { left: 0, right: 200, top: 0, bottom: 200 }],
-          [{ x: 0, y: 200 }, { left: 100, right: 200, top: 300, bottom: 400 }, { left: 0, right: 300, top: 0, bottom: 300 }],
-          [{ x: 200, y: 0 }, { left: 300, right: 400, top: 100, bottom: 200 }, { left: 0, right: 300, top: 0, bottom: 300 }],
+          [
+            { x: 0, y: 0 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 100, y: 0 },
+            { left: 100, right: 200, top: 0, bottom: 100 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 0, y: 100 },
+            { left: 0, right: 100, top: 100, bottom: 200 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 100, y: 100 },
+            { left: 100, right: 200, top: 100, bottom: 200 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 300, y: 0 },
+            { left: 200, right: 400, top: 0, bottom: 200 },
+            { left: 0, right: 200, top: 0, bottom: 200 },
+          ],
+          [
+            { x: 300, y: 200 },
+            { left: 200, right: 400, top: 100, bottom: 300 },
+            { left: 0, right: 200, top: 0, bottom: 200 },
+          ],
+          [
+            { x: 300, y: 200 },
+            { left: 200, right: 400, top: 100, bottom: 300 },
+            { left: 0, right: 200, top: 0, bottom: 200 },
+          ],
+          [
+            { x: 400, y: 400 },
+            { left: 300, right: 500, top: 300, bottom: 500 },
+            { left: 0, right: 200, top: 0, bottom: 200 },
+          ],
+          [
+            { x: 0, y: 200 },
+            { left: 100, right: 200, top: 300, bottom: 400 },
+            { left: 0, right: 300, top: 0, bottom: 300 },
+          ],
+          [
+            { x: 200, y: 0 },
+            { left: 300, right: 400, top: 100, bottom: 200 },
+            { left: 0, right: 300, top: 0, bottom: 300 },
+          ],
         ])('passes ({x: 0, y: 0}, %j, _) for bounds (%j, %j) to grid.measureDistance', (position, boundsA, boundsB) => {
           const measureDistance = jest.spyOn(grid, 'measureDistance').mockReturnValue(5);
-          calculateDistanceWithUnits(scene, grid, mockTokenBounds({ ...boundsA, elevation: 10 }), mockTokenBounds({ ...boundsB, elevation: 40 }));
-          calculateDistanceWithUnits(scene, grid, mockTokenBounds({ ...boundsB, elevation: 10 }), mockTokenBounds({ ...boundsA, elevation: 40 }));
+          calculateDistanceWithUnits(
+            scene,
+            grid,
+            mockTokenBounds({ ...boundsA, elevation: 10 }),
+            mockTokenBounds({ ...boundsB, elevation: 40 }),
+          );
+          calculateDistanceWithUnits(
+            scene,
+            grid,
+            mockTokenBounds({ ...boundsB, elevation: 10 }),
+            mockTokenBounds({ ...boundsA, elevation: 40 }),
+          );
           expect(measureDistance).toHaveBeenNthCalledWith(1, { x: 0, y: 0 }, position, expect.anything());
           expect(measureDistance).toHaveBeenNthCalledWith(2, { x: 0, y: 0 }, position, expect.anything());
           expect(measureDistance).toBeCalledTimes(2);
@@ -412,14 +481,40 @@ describe('Square', () => {
           SquareMeasureFrom.set('NEAREST');
         });
         it.each([
-          [{ x: 0, y: 0 }, { left: 0, right: 100, top: 0, bottom: 100 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 100, y: 0 }, { left: 100, right: 200, top: 0, bottom: 100 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 0, y: 100 }, { left: 0, right: 100, top: 100, bottom: 200 }, { left: 0, right: 100, top: 0, bottom: 100 }],
-          [{ x: 100, y: 100 }, { left: 100, right: 200, top: 100, bottom: 200 }, { left: 0, right: 100, top: 0, bottom: 100 }],
+          [
+            { x: 0, y: 0 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 100, y: 0 },
+            { left: 100, right: 200, top: 0, bottom: 100 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 0, y: 100 },
+            { left: 0, right: 100, top: 100, bottom: 200 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
+          [
+            { x: 100, y: 100 },
+            { left: 100, right: 200, top: 100, bottom: 200 },
+            { left: 0, right: 100, top: 0, bottom: 100 },
+          ],
         ])('passes ({x: 0, y: 0}, %j, _) for bounds (%j, %j) to grid.measureDistance', (position, boundsA, boundsB) => {
           const measureDistance = jest.spyOn(grid, 'measureDistance').mockReturnValue(5);
-          calculateDistanceWithUnits(scene, grid, mockTokenBounds({ ...boundsA, elevation: 10 }), mockTokenBounds({ ...boundsB, elevation: 40 }));
-          calculateDistanceWithUnits(scene, grid, mockTokenBounds({ ...boundsB, elevation: 10 }), mockTokenBounds({ ...boundsA, elevation: 40 }));
+          calculateDistanceWithUnits(
+            scene,
+            grid,
+            mockTokenBounds({ ...boundsA, elevation: 10 }),
+            mockTokenBounds({ ...boundsB, elevation: 40 }),
+          );
+          calculateDistanceWithUnits(
+            scene,
+            grid,
+            mockTokenBounds({ ...boundsB, elevation: 10 }),
+            mockTokenBounds({ ...boundsA, elevation: 40 }),
+          );
           expect(measureDistance).toHaveBeenNthCalledWith(1, { x: 0, y: 0 }, position, expect.anything());
           expect(measureDistance).toHaveBeenNthCalledWith(2, { x: 0, y: 0 }, position, expect.anything());
           expect(measureDistance).toBeCalledTimes(2);
@@ -427,6 +522,7 @@ describe('Square', () => {
       });
 
       describe.each(['CENTER_FAR', 'CENTER_NEAR', 'NEAREST'] as const)('MeasureFrom=%s', (measureFrom) => {
+        // biome-ignore lint/suspicious/noDuplicateTestHooks: Not sure why this gets flagged - not duplicate
         beforeEach(() => {
           SquareMeasureFrom.set(measureFrom);
         });
@@ -477,7 +573,7 @@ describe('Square', () => {
       });
 
       it.each([
-      // Straight lines
+        // Straight lines
         ['0', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 0, elevation: 0 }],
         ['5', { x: 0, y: 0, elevation: 0 }, { x: 100, y: 0, elevation: 0 }],
         ['10', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 200, elevation: 0 }],
@@ -547,7 +643,7 @@ describe('Square', () => {
       });
 
       it.each([
-      // Straight lines
+        // Straight lines
         ['0', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 0, elevation: 0 }],
         ['5', { x: 0, y: 0, elevation: 0 }, { x: 100, y: 0, elevation: 20 }],
         ['10', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 200, elevation: 20 }],
@@ -620,6 +716,7 @@ describe.each([
     });
 
     describe.each([true, false])('IncludeElevation=%j', (includeElevation) => {
+      // biome-ignore lint/suspicious/noDuplicateTestHooks: Not sure why this gets flagged... not duplicate
       beforeEach(() => {
         HexIncludeElevation.set(includeElevation);
       });
@@ -631,7 +728,12 @@ describe.each([
         { x: -52, y: 350 },
       ])('passes token position (%j) to grid.measureDistance(x, _, _)', (position) => {
         const measureDistance = jest.spyOn(grid, 'measureDistance').mockReturnValue(5);
-        calculateDistanceWithUnits(scene, grid, mockTokenCenter({ ...position, elevation: 10 }), mockTokenCenter({ x: 0, y: 0, elevation: 40 }));
+        calculateDistanceWithUnits(
+          scene,
+          grid,
+          mockTokenCenter({ ...position, elevation: 10 }),
+          mockTokenCenter({ x: 0, y: 0, elevation: 40 }),
+        );
         expect(measureDistance).toBeCalledWith(position, expect.anything(), expect.anything());
         expect(measureDistance).toBeCalledTimes(1);
       });
@@ -643,14 +745,24 @@ describe.each([
         { x: -52, y: 350 },
       ])('passes other position (%j) to grid.measureDistance(_, x, _)', (position) => {
         const measureDistance = jest.spyOn(grid, 'measureDistance').mockReturnValue(5);
-        calculateDistanceWithUnits(scene, grid, mockTokenCenter({ x: 0, y: 0, elevation: 40 }), mockTokenCenter({ ...position, elevation: 10 }));
+        calculateDistanceWithUnits(
+          scene,
+          grid,
+          mockTokenCenter({ x: 0, y: 0, elevation: 40 }),
+          mockTokenCenter({ ...position, elevation: 10 }),
+        );
         expect(measureDistance).toBeCalledWith(expect.anything(), position, expect.anything());
         expect(measureDistance).toBeCalledTimes(1);
       });
 
       it('passes gridSpaces=true to grid.measureDistance(_, _, x)', () => {
         const measureDistance = jest.spyOn(grid, 'measureDistance').mockReturnValue(5);
-        calculateDistanceWithUnits(scene, grid, mockTokenCenter({ x: 0, y: 0, elevation: 40 }), mockTokenCenter({ x: 0, y: 0, elevation: 40 }));
+        calculateDistanceWithUnits(
+          scene,
+          grid,
+          mockTokenCenter({ x: 0, y: 0, elevation: 40 }),
+          mockTokenCenter({ x: 0, y: 0, elevation: 40 }),
+        );
         expect(measureDistance).toBeCalledWith(expect.anything(), expect.anything(), { gridSpaces: true });
         expect(measureDistance).toBeCalledTimes(1);
       });
@@ -662,7 +774,12 @@ describe.each([
         [1.23456, '1.23'],
       ])('returns results (%j -> %j) from grid.measureDistance', (measureDistanceReturn, expected) => {
         jest.spyOn(grid, 'measureDistance').mockReturnValue(measureDistanceReturn);
-        const result = calculateDistanceWithUnits(scene, grid, mockTokenCenter({ x: 0, y: 0, elevation: 10 }), mockTokenCenter({ x: 0, y: 0, elevation: 40 }));
+        const result = calculateDistanceWithUnits(
+          scene,
+          grid,
+          mockTokenCenter({ x: 0, y: 0, elevation: 10 }),
+          mockTokenCenter({ x: 0, y: 0, elevation: 40 }),
+        );
         expect(result).toEqual({
           value: expected,
           units: 'mock-units',
@@ -682,7 +799,7 @@ describe.each([
       });
 
       it.each([
-      // Straight lines
+        // Straight lines
         ['0', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 0, elevation: 0 }],
         ['5', { x: 0, y: 0, elevation: 0 }, { x: 100, y: 0, elevation: 0 }],
         ['10', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 200, elevation: 0 }],
@@ -752,7 +869,7 @@ describe.each([
       });
 
       it.each([
-      // Straight lines
+        // Straight lines
         ['0', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 0, elevation: 0 }],
         ['5', { x: 0, y: 0, elevation: 0 }, { x: 100, y: 0, elevation: 20 }],
         ['10', { x: 0, y: 0, elevation: 0 }, { x: 0, y: 200, elevation: 20 }],
@@ -797,4 +914,3 @@ describe.each([
     });
   });
 });
-

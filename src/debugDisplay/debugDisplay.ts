@@ -1,7 +1,7 @@
 import emptyNode from '../html/emptyNode';
 import module from '../module';
 import updateCustomAttributeRow from '../tooltip/customAttribute/updateCustomAttributeRow';
-import AttributeRow from '../tooltip/row/AttributeRow';
+import type AttributeRow from '../tooltip/row/AttributeRow';
 import './styles.scss';
 
 const CSS_PREFIX = module.cssPrefix.childPrefix('debugDisplay');
@@ -16,9 +16,7 @@ export const toggleDebug = () => {
   if (debug) {
     debugDisplay.style.display = '';
     emptyNode(debugDisplay);
-    debugDisplay.appendChild(
-      document.createTextNode(module.localize('debugDisplay.empty')),
-    );
+    debugDisplay.appendChild(document.createTextNode(module.localize('debugDisplay.empty')));
   } else {
     debugDisplay.style.display = 'none';
     emptyNode(debugDisplay);
@@ -55,13 +53,7 @@ const addDataRows = (actor: Actor, keySoFar: string | null, data: Record<string,
   }
   keys.sort();
   for (const key of keys) {
-    if (
-      key.startsWith('_')
-      || key === 'permission'
-      || key === 'id'
-      || key === 'sort'
-      || key === ''
-    ) {
+    if (key.startsWith('_') || key === 'permission' || key === 'id' || key === 'sort' || key === '') {
       continue;
     }
     const fullKey = keySoFar === null ? key : `${keySoFar}.${key}`;

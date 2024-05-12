@@ -1,21 +1,18 @@
 import module from '../module';
 import exportSettings from './exportSettings';
 import importSettings from './importSettings';
-import CSS from './styles';
+import * as css from './styles';
 
-const menuLocalize = (key: string, data?: Record<string, string>) => module.localize(`setting.menu.importExport.${key}`, data);
+const menuLocalize = (key: string, data?: Record<string, string>) =>
+  module.localize(`setting.menu.importExport.${key}`, data);
 
 class ImportExportForm extends FormApplication {
-  constructor(object?: never, options?: FormApplicationOptions) {
-    super(object, options);
-  }
-
   /**
    * Default Options for this FormApplication
    */
   static get defaultOptions(): FormApplicationOptions {
     return {
-      ...super.defaultOptions,
+      ...FormApplication.defaultOptions,
       ...importExportFormOptions,
       classes: ['sheet'],
       // width: 960,
@@ -26,7 +23,8 @@ class ImportExportForm extends FormApplication {
   getData() {
     return {
       // export: getExportData(),
-      CSS,
+      // biome-ignore lint/style/useNamingConvention: Legacy
+      CSS: css,
       menuLocalize,
     };
   }
@@ -44,10 +42,11 @@ class ImportExportForm extends FormApplication {
   onImport(input: HTMLInputElement) {
     const files = input.files;
     if (files?.length !== 1) {
-      module.logger.warn('No files (or multiple files) selected... it is expected the browser should stop this from happening');
+      module.logger.warn(
+        'No files (or multiple files) selected... it is expected the browser should stop this from happening',
+      );
     } else {
       const file = files[0];
-      // eslint-disable-next-line no-alert
       if (!confirm(menuLocalize('confirmImport', { filename: file.name }))) {
         module.logger.info('Import aborted');
         return;
@@ -86,9 +85,9 @@ class ImportExportForm extends FormApplication {
 
     module.logger.debug('Activating ImportExportForm listeners');
 
-    const importButton = form.querySelector(`.${CSS.IMPORT}`);
+    const importButton = form.querySelector(`.${css.IMPORT}`);
     if (!importButton) {
-      module.logger.error(`Could not find .${CSS.IMPORT} button when adding listeners`);
+      module.logger.error(`Could not find .${css.IMPORT} button when adding listeners`);
     } else {
       const importInput = importButton.querySelector('input');
       if (!importInput) {
@@ -101,18 +100,16 @@ class ImportExportForm extends FormApplication {
       }
     }
 
-
-
-    const exportButton = form.querySelector(`.${CSS.EXPORT}`);
+    const exportButton = form.querySelector(`.${css.EXPORT}`);
     if (!exportButton) {
-      module.logger.error(`Could not find .${CSS.EXPORT} button when adding listeners`);
+      module.logger.error(`Could not find .${css.EXPORT} button when adding listeners`);
     } else {
       exportButton.addEventListener('click', this.onExport.bind(this));
     }
 
-    const closeButton = form.querySelector(`.${CSS.CLOSE}`);
+    const closeButton = form.querySelector(`.${css.CLOSE}`);
     if (!closeButton) {
-      module.logger.error(`Could not find .${CSS.CLOSE} button when adding listeners`);
+      module.logger.error(`Could not find .${css.CLOSE} button when adding listeners`);
     } else {
       closeButton.addEventListener('click', this.onClose.bind(this));
     }
@@ -124,4 +121,3 @@ const importExportFormOptions = module.settings.registerMenu('importExport', {
   type: ImportExportForm,
   restricted: true,
 });
-

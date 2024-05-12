@@ -1,6 +1,6 @@
 import module from '../../../module';
 
-type HexDistanceType = ('GRID' | 'EUCLIDIAN');
+type HexDistanceType = 'GRID' | 'EUCLIDIAN';
 
 export const HexDistanceChoice = module.settings.register<HexDistanceType>('hexDistanceChoice', String, 'GRID', {
   hasHint: true,

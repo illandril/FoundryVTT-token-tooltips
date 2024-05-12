@@ -21,12 +21,12 @@ const extractNumber = (value: unknown) => {
 };
 
 type PotentialUsesSystem = {
-  quantity?: unknown
+  quantity?: unknown;
   uses?: {
-    value?: unknown
-    max?: unknown
-    autoDestroy?: unknown
-  }
+    value?: unknown;
+    max?: unknown;
+    autoDestroy?: unknown;
+  };
 };
 
 export const calculateUses = (item: Item) => {
@@ -47,7 +47,7 @@ export const calculateUses = (item: Item) => {
     uses += (quantity - 1) * Math.max(1, maxUses);
     maxUses = maxUses * quantity;
   }
-  if (uses > 0 || showMaxUses && maxUses > 0) {
+  if (uses > 0 || (showMaxUses && maxUses > 0)) {
     return {
       uses,
       maxUses: showMaxUses ? maxUses : null,

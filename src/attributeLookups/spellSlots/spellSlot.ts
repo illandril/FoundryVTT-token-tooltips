@@ -3,10 +3,10 @@ import AttributeLookup from '../AttributeLookup';
 import spellIcon from './spellIcon';
 
 type MaybeSetSlotsObject = {
-  total?: unknown
-  value?: unknown
-  current?: unknown
-  max?: unknown
+  total?: unknown;
+  value?: unknown;
+  current?: unknown;
+  max?: unknown;
 };
 const isSetSlots = (value: unknown) => {
   if (value === null) {
@@ -29,14 +29,14 @@ const isNonZeroMax = (value: unknown) => {
     return true;
   }
   if (typeof value === 'number') {
-    return !isNaN(value) && value > 0;
+    return !Number.isNaN(value) && value > 0;
   }
   return typeof value === 'string' && value !== '';
 };
 
 const isSetSlotsValue = (value: unknown) => {
   if (typeof value === 'number') {
-    return !isNaN(value);
+    return !Number.isNaN(value);
   }
   if (typeof value === 'string') {
     return value !== '';
@@ -45,7 +45,7 @@ const isSetSlotsValue = (value: unknown) => {
 };
 
 const spellSlot = (key: string, displayKey: string | number) => {
-  const label = () => typeof displayKey === 'number' ? `${displayKey}` : game.i18n.localize(displayKey);
+  const label = () => (typeof displayKey === 'number' ? `${displayKey}` : game.i18n.localize(displayKey));
   return new AttributeLookup(
     () => spellIcon(label()),
     label,

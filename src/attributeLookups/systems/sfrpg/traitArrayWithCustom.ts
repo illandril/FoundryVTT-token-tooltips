@@ -6,15 +6,22 @@ import stringArrayOrSet from '../../../dataConversion/stringArrayOrSet';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
+import type { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
 import systemID from './systemID';
 
-type MaybeTrait = undefined | {
-  value?: unknown
-  custom?: unknown
-};
+type MaybeTrait =
+  | undefined
+  | {
+      value?: unknown;
+      custom?: unknown;
+    };
 
-const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocalePrefix: string, simplifier?: LocalizedValueSimplifier) => {
+const traitArrayWithCustom = (
+  localeKey: string,
+  propertyKey: string,
+  valueLocalePrefix: string,
+  simplifier?: LocalizedValueSimplifier,
+) => {
   return new AttributeLookup(
     () => null,
     () => module.localize(`tooltip.${localeKey}.label`),
@@ -29,15 +36,15 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, valueLocal
         const label = localizeOrFallback(`SFRPG.${valueLocalePrefix}${capitalized}`, value);
         return simplifier
           ? simplifier({
-            localized: label,
-            raw: value || label,
-          })
+              localized: label,
+              raw: value || label,
+            })
           : document.createTextNode(label);
       });
       const customValues = splitOn(property?.custom, /[;,]/) || [];
-      const allValues = stdValues.concat(
-        customValues.map((value) => document.createTextNode(value)),
-      ).filter(filterEmpty);
+      const allValues = stdValues
+        .concat(customValues.map((value) => document.createTextNode(value)))
+        .filter(filterEmpty);
       return calculateValue(allValues);
     },
   );

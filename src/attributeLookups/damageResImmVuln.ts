@@ -1,4 +1,4 @@
-import AttributeLookup from './AttributeLookup';
+import type AttributeLookup from './AttributeLookup';
 import simplifyDamageType from './damageTypes/simplifyDamageType';
 import a5eSystemID from './systems/a5e/systemID';
 import a5eTraitArrayWithCustom from './systems/a5e/traitArrayWithCustom';

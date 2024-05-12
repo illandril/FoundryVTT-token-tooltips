@@ -1,14 +1,14 @@
-type VERTICAL_POSITION = 'top' | 'center' | 'bottom';
-type HORIZONTAL_POSITION = 'left' | 'center' | 'right';
+type VerticalPosition = 'top' | 'center' | 'bottom';
+type HorizontalPosition = 'left' | 'center' | 'right';
 
 export type PersistentTooltipPosition = {
-  vertical: VERTICAL_POSITION
-  horizontal: HORIZONTAL_POSITION
-  rotation?: number
+  vertical: VerticalPosition;
+  horizontal: HorizontalPosition;
+  rotation?: number;
 };
 
 export type PersistentTooltipOption = {
-  type: 'user' | 'actor'
-  id: string
-  position: PersistentTooltipPosition
+  type: 'user' | 'actor';
+  id: string;
+  position: PersistentTooltipPosition;
 };

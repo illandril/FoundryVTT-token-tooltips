@@ -1,4 +1,3 @@
-
 const img = (url?: string | null) => {
   if (url) {
     const elem = document.createElement('img');

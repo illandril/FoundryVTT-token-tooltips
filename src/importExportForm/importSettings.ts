@@ -1,26 +1,21 @@
-import getStandardItems, { StandardItem } from '../customOptionsForm/getStandardOptions';
+import getStandardItems, { type StandardItem } from '../customOptionsForm/getStandardOptions';
 import module from '../module';
-import CustomOptions, { CustomOption } from '../settings/CustomOptions';
-import { StandardPermissionLevel } from '../settings/SpecialPermissions';
+import CustomOptions, { type CustomOption } from '../settings/CustomOptions';
+import type { StandardPermissionLevel } from '../settings/specialPermissions';
 import { updateAllPersistentTooltips } from '../tooltip/Tooltip';
 
 export type ImportObject = {
-  standard?: StandardOptionImport[]
-  custom?: CustomOption[]
+  standard?: StandardOptionImport[];
+  custom?: CustomOption[];
 };
 type StandardOptionImport = {
-  key: string
-  permission: StandardPermissionLevel
-  hideFromGM: boolean
-  hideOnPersistent: boolean
+  key: string;
+  permission: StandardPermissionLevel;
+  hideFromGM: boolean;
+  hideOnPersistent: boolean;
 };
 
-const STANDARD_OPTION_KEYS: readonly string[] = [
-  'key',
-  'permission',
-  'hideFromGM',
-  'hideOnPersistent',
-];
+const STANDARD_OPTION_KEYS: readonly string[] = ['key', 'permission', 'hideFromGM', 'hideOnPersistent'];
 const validateStandardOption = (option: StandardOptionImport, standardItems: StandardItem[]) => {
   const keys = Object.keys(option);
   if (keys.length < 4 || keys.some((key) => !STANDARD_OPTION_KEYS.includes(key))) {
@@ -160,7 +155,6 @@ const importSettings = (importString: string) => {
     module.logger.info('Updating custom items');
     CustomOptions.set(importObject.custom);
   }
-
 
   module.logger.info('Settings updated');
   // The settings don't always update immediately,

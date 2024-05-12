@@ -3,38 +3,16 @@ import module from '../module';
 import './form.scss';
 import lookup from './lookup';
 import PersistentTooltips from './setting';
-import { PersistentTooltipOption, PersistentTooltipPosition } from './types';
-
-const FORM_CSS_PREFIX = module.cssPrefix.childPrefix('menu').childPrefix('persistentTooltips');
-const CSS = {
-  HELP_TOGGLE_ID: FORM_CSS_PREFIX.child('helpToggle'),
-  HELP_TOGGLE_ON: FORM_CSS_PREFIX.child('helpToggle-on'),
-  HELP_TOGGLE_OFF: FORM_CSS_PREFIX.child('helpToggle-off'),
-
-  DATA: FORM_CSS_PREFIX.child('data'),
-
-  HEADER: FORM_CSS_PREFIX.child('header'),
-
-  TYPE_CELL: FORM_CSS_PREFIX.child('typeCell'),
-  ID_CELL: FORM_CSS_PREFIX.child('idCell'),
-  ID_STATE: FORM_CSS_PREFIX.child('idState'),
-  POSITION_CELL: FORM_CSS_PREFIX.child('positionCell'),
-  ROTATION_CELL: FORM_CSS_PREFIX.child('rotationCell'),
-  ACTIONS: FORM_CSS_PREFIX.child('actions'),
-
-  ADD_ROW_ID: FORM_CSS_PREFIX.child('addRow'),
-  DELETE: FORM_CSS_PREFIX.child('delete'),
-  MOVE_DOWN: FORM_CSS_PREFIX.child('moveDown'),
-  MOVE_UP: FORM_CSS_PREFIX.child('moveUp'),
-} as const;
+import * as css from './styles';
+import type { PersistentTooltipOption, PersistentTooltipPosition } from './types';
 
 const rowTemplate = module.registerTemplate('menu-persistentTooltips-row.html');
 
 type CustomFormData = {
-  position?: string | string[]
-  id?: string | string[]
-  rotation?: string | string[]
-  type?: string | string[]
+  position?: string | string[];
+  id?: string | string[];
+  rotation?: string | string[];
+  type?: string | string[];
 };
 
 const menuLocalize = (key: string) => module.localize(`setting.menu.persistentTooltips.${key}`);
@@ -65,16 +43,12 @@ const defaultTooltipSettings = {
 } as const;
 
 class PersistentTooltipForm extends FormApplication {
-  constructor(object?: never, options?: FormApplicationOptions) {
-    super(object, options);
-  }
-
   /**
    * Default Options for this FormApplication
    */
   static get defaultOptions(): FormApplicationOptions {
     return {
-      ...super.defaultOptions,
+      ...FormApplication.defaultOptions,
       ...persistentTooltipFormOptions,
       classes: ['sheet'],
       // width: 960,
@@ -84,7 +58,8 @@ class PersistentTooltipForm extends FormApplication {
 
   getCommonData() {
     return {
-      CSS,
+      // biome-ignore lint/style/useNamingConvention: Legacy
+      CSS: css,
       menuLocalize,
       types: {
         actor: game.i18n.localize('DOCUMENT.Actor'),
@@ -93,9 +68,7 @@ class PersistentTooltipForm extends FormApplication {
       positions: Object.fromEntries(
         ['left', 'center', 'right']
           .flatMap((horiz) => [`top.${horiz}`, `center.${horiz}`, `bottom.${horiz}`])
-          .map((pos) => [
-            pos, menuLocalize(`positions.${pos}`),
-          ]),
+          .map((pos) => [pos, menuLocalize(`positions.${pos}`)]),
       ),
       rotations: {
         0: menuLocalize('rotations.0'),
@@ -122,8 +95,7 @@ class PersistentTooltipForm extends FormApplication {
     };
   }
 
-  // Foundry defines this as async, so we keep it async for consistency
-  // eslint-disable-next-line @typescript-eslint/require-await
+  // biome-ignore lint/suspicious/useAwait: oundry defines this as async, so we keep it async for consistency
   async _updateObject(_event: unknown, formData: CustomFormData) {
     const types = asArray(formData.type);
     const ids = asArray(formData.id);
@@ -142,7 +114,7 @@ class PersistentTooltipForm extends FormApplication {
         type: type as PersistentTooltipOption['type'],
         id,
         position: {
-          rotation: parseInt(rotation, 10) || 0,
+          rotation: Number.parseInt(rotation, 10) || 0,
           ...normalizePosition(position),
         },
       });
@@ -165,18 +137,16 @@ class PersistentTooltipForm extends FormApplication {
   }
 
   refreshTypeState(row: JQuery<Element>) {
-    const typeInput = row
-      .find<HTMLSelectElement>('select[name="type"]')
-      .addBack('select[name="type"]')[0];
-    const idInput = row
-      .find<HTMLInputElement>('input[name="id"]')
-      .addBack('input[name="id"]')[0];
-    const idStateElement = row.find<HTMLElement>(`.${CSS.ID_STATE}`)[0];
-    if (!typeInput || !idInput || !idStateElement) {
-      module.logger.error(
-        'refreshTypeState could not find associated elements',
-        { row, typeInput, idInput, idStateElement },
-      );
+    const typeInput = row.find<HTMLSelectElement>('select[name="type"]').addBack('select[name="type"]')[0];
+    const idInput = row.find<HTMLInputElement>('input[name="id"]').addBack('input[name="id"]')[0];
+    const idStateElement = row.find<HTMLElement>(`.${css.ID_STATE}`)[0];
+    if (!(typeInput && idInput && idStateElement)) {
+      module.logger.error('refreshTypeState could not find associated elements', {
+        row,
+        typeInput,
+        idInput,
+        idStateElement,
+      });
       return;
     }
 
@@ -212,7 +182,6 @@ class PersistentTooltipForm extends FormApplication {
       module.logger.error('onDelete called with a target with no associated row');
       return;
     }
-    // eslint-disable-next-line no-alert
     if (confirm(module.localize('setting.menu.customOptions.deleteConfirm'))) {
       row.remove();
     }
@@ -262,7 +231,7 @@ class PersistentTooltipForm extends FormApplication {
           ...this.getCommonData(),
         }),
       );
-      const addRow = this.element[0].querySelector(`#${CSS.ADD_ROW_ID}`);
+      const addRow = this.element[0].querySelector(`#${css.ADD_ROW_ID}`);
       if (!addRow) {
         module.logger.error('Could not add a new row, because the add button could not be found');
       } else {
@@ -284,16 +253,16 @@ class PersistentTooltipForm extends FormApplication {
 
     module.logger.debug('Activating CustomOptionsForm listeners');
 
-    const addButton = document.getElementById(CSS.ADD_ROW_ID);
+    const addButton = document.getElementById(css.ADD_ROW_ID);
     if (!addButton) {
-      module.logger.error(`Could not find #${CSS.ADD_ROW_ID} button when adding listeners`);
+      module.logger.error(`Could not find #${css.ADD_ROW_ID} button when adding listeners`);
     } else {
       addButton.addEventListener('click', this.onAdd.bind(this));
     }
 
-    const helpToggle = form.querySelector(`#${CSS.HELP_TOGGLE_ID}`);
+    const helpToggle = form.querySelector(`#${css.HELP_TOGGLE_ID}`);
     if (!helpToggle) {
-      module.logger.error(`Could not find #${CSS.HELP_TOGGLE_ID} button when adding listeners`);
+      module.logger.error(`Could not find #${css.HELP_TOGGLE_ID} button when adding listeners`);
     } else {
       helpToggle.addEventListener('change', () => {
         this.setPosition({ height: 'auto' });
@@ -306,9 +275,9 @@ class PersistentTooltipForm extends FormApplication {
   _activateRowListeners(html: JQuery) {
     addEventListenerToAll(html, 'select[name="type"]', 'input', this.onUpdateTypeOrId.bind(this));
     addEventListenerToAll(html, 'input[name="id"]', 'input', this.onUpdateTypeOrId.bind(this));
-    addEventListenerToAll(html, `.${CSS.DELETE}`, 'click', this.onDelete.bind(this));
-    addEventListenerToAll(html, `.${CSS.MOVE_DOWN}`, 'click', this.onMoveDown.bind(this));
-    addEventListenerToAll(html, `.${CSS.MOVE_UP}`, 'click', this.onMoveUp.bind(this));
+    addEventListenerToAll(html, `.${css.DELETE}`, 'click', this.onDelete.bind(this));
+    addEventListenerToAll(html, `.${css.MOVE_DOWN}`, 'click', this.onMoveDown.bind(this));
+    addEventListenerToAll(html, `.${css.MOVE_UP}`, 'click', this.onMoveUp.bind(this));
     this._refreshActionCells();
     for (const type of html.find('select[name="type"]')) {
       const row = getRow(type);
@@ -319,7 +288,7 @@ class PersistentTooltipForm extends FormApplication {
   }
 
   _refreshActionCells() {
-    const allActions = this.element.find(`.${CSS.ACTIONS}`);
+    const allActions = this.element.find(`.${css.ACTIONS}`);
     allActions.removeClass('first');
     allActions.removeClass('last');
     allActions.first().addClass('first');
@@ -335,22 +304,20 @@ const persistentTooltipFormOptions = module.settings.registerMenu('persistentToo
 
 const getRow = (providedElement: Element) => {
   let element: Element | null = providedElement;
-  while (element && !element.parentElement?.classList.contains(CSS.DATA)) {
+  while (element && !element.parentElement?.classList.contains(css.DATA)) {
     element = element.parentElement;
   }
 
-  while (element && !element.classList.contains(CSS.ACTIONS)) {
+  while (element && !element.classList.contains(css.ACTIONS)) {
     element = element.nextElementSibling;
   }
-  if (element && element.classList.contains(CSS.ACTIONS)) {
-    const elementsInRow = [];
+  if (element?.classList.contains(css.ACTIONS)) {
+    const elementsInRow: Element[] = [];
     do {
       elementsInRow.unshift(element);
       element = element.previousElementSibling;
-    } while (element && !(element.classList.contains(CSS.HEADER) || element.classList.contains(CSS.ACTIONS)));
+    } while (element && !(element.classList.contains(css.HEADER) || element.classList.contains(css.ACTIONS)));
     return jQuery(elementsInRow);
   }
   return null;
 };
-
-

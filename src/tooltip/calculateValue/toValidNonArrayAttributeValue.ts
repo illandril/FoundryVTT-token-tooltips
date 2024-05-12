@@ -1,4 +1,4 @@
-import { ValidNonArrayAttributeType } from './Types';
+import type { ValidNonArrayAttributeType } from './types';
 
 const toValidNonArrayAttributeValue = (value: unknown): ValidNonArrayAttributeType | null => {
   if (value === null || value === '') {
@@ -7,7 +7,7 @@ const toValidNonArrayAttributeValue = (value: unknown): ValidNonArrayAttributeTy
   if (value instanceof Node) {
     return value;
   }
-  if (typeof value === 'number' && !isNaN(value)) {
+  if (typeof value === 'number' && !Number.isNaN(value)) {
     return value;
   }
   if (typeof value === 'string' || typeof value === 'boolean') {

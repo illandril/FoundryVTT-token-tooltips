@@ -1,17 +1,14 @@
-import { CalculatedValue } from '../calculateValue';
+import type { CalculatedValue } from '../calculateValue';
 import { appendValue } from '../row/addValue';
 import getSingleValue from './getSingleValue';
-import { add, getOperation, Operation } from './operations';
+import { type Operation, add, getOperation } from './operations';
 
 const stringPattern = /^\s*["'`](.+)["'`]\s*$/;
 const parenPattern = /^\s*[(](.+)[)]\s*$/;
 const mathPattern = /\s*(\+|-|\*|\/|%|[<>!=]=?-?)\s*/g;
 
 const normalizeAttributeKey = (rawAttributeKey: string) => {
-  return rawAttributeKey
-    .replace(parenPattern, '$1')
-    .replace(mathPattern, '~$1~')
-    .split('~');
+  return rawAttributeKey.replace(parenPattern, '$1').replace(mathPattern, '~$1~').split('~');
 };
 
 const getAsSingleValue = (actor: Actor, rawAttributeKey: string): CalculatedValue | null => {
@@ -48,11 +45,7 @@ const extractNextKeyData = (actor: Actor, attributeKeys: string[], startIndex: n
 };
 
 const extractNextKey = (actor: Actor, attributeKeys: string[], startIndex: number) => {
-  const {
-    attributeKey,
-    value,
-    endIndex,
-  } = extractNextKeyData(actor, attributeKeys, startIndex);
+  const { attributeKey, value, endIndex } = extractNextKeyData(actor, attributeKeys, startIndex);
 
   if (attributeKey.trim() === '') {
     return {
@@ -90,6 +83,7 @@ const extractNextKey = (actor: Actor, attributeKeys: string[], startIndex: numbe
   };
 };
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Legacy
 const getMultiValuePart = (actor: Actor, rawAttributeKey: string): CalculatedValue | null => {
   const asSingleValue = getAsSingleValue(actor, rawAttributeKey);
   if (asSingleValue) {
@@ -100,7 +94,7 @@ const getMultiValuePart = (actor: Actor, rawAttributeKey: string): CalculatedVal
   let valueSoFar = 0;
   let negate = false;
   let operation: Operation = add;
-  let fullValue;
+  let fullValue: CalculatedValue | null | undefined;
   let hadOperation = false;
   for (let i = 0; i < attributeKeys.length; i++) {
     const extracted = extractNextKey(actor, attributeKeys, i);
@@ -124,7 +118,7 @@ const getMultiValuePart = (actor: Actor, rawAttributeKey: string): CalculatedVal
     const thisValue = (negate ? -1 : 1) * keyValue.value;
     negate = false;
     const result = operation(valueSoFar, thisValue);
-    if (result === null || isNaN(result)) {
+    if (result === null || Number.isNaN(result)) {
       return null;
     }
     valueSoFar = result;

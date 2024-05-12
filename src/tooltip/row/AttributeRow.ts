@@ -2,9 +2,9 @@ import div from '../../html/div';
 import emptyNode from '../../html/emptyNode';
 import { optionalIcon } from '../../html/icon';
 import span from '../../html/span';
-import { CalculatedValue } from '../calculateValue';
+import type { CalculatedValue } from '../calculateValue';
 import addValue from './addValue';
-import CSS from './CSS';
+import * as css from './styles';
 
 export default class AttributeRow {
   #name: string | null;
@@ -13,29 +13,28 @@ export default class AttributeRow {
   #label: HTMLElement;
   // #valueDisplay: HTMLElement;
   #currDisplay: HTMLElement;
-  #maxDisplay: HTMLElement = span(CSS.MAX);
-  #unitsDisplay: HTMLElement = span(CSS.UNITS);
-  #extraDisplay: HTMLElement = span(CSS.EXTRA);
+  #maxDisplay: HTMLElement = span(css.MAX);
+  #unitsDisplay: HTMLElement = span(css.UNITS);
+  #extraDisplay: HTMLElement = span(css.EXTRA);
 
   constructor(name: string, iconNameOrElem: string | Element | null, group?: string) {
     this.#name = null;
     this.#iconName = null;
-    const row = div(CSS.ROW);
+    const row = div(css.ROW);
     if (group) {
       row.setAttribute('data-group', group);
     }
     row.setAttribute('data-name', name);
 
-
-    const label = span(CSS.LABEL);
+    const label = span(css.LABEL);
     this.#label = label;
     this.setNameAndIcon(name, iconNameOrElem);
     row.appendChild(label);
 
-    const valueDisplay = span(CSS.VALUE);
+    const valueDisplay = span(css.VALUE);
     row.appendChild(valueDisplay);
 
-    const currDisplay = span(CSS.CURRENT);
+    const currDisplay = span(css.CURRENT);
     valueDisplay.appendChild(currDisplay);
     valueDisplay.appendChild(this.#maxDisplay);
     valueDisplay.appendChild(this.#unitsDisplay);
@@ -52,7 +51,7 @@ export default class AttributeRow {
       return;
     }
     this.#name = name;
-    let iconElem;
+    let iconElem: Element | null;
     if (typeof iconNameOrElem === 'string') {
       this.#iconName = iconNameOrElem;
       iconElem = optionalIcon(iconNameOrElem);
@@ -91,5 +90,3 @@ export default class AttributeRow {
     }
   }
 }
-
-

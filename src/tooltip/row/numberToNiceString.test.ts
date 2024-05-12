@@ -96,7 +96,6 @@ describe('en-US', () => {
   });
 });
 
-
 describe('de-DE', () => {
   beforeEach(() => {
     jest.spyOn(navigator, 'language', 'get').mockReturnValue('de-DE');
@@ -123,4 +122,3 @@ describe('de-DE', () => {
     expect(Intl.NumberFormat).toBeCalledWith('de-DE', { maximumFractionDigits: 3 });
   });
 });
-

@@ -1,4 +1,3 @@
-
 export const optionalIcon = (iconName: string, thin?: boolean) => {
   if (!iconName) {
     return null;
@@ -12,7 +11,7 @@ const icon = (iconName: string, thin?: boolean) => {
   }
   const iconElem = document.createElement('i');
   iconElem.classList.add(thin ? 'fat' : 'fas');
-  iconElem.classList.add('fa-' + iconName);
+  iconElem.classList.add(`fa-${iconName}`);
   return iconElem;
 };
 

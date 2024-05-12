@@ -6,11 +6,11 @@ const nanToZero = (value: unknown) => {
   if (typeof value === 'number') {
     valueAsFloat = value;
   } else if (typeof value === 'string') {
-    valueAsFloat = parseFloat(value);
+    valueAsFloat = Number.parseFloat(value);
   } else {
-    valueAsFloat = NaN;
+    valueAsFloat = Number.NaN;
   }
-  if (isNaN(valueAsFloat)) {
+  if (Number.isNaN(valueAsFloat)) {
     return 0;
   }
   return valueAsFloat;

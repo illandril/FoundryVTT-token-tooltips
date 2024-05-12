@@ -1,4 +1,4 @@
-import calculateValue, { CalculatedValue } from '../tooltip/calculateValue';
+import calculateValue, { type CalculatedValue } from '../tooltip/calculateValue';
 
 type Icon = string | HTMLElement | null;
 type Label = string;
@@ -13,13 +13,15 @@ export default class AttributeLookup {
     public readonly icon: IconLookup,
     public readonly label: LabelLookup,
     public readonly value: ValueLookup,
-  ) {}
+  ) {
+    // Nothing to do except the public properties
+  }
 }
 
 export type AsyncRow = {
-  icon: Icon
-  label: Label
-  value: Value
+  icon: Icon;
+  label: Label;
+  value: Value;
 };
 type AsyncRowLookup = (actor: Actor, token: Token) => Promise<AsyncRow[]>;
 
@@ -27,7 +29,9 @@ export class AsyncAttributeLookup {
   constructor(
     public readonly id: string,
     public readonly asyncRows: AsyncRowLookup,
-  ) {}
+  ) {
+    // Nothing to do except the public properties
+  }
 }
 
 export const getAttributeValue = (object: unknown, valueKeys: string[]): CalculatedValue | null => {

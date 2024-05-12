@@ -1,5 +1,5 @@
 import capitalize from '../dataConversion/capitalize';
-import AttributeLookup, { SimpleActorAttributeLookup, ValueLookup } from './AttributeLookup';
+import AttributeLookup, { SimpleActorAttributeLookup, type ValueLookup } from './AttributeLookup';
 import a5eMovement from './systems/a5e/movement';
 import d35eOrPF1Movement from './systems/d35eOrPF1/movement';
 import dnd5eMovement from './systems/dnd5e/movement';
@@ -49,9 +49,9 @@ const genericMovement = (keys: string[], icon: string) => {
     () => {
       switch (game.system.id) {
         case 'swade':
-          return game.i18n.localize(`SWADE.Pace`);
+          return game.i18n.localize('SWADE.Pace');
         case 'gurps4e':
-          return game.i18n.localize(`GURPS4E.attributes.bs`);
+          return game.i18n.localize('GURPS4E.attributes.bs');
         default:
           return '[SPEED]';
       }
@@ -64,12 +64,7 @@ export default [
   multiMovement('walk', 'walking', [dnd5eMovement, a5eMovement]),
   multiMovement('land', 'walking', [d35eOrPF1Movement, pf2Movement]),
   genericMovement(
-    [
-      'system.characteristics.movement',
-      'system.characteristics.speed',
-      'system.stats.speed',
-      'system.bs',
-    ],
+    ['system.characteristics.movement', 'system.characteristics.speed', 'system.stats.speed', 'system.bs'],
     'walking',
   ),
   multiMovement('burrow', 'angle-double-down', [dnd5eMovement, d35eOrPF1Movement, pf2Movement, a5eMovement]),

@@ -3,12 +3,8 @@
     "minimum": 10,
     "verified": 11
   },
-  "esmodules": [
-    "module.js"
-  ],
-  "styles": [
-    "styles.css"
-  ],
+  "esmodules": ["module.js"],
+  "styles": ["styles.css"],
   "languages": [
     {
       "lang": "en",

@@ -1,13 +1,13 @@
-const isNumberLikeValue = (value: unknown) => {
+const isNumberLikeValue = (value: unknown): value is string | number => {
   let valueAsFloat: number;
   if (typeof value === 'number') {
     valueAsFloat = value;
   } else if (typeof value === 'string') {
-    valueAsFloat = parseFloat(value);
+    valueAsFloat = Number.parseFloat(value);
   } else {
     return false;
   }
-  return !isNaN(valueAsFloat);
+  return !Number.isNaN(valueAsFloat);
 };
 
 export default isNumberLikeValue;

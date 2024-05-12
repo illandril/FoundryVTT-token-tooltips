@@ -1,5 +1,5 @@
 import stringToInt from '../../dataConversion/stringToInt';
-import calculateValue, { CalculatedValue } from '../calculateValue';
+import calculateValue, { type CalculatedValue } from '../calculateValue';
 
 const getSingleValue = (actor: Actor, rawAttributeKey: string): CalculatedValue | null => {
   const attributeKey = rawAttributeKey.trim();

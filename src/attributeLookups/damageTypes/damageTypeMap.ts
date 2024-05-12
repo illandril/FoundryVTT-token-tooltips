@@ -3,7 +3,7 @@ import module from '../../module';
 const cssPrefix = module.cssPrefix.childPrefix('damage-types');
 const rotateLeft = cssPrefix.child('rotate-left');
 
-const damageTypeMap = new Map<string, { iconKey: string, color?: string, cssClass?: string }>();
+const damageTypeMap = new Map<string, { iconKey: string; color?: string; cssClass?: string }>();
 
 const physicalColor = '#5E6B69';
 const genericConditionColor = '#6D7174';
@@ -274,6 +274,4 @@ damageTypeMap.set('weapons', {
   color: physicalColor,
 });
 
-
 export default damageTypeMap;
-

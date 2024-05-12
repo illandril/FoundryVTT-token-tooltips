@@ -29,9 +29,7 @@ describe('NONE', () => {
     expect(value.textContent).toBe(localized);
   });
 
-  it.each([
-    '5', '(+7)', '(-6)',
-  ])('should render suffix (%s) after the label', (suffix) => {
+  it.each(['5', '(+7)', '(-6)'])('should render suffix (%s) after the label', (suffix) => {
     const value = simplifyDamageType({
       localized: 'Acid',
       raw: 'acid',
@@ -155,9 +153,7 @@ describe('COLOR_ICON', () => {
     expect(value).toHaveStyle({ color: expectedColor });
   });
 
-  it.each([
-    '5', '(+7)', '(-6)',
-  ])('should render suffix (%s) after the icon', (suffix) => {
+  it.each(['5', '(+7)', '(-6)'])('should render suffix (%s) after the icon', (suffix) => {
     const value = simplifyDamageType({
       localized: 'Acid',
       raw: 'acid',
@@ -209,36 +205,37 @@ describe('ICON_AND_TEXT', () => {
     ['fa-droplet', 'Acid', '#316100', 'acid'],
     ['fa-hammer-war', 'Bludgeoning', '#5E6B69', 'bludgeoning'],
     ['fa-fire', 'Fire', '#CE3C02', 'fire'],
-  ])('should render icon (%s) and localized string (%s) with color (%s) for %s', (expectedIcon, localized, expectedColor, raw) => {
-    const value = simplifyDamageType({
-      localized,
-      raw,
-    });
+  ])(
+    'should render icon (%s) and localized string (%s) with color (%s) for %s',
+    (expectedIcon, localized, expectedColor, raw) => {
+      const value = simplifyDamageType({
+        localized,
+        raw,
+      });
 
-    expect(value).toBeInstanceOf(HTMLSpanElement);
+      expect(value).toBeInstanceOf(HTMLSpanElement);
 
-    const icon = (value as HTMLElement).firstElementChild as HTMLElement;
-    expect(icon.tagName).toBe('I');
-    expect(icon).toHaveClass('fas');
-    expect(icon).toHaveClass(expectedIcon);
-    expect(icon).toHaveAccessibleName('');
+      const icon = (value as HTMLElement).firstElementChild as HTMLElement;
+      expect(icon.tagName).toBe('I');
+      expect(icon).toHaveClass('fas');
+      expect(icon).toHaveClass(expectedIcon);
+      expect(icon).toHaveAccessibleName('');
 
-    const space = icon.nextSibling as Text;
-    expect(space).toBeInstanceOf(Text);
-    expect(space.textContent).toBe('\u00a0');
+      const space = icon.nextSibling as Text;
+      expect(space).toBeInstanceOf(Text);
+      expect(space.textContent).toBe('\u00a0');
 
-    const text = space.nextSibling as Text;
-    expect(text).toBeInstanceOf(Text);
-    expect(text.textContent).toBe(localized);
+      const text = space.nextSibling as Text;
+      expect(text).toBeInstanceOf(Text);
+      expect(text.textContent).toBe(localized);
 
-    expect(text.nextSibling).toBeNull();
+      expect(text.nextSibling).toBeNull();
 
-    expect(value).toHaveStyle({ color: expectedColor });
-  });
+      expect(value).toHaveStyle({ color: expectedColor });
+    },
+  );
 
-  it.each([
-    '5', '(+7)', '(-6)',
-  ])('should render suffix (%s) after the label', (suffix) => {
+  it.each(['5', '(+7)', '(-6)'])('should render suffix (%s) after the label', (suffix) => {
     const value = simplifyDamageType({
       localized: 'Acid',
       raw: 'acid',
@@ -289,4 +286,3 @@ describe('ICON_AND_TEXT', () => {
     expect(value as HTMLElement).toHaveStyle({ color: '' });
   });
 });
-

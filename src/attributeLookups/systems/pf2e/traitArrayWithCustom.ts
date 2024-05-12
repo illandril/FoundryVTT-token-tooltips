@@ -5,7 +5,7 @@ import unknownObject from '../../../dataConversion/unknownObject';
 import module from '../../../module';
 import calculateValue from '../../../tooltip/calculateValue';
 import AttributeLookup from '../../AttributeLookup';
-import { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
+import type { LocalizedValueSimplifier } from '../../LocalizedValueSimplifier';
 import systemID from './systemID';
 
 const getLabelFromType = (type: string | null, propertyKey: string, fallback: string | null) => {
@@ -54,10 +54,10 @@ const getLabel = (value: unknown, propertyKey: string, simplifier?: LocalizedVal
   }
   const labelNode = simplifier
     ? simplifier({
-      localized: label,
-      raw: type || fallback || label,
-      suffix,
-    })
+        localized: label,
+        raw: type || fallback || label,
+        suffix,
+      })
     : document.createTextNode(`${label}${suffix ? ` ${suffix}` : ''}`);
   return labelNode;
 };
@@ -90,10 +90,7 @@ const traitArrayWithCustom = (localeKey: string, propertyKey: string, simplifier
         const customValues = stringArrayOrSet(propertyObj?.custom);
         allValues = stdValues.filter(filterEmpty);
         if (customValues?.length) {
-          allValues = allValues.concat(
-            customValues.filter(filterEmpty)
-              .map((value) => document.createTextNode(value)),
-          );
+          allValues = allValues.concat(customValues.filter(filterEmpty).map((value) => document.createTextNode(value)));
         }
       }
       return calculateValue(allValues);

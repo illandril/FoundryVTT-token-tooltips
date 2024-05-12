@@ -12,12 +12,7 @@ const passive = (key: string, icon: string) => {
     () => icon,
     () => {
       if (game.system.id === dnd5eSystemID) {
-        return (
-          game.i18n.localize(`DND5E.Skill${capitalize(key)}`)
-            + ' ('
-            + game.i18n.localize('DND5E.Passive')
-            + ')'
-        );
+        return `${game.i18n.localize(`DND5E.Skill${capitalize(key)}`)} (${game.i18n.localize('DND5E.Passive')})`;
       }
       return `[${key.toUpperCase()}]`;
     },
@@ -41,7 +36,7 @@ export default [
       if (game.system.id !== pf1SystemID || isPF1LiteNPC(actor)) {
         return null;
       }
-      return calculateValue(foundry.utils.getProperty(actor.system, `skills.per.mod`));
+      return calculateValue(foundry.utils.getProperty(actor.system, 'skills.per.mod'));
     },
   ),
 
@@ -55,12 +50,14 @@ export default [
       if (game.system.id !== pf2eSystemID) {
         return null;
       }
-      const key = foundry.utils.isNewerVersion('5.12.0', game.system.version) ? 'attributes.perception.value' : 'perception.value';
+      const key = foundry.utils.isNewerVersion('5.12.0', game.system.version)
+        ? 'attributes.perception.value'
+        : 'perception.value';
       const value = foundry.utils.getProperty(actor.system, key);
       let numValue: number | null;
       if (typeof value === 'string') {
         numValue = stringToInt(value);
-      } else if (typeof value === 'number' && !isNaN(value)) {
+      } else if (typeof value === 'number' && !Number.isNaN(value)) {
         numValue = value;
       } else {
         numValue = null;

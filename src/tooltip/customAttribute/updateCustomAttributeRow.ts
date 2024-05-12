@@ -1,5 +1,5 @@
 import module from '../../module';
-import { CustomOption } from '../../settings/CustomOptions';
+import type { CustomOption } from '../../settings/CustomOptions';
 import AttributeRow from '../row/AttributeRow';
 import getMultiValue from './getMultiValue';
 import isImageKey from './isImageKey';
@@ -11,9 +11,7 @@ const toImage = (value: string) => {
   return image;
 };
 
-const updateCustomAttributeRow = (
-  actor: Actor, customRow: CustomOption, customRows: AttributeRow[], index: number,
-) => {
+const updateCustomAttributeRow = (actor: Actor, customRow: CustomOption, customRows: AttributeRow[], index: number) => {
   const attributeKey = customRow.attributeKey;
   const value = getMultiValue(actor, attributeKey);
   module.logger.debug('updateCustomAttributeRow', attributeKey, value);
@@ -26,7 +24,7 @@ const updateCustomAttributeRow = (
 
   const name = customRow.name;
   const iconElem = customRow.icon;
-  let row;
+  let row: AttributeRow;
   if (!customRows[index]) {
     row = new AttributeRow(name, iconElem);
     customRows[index] = row;
