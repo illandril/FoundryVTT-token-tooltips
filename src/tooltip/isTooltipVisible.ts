@@ -22,7 +22,7 @@ const Rules = {
   },
   // biome-ignore lint/style/useNamingConvention: Legacy
   OWNER: (token) => {
-    return token.owner;
+    return token.document.isOwner;
   },
   // biome-ignore lint/style/useNamingConvention: Legacy
   OBSERVER: (token) => {
