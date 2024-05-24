@@ -1,13 +1,11 @@
-.dnd5e.sheet.actor .items-list {
-  .illandril-token-tooltips--actorSettings--tooltipToggleCell {
-    flex: 0 0 2em;
-  }
+.illandril-token-tooltips--actorSettings--tooltipToggleCell {
+  flex: 0 0 2em;
+}
 
-  .illandril-token-tooltips--actorSettings--tooltipToggle {
-    color: #000;
-    opacity: 0.3;
-    &[aria-checked="true"] {
-      opacity: 0.8;
-    }
+.illandril-token-tooltips--actorSettings--tooltipToggle {
+  color: #000;
+  opacity: 0.3;
+  &[aria-checked="true"] {
+    opacity: 0.8;
   }
 }
