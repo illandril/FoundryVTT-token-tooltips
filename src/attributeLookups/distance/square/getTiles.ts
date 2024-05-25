@@ -3,10 +3,10 @@ const getTile = (pos: number, size: number) => {
 };
 const getTiles = (grid: GridLayer, bounds: PIXI.Rectangle) => {
   return {
-    left: getTile(bounds.left, grid.size),
-    right: getTile(bounds.right - 0.1, grid.size),
-    top: getTile(bounds.top, grid.size),
-    bottom: getTile(bounds.bottom - 0.1, grid.size),
+    left: getTile(bounds.left, grid.grid.size),
+    right: getTile(bounds.right - 0.1, grid.grid.size),
+    top: getTile(bounds.top, grid.grid.size),
+    bottom: getTile(bounds.bottom - 0.1, grid.grid.size),
   };
 };
 

@@ -8,7 +8,7 @@ const calculateSquareDistanceGridSpaces = (grid: GridLayer, token: Token, other:
   const tileOffset = calculateTileOffset(grid, token, other);
   return grid.measureDistance(
     { x: 0, y: 0 },
-    { x: tileOffset.horizontal * grid.size, y: tileOffset.vertical * grid.size },
+    { x: tileOffset.horizontal * grid.grid.size, y: tileOffset.vertical * grid.grid.size },
     { gridSpaces: true },
   );
 };
@@ -16,15 +16,15 @@ const calculateSquareDistanceGridSpaces = (grid: GridLayer, token: Token, other:
 const calculateSquareDistanceEuclidian = (grid: GridLayer, token: Token, other: Token) => {
   const includeElevation = SquareIncludeElevation.get();
   const measureFrom = SquareMeasureFrom.get();
-  const tileDistance = grid.grid.options.dimensions.distance;
+  const tileDistance = grid.grid.distance;
   const from = {
-    x: (token.center.x / grid.size) * tileDistance,
-    y: (token.center.y / grid.size) * tileDistance,
+    x: (token.center.x / grid.grid.size) * tileDistance,
+    y: (token.center.y / grid.grid.size) * tileDistance,
     elevation: includeElevation ? token.document.elevation || 0 : 0,
   };
   const to = {
-    x: (other.center.x / grid.size) * tileDistance,
-    y: (other.center.y / grid.size) * tileDistance,
+    x: (other.center.x / grid.grid.size) * tileDistance,
+    y: (other.center.y / grid.grid.size) * tileDistance,
     elevation: includeElevation ? other.document.elevation || 0 : 0,
   };
   if (measureFrom === 'NEAREST') {
@@ -38,10 +38,10 @@ const calculateSquareDistanceEuclidian = (grid: GridLayer, token: Token, other: 
 };
 
 const calculateSquareDistanceEquidistant = (grid: GridLayer, token: Token, other: Token) => {
-  return calculateTileDistanceEquidistant(grid, token, other) * grid.grid.options.dimensions.distance;
+  return calculateTileDistanceEquidistant(grid, token, other) * grid.grid.distance;
 };
 const calculateSquareDistanceAlternating = (grid: GridLayer, token: Token, other: Token) => {
-  return calculateTileDistanceAlternating(grid, token, other) * grid.grid.options.dimensions.distance;
+  return calculateTileDistanceAlternating(grid, token, other) * grid.grid.distance;
 };
 
 const calculateSquareDistance = (grid: GridLayer, token: Token, other: Token) => {

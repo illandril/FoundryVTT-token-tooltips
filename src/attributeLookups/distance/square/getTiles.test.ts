@@ -21,7 +21,9 @@ it.each([
   [{ left: 5, right: 8, top: 16, bottom: 19 }, 100, rect(500, 1600, 400, 400)],
 ])('returns %j for grid.size=%j, bounds=%j', (expected, gridSize, bounds) => {
   const grid = {
-    size: gridSize,
+    grid: {
+      size: gridSize,
+    },
   } as GridLayer;
 
   const result = getTiles(grid, bounds);

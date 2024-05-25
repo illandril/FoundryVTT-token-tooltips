@@ -45,8 +45,8 @@ const calculateTileOffset = (grid: GridLayer, token: Token, other: Token) => {
 
   let elevation: number;
   if (SquareIncludeElevation.get()) {
-    const tokenElevationTiles = token.document.elevation / grid.grid.options.dimensions.distance;
-    const otherElevationTiles = other.document.elevation / grid.grid.options.dimensions.distance;
+    const tokenElevationTiles = token.document.elevation / grid.grid.distance;
+    const otherElevationTiles = other.document.elevation / grid.grid.distance;
     elevation = getOffset(tokenElevationTiles, tokenElevationTiles, otherElevationTiles, otherElevationTiles);
   } else {
     elevation = 0;

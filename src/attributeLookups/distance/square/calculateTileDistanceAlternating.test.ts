@@ -87,13 +87,9 @@ describe('MeasureFrom=NEAREST', () => {
     [9, 100, bounds(0, 0, 100, 100), bounds(300, 800, 100, 100)],
   ])('returns %j for grid.size=%j, a=%j, b=%j', (expected, gridSize, a, b) => {
     const grid = {
-      size: gridSize,
       grid: {
-        options: {
-          dimensions: {
-            distance: 5,
-          },
-        },
+        size: gridSize,
+        distance: 5,
       },
     } as GridLayer;
     const token = {

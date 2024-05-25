@@ -4,7 +4,7 @@ import calculateSquareDistance from './square/calculateSquareDistance';
 
 const calculateDistance = (grid: GridLayer, token: Token, other: Token) => {
   let distance: number;
-  switch (grid.type) {
+  switch (grid.grid.type) {
     case foundry.CONST.GRID_TYPES.HEXEVENQ:
     case foundry.CONST.GRID_TYPES.HEXEVENR:
     case foundry.CONST.GRID_TYPES.HEXODDQ:

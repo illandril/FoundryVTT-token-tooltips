@@ -1,6 +1,6 @@
 {
   "compatibility": {
-    "minimum": 10,
+    "minimum": 12,
     "verified": 12
   },
   "esmodules": ["module.js"],
@@ -19,6 +19,10 @@
   ],
   "license": "LICENSE",
   "media": [
+    {
+      "type": "setup",
+      "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/main/screenshots/setup.png"
+    },
     {
       "type": "cover",
       "url": "https://github.com/illandril/FoundryVTT-token-tooltips/raw/main/screenshots/cover.jpg"

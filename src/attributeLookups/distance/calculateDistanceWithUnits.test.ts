@@ -59,23 +59,22 @@ const scene = {
 } as Partial<Scene> as Scene;
 
 const gridNoType = {
-  type: foundry.CONST.GRID_TYPES.GRIDLESS,
-  size: 100,
   grid: {
-    options: {
-      dimensions: {
-        distance: 5,
-      },
-    },
-  } as Partial<BaseGrid> as BaseGrid,
+    size: 100,
+    distance: 5,
+    type: foundry.CONST.GRID_TYPES.GRIDLESS,
+  } as foundry.grid.BaseGrid,
   measureDistance: () => -42,
 } as Partial<GridLayer>;
 
 describe('Gridless', () => {
   const grid = {
     ...gridNoType,
-    type: foundry.CONST.GRID_TYPES.GRIDLESS,
-  } as Partial<GridLayer> as GridLayer;
+    grid: {
+      ...gridNoType.grid,
+      type: foundry.CONST.GRID_TYPES.GRIDLESS,
+    },
+  } as GridLayer;
 
   describe('w/ Elevation', () => {
     beforeEach(() => {
@@ -201,8 +200,11 @@ describe('Gridless', () => {
 describe('Square', () => {
   const grid = {
     ...gridNoType,
-    type: foundry.CONST.GRID_TYPES.SQUARE,
-  } as Partial<GridLayer> as GridLayer;
+    grid: {
+      ...gridNoType.grid,
+      type: foundry.CONST.GRID_TYPES.SQUARE,
+    },
+  } as GridLayer;
 
   describe('Grid', () => {
     beforeEach(() => {
@@ -707,8 +709,11 @@ describe.each([
 ])('Hex (%j)', (gridType) => {
   const grid = {
     ...gridNoType,
-    type: gridType,
-  } as Partial<GridLayer> as GridLayer;
+    grid: {
+      ...gridNoType.grid,
+      type: gridType,
+    },
+  } as GridLayer;
 
   describe('Grid', () => {
     beforeEach(() => {

@@ -98,13 +98,9 @@ describe('MeasureFrom=NEAREST', () => {
     [{ elevation: 0, horizontal: 1, vertical: 2 }, 50, bounds(0, 0, 200, 200), bounds(200, 250, 200, 200)],
   ])('returns %j for grid.size=%j, a=%j, b=%j', (expected, gridSize, a, b) => {
     const grid = {
-      size: gridSize,
       grid: {
-        options: {
-          dimensions: {
-            distance: 5,
-          },
-        },
+        size: gridSize,
+        distance: 5,
       },
     } as GridLayer;
     const token = {
@@ -212,13 +208,9 @@ describe('MeasureFrom=CENTER_NEAR', () => {
     [{ elevation: 0, horizontal: 3, vertical: 4 }, 50, bounds(0, 0, 200, 200), bounds(200, 250, 200, 200)],
   ])('returns %j for grid.size=%j, a=%j, b=%j', (expected, gridSize, a, b) => {
     const grid = {
-      size: gridSize,
       grid: {
-        options: {
-          dimensions: {
-            distance: 5,
-          },
-        },
+        size: gridSize,
+        distance: 5,
       },
     } as GridLayer;
     const token = {
@@ -326,13 +318,9 @@ describe('MeasureFrom=CENTER_FAR', () => {
     [{ elevation: 0, horizontal: 5, vertical: 6 }, 50, bounds(0, 0, 200, 200), bounds(200, 250, 200, 200)],
   ])('returns %j for grid.size=%j, a=%j, b=%j', (expected, gridSize, a, b) => {
     const grid = {
-      size: gridSize,
       grid: {
-        options: {
-          dimensions: {
-            distance: 5,
-          },
-        },
+        size: gridSize,
+        distance: 5,
       },
     } as GridLayer;
     const token = {

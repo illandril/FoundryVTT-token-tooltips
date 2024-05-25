@@ -13,11 +13,4 @@ permissions:
 
 jobs:
   auto-assign:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Auto-assign issue / PR'
-        uses: pozil/auto-assign-issue@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: illandril
-          allowSelfAssign: true
+    uses: illandril/FoundryVTT-package-release-action/.github/workflows/illandril-assign.yml@main
