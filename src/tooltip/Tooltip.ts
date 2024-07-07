@@ -152,18 +152,20 @@ const getFixedWrapper = ({ vertical, horizontal }: PersistentTooltipPosition) =>
 };
 
 const persistentTooltipUpdaters = new Set<() => void>();
-export const updateAllPersistentTooltips = () => {
+export const updateAllPersistentTooltips = foundry.utils.debounce(() => {
   for (const updater of persistentTooltipUpdaters) {
     updater();
   }
-};
+}, 100);
 Hooks.on('canvasReady', updateAllPersistentTooltips);
 Hooks.on('controlToken', updateAllPersistentTooltips);
 Hooks.on('updateToken', updateAllPersistentTooltips);
+Hooks.on('refreshToken', updateAllPersistentTooltips);
 Hooks.on('updateActor', updateAllPersistentTooltips);
 Hooks.on('updateUser', updateAllPersistentTooltips);
 
 export default class Tooltip {
+  #token: Token | null = null;
   #element = div(CSS_TOOLTIP);
   #persistentUpdater?: () => void;
   #nameElement = div(CSS_NAME);
@@ -197,6 +199,11 @@ export default class Tooltip {
       this.#element.classList.remove(CSS_SHOW);
     });
 
+    persistentTooltipUpdaters.add(() => {
+      if (this.#token) {
+        this.#onHover(this.#token);
+      }
+    });
     Hooks.on('hoverToken', (token, hovered) => {
       this.#onHover(hovered ? token : game.canvas.tokens?.hover ?? null);
     });
@@ -235,6 +242,7 @@ export default class Tooltip {
 
   #updatePersistent(fixed: PersistentTooltipArgs) {
     const token = fixed.getCurrentToken();
+    this.#token = token;
     if (token && shouldShowTooltip(token)) {
       module.logger.debug('updatePersistent show', token);
       this.#updateData(token);
@@ -283,11 +291,13 @@ export default class Tooltip {
 
   #onHover(token: Token | null) {
     if (token && shouldShowTooltip(token)) {
+      this.#token = token;
       module.logger.debug('onHover show', token);
       this.#updateData(token);
       this.#fixPosition(token);
       this.#show();
     } else {
+      this.#token = null;
       module.logger.debug('onHover hide', token);
       this.#hide();
     }

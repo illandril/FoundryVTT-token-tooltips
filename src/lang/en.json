@@ -233,45 +233,6 @@
         "ALL": "GM sees Player info",
         "NPC_ONLY": "NPC only for GMs"
       },
-      "squareDistanceChoice": {
-        "label": "Diagonal Rule (Square)",
-        "hint": "Specify how the Distance Ruler calculates diagonal distances from for scenes using Square grids. 'Use Grid Measurements' will measure the same way as the Measure Distance tool (ignores elevation). 'Euclidian': The absolute distance (e.g. 5ft square -> 1 diagonal = 7.07ft, 2 diagonals = 14.14ft, etc). 'Equidistant': Diagonals are treated as straights (5ft square -> one diagonal = 5ft, two diagonals = 10ft, etc). 'Alternating': Diagonals are treated as one or two straights alternating (5ft square -> one diagonal = 5ft, two diagonals = 15ft, three diagonals = 20ft, etc)",
-        "choice": {
-          "GRID": "Use Grid Measurements",
-          "EUCLIDIAN": "Euclidian",
-          "EQUIDISTANT": "Equidistant",
-          "ALTERNATING": "Alternating"
-        }
-      },
-      "squareMeasureFrom": {
-        "label": "Measure From (Square)",
-        "hint": "Specify where the Distance Ruler calculates distances from for scenes using Square grids. 'Nearest Grid Spaces' will measure from the center of the closest grid spaces of each token. For 'Euclidian' measurements, the two 'Center' options will measure from the center of each token, ignoring grid spaces. For non-euclidian measurements, the two 'Center' options will measure from the center of the grid space that includes the center of each token. If the center of the token is in between two (or more) grid spaces, `Round Up` will select the grid space touching the center that is farthest from the other token, and 'Round Down' will select the grid space touchign the center that is nearest the other token.",
-        "choice": {
-          "NEAREST": "Nearest Grid Spaces",
-          "CENTER_FAR": "Center (Round Up)",
-          "CENTER_NEAR": "Center (Round Down)"
-        }
-      },
-      "squareIncludeElevation": {
-        "label": "Include Elevation (Square)",
-        "hint": "If checked, distances shown by the distance ruler will also factor in elevation differences between the two tokens for scenes using Square grids. Note: This setting is ignored for the 'Use Grid Measurements' mode."
-      },
-      "hexDistanceChoice": {
-        "label": "Diagonal Rule (Hex)",
-        "hint": "Specify how the Distance Ruler calculates diagonal distances from for scenes using Hex grids. 'Use Grid Measurements' will measure the same way as the Measure Distance tool (ignores elevation). 'Euclidian': The absolute distance between the center of each token.",
-        "choice": {
-          "GRID": "Use Grid Measurements",
-          "EUCLIDIAN": "Euclidian"
-        }
-      },
-      "hexIncludeElevation": {
-        "label": "Include Elevation (Hex)",
-        "hint": "If checked, distances shown by the distance ruler will also factor in elevation differences between the two tokens for scenes using Hex grids. Note: This setting is ignored for the 'Use Grid Measurements' mode."
-      },
-      "gridlessIncludeElevation": {
-        "label": "Include Elevation (Gridless)",
-        "hint": "If checked, distances shown by the distance ruler will also factor in elevation differences between the two tokens for Gridless scenes."
-      },
 
       "rowsPerTooltip.label": "Tooltip Rows (Hover)",
       "rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",
