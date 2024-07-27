@@ -1,6 +1,6 @@
 {
   "name": "@illandril/foundryvtt-token-tooltips",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "Illandril's Token Tooltips: Adds tooltips for tokens for any system. Some, but not all, systems have some values pre-configured for the tooltip, but custom tooltip values can be configured for any system. The DnD5e system has the most built-in support, but other modules (including Pathfinder 1 and 2, D&D 3.5, and more) have some values configured to show out-of-the-box.",
   "type": "module",
   "scripts": {
