@@ -44,32 +44,40 @@ const addTogglesToInventoryTab = (sheetElem: HTMLElement, tabSelector: string, a
 };
 
 const addTooltipToggleHeaders = (inventoryHeaders: NodeListOf<Element>) => {
-  Array.prototype.forEach.call(inventoryHeaders, (inventoryHeader: Element) => {
-    const tooltipHeader = document.createElement('div');
-    tooltipHeader.classList.add(CSS5E_ITEM_DETAIL);
-    tooltipHeader.classList.add(CSS_TOOLTIP_CELL);
+  try {
+    Array.prototype.forEach.call(inventoryHeaders, (inventoryHeader: Element) => {
+      const tooltipHeader = document.createElement('div');
+      tooltipHeader.classList.add(CSS5E_ITEM_DETAIL);
+      tooltipHeader.classList.add(CSS_TOOLTIP_CELL);
 
-    const itemControlsHeader = inventoryHeader.querySelector('.item-controls');
-    inventoryHeader.insertBefore(tooltipHeader, itemControlsHeader);
-  });
+      const itemControlsHeader = inventoryHeader.querySelector('.item-controls');
+      itemControlsHeader?.parentElement?.insertBefore(tooltipHeader, itemControlsHeader);
+    });
+  } catch (error) {
+    module.logger.error('Error adding tooltip toggle headers', inventoryHeaders, error);
+  }
 };
 
 const addTooltipToggleCells = (inventoryRows: NodeListOf<Element>, actor: Actor) => {
-  Array.prototype.forEach.call(inventoryRows, (inventoryRow: Element) => {
-    const item = getItemForRow(inventoryRow, actor);
-    if (!item) {
-      module.logger.error('Could not find item for row', inventoryRow, actor);
-    } else {
-      const tooltipCell = document.createElement('div');
-      tooltipCell.classList.add(CSS5E_ITEM_DETAIL);
-      tooltipCell.classList.add(CSS_TOOLTIP_CELL);
+  try {
+    Array.prototype.forEach.call(inventoryRows, (inventoryRow: Element) => {
+      const item = getItemForRow(inventoryRow, actor);
+      if (!item) {
+        module.logger.error('Could not find item for row', inventoryRow, actor);
+      } else {
+        const tooltipCell = document.createElement('div');
+        tooltipCell.classList.add(CSS5E_ITEM_DETAIL);
+        tooltipCell.classList.add(CSS_TOOLTIP_CELL);
 
-      addTooltipToggle(tooltipCell, item);
+        addTooltipToggle(tooltipCell, item);
 
-      const itemControlsCell = inventoryRow.querySelector('.item-controls');
-      inventoryRow.insertBefore(tooltipCell, itemControlsCell);
-    }
-  });
+        const itemControlsCell = inventoryRow.querySelector('.item-controls');
+        itemControlsCell?.parentElement?.insertBefore(tooltipCell, itemControlsCell);
+      }
+    });
+  } catch (error) {
+    module.logger.error('Error adding tooltip toggle cells', error, inventoryRows);
+  }
 };
 
 const getItemForRow = (inventoryRow: Element, actor: Actor) => {
