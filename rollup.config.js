@@ -21,6 +21,11 @@ export default {
     sourcemap: isDevelopment,
     sourcemapPathTransform: (sourcePath) => sourcePath.replace(/^..[/\\]?/, ''),
   },
+  watch: {
+    chokidar: {
+      usePolling: true,
+    },
+  },
   plugins: [
     commonjs(),
     nodeResolve({ extensions: ['.js', '.ts'] }),

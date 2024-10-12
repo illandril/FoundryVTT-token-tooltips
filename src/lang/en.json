@@ -233,6 +233,10 @@
         "ALL": "GM sees Player info",
         "NPC_ONLY": "NPC only for GMs"
       },
+      "disableTooltips": {
+        "label": "Disable Tooltips",
+        "hint": "If checked, Tooltips will not show for you regardless of what other settings are configured by the GM for this module (client setting - does not impact other players). Note: Applies only to dynamic tooltips, and does not impact Persistent Tooltips, which you already can separately add or delete at will in the Configure Persistent Tooltips menu."
+      },
 
       "rowsPerTooltip.label": "Tooltip Rows (Hover)",
       "rowsPerTooltip.hint": "The maximum number of rows shown in each column in the Tooltip.",

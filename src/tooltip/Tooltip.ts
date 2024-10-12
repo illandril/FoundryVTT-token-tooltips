@@ -82,6 +82,10 @@ const ShowOnHighlightHotkey = module.settings.register('showOnHighlightHotkey', 
 const ShowOnlyWithTooltipHotkey = module.settings.register('showOnlyWithTooltipHotkey', Boolean, false, {
   hasHint: true,
 });
+const DisableTooltips = module.settings.register('disableTooltips', Boolean, false, {
+  hasHint: true,
+  scope: 'client',
+});
 
 export type PersistentTooltipArgs = {
   position: PersistentTooltipPosition;
@@ -290,7 +294,11 @@ export default class Tooltip {
   }
 
   #onHover(token: Token | null) {
-    if (token && shouldShowTooltip(token)) {
+    if (DisableTooltips.get()) {
+      this.#token = null;
+      module.logger.debug('onHover hide (disabled)', token);
+      this.#hide();
+    } else if (token && shouldShowTooltip(token)) {
       this.#token = token;
       module.logger.debug('onHover show', token);
       this.#updateData(token);
